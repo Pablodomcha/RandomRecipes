@@ -1,0 +1,123 @@
+# Compiled class files
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Log files
+*.log
+logs/
+target/*.log
+
+# IDE-specific files and directories
+
+## Eclipse
+.classpath
+.project
+.settings/
+.idea/ # For IntelliJ IDEA
+.vscode/ # For VS Code workspace settings (unless explicitly shared)
+
+## IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+## VS Code
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+# Keep .vscode/extensions.json if you want to recommend extensions
+# Keep .vscode/settings.json if it contains shared project settings
+
+## NetBeans
+nbproject/private/
+build/
+dist/
+nbbuild/
+.nb-gradle/
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/wrapper/maven-wrapper.jar # Maven wrapper JAR (already in .gitignore, but good to be explicit)
+
+# Gradle
+.gradle/
+build/
+bin/
+.gradletasknamecache
+!gradle-wrapper.jar # Keep the wrapper JAR if you use Gradle Wrapper
+gradle/wrapper/gradle-wrapper.jar
+
+# Sbt
+target/
+project/target/
+.history
+.sbt/
+.cache/
+.scala_dependencies/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+.localized
+.Trashes
+
+# Generated files
+# A-Z.txt (e.g. used by some generators)
+# Anything with specific generated extensions
+*.bak
+*.orig
+*.swp
+*.swo
+*.tmp
+*~
+
+# Test and coverage reports
+/jacoco/
+/surefire-reports/
+/failsafe-reports/
+/checkstyle-reports/
+/spotbugs-reports/
+/pmd-reports/
+
+# Runtime and environment files
+*.pid
+*.lock
+.env
+.env.*
+!.env.example # Keep example environment files
+
+# Database files
+*.db
+*.sqlite
+*.sql.local
+*.properties.local
+
+# Web application specific (if not handled by build tools)
+/src/main/webapp/WEB-INF/classes/
+/src/main/webapp/WEB-INF/lib/
+
+# Security files (if not managed separately, e.g., by vault)
+*.key
+*.pem
+*.p12
+*.jks
+
+# Other common temporary files
+temp/
+tmp/
