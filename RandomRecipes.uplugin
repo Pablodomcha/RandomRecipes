@@ -1,0 +1,31 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"SemVersion": "1.0.0",
+	"GameVersion": ">=415558",
+	"FriendlyName": "Random Recipes",
+	"Description": "Randomizes all recipes. Created from ContentLib, so most of the work is actually theirs.",
+	"Category": "Modding",
+	"CreatedBy": "Hillnor",
+	"CreatedByURL": "",
+	"DocsURL": "https://docs.ficsit.app/contentlib/latest/index.html",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Plugins": [
+		{
+			"Name": "SML",
+			"Enabled": true,
+			"SemVersion": "3.11.1"
+		},
+		{
+			"Name": "ContentLib",
+			"Enabled": true,
+			"SemVersion": "1.6.0"
+		}
+	]
+}

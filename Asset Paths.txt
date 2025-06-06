@@ -1,0 +1,11 @@
+From SML in UE:
+
+SatisfactoryModLoader/Content/FactoryGame/...
+
+Change to:
+
+//Game/FactoryGame/...
+
+and keep the rest.
+
+If you don't have SML in UE, go to: https://docs.ficsit.app/contentlib/latest/Tutorials/FindAssetPath.html
