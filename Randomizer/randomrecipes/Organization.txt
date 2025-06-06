@@ -1,0 +1,25 @@
+-Categories:
+    1. Materials (equipment things are materials)
+    2. Structures
+    2.1. Progressive Structures (ie: Belts, Crafters)
+    3. MAM Research
+    3.1. Progressive MAM (ie: Depot Upgrades)
+
+-Treatment:
+    1. Materials
+        Moved from unavailable to available when added to a tier.
+    2. Structures
+        If Crafting, increases 
+    3. MAM Research
+
+-Costs:
+    1. Milestones:
+        1-4 resources.
+    2. Elevtor Parts:
+        1-4 resources.
+    3. Items:
+        1-X where X is the max number of slots for the selected crafting structure
+        First Randomize Crafting structure, then randomize materials.
+
+-Handcrafts:
+    For simplicity, everything can be crafted by hand (though you cannot really craft with liquids).

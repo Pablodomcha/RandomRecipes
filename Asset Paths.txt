@@ -6,6 +6,6 @@ Change to:
 
 //Game/FactoryGame/...
 
-and keep the rest.
+keep the rest and append ".<<recipename>>_C" instead of the ".uasset" extension. Yes, the recipe name is twice there, once before the "." and once after it.
 
 If you don't have SML in UE, go to: https://docs.ficsit.app/contentlib/latest/Tutorials/FindAssetPath.html
