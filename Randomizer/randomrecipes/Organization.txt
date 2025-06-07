@@ -1,9 +1,16 @@
+Tutorial costs are free (the mod assumes you use "Onboarding")
+
 -Categories:
-    1. Materials (equipment things are materials)
+    1. Materials* (equipment things are materials)
     2. Structures
     2.1. Progressive Structures (ie: Belts, Crafters)
     3. MAM Research
-    3.1. Progressive MAM (ie: Depot Upgrades)
+    3.1. Progressive MAM (ie: Depot Upgrades) positions are not randomized, but their costs are.*
+    
+*A minable resource is only considered unlocked when scannable.
+*Hazmat, Iodine filter and Uranium Scan will be in the same milestone.
+*Hard to ensure they are in order.
+
 
 -Treatment:
     1. Materials
@@ -14,12 +21,14 @@
 
 -Costs:
     1. Milestones:
-        1-4 resources.
+        1-16 resources.*
     2. Elevtor Parts:
-        1-4 resources.
+        1-4 resources.*
     3. Items:
         1-X where X is the max number of slots for the selected crafting structure
         First Randomize Crafting structure, then randomize materials.
 
+*More may work, but testing it is not worth it.
+
 -Handcrafts:
-    For simplicity, everything can be crafted by hand (though you cannot really craft with liquids).
+    For simplicity, everything can be crafted by hand (though you cannot really craft with liquids)

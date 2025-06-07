@@ -5,7 +5,19 @@
     "ClearCost": true,
     "Cost": [
         {
-            "Item": "Desc_IronPlate",
+            "Item": "BP_ItemDescriptorPortableMiner",
+            "Amount": 5
+        },
+        {
+            "Item": "Desc_Biofuel",
+            "Amount": 5
+        },
+        {
+            "Item": "Desc_Stone",
+            "Amount": 5
+        },
+        {
+            "Item": "Desc_Biomass",
             "Amount": 5
         }
     ]
