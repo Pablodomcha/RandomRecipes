@@ -5,11 +5,11 @@ Tutorial costs are free (the mod assumes you use "Onboarding")
     2. Structures
     2.1. Progressive Structures (ie: Belts, Crafters)
     3. MAM Research
-    3.1. Progressive MAM (ie: Depot Upgrades) positions are not randomized, but their costs are.*
+    3.1. Progressive MAM (ie: Depot Upgrades) positions are not randomized, but their costs are.**
     
 *A minable resource is only considered unlocked when scannable.
-*Hazmat, Iodine filter and Uranium Scan will be in the same milestone.
-*Hard to ensure they are in order.
+*Hazmat, Iodine filter and Uranium Scan need an external check to enable uranium.
+**Hard to ensure they are in order.
 
 
 -Treatment:
@@ -31,4 +31,30 @@ Tutorial costs are free (the mod assumes you use "Onboarding")
 *More may work, but testing it is not worth it.
 
 -Handcrafts:
-    For simplicity, everything can be crafted by hand (though you cannot really craft with liquids)
+    For simplicity, everything craftable in Constructors can be made by hand and anything else won't.
+
+-Craft unlocked != Craft Possible
+
+-Options (Toggle):
+    1. Tiers: 
+        Keep: Shuffles recipes within the same tier they would go into.
+        Random: Every Recipe can go in any tier.
+    2. Space Elevator:
+        Same tier: Space elevator recipes are always from materials within the last 2 tiers unlocked.
+        Random: Space elevator recipes can take any material obtainable.
+    3. Ore Location:
+        Located: You don't need ores you can't scan to unlock the ability to scan them.
+        Unlocated: Any ore can be part of any recipe.
+        Radiation Party: Uranium could be needed for recipes unlocked before you can have radiation protection.
+
+-Options (Insert Value):
+    1. Max stack per component: Maximum number of each component needed for a craft.
+    2. Max stack per structure: Maximum number of each component needed to build with the builder tool.
+    3. Max items per structure: Maximum number of different items to build with the builder tool.
+    4. Max stack per milestone: Maximum number of each component needed to complete a milestone.
+    5. Max items per milestone: Maximum number of different items to complete a milestone.
+    6. Max stack per elevator part: Maximum number of each component needed to complete a Project Assembly stage.
+    7. Max items per elevator part: Maximum number of different items to complete a Project Assembly stage.
+    8. Max time per milestone: Maximum time to research a new milestone after completing one.
+    9. Max time to craft: Maximum time needed for a craft.
+    
