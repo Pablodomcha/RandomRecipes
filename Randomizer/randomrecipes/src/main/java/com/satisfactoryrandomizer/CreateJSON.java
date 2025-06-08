@@ -11,7 +11,7 @@ import java.util.ArrayList; //mats will be an Arraylist, so it's actually used
 
 public class CreateJSON {
 
-    public static void saveObjectAsJson(Recipe recipe) {
+    public static void saveRecipeAsJson(Recipe recipe) {
         String json = recipeToJson(recipe.getComponent(), recipe.getAmount(), recipe.getIngredients(),
                 recipe.getSchema(), recipe.getStation());
         try (FileWriter writer = new FileWriter(recipe.getFilename())) {

@@ -2,6 +2,7 @@ package com.satisfactoryrandomizer.Storage;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Materials {
 
@@ -15,26 +16,28 @@ public class Materials {
         // Create a temporary lists to add the prefixes to before adding to components
         List<Component> tempList = new ArrayList<>();
         List<Component> prefixedTempList;
+        List<CraftStation> tempStations = new ArrayList<>();
 
         // Initialize the list of available stations
-        stations.add(new CraftStation("Assembler", false, "Recipe_AssemblerMk1",
+        tempStations.add(new CraftStation("Assembler", false, "Recipe_AssemblerMk1",
                 2, 1, 0, 0));
-        stations.add(new CraftStation("Blender", false, "Recipe_Blender",
+        tempStations.add(new CraftStation("Blender", false, "Recipe_Blender",
                 2, 1, 2, 1));
-        stations.add(new CraftStation("Constructor", true, "Recipe_ConstructorMk1",
+        tempStations.add(new CraftStation("Constructor", true, "Recipe_ConstructorMk1",
                 1, 1, 0, 0));
-        stations.add(new CraftStation("Manufacturer", false, "Recipe_ManufacturerMk1",
+        tempStations.add(new CraftStation("Manufacturer", false, "Recipe_ManufacturerMk1",
                 4, 1, 0, 0));
-        stations.add(new CraftStation("Packager", false, "Recipe_Packager",
+        tempStations.add(new CraftStation("Packager", false, "Recipe_Packager",
                 1, 1, 1, 1));
-        stations.add(new CraftStation("PAccel", false, "Recipe_HadronCollider",
+        tempStations.add(new CraftStation("PAccel", false, "Recipe_HadronCollider",
                 2, 1, 1, 0));
-        stations.add(new CraftStation("Refinery", false, "Recipe_OilRefinery",
+        tempStations.add(new CraftStation("Refinery", false, "Recipe_OilRefinery",
                 1, 1, 1, 1));
-        stations.add(new CraftStation("Converter", false, "Recipe_Converter",
+        tempStations.add(new CraftStation("Converter", false, "Recipe_Converter",
                 2, 1, 0, 1));
-        stations.add(new CraftStation("QuantumEncoder", false, "Recipe_QuantumEncoder",
+        tempStations.add(new CraftStation("QuantumEncoder", false, "Recipe_QuantumEncoder",
                 3, 1, 1, 1));
+        stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
 
         // Initialize the available materials
         // Starting you only have directly gatherable materials
@@ -53,7 +56,7 @@ public class Materials {
         tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
         tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
 
-        prefixedTempList = AddPrefixSuffix(tempList, "//Game/FactoryGame/Recipes/Constructor/");
+        prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Constructor/");
         components.addAll(prefixedTempList);
         tempList.clear();
         prefixedTempList.clear();
@@ -63,7 +66,7 @@ public class Materials {
                 new Component("Desc_IronIngot", "Recipe_IngotIron", true, false, false));
         tempList.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", true, false, false));
 
-        prefixedTempList = AddPrefixSuffix(tempList, "//Game/FactoryGame/Recipes/Smelter/");
+        prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Smelter/");
         components.addAll(prefixedTempList);
         tempList.clear();
         prefixedTempList.clear();
@@ -71,7 +74,7 @@ public class Materials {
         // /Recipes/Assembler/
         tempList.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
 
-        prefixedTempList = AddPrefixSuffix(tempList, "//Game/FactoryGame/Recipes/Assembler/");
+        prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Assembler/");
         components.addAll(prefixedTempList);
         tempList.clear();
         prefixedTempList.clear();
@@ -81,7 +84,7 @@ public class Materials {
         // components.add(new Component("", "", false, false));
     }
 
-    private List<Component> AddPrefixSuffix(List<Component> list, String prefix) {
+    private List<Component> AddPrefix(List<Component> list, String prefix) {
         List<Component> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -97,13 +100,23 @@ public class Materials {
         return prefixedList;
     }
 
-    // Getters and Setters
-    public void logComponents() {
-        System.out.println("Listing all components:");
-        for (Component component : components) {
-            System.out.println(component.toString());
+    private List<CraftStation> AddPrefixStat(List<CraftStation> list, String prefix) {
+        List<CraftStation> prefixedList = new ArrayList<>(list);
+
+        for (int i = 0; i < prefixedList.size(); i++) {
+            CraftStation c = prefixedList.get(i);
+            if (c.getRecipePath() != null && !c.getRecipePath().startsWith(prefix)) {
+                prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
+            }
         }
+        System.out.println("Prefixed List with " + prefix + ":");
+        for (CraftStation comp : prefixedList) {
+            System.out.println(comp.getName());
+        }
+        return prefixedList;
     }
+
+    // Getters and Setters
 
     public Component getComponentByName(String name) {
         for (Component component : components) {
@@ -155,4 +168,42 @@ public class Materials {
         }
         return result;
     }
+
+    public CraftStation getRandomAvailableAndCraftableStation(int seed) {
+        List<CraftStation> availableStations = new ArrayList<>();
+        for (CraftStation station : stations) {
+            if (station.isAvailable() && station.isCraftable()) {
+                availableStations.add(station);
+            }
+        }
+        if (availableStations.isEmpty()) {
+            return null;
+        }
+        Random random = new Random(seed);
+        int index = random.nextInt(availableStations.size());
+        return availableStations.get(index);
+    }
+
+    public boolean setComponentAvailable(String name, boolean available) {
+        for (Component component : components) {
+            if (component.getName().equals(name)) {
+                component.setAvailable(available);
+                return true;
+            }
+        }
+        System.out.println("Could not set Available, Component not found: " + name);
+        return false;
+    }
+
+        public boolean setComponentCraftable(String name, boolean craftable) {
+        for (Component component : components) {
+            if (component.getName().equals(name)) {
+                component.setCraftable(craftable, true);
+                return true;
+            }
+        }
+        System.out.println("Could not set Craftable, component not found: " + name);
+        return false;
+    }
+
 }

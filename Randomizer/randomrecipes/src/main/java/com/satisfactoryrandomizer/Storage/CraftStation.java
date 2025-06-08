@@ -55,4 +55,17 @@ public class CraftStation {
     public int getLiquidOut() {
         return liquidOut;
     }
+
+    public int getTotalIn() {
+        return solidIn + liquidIn;
+    }
+
+    public int getTotalOut() {
+        return solidOut + liquidOut;
+    }
+
+    public void setRecipePath(String recipepath) {
+        this.recipepath = recipepath;
+    }
+
 }
