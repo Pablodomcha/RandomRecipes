@@ -1,32 +1,44 @@
 package com.satisfactoryrandomizer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import com.satisfactoryrandomizer.Storage.*;
 
 public class SequenceGenerator {
+    static int seed = 0;
 
-    /**
-     * Generates the randomized lsit of JSON recipes for Tier 0
-     * 
-     * @return the randomized lsit of JSON items for Tier 0
-     */
-    public List<String> generateT0() {
-        List<String> list = new ArrayList<>();
+    public static void GenerateRecipes(int seed) {
 
-        
+        Materials materials = new Materials();
 
-        return list;
+        // Generate a random seed if not provided
+        if (seed == 0) {
+            GenerateSeed();
+        }
+        System.out.println("Using seed: " + seed);
+
+        // Shuffle the list of available components
+        List<Component> availableComponents = materials.getAvailableButUncraftableComponents();
+        Collections.shuffle(availableComponents, new Random(seed));
+
+        // Loop to generate recipes for all components
+        while (materials.getAvailableButUncraftableComponents().size() > 0) {
+
+        }
+
     }
 
-    /**
-     * Returns a random element from the given list, or null if the list is empty.
-     */
-    public String getRandomElement(List<String> list) {
-        if (list == null || list.isEmpty()) {
-            return null;
-        }
-        int randomIndex = ThreadLocalRandom.current().nextInt(list.size());
-        return list.get(randomIndex);
+    public static void RandomNumber() {
+        Random random = new Random(seed);
+        int randomNumber = random.nextInt(100);
+        System.out.println("Random number: " + randomNumber);
+    }
+
+    public static void GenerateSeed() {
+        Random random = new Random();
+        seed = random.nextInt(2000000000);
     }
 }

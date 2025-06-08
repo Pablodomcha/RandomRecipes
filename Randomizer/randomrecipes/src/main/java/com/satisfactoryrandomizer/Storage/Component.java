@@ -1,42 +1,52 @@
 package com.satisfactoryrandomizer.Storage;
+
+import java.util.List;
+
 public class Component {
 
     private String name;
     private String recipepath = null;
     private Boolean available;
     private Boolean craftable;
-    private String extraCheck = null;
+    private List<String> extraCheck = null; // Used for components that require additional checks
+    private Boolean liquid = false;
+    private Boolean raw = false; // Indicates if the component is a raw material (no recipe)
 
     // Basic constructor
     public Component(String name, Boolean available) {
         this.name = name;
         this.available = available;
         this.craftable = available;
+        this.raw = true; // Default to raw material if no recipe is provided
     }
 
     // Full constructor
-    public Component(String name, String recipepath, Boolean available, Boolean craftable) {
+    public Component(String name, String recipepath, Boolean available, Boolean craftable, Boolean liquid) {
         this.name = name;
         this.recipepath = recipepath + "." + recipepath + "_C";
         this.available = available;
         this.craftable = (available && craftable);
+        this.liquid = liquid;
     }
 
     // Constructor for components without a recipe (Raw materials)
-    public Component(String name, Boolean available, Boolean craftable) {
+    public Component(String name, Boolean available, Boolean craftable, Boolean liquid) {
         this.name = name;
         this.available = available;
         this.craftable = (available && craftable);
+        this.liquid = liquid;
     }
 
     // Full constructor for components that enable other components
     // (like uranium needs to check for several items)
-    public Component(String name, String recipepath, Boolean available, Boolean craftable, String extraCheck) {
+    public Component(String name, String recipepath, Boolean available, Boolean craftable, Boolean liquid,
+            List<String> extraCheck) {
         this.name = name;
         this.recipepath = recipepath + "." + recipepath + "_C";
         this.available = available;
         this.craftable = (available && craftable);
         this.extraCheck = extraCheck;
+        this.liquid = liquid;
     }
 
     // Getters
@@ -56,8 +66,12 @@ public class Component {
         return craftable;
     }
 
-    public String getExtraCheck() {
+    public List<String> getExtraCheck() {
         return extraCheck;
+    }
+
+    public Boolean isLiquid() {
+        return liquid;
     }
 
     // Setters
@@ -83,8 +97,12 @@ public class Component {
         }
     }
 
-    public void setExtraCheck(String extraCheck) {
+    public void setExtraCheck(List<String> extraCheck) {
         this.extraCheck = extraCheck;
+    }
+
+    public void setLiquid(Boolean liquid) {
+        this.liquid = liquid;
     }
 
     public String toString() {

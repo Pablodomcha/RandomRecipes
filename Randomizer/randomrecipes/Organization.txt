@@ -25,29 +25,43 @@ Tutorial costs are free (the mod assumes you use "Onboarding")
     2. Elevtor Parts:
         1-4 resources.*
     3. Items:
-        1-X where X is the max number of slots for the selected crafting structure
-        First Randomize Crafting structure, then randomize materials.
+        1-X where X is the max number of slots for the selected production structure
+        First Randomize production structure, then randomize materials.
 
 *More may work, but testing it is not worth it.
 
--Handcrafts:
-    For simplicity, everything craftable in Constructors can be made by hand and anything else won't.
-
--Craft unlocked != Craft Possible
+Info:
+    1. Handcrafts: For simplicity, everything craftable in Constructors can be made by hand and anything else won't.
+    2. Craft unlocked != Craft Possible.
+    3. Anything not strictly necessary is randomized at the end and therefore can use all materials (for example blueprint maker, belts, vehicles, alternate recipes).
+    4. Production buildings may not be able to reach 100% efficiency on certain recipes.
+    5. Packaging/unpackaging recipes unaffected (the container recipes are though).
+    6. Excited Photonic Matter is not free. Blame Ficsit.
 
 -Options (Toggle):
-    1. Tiers: 
-        Keep: Shuffles recipes within the same tier they would go into.
-        Random: Every Recipe can go in any tier.
-    2. Space Elevator:
-        Same tier: Space elevator recipes are always from materials within the last 2 tiers unlocked.
-        Random: Space elevator recipes can take any material obtainable.
-    3. Ore Location:
-        Located: You don't need ores you can't scan to unlock the ability to scan them.
-        Unlocated: Any ore can be part of any recipe.
+    1. Ore Location:
+        Easy: You don't need ores you can't scan to unlock the ability to scan them. Uranium will only be needed if you can have radiation protection.
+        Medium: Any ore can be part of any recipe. Uranium will only be needed if you can have radiation protection.
         Radiation Party: Uranium could be needed for recipes unlocked before you can have radiation protection.
+    2. Belts:
+        Easy: Only use raw ore, ensuring they can always be made (though you may need to search for the ore without scan).
+        Medium: Tier 1 belt and pole only uses raw ore. Other belts can use anything (guarantees at least access to basic belts).
+        Hard: Uses anything, you could end up with no access to belts for part/most of your playthrough.
+    3. Electricity:
+        Easy: Basic electric poles and biomass burners use only raw ore.
+        Medium: Basic electric poles use only raw ore. You may need to rely on HUB power generation for a while.
+        Hard: Have fun with your handcrafting (poles and biomass burners will still be buildable before you need production stations).
+    4. Waste:
+        Easy: Recipes only have 1 output, so you don't need to handle a second resource you may not need.
+        Medium: Recipes can have solid outputs other than the desired, but the Awesome sink recipe will be available from the start and only use raw ore.
+        Hard: Recipes can have solid outputs other than the desired and the Awesome sink may not be available or have really hard crafting recipe.
+        No U: Recipes can have solid/liquid outputs other than the desired and the sink may not be available or have really hard crafting recipe. Packaging to get rid of liquids may or may not be easy, you may need tons deposits and manual flushing.
+    5. Liquids:
+        Only liquid: Liquids can only be used in their liquid form for recipes.
+        Packaged and Liquid: Packaged liquids can be part of recipes. Packaging could be really expensive or not.
 
 -Options (Insert Value):
+    0. Seed.
     1. Max stack per component: Maximum number of each component needed for a craft.
     2. Max stack per structure: Maximum number of each component needed to build with the builder tool.
     3. Max items per structure: Maximum number of different items to build with the builder tool.
@@ -57,4 +71,7 @@ Tutorial costs are free (the mod assumes you use "Onboarding")
     7. Max items per elevator part: Maximum number of different items to complete a Project Assembly stage.
     8. Max time per milestone: Maximum time to research a new milestone after completing one.
     9. Max time to craft: Maximum time needed for a craft.
-    
+    10. Handcrafting speed: Multiplier for handcrafting speed. Lower is faster (the base game value is usually between 0.5 and 1 depending on recipe).
+    11. Input slot bias: Higher numbers mean that the randomizer will try to use more of the inputs available in the production station. 100 means always will use all slots, 0 means all recipes use 1 input slot.
+    12. Max recipes used: Maximum number of recipes that can use a material for producing other materials. Very low numbers will end up with many free recipes.
+    13. Free recipe chance: Unless forced by "Max recipes used", this is the chance for a material to be free (like Excited Photonic Matter, except that may no longer be free). Put to 0 if you don't want free recipes unless Max recipes used forces it. Put 100 for all free recipes (not sure why you'd use a randomized for that).

@@ -2,17 +2,13 @@ package com.satisfactoryrandomizer.Storage;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.HashMap;
 
 public class Materials {
 
     // List of Components
     private List<Component> components = new ArrayList<>();
     // List of craftable items at the start of the game
-    private Map<String, Boolean> stations = new HashMap<>();
+    private List<CraftStation> stations = new ArrayList<>();
 
     public Materials() {
 
@@ -21,14 +17,24 @@ public class Materials {
         List<Component> prefixedTempList;
 
         // Initialize the list of available stations
-        stations.put("Assembler", false);
-        stations.put("Constructor", false);
-        stations.put("Blender", false);
-        stations.put("Manufacturer", false);
-        stations.put("Refinery", false);
-        stations.put("Smelter", false);
-        stations.put("Foundry", false);
-        stations.put("PartAccel", false);
+        stations.add(new CraftStation("Assembler", false, "Recipe_AssemblerMk1",
+                2, 1, 0, 0));
+        stations.add(new CraftStation("Blender", false, "Recipe_Blender",
+                2, 1, 2, 1));
+        stations.add(new CraftStation("Constructor", true, "Recipe_ConstructorMk1",
+                1, 1, 0, 0));
+        stations.add(new CraftStation("Manufacturer", false, "Recipe_ManufacturerMk1",
+                4, 1, 0, 0));
+        stations.add(new CraftStation("Packager", false, "Recipe_Packager",
+                1, 1, 1, 1));
+        stations.add(new CraftStation("PAccel", false, "Recipe_HadronCollider",
+                2, 1, 1, 0));
+        stations.add(new CraftStation("Refinery", false, "Recipe_OilRefinery",
+                1, 1, 1, 1));
+        stations.add(new CraftStation("Converter", false, "Recipe_Converter",
+                2, 1, 0, 1));
+        stations.add(new CraftStation("QuantumEncoder", false, "Recipe_QuantumEncoder",
+                3, 1, 1, 1));
 
         // Initialize the available materials
         // Starting you only have directly gatherable materials
@@ -38,14 +44,14 @@ public class Materials {
 
         // available at Onboarding, Is available but not nececessarily craftable
         // /Recipes/Constructor/
-        tempList.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false));
-        tempList.add(new Component("Desc_IronRod", "Recipe_IronRod", true, false));
-        tempList.add(new Component("Desc_Wire", "Recipe_Wire", true, false));
-        tempList.add(new Component("Desc_Cable", "Recipe_Cable", true, false));
-        tempList.add(new Component("Desc_Cement", "Recipe_Concrete", true, false));
-        tempList.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false));
-        tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false));
-        tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false));
+        tempList.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
+        tempList.add(new Component("Desc_IronRod", "Recipe_IronRod", true, false, false));
+        tempList.add(new Component("Desc_Wire", "Recipe_Wire", true, false, false));
+        tempList.add(new Component("Desc_Cable", "Recipe_Cable", true, false, false));
+        tempList.add(new Component("Desc_Cement", "Recipe_Concrete", true, false, false));
+        tempList.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false, false));
+        tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
+        tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
 
         prefixedTempList = AddPrefixSuffix(tempList, "//Game/FactoryGame/Recipes/Constructor/");
         components.addAll(prefixedTempList);
@@ -54,8 +60,8 @@ public class Materials {
 
         // /Recipes/Smelter/
         tempList.add(
-                new Component("Desc_IronIngot", "Recipe_IngotIron", true, false));
-        tempList.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", true, false));
+                new Component("Desc_IronIngot", "Recipe_IngotIron", true, false, false));
+        tempList.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", true, false, false));
 
         prefixedTempList = AddPrefixSuffix(tempList, "//Game/FactoryGame/Recipes/Smelter/");
         components.addAll(prefixedTempList);
@@ -63,7 +69,7 @@ public class Materials {
         prefixedTempList.clear();
 
         // /Recipes/Assembler/
-        tempList.add(new Component("Desc_IronPlateReinforced","Recipe_IronPlateReinforced", true, false));
+        tempList.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
 
         prefixedTempList = AddPrefixSuffix(tempList, "//Game/FactoryGame/Recipes/Assembler/");
         components.addAll(prefixedTempList);
@@ -120,10 +126,10 @@ public class Materials {
         return false;
     }
 
-    public List<Component> getAvailableAndCraftableComponents() {
+    public List<Component> getAvailableAndCraftableComponents(Boolean liquid) {
         List<Component> result = new ArrayList<>();
         for (Component component : components) {
-            if (component.isAvailable() && component.isCraftable()) {
+            if (component.isAvailable() && component.isCraftable() && component.isLiquid() == liquid) {
                 result.add(component);
             }
         }

@@ -29,18 +29,28 @@ public class CreateJSON {
                 "  \"Products\": [\r\n    {" + "\r\n" +
                 "      \"Item\": \"" + comp.getName() + "\",\r\n" +
                 "      \"Amount\": " + amount + "\r\n" +
-                "    }\r\n  ],\r\n" +
-                "  \"Ingredients\": [" + "\r\n";
+                "    }\r\n  ],\r\n";
+
+        // We don't want to add "Ingredients" if there are none
+        if (mats.size() != 0) {
+            file += "  \"Ingredients\": [" + "\r\n";
+        }
 
         for (int i = 0; i < mats.size(); i++) {
             file += "    {\r\n" +
                     "      \"Item\": \"" + mats.get(i).getName() + "\",\r\n" +
                     "      \"Amount\": " + mats.get(i).getAmount() + "\r\n" +
                     "    }";
-            if (i<mats.size() - 1) {file += ",";}
+            if (i < mats.size() - 1) {
+                file += ",";
+            }
             file += "\r\n";
         }
-        file += "  ],\r\n";
+        // Don't close and array that's not started
+        if (mats.size() != 0) {
+            file += "  ],\r\n";
+        }
+
         file += "  \"ProducedIn\": [\"" + station + "\"]\r\n}";
 
         return file;
