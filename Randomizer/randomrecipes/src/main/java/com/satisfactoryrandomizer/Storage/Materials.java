@@ -1,7 +1,7 @@
 package com.satisfactoryrandomizer.Storage;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Materials {
@@ -192,6 +192,16 @@ public class Materials {
         Random random = new Random(seed);
         int index = random.nextInt(availableStations.size());
         return availableStations.get(index);
+    }
+
+    public List<CraftStation> getAvailableButUncraftableStations() {
+        List<CraftStation> result = new ArrayList<>();
+        for (CraftStation station : stations) {
+            if (station.isAvailable() && !station.isCraftable()) {
+                result.add(station);
+            }
+        }
+        return result;
     }
 
     public boolean setComponentAvailable(String name, boolean available) {

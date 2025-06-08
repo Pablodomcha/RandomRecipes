@@ -77,9 +77,9 @@ Info:
     2. Structure randomization, use or not generic logic for belts.
     3. Structure randomization, use or not generic logic for Poles/cables.
     4. Sequence Generation in products and Structure randomization.
-    5. Add liquid materials to Materials initialization. Extra check for Packager and the liquid.
+    5. Add packaged liquid materials to Materials initialization. Extra check for Packager and the liquid.
     6. Change craft station energy use in their sequencer.
-    7. Edit the value for inventory slot rewards in milestone initialization.
+    7. Edit the value for inventory slot rewards in milestone inicialization.
 
 -Options (Insert Value): Don't put the Max Stack or Max items to 0, for free recipes use the specific option.
     0. Seed.

@@ -31,7 +31,17 @@ public class SequenceGenerator {
     }
 
     private static void generateStructureIteration() {
-        List<CraftStation> stations = new ArrayList<>();
+        List<CraftStation> stations = materials.getAvailableButUncraftableStations();
+        List<Component> availableComponents = materials.getAvailableButUncraftableComponents();
+        while (stations.size() > 0) {
+
+            // Neede variables. Prod will always only have the station, but has to be a
+            // string regardless.
+            CraftStation station = stations.get(0);
+            List<Mat> mats = new ArrayList<>();
+            List<Mat> prod = new ArrayList<>();
+
+        }
     }
 
     private static void generateMaterialIteration() {
@@ -116,8 +126,8 @@ public class SequenceGenerator {
                 break; // No more slots available, break the loop to stop the program from crashing
             }
             // Select a random component from the usable components
-            List<Component> availableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
-            Component component = availableComponents.get(random.nextInt(availableComponents.size()));
+            List<Component> craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
+            Component component = craftableComponents.get(random.nextInt(craftableComponents.size()));
 
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
@@ -174,7 +184,7 @@ public class SequenceGenerator {
 
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
-            products.add(new Mat(component.getName(), random.nextInt(UiValues.getMaxStackComp()) + 1));
+            products.add(new Mat(component.getName(), random.nextInt(UiValues.getMaxCompCraft()) + 1));
         }
 
         return products;
