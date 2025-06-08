@@ -1,26 +1,28 @@
-//Game/FactoryGame/Recipes/Constructor/Recipe_IronRod.Recipe_IronRod_C
+//Game/FactoryGame/Recipes/Constructor/Recipe_IronPlate.Recipe_IronPlate_C
 {
   "$schema": "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json",
   "ClearIngredients": true,
   "Products": [
     {
-      "Item": "Desc_IronRod",
-      "Amount": 3
+      "Item": "Desc_IronPlate",
+      "Amount": 10
+    },
+    {
+      "Item": "Desc_LiquidOil",
+      "Amount": 5
     }
   ],
   "Ingredients": [
     {
       "Item": "Desc_OreIron",
-      "Amount": 1
+      "Amount": 20
     },
     {
       "Item": "Desc_OreCopper",
-      "Amount": 2
-    },
-    {
-      "Item": "Desc_Stone",
-      "Amount": 3
+      "Amount": 10
     }
   ],
-  "ProducedIn": ["Build_ManufacturerMk1"]
+  "ProducedIn": [
+    "Build_Blender"
+  ]
 }

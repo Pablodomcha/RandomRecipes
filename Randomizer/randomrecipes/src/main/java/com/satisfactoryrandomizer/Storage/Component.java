@@ -8,16 +8,14 @@ public class Component {
     private String recipepath = null;
     private Boolean available;
     private Boolean craftable;
-    private List<String> extraCheck = null; // Used for components that require additional checks
+    private List<String> extraCheck = null; // Items that need to be craftable before this component can be crafted
     private Boolean liquid = false;
-    private Boolean raw = false; // Indicates if the component is a raw material (no recipe)
 
     // Basic constructor
     public Component(String name, Boolean available) {
         this.name = name;
         this.available = available;
         this.craftable = available;
-        this.raw = true; // Default to raw material if no recipe is provided
     }
 
     // Full constructor

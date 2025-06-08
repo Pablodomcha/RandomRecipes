@@ -7,13 +7,16 @@ import java.util.concurrent.ThreadLocalRandom;
 import com.satisfactoryrandomizer.Storage.*;
 
 /**
- * Hello world!
+ * This only actually runs the UI and SequenceGenerator classes.
  */
 public final class App {
     private App() {
     }
 
     public static void main(String[] args) {
+
+        //SequenceGenerator.generateSequence(UiValues.getSeed());
+
         Tests.test();
     }
 }

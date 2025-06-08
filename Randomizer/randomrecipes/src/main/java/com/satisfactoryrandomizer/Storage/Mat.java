@@ -1,19 +1,22 @@
 package com.satisfactoryrandomizer.Storage;
 
+// Material for recipe, only has the material name and amount of it created.
 public class Mat {
-    String name;
-    int amount;
+
+    // Capitalized for JSONification purposes
+    String Item;
+    int Amount;
 
     public Mat(String name, int amount) {
-        this.name = name;
-        this.amount = amount;
+        this.Item = name;
+        this.Amount = amount;
     }
 
     public String getName() {
-        return name;
+        return Item;
     }
 
     public int getAmount() {
-        return amount;
+        return Amount;
     }
 }

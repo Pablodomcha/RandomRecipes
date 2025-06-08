@@ -159,6 +159,16 @@ public class Materials {
         return result;
     }
 
+        public List<Component> getAvailableComponents(Boolean liquid) {
+        List<Component> result = new ArrayList<>();
+        for (Component component : components) {
+            if (component.isAvailable() && component.isLiquid() == liquid) {
+                result.add(component);
+            }
+        }
+        return result;
+    }
+
     public List<Component> getUnavailableComponents() {
         List<Component> result = new ArrayList<>();
         for (Component component : components) {

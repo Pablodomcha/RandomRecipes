@@ -31,7 +31,7 @@ Tutorial costs are free (the mod assumes you use "Onboarding")
 *More may work, but testing it is not worth it.
 
 Info:
-    1. Handcrafts: For simplicity, everything craftable in Constructors can be made by hand and anything else won't.
+    1. Handcrafts: For simplicity, everything craftable in Constructors/Smelters can be made by hand and anything else won't.
     2. Craft unlocked != Craft Possible.
     3. Anything not strictly necessary is randomized at the end and therefore can use all materials (for example blueprint maker, belts, vehicles, alternate recipes).
     4. Production buildings may not be able to reach 100% efficiency on certain recipes.
@@ -40,6 +40,7 @@ Info:
     7. Recipes obtained from tier 0 are craftable using only each other.
     8. MAM researches are all considered non-essential, the ones that are will be moved to milestones. Non-essential things will be moved from milestones to MAM in exchange.
     9. All materials are treated the same, so you could end up with the screw being as expensive as a vanilla uranium fuel rod and vice versa.
+    10. If for whatever reason introducing the same seed creates different paths for different players, you can work arround it by having one player create the files and send them to the others. This should be reported as a bug regardless.
 
 -Options (Toggle):
     1. Ore location:
@@ -54,7 +55,7 @@ Info:
         Easy: Basic electric poles and biomass burners use only raw ore and are cheap.
         Medium: Basic electric poles use only raw ore and are cheap.
         Hard: Have fun with your handcrafting (poles and biomass burners will still be buildable from the start, but they might be really expensive).
-    4. Waste:
+    4. Waste (the "desired" output is the one for which the recipe is generated, even if you like more the other output):
         Easy: Recipes only have 1 output, so you don't need to handle a second resource you may not need.
         Medium: Recipes can have solid outputs other than the desired, but the Awesome sink recipe will be available from the start and only use raw ore.
         Hard: Recipes can have solid outputs other than the desired and the Awesome sink may not be available or have really hard crafting recipe.
@@ -65,7 +66,7 @@ Info:
     6. Power:
         Vanilla: Structures use vanilla power. It's fun until you have to run Particle Accelerators on Biomass Burners.
         Balanced: Structures obtained earlier consume less energy. If your Particle Accelerator is Tier 2, it will consume on average what a foundry does.
-        Random: I felt like adding this. The idea is really funny, the gameplay isn't.
+        Random: I felt like adding this. The idea is really funny, the gameplay isn't (the min value is 10MW and the max is 2GW)
     7. Inventory slots: (The number of upgrades that give slots is not randomized, only the amount of slots they give and the milestones/MAM research they appear in).
         Fixed: The amount of slots is fixed, uses Max value (with this option Min values is ignored). MAM researches that give these give double.
         Random: The amount of slots is random between the values provided. MAM researches double the randomized value (yes, this means MAM always gives an even number of slots).
@@ -73,12 +74,12 @@ Info:
         Min: Number (min 1).
 
     1. Materials inicialization, add other ores as available or not.
-    2. Structure randomization, use or not generic logi for belts.
-    3. 
-    4. 
-    5. 
-    6. 
-    7. 
+    2. Structure randomization, use or not generic logic for belts.
+    3. Structure randomization, use or not generic logic for Poles/cables.
+    4. Sequence Generation in products and Structure randomization.
+    5. Add liquid materials to Materials initialization. Extra check for Packager and the liquid.
+    6. Change craft station energy use in their sequencer.
+    7. Edit the value for inventory slot rewards in milestone initialization.
 
 -Options (Insert Value): Don't put the Max Stack or Max items to 0, for free recipes use the specific option.
     0. Seed.
@@ -88,30 +89,26 @@ Info:
     4. Max items per structure: Maximum number of different items to build with the builder tool.
     5. Max stack per milestone: Maximum number of each component needed to complete a milestone.
     6. Max items per milestone: Maximum number of different items to complete a milestone.
-    7. Max stack per elevator part: Maximum number of each component needed to complete a Project Assembly stage.
-    8. Max items per elevator part: Maximum number of different items to complete a Project Assembly stage.
-    9. Max time per milestone: Maximum time to research a new milestone after completing one.
+    7. Max time per milestone: Maximum time to research a new milestone after completing one or time to complete a MAM research.
+    8. Max stack per elevator part: Maximum number of each component needed to complete a Project Assembly stage.
+    9. Max items per elevator part: Maximum number of different items to complete a Project Assembly stage.
     10. Max time to craft: Maximum time needed for a craft.
     11. Handcrafting speed: Multiplier for handcrafting speed. Lower is faster (the base game value is usually between 0.5 and 1 depending on recipe).
-    12. Input slot bias: Higher numbers mean that the randomizer will try to use more of the inputs available in the production station. 100 means always will use all slots, 0 means all recipes use 1 input slot, 50 means there's no bias.
+    12. Slot bias: Higher numbers mean that the randomizer will try to use more of the slots available in the production station. 100 means always will use all slots, 0 means all recipes use 1 input/output slot, 50 means there's no bias. If waste is in easy, this only affects input.
     13. Max recipes used: Maximum number of recipes that can use a material for producing other materials. Very low numbers will end up with many free recipes.
     14. Free recipe chance: Unless forced by "Max recipes used", this is the chance for a material to be free (like Excited Photonic Matter, except that may no longer be free). Put to 0 if you don't want free recipes unless Max recipes used forces it. Put 100 for all free recipes (not sure why you'd use a randomized for that).
 
-    1. 
-    2. 
-    3. 
-    4. 
-    5. 
-    6. 
-    7. 
-    8. 
-    9. 
-    10. 
-    11. 
-    12. 
-    13. 
-    14. 
-
-
-
-    TODO: GenerateMaterialIteration in SequenceGenerator works. Complete the sequence generation. Also fill where is each thing implemented in this file.
+    1. In component sequencer.
+    2. In component sequencer.
+    3. In Structure Sequencer.
+    4. In Structure Sequencer.
+    5. In Milestone Sequencer.
+    6. In Milestone Sequencer.
+    7. In Milestone Sequencer.
+    8. In Elevator Sequencer.
+    9. In Elevator Sequencer.
+    10. In component sequencer.
+    11. In component sequencer.
+    12. In component sequencer.
+    13. In component sequencer.
+    14. In component sequencer.
