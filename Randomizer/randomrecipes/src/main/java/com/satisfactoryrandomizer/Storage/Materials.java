@@ -19,23 +19,23 @@ public class Materials {
         List<CraftStation> tempStations = new ArrayList<>();
 
         // Initialize the list of available stations
-        tempStations.add(new CraftStation("Assembler", false, "Recipe_AssemblerMk1",
+        tempStations.add(new CraftStation("Assembler", false, false, "Recipe_AssemblerMk1",
                 2, 1, 0, 0));
-        tempStations.add(new CraftStation("Blender", false, "Recipe_Blender",
+        tempStations.add(new CraftStation("Blender", false, false, "Recipe_Blender",
                 2, 1, 2, 1));
-        tempStations.add(new CraftStation("Constructor", true, "Recipe_ConstructorMk1",
+        tempStations.add(new CraftStation("Constructor", true, true, "Recipe_ConstructorMk1",
                 1, 1, 0, 0));
-        tempStations.add(new CraftStation("Manufacturer", false, "Recipe_ManufacturerMk1",
+        tempStations.add(new CraftStation("Manufacturer", false, false, "Recipe_ManufacturerMk1",
                 4, 1, 0, 0));
-        tempStations.add(new CraftStation("Packager", false, "Recipe_Packager",
+        tempStations.add(new CraftStation("Packager", false, false, "Recipe_Packager",
                 1, 1, 1, 1));
-        tempStations.add(new CraftStation("PAccel", false, "Recipe_HadronCollider",
+        tempStations.add(new CraftStation("PAccel", false, false, "Recipe_HadronCollider",
                 2, 1, 1, 0));
-        tempStations.add(new CraftStation("Refinery", false, "Recipe_OilRefinery",
+        tempStations.add(new CraftStation("Refinery", false, false, "Recipe_OilRefinery",
                 1, 1, 1, 1));
-        tempStations.add(new CraftStation("Converter", false, "Recipe_Converter",
+        tempStations.add(new CraftStation("Converter", false, false, "Recipe_Converter",
                 2, 1, 0, 1));
-        tempStations.add(new CraftStation("QuantumEncoder", false, "Recipe_QuantumEncoder",
+        tempStations.add(new CraftStation("QuantumEncoder", false, false, "Recipe_QuantumEncoder",
                 3, 1, 1, 1));
         stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
 
@@ -53,7 +53,6 @@ public class Materials {
         tempList.add(new Component("Desc_Cable", "Recipe_Cable", true, false, false));
         tempList.add(new Component("Desc_Cement", "Recipe_Concrete", true, false, false));
         tempList.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false, false));
-        tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
         tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
 
         prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Constructor/");
@@ -94,9 +93,6 @@ public class Materials {
             }
         }
         System.out.println("Prefixed List with " + prefix + ":");
-        for (Component comp : prefixedList) {
-            System.out.println(comp.getName());
-        }
         return prefixedList;
     }
 
@@ -110,9 +106,6 @@ public class Materials {
             }
         }
         System.out.println("Prefixed List with " + prefix + ":");
-        for (CraftStation comp : prefixedList) {
-            System.out.println(comp.getName());
-        }
         return prefixedList;
     }
 
@@ -142,7 +135,7 @@ public class Materials {
     public List<Component> getAvailableAndCraftableComponents(Boolean liquid) {
         List<Component> result = new ArrayList<>();
         for (Component component : components) {
-            if (component.isAvailable() && component.isCraftable() && component.isLiquid() == liquid) {
+            if (component.isAvailable() && component.isCraftable() && component.isLiquid().equals(liquid)) {
                 result.add(component);
             }
         }
@@ -159,10 +152,10 @@ public class Materials {
         return result;
     }
 
-        public List<Component> getAvailableComponents(Boolean liquid) {
+    public List<Component> getAvailableComponents(Boolean liquid) {
         List<Component> result = new ArrayList<>();
         for (Component component : components) {
-            if (component.isAvailable() && component.isLiquid() == liquid) {
+            if (component.isAvailable() && component.isLiquid().equals(liquid)) {
                 result.add(component);
             }
         }
@@ -207,7 +200,7 @@ public class Materials {
     public boolean setComponentAvailable(String name, boolean available) {
         for (Component component : components) {
             if (component.getName().equals(name)) {
-                component.setAvailable(available);
+                component.setAvailable(true);
                 return true;
             }
         }
@@ -215,15 +208,40 @@ public class Materials {
         return false;
     }
 
-        public boolean setComponentCraftable(String name, boolean craftable) {
+    public boolean setComponentCraftable(String name, boolean craftable) {
         for (Component component : components) {
             if (component.getName().equals(name)) {
-                component.setCraftable(craftable, true);
+                component.setCraftable(craftable);
                 return true;
             }
         }
         System.out.println("Could not set Craftable, component not found: " + name);
         return false;
+    }
+
+    /**
+     * Use one of the material, reducing the amount of remaining uses by 1.
+     * 
+     * @param name The name of the material to use.
+     * @return The new amount of remaining uses, or 0 if the material was not found.
+     */
+    public int useComponent(String name) {
+        for (Component component : components) {
+            if (component.getName().equals(name)) {
+                return component.use();
+            }
+        }
+        System.out.println("Could not use component, component not found: " + name);
+        return 0;
+    }
+
+    /**
+     * Increase the number of uses for al materials by 1. Used to avoid crashing due to the lack of material uses.
+     */
+    public void refillComponents() {
+        for (Component component : components) {
+            component.refill();
+        }
     }
 
 }

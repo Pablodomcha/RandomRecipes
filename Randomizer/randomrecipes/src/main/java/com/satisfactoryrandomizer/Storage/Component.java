@@ -10,6 +10,7 @@ public class Component {
     private Boolean craftable;
     private List<String> extraCheck = null; // Items that need to be craftable before this component can be crafted
     private Boolean liquid = false;
+    private int remainingUses = UiValues.getMaxRecipesUsed();
 
     // Basic constructor
     public Component(String name, Boolean available) {
@@ -23,7 +24,7 @@ public class Component {
         this.name = name;
         this.recipepath = recipepath + "." + recipepath + "_C";
         this.available = available;
-        this.craftable = (available && craftable);
+        this.craftable = craftable;
         this.liquid = liquid;
     }
 
@@ -31,7 +32,7 @@ public class Component {
     public Component(String name, Boolean available, Boolean craftable, Boolean liquid) {
         this.name = name;
         this.available = available;
-        this.craftable = (available && craftable);
+        this.craftable = craftable;
         this.liquid = liquid;
     }
 
@@ -42,7 +43,7 @@ public class Component {
         this.name = name;
         this.recipepath = recipepath + "." + recipepath + "_C";
         this.available = available;
-        this.craftable = (available && craftable);
+        this.craftable = craftable;
         this.extraCheck = extraCheck;
         this.liquid = liquid;
     }
@@ -57,7 +58,7 @@ public class Component {
     }
 
     public Boolean isAvailable() {
-        return available;
+        return available && remainingUses > 0;
     }
 
     public Boolean isCraftable() {
@@ -85,14 +86,8 @@ public class Component {
         this.available = available;
     }
 
-    public void setCraftable(Boolean craftable, Boolean checkAvailable) {
+    public void setCraftable(Boolean craftable) {
         this.craftable = craftable;
-        if (checkAvailable) { // If checkAvailable is true, ensure craftable is only true if available also is
-            this.craftable = this.available && craftable;
-        }
-        if (!available && craftable) { // Warn if craftable is set to true while available is false
-            System.out.println("Warning: Component '" + this.name + "' is set to craftable while not available.");
-        }
     }
 
     public void setExtraCheck(List<String> extraCheck) {
@@ -103,13 +98,21 @@ public class Component {
         this.liquid = liquid;
     }
 
-    public String toString() {
-        return "Component{" +
-                "name='" + name + '\'' +
-                ", recipepath='" + recipepath + '\'' +
-                ", available=" + available +
-                ", craftable=" + craftable +
-                ", extraCheck='" + extraCheck + '\'' +
-                '}';
+    /**
+     * Use one of the material, reducing the amount of remaining uses by 1.
+     * 
+     * @return The new amount of remaining uses.
+     */
+    public int use() {
+        return --this.remainingUses;
+    }
+
+    /**
+     * Refill the material, increasing the amount of remaining uses by 1.
+     * 
+     * @return The new amount of remaining uses.
+     */
+    public int refill() {
+        return ++this.remainingUses;
     }
 }

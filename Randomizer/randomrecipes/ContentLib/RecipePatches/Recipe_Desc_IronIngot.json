@@ -1,0 +1,26 @@
+//Game/FactoryGame/Recipes/Smelter/Recipe_IngotIron.Recipe_IngotIron_C
+{
+  "$schema": "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json",
+  "ClearIngredients": true,
+  "Products": [
+    {
+      "Item": "Desc_IronIngot",
+      "Amount": 2
+    },
+    {
+      "Item": "Desc_IronIngot",
+      "Amount": 1
+    }
+  ],
+  "Ingredients": [
+    {
+      "Item": "Desc_OreCopper",
+      "Amount": 1
+    }
+  ],
+  "ProducedIn": [
+    "Constructor"
+  ],
+  "ManufacturingDuration": 100,
+  "ManualManufacturingMultiplier": 0.6077327717245915
+}

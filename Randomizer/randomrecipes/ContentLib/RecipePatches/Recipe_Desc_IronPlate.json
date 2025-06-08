@@ -5,24 +5,22 @@
   "Products": [
     {
       "Item": "Desc_IronPlate",
-      "Amount": 10
+      "Amount": 2
     },
     {
-      "Item": "Desc_LiquidOil",
-      "Amount": 5000
+      "Item": "Desc_IronPlate",
+      "Amount": 2
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_OreIron",
-      "Amount": 20
-    },
-    {
-      "Item": "Desc_CopperWire",
-      "Amount": 10
+      "Item": "Desc_IronRod",
+      "Amount": 1
     }
   ],
   "ProducedIn": [
-    "Build_ManufacturerMk1"
-  ]
+    "Constructor"
+  ],
+  "ManufacturingDuration": 100,
+  "ManualManufacturingMultiplier": 0.7542579690432016
 }

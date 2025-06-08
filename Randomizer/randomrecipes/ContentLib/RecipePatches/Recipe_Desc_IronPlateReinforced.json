@@ -1,0 +1,26 @@
+//Game/FactoryGame/Recipes/Assembler/Recipe_IronPlateReinforced.Recipe_IronPlateReinforced_C
+{
+  "$schema": "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json",
+  "ClearIngredients": true,
+  "Products": [
+    {
+      "Item": "Desc_IronPlateReinforced",
+      "Amount": 2
+    },
+    {
+      "Item": "Desc_IronPlateReinforced",
+      "Amount": 2
+    }
+  ],
+  "Ingredients": [
+    {
+      "Item": "Desc_GenericBiomass",
+      "Amount": 2
+    }
+  ],
+  "ProducedIn": [
+    "Constructor"
+  ],
+  "ManufacturingDuration": 100,
+  "ManualManufacturingMultiplier": 0.5414799068190644
+}

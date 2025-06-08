@@ -12,10 +12,11 @@ public class CraftStation {
     private int liquidOut;
 
     // Basic constructor
-    public CraftStation(String name, Boolean available, String recipepath,
+    public CraftStation(String name, Boolean available, Boolean craftable, String recipepath,
             int solidIn, int solidOut, int liquidIn, int liquidOut) {
         this.name = name;
         this.available = available;
+        this.craftable = craftable;
         this.recipepath = recipepath + "." + recipepath + "_C";
         this.solidIn = solidIn;
         this.solidOut = solidOut;

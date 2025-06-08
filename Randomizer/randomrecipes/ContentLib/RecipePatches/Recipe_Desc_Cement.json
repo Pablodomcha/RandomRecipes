@@ -1,0 +1,26 @@
+//Game/FactoryGame/Recipes/Constructor/Recipe_Concrete.Recipe_Concrete_C
+{
+  "$schema": "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json",
+  "ClearIngredients": true,
+  "Products": [
+    {
+      "Item": "Desc_Cement",
+      "Amount": 2
+    },
+    {
+      "Item": "Desc_Cement",
+      "Amount": 1
+    }
+  ],
+  "Ingredients": [
+    {
+      "Item": "Desc_Stone",
+      "Amount": 1
+    }
+  ],
+  "ProducedIn": [
+    "Constructor"
+  ],
+  "ManufacturingDuration": 100,
+  "ManualManufacturingMultiplier": 0.8167297924261323
+}

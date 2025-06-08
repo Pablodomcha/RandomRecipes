@@ -1,0 +1,26 @@
+//Game/FactoryGame/Recipes/Constructor/Recipe_Cable.Recipe_Cable_C
+{
+  "$schema": "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json",
+  "ClearIngredients": true,
+  "Products": [
+    {
+      "Item": "Desc_Cable",
+      "Amount": 2
+    },
+    {
+      "Item": "Desc_Cable",
+      "Amount": 2
+    }
+  ],
+  "Ingredients": [
+    {
+      "Item": "Desc_OreCopper",
+      "Amount": 2
+    }
+  ],
+  "ProducedIn": [
+    "Constructor"
+  ],
+  "ManufacturingDuration": 100,
+  "ManualManufacturingMultiplier": 0.7247212313360543
+}

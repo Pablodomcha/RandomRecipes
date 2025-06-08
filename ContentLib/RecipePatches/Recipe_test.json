@@ -9,20 +9,11 @@
     },
     {
       "Item": "Desc_LiquidOil",
-      "Amount": 5
-    }
-  ],
-  "Ingredients": [
-    {
-      "Item": "Desc_OreIron",
-      "Amount": 20
-    },
-    {
-      "Item": "Desc_OreCopper",
-      "Amount": 10
+      "Amount": 5000
     }
   ],
   "ProducedIn": [
-    "Build_Blender"
-  ]
+    "Build_ManufacturerMk1"
+  ],
+  "ManufacturingDuration": 2
 }
