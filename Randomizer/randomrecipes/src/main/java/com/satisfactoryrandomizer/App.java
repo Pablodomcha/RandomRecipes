@@ -12,5 +12,7 @@ public final class App {
         SequenceGenerator.generateSequence();
 
         //Tests.test();
+
+        Console.saveLogs();
     }
 }

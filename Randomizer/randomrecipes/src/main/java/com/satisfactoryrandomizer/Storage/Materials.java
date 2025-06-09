@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.satisfactoryrandomizer.Console;
+
 public class Materials {
 
     // List of Components
@@ -96,7 +98,7 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
             }
         }
-        System.out.println("Prefixed List with " + prefix + ":");
+        Console.log("Prefixed List with " + prefix + ":");
         return prefixedList;
     }
 
@@ -109,7 +111,7 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
             }
         }
-        System.out.println("Prefixed List with " + prefix + ":");
+        Console.log("Prefixed List with " + prefix + ":");
         return prefixedList;
     }
 
@@ -121,7 +123,7 @@ public class Materials {
                 return component;
             }
         }
-        System.out.println("Component not found: " + name);
+        Console.log("Component not found: " + name);
         return null;
     }
 
@@ -132,7 +134,7 @@ public class Materials {
                 return true;
             }
         }
-        System.out.println("Component to replace not found: " + name);
+        Console.log("Component to replace not found: " + name);
         return false;
     }
 
@@ -208,7 +210,7 @@ public class Materials {
                 return true;
             }
         }
-        System.out.println("Could not set Available, Component not found: " + name);
+        Console.log("Could not set Available, Component not found: " + name);
         return false;
     }
 
@@ -219,7 +221,7 @@ public class Materials {
                 return true;
             }
         }
-        System.out.println("Could not set Craftable, component not found: " + name);
+        Console.log("Could not set Craftable, component not found: " + name);
         return false;
     }
 
@@ -235,7 +237,7 @@ public class Materials {
                 return component.use();
             }
         }
-        System.out.println("Could not use component, component not found: " + name);
+        Console.log("Could not use component, component not found: " + name);
         return 0;
     }
 

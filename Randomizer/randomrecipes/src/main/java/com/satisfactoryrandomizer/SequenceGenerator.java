@@ -26,9 +26,9 @@ public class SequenceGenerator {
         // Generate a random seed if not provided and set it to the random generator
         if (seed == 0) {
             generateSeed();
-            System.out.println("Generating seed because it wasn't provided.");
+            Console.log("Generating seed because it wasn't provided.");
         }
-        System.out.println("Using seed: " + seed);
+        Console.log("Using seed: " + seed);
         random = new Random(seed);
 
         // Do the first loop of randomization for tier 0 materials
@@ -94,7 +94,7 @@ public class SequenceGenerator {
 
             mats = generateIngredients(station);
 
-            System.out.println("Generated ingredients for " + comp.getName() + " to be made in " + station.getName());
+            Console.cheatsheet("Generated ingredients for " + comp.getName() + " to be made in " + station.getName());
 
             // Add the main product multiplying the value range by 1000 for liquids.
             if (comp.isLiquid()) {
@@ -150,7 +150,7 @@ public class SequenceGenerator {
                 } else if (solidslots > 0) {
                     selectedLiquid = false;
                 } else {
-                    System.out.println(
+                    Console.log(
                             "No more slots available for ingredients, this message does not stop the program, but means there's an error somewhere.");
                     break; // No more slots available, break the loop to stop the program from crashing
                 }
@@ -184,7 +184,7 @@ public class SequenceGenerator {
 
         // Ensure we didn't put a recipe in a slot it can't be
         if (liquidslots < 0 || solidslots < 0) {
-            System.out.println("Slots went negative, the main ingredient can't be crafted there.");
+            Console.log("Slots went negative, the main ingredient can't be crafted there.");
             return products;
         }
 
@@ -201,7 +201,7 @@ public class SequenceGenerator {
             } else if (solidslots > 0) {
                 selectedLiquid = false;
             } else {
-                System.out.println(
+                Console.log(
                         "No more slots available for ingredients, this message does not stop the program, but means there's an error somewhere.");
                 break; // No more slots available, break the loop to stop the program from crashing
             }
@@ -253,7 +253,7 @@ public class SequenceGenerator {
             }
             loops++;
             if (loops > 100) {
-                System.out.println("Looping through the available materials for the " + loops
+                Console.log("Looping through the available materials for the " + loops
                         + "th time, \"Max recipes used\" is too low. The uses of all components will be increased by 1 to procceed");
                 materials.refillComponents();
                 craftableComponents = materials.getAvailableAndCraftableComponents(liquid);
@@ -263,7 +263,7 @@ public class SequenceGenerator {
         if (component.isAvailable()) {
             materials.useComponent(component.getName());
         } else {
-            System.out.println(
+            Console.log(
                     "For some reason this recipe is trying to use an unavailable component: " + component.getName());
         }
 
@@ -289,7 +289,7 @@ public class SequenceGenerator {
             double power = 1 + (bias - 51.0) / 49.0 * 9.0; // power: 1 at bias=50, 10 at bias=100
             r = 1 - Math.pow(1 - r, power);
         }
-        System.out.println("getBiasedRandomInt: min=" + (min + (int) ((max - min + 1) * r)));
+        Console.log("getBiasedRandomInt: min=" + (min + (int) ((max - min + 1) * r)));
         return min + (int) ((max - min + 1) * r);
 
     }

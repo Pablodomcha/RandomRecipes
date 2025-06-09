@@ -5,19 +5,19 @@
   "Products": [
     {
       "Item": "Desc_Wire",
-      "Amount": 2
+      "Amount": 1
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_CopperIngot",
-      "Amount": 2
+      "Item": "Desc_OreIron",
+      "Amount": 1
     }
   ],
   "ProducedIn": [
-    "Build_ConstructorMk1",
+    "Build_SmelterMk1",
     "manual"
   ],
-  "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.6485565281254663
+  "ManufacturingDuration": 0,
+  "ManualManufacturingMultiplier": 0.8566817229496393
 }

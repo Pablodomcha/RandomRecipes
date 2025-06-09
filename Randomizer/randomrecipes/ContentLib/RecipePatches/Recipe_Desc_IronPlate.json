@@ -5,19 +5,19 @@
   "Products": [
     {
       "Item": "Desc_IronPlate",
-      "Amount": 1
+      "Amount": 2
     }
   ],
   "Ingredients": [
     {
       "Item": "Desc_OreIron",
-      "Amount": 1
+      "Amount": 2
     }
   ],
   "ProducedIn": [
     "Build_SmelterMk1",
     "manual"
   ],
-  "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.9593700193741266
+  "ManufacturingDuration": 0,
+  "ManualManufacturingMultiplier": 0.9601506126473172
 }

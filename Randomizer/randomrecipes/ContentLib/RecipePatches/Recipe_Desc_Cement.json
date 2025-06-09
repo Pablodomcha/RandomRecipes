@@ -15,9 +15,9 @@
     }
   ],
   "ProducedIn": [
-    "Build_ConstructorMk1",
+    "Build_SmelterMk1",
     "manual"
   ],
-  "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.9310275378807232
+  "ManufacturingDuration": 0,
+  "ManualManufacturingMultiplier": 0.7905057335108745
 }

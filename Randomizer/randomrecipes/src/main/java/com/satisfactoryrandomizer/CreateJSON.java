@@ -49,6 +49,7 @@ public class CreateJSON {
 
         try (FileWriter writer = new FileWriter(recipe.getFilename())) {
             writer.write(json);
+            writer.close();
         } catch (IOException e) {
             System.err.println("Error writing JSON file: " + e.getMessage());
         }

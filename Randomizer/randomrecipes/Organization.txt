@@ -114,8 +114,6 @@ TODO:
 
 Structures recipe path is wrong.
 
-Craft Time is always max value.
-
 Make the Tutorial Phase.
 
 Make recipes to create/use leaves and wood (Can use the 2nd biomass recipe for one of them)

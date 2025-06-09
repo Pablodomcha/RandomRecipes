@@ -5,19 +5,19 @@
   "Products": [
     {
       "Item": "Desc_GenericBiomass",
-      "Amount": 2
+      "Amount": 1
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_IronIngot",
+      "Item": "Desc_Stone",
       "Amount": 2
     }
   ],
   "ProducedIn": [
-    "Build_ConstructorMk1",
+    "Build_SmelterMk1",
     "manual"
   ],
-  "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.8550962071520343
+  "ManufacturingDuration": 0,
+  "ManualManufacturingMultiplier": 0.5370488601309598
 }
