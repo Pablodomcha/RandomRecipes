@@ -1,23 +1,23 @@
-//Game/FactoryGame/Recipes/Constructor/Recipe_IronRod.Recipe_IronRod_C
+//Game/FactoryGame/Recipes/Constructor/Recipe_Cable.Recipe_Cable_C
 {
   "$schema": "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json",
   "ClearIngredients": true,
   "Products": [
     {
-      "Item": "Desc_IronRod",
-      "Amount": 2
+      "Item": "Desc_Cable",
+      "Amount": 5
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_Stone",
-      "Amount": 2
+      "Item": "Desc_OreIron",
+      "Amount": 7
     }
   ],
   "ProducedIn": [
-    "Build_SmelterMk1",
+    "Build_ConstructorMk1",
     "manual"
   ],
   "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.9161062539862777
+  "ManualManufacturingMultiplier": 0.514101481120135
 }

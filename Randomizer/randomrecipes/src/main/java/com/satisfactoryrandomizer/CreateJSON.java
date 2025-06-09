@@ -15,17 +15,20 @@ public class CreateJSON {
 
     public static void saveRecipeAsJson(Recipe recipe, String recipePath) {
 
-        // Convert the station to list and add manual if it's from constructor or smelter.
+        // Convert the station to list and add manual if it's from constructor or
+        // smelter.
+        // Also prefix it with "Build_" to make it the correct name.
         List<String> stations = new ArrayList<>();
         stations.add(recipe.getStation());
-        if(recipe.getStation().equals("Build_ConstructorMk1") || recipe.getStation().equals("Build_SmelterMk1")){
+        if (recipe.getStation().equals("Build_ConstructorMk1") || recipe.getStation().equals("Build_SmelterMk1")) {
             stations.add("manual");
         }
-        JSONableRecipe jsonRecipe = new JSONableRecipe(recipe.getProducts(), recipe.getIngredients(), stations, recipe.getTime(), recipe.getHandcraftSpeed());
+        JSONableRecipe jsonRecipe = new JSONableRecipe(recipe.getProducts(), recipe.getIngredients(), stations,
+                recipe.getTime(), recipe.getHandcraftSpeed());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonRecipe);
-        json = json.replace("\n", "\r\n"); // Make the breaks CRLF
-        json = recipePath + "\n" + json;
+        json = json.replace("\n", "\r\n"); // Make the line breaks CRLF
+        json = recipePath + "\r\n" + json;
 
         try (FileWriter writer = new FileWriter(recipe.getFilename())) {
             writer.write(json);
@@ -34,9 +37,10 @@ public class CreateJSON {
         }
     }
 
-        public static void saveStructureAsJson(Recipe recipe, String recipePath) {
+    public static void saveStructureAsJson(Recipe recipe, String recipePath) {
 
-        // Convert the station to list and add manual if it's from constructor or smelter.
+        // Convert the station to list and add manual if it's from constructor or
+        // smelter.
         JSONableStructure jsonRecipe = new JSONableStructure(recipe.getProducts(), recipe.getIngredients());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonRecipe);

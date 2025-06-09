@@ -5,22 +5,19 @@
   "Products": [
     {
       "Item": "Desc_CopperIngot",
-      "Amount": 2
-    },
-    {
-      "Item": "Desc_CopperIngot",
-      "Amount": 2
+      "Amount": 1
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_Cable",
-      "Amount": 1
+      "Item": "Desc_Stone",
+      "Amount": 2
     }
   ],
   "ProducedIn": [
-    "Constructor"
+    "Build_ConstructorMk1",
+    "manual"
   ],
   "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.5262805187912446
+  "ManualManufacturingMultiplier": 0.8909376342922718
 }

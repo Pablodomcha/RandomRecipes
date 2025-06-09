@@ -6,21 +6,18 @@
     {
       "Item": "Desc_IronIngot",
       "Amount": 2
-    },
-    {
-      "Item": "Desc_IronIngot",
-      "Amount": 1
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_OreCopper",
+      "Item": "Desc_IronPlateReinforced",
       "Amount": 1
     }
   ],
   "ProducedIn": [
-    "Constructor"
+    "Build_SmelterMk1",
+    "manual"
   ],
   "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.6077327717245915
+  "ManualManufacturingMultiplier": 0.7875418276308845
 }

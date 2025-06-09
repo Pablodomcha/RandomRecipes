@@ -6,21 +6,18 @@
     {
       "Item": "Desc_Cement",
       "Amount": 2
-    },
-    {
-      "Item": "Desc_Cement",
-      "Amount": 1
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_Stone",
-      "Amount": 1
+      "Item": "Desc_Wire",
+      "Amount": 2
     }
   ],
   "ProducedIn": [
-    "Constructor"
+    "Build_ConstructorMk1",
+    "manual"
   ],
   "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.8167297924261323
+  "ManualManufacturingMultiplier": 0.9310275378807232
 }

@@ -6,21 +6,18 @@
     {
       "Item": "Desc_Wire",
       "Amount": 2
-    },
-    {
-      "Item": "Desc_Wire",
-      "Amount": 2
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_IronScrew",
+      "Item": "Desc_CopperIngot",
       "Amount": 2
     }
   ],
   "ProducedIn": [
-    "Constructor"
+    "Build_ConstructorMk1",
+    "manual"
   ],
   "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.7505308343248887
+  "ManualManufacturingMultiplier": 0.6485565281254663
 }

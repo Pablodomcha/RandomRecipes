@@ -6,21 +6,18 @@
     {
       "Item": "Desc_Cable",
       "Amount": 2
-    },
-    {
-      "Item": "Desc_Cable",
-      "Amount": 2
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_OreCopper",
-      "Amount": 2
+      "Item": "Desc_OreIron",
+      "Amount": 1
     }
   ],
   "ProducedIn": [
-    "Constructor"
+    "Build_SmelterMk1",
+    "manual"
   ],
   "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.7247212313360543
+  "ManualManufacturingMultiplier": 0.8144341144973539
 }

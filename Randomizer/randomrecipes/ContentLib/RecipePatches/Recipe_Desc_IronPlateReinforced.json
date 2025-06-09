@@ -5,22 +5,19 @@
   "Products": [
     {
       "Item": "Desc_IronPlateReinforced",
-      "Amount": 2
-    },
-    {
-      "Item": "Desc_IronPlateReinforced",
-      "Amount": 2
+      "Amount": 1
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_GenericBiomass",
-      "Amount": 2
+      "Item": "Desc_Stone",
+      "Amount": 1
     }
   ],
   "ProducedIn": [
-    "Constructor"
+    "Build_SmelterMk1",
+    "manual"
   ],
   "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.5414799068190644
+  "ManualManufacturingMultiplier": 0.7069372137395535
 }

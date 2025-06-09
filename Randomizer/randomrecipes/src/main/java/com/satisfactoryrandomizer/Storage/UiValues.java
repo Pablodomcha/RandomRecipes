@@ -28,8 +28,8 @@ public class UiValues {
     static int maxStackEle = 2;
     static int maxItemEle = 2;
 
-    static int maxTimeMile = 100; // Seconds
-    static int maxTimeCraft = 100; // Seconds
+    static int maxTimeMile = 1; // Seconds
+    static int maxTimeCraft = 1; // Seconds
     static double[] handcraftSpeed = { 0.5, 1.0 };
 
     static int inputBias = 50; // 0 = min unputs, 100 = max inputs

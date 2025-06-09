@@ -43,7 +43,7 @@ public class SequenceGenerator {
 
         // Get the station list and components available to make them
         List<CraftStation> stations = materials.getAvailableButUncraftableStations();
-
+        //stations.add materials.getStation("");
         while (!stations.isEmpty()) {
             // Needed variables. Prod will always only have the station, but has to be a
             // string regardless.
@@ -64,7 +64,7 @@ public class SequenceGenerator {
             );
 
             // Create Recipe JSON file
-            CreateJSON.saveStructureAsJson(recipe, station.getRecipePath());
+            CreateJSON.saveStructureAsJson(recipe, station.getRecipePath()); // Wrong path for structures, this is the path to call them for components
 
             // Mark the component as craftable and update the list of available but
             // uncraftable components
@@ -94,7 +94,7 @@ public class SequenceGenerator {
 
             mats = generateIngredients(station);
 
-            System.out.println("Generated ingredients for " + comp.getName());
+            System.out.println("Generated ingredients for " + comp.getName() + " to be made in " + station.getName());
 
             // Add the main product multiplying the value range by 1000 for liquids.
             if (comp.isLiquid()) {
@@ -105,13 +105,6 @@ public class SequenceGenerator {
                 mainliquid = false;
             }
 
-            // Add main product to products.
-            // Add other products if waste is not Easy
-            prod.add(new Mat(comp.getName(), random.nextInt(UiValues.getMaxStackComp()) + 1));
-            if (UiValues.getWaste() != 0) {
-                prod.addAll(generateProducts(station, mainliquid));
-            }
-
             double handSpeed = random.nextDouble() * (UiValues.getHandcraftSpeed()[1] - UiValues.getHandcraftSpeed()[0])
                     + UiValues.getHandcraftSpeed()[0];
 
@@ -119,8 +112,8 @@ public class SequenceGenerator {
                     prod, // Products
                     mats, // Ingredients
                     "Recipe_" + comp.getName() + ".json", // Filename
-                    station.getName(), // Station
-                    UiValues.getMaxTimeCraft(), // Time
+                    station.getBuilderPath(), // Station
+                    random.nextInt(UiValues.getMaxTimeCraft()), // Time
                     handSpeed // Handcraft speed
             );
 

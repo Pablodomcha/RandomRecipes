@@ -83,8 +83,8 @@ Info:
 
 -Options (Insert Value): Don't put the Max Stack or Max items to 0, for free recipes use the specific option.
     0. Seed.
-    1. Max stack per component: Maximum number of each component needed for a craft.
-    2. Max component per craft: Maximum number of each component produced by a craft. 
+    1. Max stack per component: Maximum number of each component needed for a craft. Over 50 will crash.
+    2. Max component per craft: Maximum number of each component produced by a craft. Over 50 will crash.
     3. Max stack per structure: Maximum number of each component needed to build with the builder tool.
     4. Max items per structure: Maximum number of different items to build with the builder tool.
     5. Max stack per milestone: Maximum number of each component needed to complete a milestone.
@@ -109,3 +109,13 @@ Info:
     11. In component sequencer. V
     12. In component sequencer. V
     13. In component sequencer. V
+
+TODO:
+
+Structures recipe path is wrong.
+
+Craft Time is always max value.
+
+Make the Tutorial Phase.
+
+Make recipes to create/use leaves and wood (Can use the 2nd biomass recipe for one of them)
