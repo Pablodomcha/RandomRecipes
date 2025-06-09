@@ -104,6 +104,7 @@ public class SequenceGenerator {
                 prod.add(new Mat(comp.getName(), random.nextInt(UiValues.getMaxStackComp()) + 1));
                 mainliquid = false;
             }
+            prod.addAll(generateProducts(station, mainliquid));
 
             double handSpeed = random.nextDouble() * (UiValues.getHandcraftSpeed()[1] - UiValues.getHandcraftSpeed()[0])
                     + UiValues.getHandcraftSpeed()[0];
