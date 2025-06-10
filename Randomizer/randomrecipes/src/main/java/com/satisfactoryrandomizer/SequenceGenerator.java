@@ -199,7 +199,7 @@ public class SequenceGenerator {
 
             // If any liquid has been unlocked we check for them, otherwise, we don't.
             // If it's a structure, we don't use liquids.
-            if (liquidUnlocked && !isStructure) {
+            if (SequenceGenerator.liquidUnlocked && !isStructure) {
                 if (liquidslots > 0 && solidslots > 0) {
                     // Randomly choose between liquid and solid slot
                     selectedLiquid = random.nextBoolean();
@@ -207,14 +207,15 @@ public class SequenceGenerator {
                     selectedLiquid = true;
                 } else {
                     Console.log(
-                            "No more slots available for ingredients, this message does not stop the program, but means there's an error somewhere.");
-                    break; // No more slots available, break the loop to stop the program from crashing
+                            "No more slots available for ingredients. THis shouldn't happen.");
                 }
             }
             // Select a random component from the usable components
             List<Component> craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
 
             ensureUnused(ingredients, craftableComponents, selectedLiquid);
+
+            Console.log("Selected ingredients: " + ingredients);
 
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component

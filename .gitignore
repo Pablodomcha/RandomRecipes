@@ -25,7 +25,7 @@ target/*.log
 
 ## Ignore the randomized files
 ContentLib/
-Randomizer\randomrecipes\ContentLib
+Randomizer/randomrecipes/ContentLib
 
 ## IntelliJ IDEA
 .idea/
