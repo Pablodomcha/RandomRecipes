@@ -8,17 +8,17 @@ import com.satisfactoryrandomizer.Console;
 import com.satisfactoryrandomizer.Storage.Randomizables.Component;
 import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
 import com.satisfactoryrandomizer.Storage.Randomizables.EssentialStructure;
+import com.satisfactoryrandomizer.Storage.Randomizables.Milestone;
 import com.satisfactoryrandomizer.Storage.Randomizables.Randomizable;
 import com.satisfactoryrandomizer.Storage.Randomizables.Structure;
 
 public class Materials {
 
-    // List of Components
-    private final List<Component> components = new ArrayList<>();
-    // List of craftable items at the start of the game
-    private List<CraftStation> stations = new ArrayList<>();
+    private final List<Component> components = new ArrayList<>();// Components
+    private List<CraftStation> stations = new ArrayList<>(); // Crafting Stations
     private List<Structure> structures = new ArrayList<>(); // Generic structures that don't affect the logic
     private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by the logic
+    private List<Milestone> milestones = new ArrayList<>(); // Milestones
 
     public Materials() {
 
@@ -27,7 +27,7 @@ public class Materials {
         List<Component> prefixedTempList;
         List<CraftStation> tempStations = new ArrayList<>();
 
-        // Initialize the list of available stations
+        // Crafting Stations
         tempStations
                 .add(new CraftStation("Desc_AssemblerMk1", false, false, "Recipe_AssemblerMk1", "Build_AssemblerMk1",
                         2, 1, 0, 0));
@@ -58,13 +58,13 @@ public class Materials {
                 2, 1, 0, 0));
         this.stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
 
-        // Initialize the available materials
+        // Components
+
         // Starting you only have directly gatherable materials
         this.components.add(new Component("Desc_OreIron", true, false));
         this.components.add(new Component("Desc_OreCopper", true, false));
         this.components.add(new Component("Desc_Stone", true, false));
 
-        // available at Onboarding, Is available but not nececessarily craftable
         // /Recipes/Constructor/
         tempList.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
         tempList.add(new Component("Desc_IronRod", "Recipe_IronRod", true, false, false));
@@ -101,8 +101,6 @@ public class Materials {
         tempList.clear();
         prefixedTempList.clear();
 
-        // Now the rest of resources.
-        // Resource/RawResources/
         // this.components.add(new Component("", "", false, false));
 
         // Milestones

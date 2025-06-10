@@ -118,6 +118,8 @@ Info:
 
 TODO:
 
+Add milestones, structures and essential structures to be able to create the logic.
+
 Make the Tutorial Phase.
 
 Make the game select the first Crafting station. Make sure it's enabled by the end of the tutorial.
