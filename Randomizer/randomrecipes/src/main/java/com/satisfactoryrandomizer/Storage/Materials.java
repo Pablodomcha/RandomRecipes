@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.satisfactoryrandomizer.Console;
+import com.satisfactoryrandomizer.Storage.Randomizables.Component;
+import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
 
 public class Materials {
 
@@ -27,8 +29,9 @@ public class Materials {
                 2, 1, 2, 1));
         tempStations.add(new CraftStation("Constructor", true, true, "Recipe_ConstructorMk1", "Build_ConstructorMk1",
                 1, 1, 0, 0));
-        tempStations.add(new CraftStation("Manufacturer", false, false, "Recipe_ManufacturerMk1", "Build_ManufacturerMk1",
-                4, 1, 0, 0));
+        tempStations
+                .add(new CraftStation("Manufacturer", false, false, "Recipe_ManufacturerMk1", "Build_ManufacturerMk1",
+                        4, 1, 0, 0));
         tempStations.add(new CraftStation("Packager", false, false, "Recipe_Packager", "Build_Packager",
                 1, 1, 1, 1));
         tempStations.add(new CraftStation("PAccel", false, false, "Recipe_HadronCollider", "Build_HadronCollider",
@@ -37,8 +40,9 @@ public class Materials {
                 1, 1, 1, 1));
         tempStations.add(new CraftStation("Converter", false, false, "Recipe_Converter", "Build_Converter",
                 2, 1, 0, 1));
-        tempStations.add(new CraftStation("QuantumEncoder", false, false, "Recipe_QuantumEncoder", "Build_QuantumEncoder",
-                3, 1, 1, 1));
+        tempStations
+                .add(new CraftStation("QuantumEncoder", false, false, "Recipe_QuantumEncoder", "Build_QuantumEncoder",
+                        3, 1, 1, 1));
         tempStations.add(new CraftStation("SmelterMk1", true, true, "Recipe_SmelterMk1", "Build_SmelterMk1",
                 1, 1, 0, 0));
         tempStations.add(new CraftStation("FoundryMk1", false, false, "Recipe_FoundryMk1", "Build_FoundryMk1",
@@ -47,9 +51,9 @@ public class Materials {
 
         // Initialize the available materials
         // Starting you only have directly gatherable materials
-        components.add(new Component("Desc_OreIron", true));
-        components.add(new Component("Desc_OreCopper", true));
-        components.add(new Component("Desc_Stone", true));
+        components.add(new Component("Desc_OreIron", true, false));
+        components.add(new Component("Desc_OreCopper", true, false));
+        components.add(new Component("Desc_Stone", true, false));
 
         // available at Onboarding, Is available but not nececessarily craftable
         // /Recipes/Constructor/
@@ -60,6 +64,7 @@ public class Materials {
         tempList.add(new Component("Desc_Cement", "Recipe_Concrete", true, false, false));
         tempList.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false, false));
         tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
+        tempList.add(new Component("Desc_Leaves", "Recipe_Biomass_Wood", true, false, false));
 
         prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Constructor/");
         components.addAll(prefixedTempList);
@@ -77,7 +82,8 @@ public class Materials {
         prefixedTempList.clear();
 
         // /Recipes/Assembler/
-        tempList.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
+        tempList.add(
+                new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
 
         prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Assembler/");
         components.addAll(prefixedTempList);
@@ -127,7 +133,7 @@ public class Materials {
         return null;
     }
 
-    public boolean replaceComponentByName(String name, Component newComponent) {
+    public Boolean replaceComponentByName(String name, Component newComponent) {
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i).getName().equals(name)) {
                 components.set(i, newComponent);
@@ -203,7 +209,7 @@ public class Materials {
         return result;
     }
 
-    public boolean setComponentAvailable(String name, boolean available) {
+    public Boolean setComponentAvailable(String name, Boolean available) {
         for (Component component : components) {
             if (component.getName().equals(name)) {
                 component.setAvailable(true);
@@ -214,7 +220,7 @@ public class Materials {
         return false;
     }
 
-    public boolean setComponentCraftable(String name, boolean craftable) {
+    public Boolean setComponentCraftable(String name, Boolean craftable) {
         for (Component component : components) {
             if (component.getName().equals(name)) {
                 component.setCraftable(craftable);

@@ -11,13 +11,13 @@
   "Ingredients": [
     {
       "Item": "Desc_Cement",
-      "Amount": 1
+      "Amount": 2
     }
   ],
   "ProducedIn": [
-    "Build_SmelterMk1",
+    "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0,
-  "ManualManufacturingMultiplier": 0.8171456112859772
+  "ManufacturingDuration": 0.21,
+  "ManualManufacturingMultiplier": 0.21
 }

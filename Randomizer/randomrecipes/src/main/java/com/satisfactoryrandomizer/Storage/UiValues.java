@@ -11,7 +11,6 @@ public class UiValues {
     static int electricity = 0;
     static int waste = 0;
     static int liquids = 0;
-    static int power = 0;
 
     // Inventory Slots Weirdo
     static int inventorySlots = 0; // 0 = fixed, 1 = random
@@ -28,8 +27,8 @@ public class UiValues {
     static int maxStackEle = 2;
     static int maxItemEle = 2;
 
-    static int maxTimeMile = 1; // Seconds
-    static int maxTimeCraft = 1; // Seconds
+    static double maxTimeMile = 1; // Seconds
+    static double maxTimeCraft = 1; // Seconds
     static double[] handcraftSpeed = { 0.5, 1.0 };
 
     static int inputBias = 50; // 0 = min unputs, 100 = max inputs
@@ -137,26 +136,6 @@ public class UiValues {
 
     public static void setLiquids(int liquids) {
         UiValues.liquids = liquids;
-    }
-
-    /**
-     * Retrieves the current power setting.
-     * 
-     * @return 6. Power:
-     *         Vanilla: Structures use vanilla power. It's fun until you have to run
-     *         Particle Accelerators on Biomass Burners.
-     *         Balanced: Structures obtained earlier consume less energy. If your
-     *         Particle Accelerator is Tier 2, it will consume on average what a
-     *         foundry does.
-     *         Random: I felt like adding this. The idea is really funny, the
-     *         gameplay isn't (the min value is 10MW and the max is 2GW)
-     */
-    public static int getPower() {
-        return power;
-    }
-
-    public static void setPower(int power) {
-        UiValues.power = power;
     }
 
     /**
@@ -283,7 +262,7 @@ public class UiValues {
      * 
      * @return 7. Max time per milestone.
      */
-    public static int getMaxTimeMile() {
+    public static double getMaxTimeMile() {
         return maxTimeMile;
     }
 
@@ -324,7 +303,7 @@ public class UiValues {
      * 
      * @return 10. Max time to craft.
      */
-    public static int getMaxTimeCraft() {
+    public static double getMaxTimeCraft() {
         return maxTimeCraft;
     }
 

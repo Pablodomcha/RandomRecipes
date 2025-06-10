@@ -41,6 +41,7 @@ Info:
     8. MAM researches are all considered non-essential, the ones that are will be moved to milestones. Non-essential things will be moved from milestones to MAM in exchange.
     9. All materials are treated the same, so you could end up with the screw being as expensive as a vanilla uranium fuel rod and vice versa.
     10. If for whatever reason introducing the same seed creates different paths for different players, you can work arround it by having one player create the files and send them to the others. This should be reported as a bug regardless.
+    11. Particle accelerator/Converter recipes use energy based on the tier of the recipe. Generating 1500MW on Biomass Burners is only fun the 1st time.
 
 -Options (Toggle):
     1. Ore location:
@@ -63,10 +64,7 @@ Info:
     5. Liquids:
         Only liquid: Liquids can only be used in their liquid form for recipes (this is the case for the base game).
         Packaged and Liquid: Packaged liquids can be part of recipes. Packaging could be really expensive (or not).
-    6. Power:
-        Vanilla: Structures use vanilla power. It's fun until you have to run Particle Accelerators on Biomass Burners.
-        Balanced: Structures obtained earlier consume less energy. If your Particle Accelerator is Tier 2, it will consume on average what a foundry does.
-        Random: I felt like adding this. The idea is really funny, the gameplay isn't (the min value is 10MW and the max is 2GW)
+        Random: I felt like adding this. The idea is really funny, the gameplay isn't (the min value is 10MW and the max is 2GW).
     7. Inventory slots: (The number of upgrades that give slots is not randomized, only the amount of slots they give and the milestones/MAM research they appear in).
         Fixed: The amount of slots is fixed, uses Max value (with this option Min values is ignored). MAM researches that give these give double.
         Random: The amount of slots is random between the values provided. MAM researches double the randomized value (yes, this means MAM always gives an even number of slots).
@@ -85,8 +83,8 @@ Info:
     0. Seed.
     1. Max stack per component: Maximum number of each component needed for a craft. Over 50 will crash.
     2. Max component per craft: Maximum number of each component produced by a craft. Over 50 will crash.
-    3. Max stack per structure: Maximum number of each component needed to build with the builder tool.
-    4. Max items per structure: Maximum number of different items to build with the builder tool.
+    3. Max stack per structure: Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build.
+    4. Max items per structure: Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build.
     5. Max stack per milestone: Maximum number of each component needed to complete a milestone.
     6. Max items per milestone: Maximum number of different items to complete a milestone.
     7. Max time per milestone: Maximum time to research a new milestone after completing one or time to complete a MAM research.

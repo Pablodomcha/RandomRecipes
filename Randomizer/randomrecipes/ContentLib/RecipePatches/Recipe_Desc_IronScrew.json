@@ -10,7 +10,7 @@
   ],
   "Ingredients": [
     {
-      "Item": "Desc_OreCopper",
+      "Item": "Desc_Wire",
       "Amount": 1
     }
   ],
@@ -18,6 +18,6 @@
     "Build_SmelterMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0,
-  "ManualManufacturingMultiplier": 0.7455599983851802
+  "ManufacturingDuration": 0.91,
+  "ManualManufacturingMultiplier": 0.91
 }

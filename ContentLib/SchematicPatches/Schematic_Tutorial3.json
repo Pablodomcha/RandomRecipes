@@ -1,6 +1,5 @@
 //Game/FactoryGame/Schematics/Tutorial/Schematic_Tutorial3.Schematic_Tutorial3_C
 {
     "$schema": "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/main/JsonSchemas/CL_Schematic.json",
-    "ClearCost": true,
-    "ClearRecipes": true
+    "ClearCost": true
 }

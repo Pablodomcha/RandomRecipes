@@ -10,14 +10,14 @@
   ],
   "Ingredients": [
     {
-      "Item": "Desc_IronScrew",
-      "Amount": 2
+      "Item": "Desc_Wire",
+      "Amount": 1
     }
   ],
   "ProducedIn": [
-    "Build_SmelterMk1",
+    "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0,
-  "ManualManufacturingMultiplier": 0.5930407245704865
+  "ManufacturingDuration": 0.52,
+  "ManualManufacturingMultiplier": 0.52
 }

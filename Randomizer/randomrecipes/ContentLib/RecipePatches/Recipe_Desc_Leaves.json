@@ -1,23 +1,23 @@
-//Game/FactoryGame/Recipes/Constructor/Recipe_Cable.Recipe_Cable_C
+//Game/FactoryGame/Recipes/Constructor/Recipe_Biomass_Wood.Recipe_Biomass_Wood_C
 {
   "$schema": "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json",
   "ClearIngredients": true,
   "Products": [
     {
-      "Item": "Desc_Cable",
-      "Amount": 5
+      "Item": "Desc_Leaves",
+      "Amount": 2
     }
   ],
   "Ingredients": [
     {
-      "Item": "Desc_OreIron",
-      "Amount": 7
+      "Item": "Desc_IronScrew",
+      "Amount": 1
     }
   ],
   "ProducedIn": [
     "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 100,
-  "ManualManufacturingMultiplier": 0.514101481120135
+  "ManufacturingDuration": 0.63,
+  "ManualManufacturingMultiplier": 0.63
 }

@@ -1,5 +1,6 @@
 package com.satisfactoryrandomizer.Storage;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 // Stores all values needes to create a recipe in JSON format
@@ -11,18 +12,27 @@ public class Recipe {
     private String schema;
     private String filename;
     private String station;
-    private int time;
+    private double time;
     private double handcraftingSpeed;
     private String path = "ContentLib/RecipePatches/";
 
-    public Recipe(List<Mat> products, List<Mat> ingredients, String filename, String station, int time, double handSpeed) {
+    public Recipe(List<Mat> products, List<Mat> ingredients, String filename, String station, double time,
+            double handSpeed) {
         this.products = products;
         this.ingredients = ingredients;
         this.schema = "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json";
         this.filename = path + filename;
         this.station = station;
-        this.time = time;
-        this.handcraftingSpeed = handSpeed;
+
+        BigDecimal bigTime = new BigDecimal(time);
+        bigTime = bigTime.setScale(2, BigDecimal.ROUND_UP);
+        double roundedTime = bigTime.doubleValue();
+        this.time = roundedTime;
+
+        BigDecimal ManTime = new BigDecimal(time);
+        ManTime = ManTime.setScale(2, BigDecimal.ROUND_UP);
+        double roundedMan = ManTime.doubleValue();
+        this.handcraftingSpeed = roundedMan;
     }
 
     public List<Mat> getProducts() {
@@ -49,7 +59,7 @@ public class Recipe {
         return station;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
 

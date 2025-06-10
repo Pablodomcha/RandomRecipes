@@ -1,12 +1,8 @@
-package com.satisfactoryrandomizer.Storage;
+package com.satisfactoryrandomizer.Storage.Randomizables;
 
-public class CraftStation {
+public class CraftStation extends Randomizable {
 
-    private final String name;
-    private String recipepath;
     private final String builderpath;
-    private final Boolean available;
-    private final Boolean craftable;
     private final int solidIn;
     private final int solidOut;
     private final int liquidIn;
@@ -15,10 +11,7 @@ public class CraftStation {
     // Basic constructor
     public CraftStation(String name, Boolean available, Boolean craftable, String recipepath,
             String builderpath, int solidIn, int solidOut, int liquidIn, int liquidOut) {
-        this.name = name;
-        this.available = available;
-        this.craftable = craftable;
-        this.recipepath = recipepath + "." + recipepath + "_C";
+        super(name, recipepath + "." + recipepath + "_C", available, craftable, null);
         this.builderpath = builderpath;
         this.solidIn = solidIn;
         this.solidOut = solidOut;
@@ -26,25 +19,9 @@ public class CraftStation {
         this.liquidOut = liquidOut;
     }
 
-    // Getters
-    public String getName() {
-        return name;
-    }
-
-    public String getRecipePath() {
-        return recipepath;
-    }
 
     public String getBuilderPath() {
         return builderpath;
-    }
-
-    public Boolean isAvailable() {
-        return available;
-    }
-
-    public Boolean isCraftable() {
-        return craftable;
     }
 
     public int getSolidIn() {
@@ -69,9 +46,5 @@ public class CraftStation {
 
     public int getTotalOut() {
         return solidOut + liquidOut;
-    }
-
-    public void setRecipePath(String recipepath) {
-        this.recipepath = recipepath;
     }
 }

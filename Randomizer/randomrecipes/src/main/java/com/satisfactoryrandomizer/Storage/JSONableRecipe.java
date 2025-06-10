@@ -8,10 +8,10 @@ public class JSONableRecipe {
     private List<Mat> Products;
     private List<Mat> Ingredients;
     private List<String> ProducedIn;
-    private int ManufacturingDuration;
+    private double ManufacturingDuration;
     private double ManualManufacturingMultiplier = 1;
 
-    public JSONableRecipe(List<Mat> products, List<Mat> ingredients, List<String> producedIn, int manufacturingDuration, double manualDuration) {
+    public JSONableRecipe(List<Mat> products, List<Mat> ingredients, List<String> producedIn, double manufacturingDuration, double manualDuration) {
         this.Products = products;
         this.Ingredients = ingredients;
         this.ProducedIn = producedIn;

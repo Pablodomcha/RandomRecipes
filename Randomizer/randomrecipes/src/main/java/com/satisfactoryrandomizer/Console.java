@@ -15,9 +15,7 @@ public class Console {
     }
 
     public static void cheatsheet(String message) {
-        String temp = message;
-        System.out.println(temp);
-        cheatsheet += temp + "\n";
+        cheatsheet += message + "\n";
     }
 
     public static void saveLogs() {

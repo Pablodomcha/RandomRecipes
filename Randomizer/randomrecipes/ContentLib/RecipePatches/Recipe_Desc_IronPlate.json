@@ -10,14 +10,14 @@
   ],
   "Ingredients": [
     {
-      "Item": "Desc_OreIron",
+      "Item": "Desc_OreCopper",
       "Amount": 2
     }
   ],
   "ProducedIn": [
-    "Build_SmelterMk1",
+    "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0,
-  "ManualManufacturingMultiplier": 0.9601506126473172
+  "ManufacturingDuration": 0.35,
+  "ManualManufacturingMultiplier": 0.35
 }
