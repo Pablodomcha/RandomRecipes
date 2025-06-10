@@ -4,8 +4,9 @@ Prefixed List with //Game/FactoryGame/Recipes/Smelter/
 Prefixed List with //Game/FactoryGame/Recipes/Assembler/
 You are running test code. If this message is on release, some test code was left in.
 Generating seed because it wasn't provided.
-Using seed: 3572203258745481599
-Randomizable array size: 22
+Using seed: 687790517287773313
+Randomizable array size: 23
+Randomizable array size: 21
 Randomizable array size: 20
 Randomizable array size: 19
 Randomizable array size: 18
@@ -24,5 +25,6 @@ Randomizable array size: 6
 Randomizable array size: 5
 Randomizable array size: 4
 Randomizable array size: 3
+Desc_Wood has a null path (this is normal for wood, but not for other items)
 Randomizable array size: 2
 Randomizable array size: 1

@@ -21,7 +21,7 @@ public class Recipe {
         this.products = products;
         this.ingredients = ingredients;
         this.schema = "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json";
-        this.filename = path + filename;
+        this.filename = this.path + filename;
         this.station = station;
 
         BigDecimal bigTime = new BigDecimal(time);

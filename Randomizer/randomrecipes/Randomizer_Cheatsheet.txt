@@ -1,23 +1,24 @@
-Seed: 3572203258745481599
+Seed: 687790517287773313
 Items in order of generation (only ensured way to reach a material is to have all the previous):
-Desc_QuantumEncoder can be made
-Desc_CopperIngot is made in Desc_QuantumEncoder
-Desc_AssemblerMk1 can be made
+Desc_Cable is made in Desc_ConstructorMk1
+Desc_IronPlateReinforced is made in Desc_ConstructorMk1
 Desc_IronRod is made in Desc_ConstructorMk1
-Desc_Cement is made in Desc_ConstructorMk1
-Desc_Packager can be made
-Desc_IronPlate is made in Desc_QuantumEncoder
-Desc_Wire is made in Desc_QuantumEncoder
-Desc_IronScrew is made in Desc_QuantumEncoder
-Desc_OilRefinery can be made
-Desc_Leaves is made in Desc_Packager
-Desc_FoundryMk1 can be made
-Desc_Blender can be made
-Desc_Converter can be made
-Desc_SmelterMk1 can be made
 Desc_ManufacturerMk1 can be made
-Desc_GenericBiomass is made in Desc_Blender
+Desc_Leaves is made in Desc_ManufacturerMk1
+Desc_IronScrew is made in Desc_ManufacturerMk1
+Desc_FoundryMk1 can be made
+Desc_IronIngot is made in Desc_ManufacturerMk1
+Desc_SmelterMk1 can be made
+Desc_OilRefinery can be made
 Desc_HadronCollider can be made
-Desc_Cable is made in Desc_FoundryMk1
-Desc_IronPlateReinforced is made in Desc_AssemblerMk1
-Desc_IronIngot is made in Desc_Packager
+Desc_Cement is made in Desc_HadronCollider
+Desc_Wire is made in Desc_OilRefinery
+Desc_QuantumEncoder can be made
+Desc_IronPlate is made in Desc_QuantumEncoder
+Desc_Converter can be made
+Desc_Packager can be made
+Desc_AssemblerMk1 can be made
+Desc_GenericBiomass is made in Desc_ManufacturerMk1
+Desc_CopperIngot is made in Desc_ConstructorMk1
+Desc_Wood is made in Desc_ManufacturerMk1
+Desc_Blender can be made

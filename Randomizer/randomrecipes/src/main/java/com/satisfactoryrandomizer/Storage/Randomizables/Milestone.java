@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Milestone extends Randomizable {
 
-    private String rewards;
+    private List<String> rewards;
     // Recipepath is a shcematic path, but W/e
 
     // Basic constructor
@@ -12,11 +12,15 @@ public class Milestone extends Randomizable {
         super(name, recipepath + "." + recipepath + "_C", available, craftable, extraCheck);
     }
     
-    public String getRewards() {
+    public List<String> getRewards() {
         return this.rewards;
     }
 
-    public void setRewards(String rewards) {
+    public String getrmRewards(){
+        return this.rewards.get(0);
+    }
+
+    public void setRewards(List<String> rewards) {
         this.rewards = rewards;
     }
 }

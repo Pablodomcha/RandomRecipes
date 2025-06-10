@@ -7,6 +7,8 @@ import java.util.Random;
 import com.satisfactoryrandomizer.Console;
 import com.satisfactoryrandomizer.Storage.Randomizables.Component;
 import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
+import com.satisfactoryrandomizer.Storage.Randomizables.EssentialStructure;
+import com.satisfactoryrandomizer.Storage.Randomizables.Randomizable;
 import com.satisfactoryrandomizer.Storage.Randomizables.Structure;
 
 public class Materials {
@@ -15,8 +17,8 @@ public class Materials {
     private final List<Component> components = new ArrayList<>();
     // List of craftable items at the start of the game
     private List<CraftStation> stations = new ArrayList<>();
-    private List<Structure> structures = new ArrayList<>(); //Generic structures that don't affect the logic
-    private List<Structure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by the logic
+    private List<Structure> structures = new ArrayList<>(); // Generic structures that don't affect the logic
+    private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by the logic
 
     public Materials() {
 
@@ -24,8 +26,6 @@ public class Materials {
         List<Component> tempList = new ArrayList<>();
         List<Component> prefixedTempList;
         List<CraftStation> tempStations = new ArrayList<>();
-
-
 
         // Initialize the list of available stations
         tempStations
@@ -74,8 +74,10 @@ public class Materials {
         tempList.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false, false));
         tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
         tempList.add(new Component("Desc_Leaves", "Recipe_Biomass_Wood", true, false, false));
+        tempList.add(new Component("Desc_Wood", null, true, false, false));
 
         prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Constructor/");
+
         this.components.addAll(prefixedTempList);
         tempList.clear();
         prefixedTempList.clear();
@@ -105,6 +107,9 @@ public class Materials {
 
         // Milestones
 
+
+        // Essential structures are structures too they are just forced to be gotten early.
+        this.structures.addAll(this.essentialStructures);
     }
 
     private List<Component> AddPrefix(List<Component> list, String prefix) {
@@ -231,6 +236,26 @@ public class Materials {
         return result;
     }
 
+    public List<Randomizable> getUnavailableAndUncraftableRandomizables() {
+        List<Randomizable> result = new ArrayList<>();
+        for (CraftStation station : this.stations) {
+            if (!station.isAvailable() && !station.isCraftable()) {
+                result.add(station);
+            }
+        }
+        for (Component component : this.components) {
+            if (!component.isAvailable() && !component.isCraftable()) {
+                result.add(component);
+            }
+        }
+        for (Structure structure : this.structures) {
+            if (!structure.isAvailable() && !structure.isCraftable()) {
+                result.add(structure);
+            }
+        }
+        return result;
+    }
+
     public Boolean setComponentAvailable(String name, Boolean available) {
         for (Component component : this.components) {
             if (component.getName().equals(name)) {
@@ -338,13 +363,11 @@ public class Materials {
     // Only for debugging
     public void testSetup() {
         Console.test();
-        for(CraftStation stat : this.stations){
+        for (CraftStation stat : this.stations) {
             getStationByName(stat.getName()).setAvailable(true);
         }
     }
 
-    
-        // Test only
-
+    // Test only
 
 }

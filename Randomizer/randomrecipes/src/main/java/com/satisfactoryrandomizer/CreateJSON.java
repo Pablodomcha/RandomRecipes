@@ -28,7 +28,13 @@ public class CreateJSON {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonRecipe);
         json = json.replace("\n", "\r\n"); // Make the line breaks CRLF
-        json = recipePath + "\r\n" + json;
+
+        if (recipePath.contains("null")) {
+            Console.log(recipe.getProducts().get(0).getName()
+                    + " has a null path (this is normal for wood, but not for other items)");
+        } else {
+            json = recipePath + "\r\n" + json;
+        }
 
         try (FileWriter writer = new FileWriter(recipe.getFilename())) {
             writer.write(json);
