@@ -13,14 +13,14 @@ import com.satisfactoryrandomizer.Storage.Recipe;
 
 public class CreateJSON {
 
-    public static void saveRecipeAsJson(Recipe recipe, String recipePath) {
+    public static void saveRecipeAsJson(Recipe recipe, String recipePath, String firstStation) {
 
         // Convert the station to list and add manual if it's from constructor or
         // smelter.
         // Also prefix it with "Build_" to make it the correct name.
         List<String> stations = new ArrayList<>();
         stations.add(recipe.getStation());
-        if (recipe.getStation().equals("Build_ConstructorMk1") || recipe.getStation().equals("Build_SmelterMk1")) {
+        if (recipe.getStation().equals(firstStation)) {
             stations.add("manual");
         }
         JSONableRecipe jsonRecipe = new JSONableRecipe(recipe.getProducts(), recipe.getIngredients(), stations,
@@ -33,7 +33,7 @@ public class CreateJSON {
         try (FileWriter writer = new FileWriter(recipe.getFilename())) {
             writer.write(json);
         } catch (IOException e) {
-            System.err.println("Error writing JSON file: " + e.getMessage());
+            Console.log("Error writing JSON file: " + e.getMessage());
         }
     }
 
@@ -51,7 +51,7 @@ public class CreateJSON {
             writer.write(json);
             writer.close();
         } catch (IOException e) {
-            System.err.println("Error writing JSON file: " + e.getMessage());
+            Console.log("Error writing JSON file: " + e.getMessage());
         }
     }
 }

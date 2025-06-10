@@ -116,9 +116,9 @@ Info:
 
 TODO:
 
-Structures recipe path is wrong.
-
 Make the Tutorial Phase.
+
+Make the game select the first Crafting station. Make sure it's enabled by the end of the tutorial.
 
 Make recipes to create/use leaves and wood (Can use the 2nd biomass recipe for one of them)
 

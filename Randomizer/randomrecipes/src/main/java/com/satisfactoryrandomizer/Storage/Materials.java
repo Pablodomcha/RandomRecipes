@@ -7,6 +7,7 @@ import java.util.Random;
 import com.satisfactoryrandomizer.Console;
 import com.satisfactoryrandomizer.Storage.Randomizables.Component;
 import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
+import com.satisfactoryrandomizer.Storage.Randomizables.Structure;
 
 public class Materials {
 
@@ -14,6 +15,7 @@ public class Materials {
     private final List<Component> components = new ArrayList<>();
     // List of craftable items at the start of the game
     private List<CraftStation> stations = new ArrayList<>();
+    private List<Structure> structures = new ArrayList<>();
 
     public Materials() {
 
@@ -23,31 +25,32 @@ public class Materials {
         List<CraftStation> tempStations = new ArrayList<>();
 
         // Initialize the list of available stations
-        tempStations.add(new CraftStation("Assembler", false, false, "Recipe_AssemblerMk1", "Build_AssemblerMk1",
+        tempStations.add(new CraftStation("Desc_AssemblerMk1", false, false, "Recipe_AssemblerMk1", "Build_AssemblerMk1",
                 2, 1, 0, 0));
-        tempStations.add(new CraftStation("Blender", false, false, "Recipe_Blender", "Build_Blender",
+        tempStations.add(new CraftStation("Desc_Blender", false, false, "Recipe_Blender", "Build_Blender",
                 2, 1, 2, 1));
-        tempStations.add(new CraftStation("Constructor", true, true, "Recipe_ConstructorMk1", "Build_ConstructorMk1",
+        tempStations.add(new CraftStation("Desc_ConstructorMk1", true, false, "Recipe_ConstructorMk1", "Build_ConstructorMk1",
                 1, 1, 0, 0));
         tempStations
-                .add(new CraftStation("Manufacturer", false, false, "Recipe_ManufacturerMk1", "Build_ManufacturerMk1",
+                .add(new CraftStation("Desc_ManufacturerMk1", false, false, "Recipe_ManufacturerMk1", "Build_ManufacturerMk1",
                         4, 1, 0, 0));
-        tempStations.add(new CraftStation("Packager", false, false, "Recipe_Packager", "Build_Packager",
+        tempStations.add(new CraftStation("Desc_Packager", false, false, "Recipe_Packager", "Build_Packager",
                 1, 1, 1, 1));
-        tempStations.add(new CraftStation("PAccel", false, false, "Recipe_HadronCollider", "Build_HadronCollider",
+        tempStations.add(new CraftStation("Desc_HadronCollider", false, false, "Recipe_HadronCollider", "Build_HadronCollider",
                 2, 1, 1, 0));
-        tempStations.add(new CraftStation("Refinery", false, false, "Recipe_OilRefinery", "Build_OilRefinery",
+        tempStations.add(new CraftStation("Desc_OilRefinery", false, false, "Recipe_OilRefinery", "Build_OilRefinery",
                 1, 1, 1, 1));
-        tempStations.add(new CraftStation("Converter", false, false, "Recipe_Converter", "Build_Converter",
+        tempStations.add(new CraftStation("Desc_Converter", false, false, "Recipe_Converter", "Build_Converter",
                 2, 1, 0, 1));
         tempStations
-                .add(new CraftStation("QuantumEncoder", false, false, "Recipe_QuantumEncoder", "Build_QuantumEncoder",
+                .add(new CraftStation("Desc_QuantumEncoder", false, false, "Recipe_QuantumEncoder", "Build_QuantumEncoder",
                         3, 1, 1, 1));
-        tempStations.add(new CraftStation("SmelterMk1", true, true, "Recipe_SmelterMk1", "Build_SmelterMk1",
+        tempStations.add(new CraftStation("Desc_SmelterMk1", true, false, "Recipe_SmelterMk1", "Build_SmelterMk1",
                 1, 1, 0, 0));
-        tempStations.add(new CraftStation("FoundryMk1", false, false, "Recipe_FoundryMk1", "Build_FoundryMk1",
+        tempStations.add(new CraftStation("Desc_FoundryMk1", false, false, "Recipe_FoundryMk1", "Build_FoundryMk1",
                 2, 1, 0, 0));
         this.stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
+
 
         // Initialize the available materials
         // Starting you only have directly gatherable materials
@@ -104,20 +107,20 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
             }
         }
-        Console.log("Prefixed List with " + prefix + ":");
+        Console.log("Prefixed List with " + prefix);
         return prefixedList;
     }
 
-    private List<CraftStation> AddPrefixStat(List<CraftStation> list, String prefix) {
+    private List<CraftStation> AddPrefixStat(List<CraftStation> list, String prefixRecipe) {
         List<CraftStation> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
             CraftStation c = prefixedList.get(i);
-            if (c.getRecipePath() != null && !c.getRecipePath().startsWith(prefix)) {
-                prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
+            if (c.getRecipePath() != null && !c.getRecipePath().startsWith(prefixRecipe)) {
+                prefixedList.get(i).setRecipePath(prefixRecipe + c.getRecipePath());
             }
         }
-        Console.log("Prefixed List with " + prefix + ":");
+        Console.log("Prefixed CraftStation List with " + prefixRecipe);
         return prefixedList;
     }
 
@@ -194,7 +197,7 @@ public class Materials {
         return result;
     }
 
-    public CraftStation getRandomAvailableAndCraftableStation(int seed) {
+    public CraftStation getRandomAvailableAndCraftableStation(long seed) {
         List<CraftStation> availableStations = new ArrayList<>();
         for (CraftStation station : this.stations) {
             if (station.isAvailable() && station.isCraftable()) {
@@ -241,6 +244,26 @@ public class Materials {
         return false;
     }
 
+    public void setStructureAvailable(String name, Boolean available) {
+        for (CraftStation station : this.stations) {
+            if (station.getName().equals(name)) {
+                station.setAvailable(available);
+                return;
+            }
+        }
+        Console.log("Could not set Craftable, station not found: " + name);
+    }
+
+    public void setStructureCraftable(String name, Boolean craftable) {
+        for (CraftStation station : this.stations) {
+            if (station.getName().equals(name)) {
+                station.setCraftable(craftable);
+                return;
+            }
+        }
+        Console.log("Could not set Craftable, station not found: " + name);
+    }
+
     /**
      * Use one of the material, reducing the amount of remaining uses by 1.
      * 
@@ -271,10 +294,12 @@ public class Materials {
         // Get the Randomizables enabled by this component
         for (Component c : this.components) {
             for (String extra : c.getExtraCheck()) {
-                // If the Randomizable is not of a certain type, check the next one, search it as a Station
+                // If the Randomizable is not of a certain type, check the next one, search it
+                // as a Station
                 if (getComponentByName(extra) == null) {
                     if (getStationByName(extra) == null) {
-                        // Add here any other type of Randomizable created that influences this part of the logic
+                        // Add here any other type of Randomizable created that influences this part of
+                        // the logic
                         throw new Exception("Randomizable not found: " + extra);
                     }
                     getStationByName(extra).addCheckAlso(c.getName());
@@ -286,10 +311,12 @@ public class Materials {
         // Get the Randomizables enabled by this station
         for (CraftStation s : this.stations) {
             for (String extra : s.getExtraCheck()) {
-                // If the Randomizable is not of a certain type, check the next one, search it as a Station
+                // If the Randomizable is not of a certain type, check the next one, search it
+                // as a Station
                 if (getComponentByName(extra) == null) {
                     if (getStationByName(extra) == null) {
-                        // Add here any other type of Randomizable created that influences this part of the logic
+                        // Add here any other type of Randomizable created that influences this part of
+                        // the logic
                         throw new Exception("Randomizable not found: " + extra);
                     }
                     getStationByName(extra).addCheckAlso(s.getName());

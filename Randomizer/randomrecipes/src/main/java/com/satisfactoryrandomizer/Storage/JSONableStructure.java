@@ -1,5 +1,6 @@
 package com.satisfactoryrandomizer.Storage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JSONableStructure {
@@ -7,7 +8,7 @@ public class JSONableStructure {
     private boolean ClearIngredients = true;
     private List<Mat> Products;
     private List<Mat> Ingredients;
-    private List<String> ProducedIn;
+    private List<String> ProducedIn = new ArrayList<>();
 
     public JSONableStructure(List<Mat> products, List<Mat> ingredients) {
         this.Products = products;

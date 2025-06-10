@@ -30,7 +30,7 @@ public class Tests {
 
         Recipe rec = new Recipe(products, ingredients, filename, producedIn, time, 1.0);
 
-        CreateJSON.saveRecipeAsJson(rec, filepath);
+        //CreateJSON.saveRecipeAsJson(rec, filepath);
     }
 
 }

@@ -21,30 +21,30 @@ public class CraftStation extends Randomizable {
 
 
     public String getBuilderPath() {
-        return builderpath;
+        return this.builderpath;
     }
 
     public int getSolidIn() {
-        return solidIn;
+        return this.solidIn;
     }
 
     public int getSolidOut() {
-        return solidOut;
+        return this.solidOut;
     }
 
     public int getLiquidIn() {
-        return liquidIn;
+        return this.liquidIn;
     }
 
     public int getLiquidOut() {
-        return liquidOut;
+        return this.liquidOut;
     }
 
     public int getTotalIn() {
-        return solidIn + liquidIn;
+        return this.solidIn + this.liquidIn;
     }
 
     public int getTotalOut() {
-        return solidOut + liquidOut;
+        return this.solidOut + this.liquidOut;
     }
 }
