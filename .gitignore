@@ -23,6 +23,10 @@ target/*.log
 .idea/ # For IntelliJ IDEA
 .vscode/ # For VS Code workspace settings (unless explicitly shared)
 
+## Ignore the randomized files
+ContentLib/
+Randomizer\randomrecipes\ContentLib
+
 ## IntelliJ IDEA
 .idea/
 *.iml
