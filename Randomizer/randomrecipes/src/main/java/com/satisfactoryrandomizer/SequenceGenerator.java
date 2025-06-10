@@ -17,6 +17,7 @@ public class SequenceGenerator {
     private static Random random = new Random();
     private static Materials materials;
     private static Boolean liquidUnlocked = false;
+    private static String lastObtainedStation = null;
 
     public static void generateSequence() {
 
@@ -24,8 +25,8 @@ public class SequenceGenerator {
         materials = new Materials();
 
         // Generate the extraChecks
-        try{
-        materials.fillExtraChecks();
+        try {
+            materials.fillExtraChecks();
         } catch (Exception e) {
             Console.log("Exception in the extra checks: " + e.getMessage());
         }
@@ -38,16 +39,41 @@ public class SequenceGenerator {
         Console.log("Using seed: " + seed);
         random = new Random(seed);
 
-        //Create the starting array of items
+        // Create the starting array of items
         List<Randomizable> randomizables = new ArrayList<>();
         randomizables.addAll(materials.getAvailableButUncraftableComponents());
         randomizables.addAll(materials.getAvailableButUncraftableStations());
 
         // Main loop, runs until there's nothing left to randomize
-        while (!randomizables.isEmpty()) {
+        int cap = 1000;
+        while (!randomizables.isEmpty() && cap -- > 0) {
+            // Pick a random item to randomize
+            Randomizable randomizable = randomizables.get(random.nextInt(randomizables.size()));
+            if (randomizable instanceof Component) {
+                Component comp = (Component) randomizable;
+                if (comp.isLiquid() && !liquidUnlocked) {
+                    continue;
+                } else {
+                    generateMaterial(comp);
+                }
+            } else if (randomizable instanceof CraftStation) {
+                generateStructure((CraftStation) randomizable);
+            } else {
+                Console.log("Unknown item type: " + randomizable);
+                Console.log("Exiting the randomize loop.");
+                break;
+            }
 
+            Console.log("Randomizable array size: " + randomizables.size());
+            // Update the list (the item is set craftable by the methods above)
+            randomizables.clear();
+            randomizables.addAll(materials.getAvailableButUncraftableComponents());
+            randomizables.addAll(materials.getAvailableButUncraftableStations());
         }
 
+        if(cap <= 0) {
+            Console.log("Too many iterations of the main loop, exiting.");
+        }
     }
 
     private static void generateStructure(CraftStation station) {
@@ -72,17 +98,24 @@ public class SequenceGenerator {
         CreateJSON.saveStructureAsJson(recipe, station.getRecipePath()); // Wrong path for structures, this is the
                                                                          // path to call them for components
 
-        // Mark the component as craftable and update the list of available but
-        // uncraftable components
+        // Mark the component as craftable
         materials.setComponentCraftable(station.getName(), true);
 
-        // No need to update the list of available components as we only added buildable
-        // structures.
+        // Update the last obtained station
+        lastObtainedStation = station.getName();
     }
 
     private static void generateMaterial(Component comp) {
         // Select a random crafting Station
         CraftStation station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
+
+        // If the station is not the last one obtained, reroll to increase station
+        // variability.
+        int count = UiValues.getStationBias();
+        while (!station.getName().equals(lastObtainedStation) && count-- > 0 && lastObtainedStation != null) {
+            station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
+        }
+
         List<Mat> mats = generateIngredients(station, false);
         List<Mat> prod = new ArrayList<>();
         Boolean mainliquid;
@@ -181,7 +214,9 @@ public class SequenceGenerator {
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
             // Multiply by 1000 for liquids
-            int amount = random.nextInt(UiValues.getMaxStackComp()) + 1;
+            int amount;
+            amount = isStructure ? random.nextInt(UiValues.getMaxStackComp()) + 1
+                    : random.nextInt(UiValues.getMaxStackStruct()) + 1;
             if (selectedLiquid) {
                 amount = amount * 1000;
             }

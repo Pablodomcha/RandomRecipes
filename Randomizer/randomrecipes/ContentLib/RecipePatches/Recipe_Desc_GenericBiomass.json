@@ -8,16 +8,11 @@
       "Amount": 1
     }
   ],
-  "Ingredients": [
-    {
-      "Item": "Desc_IronScrew",
-      "Amount": 1
-    }
-  ],
+  "Ingredients": [],
   "ProducedIn": [
     "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.91,
-  "ManualManufacturingMultiplier": 0.91
+  "ManufacturingDuration": 0.77,
+  "ManualManufacturingMultiplier": 0.77
 }

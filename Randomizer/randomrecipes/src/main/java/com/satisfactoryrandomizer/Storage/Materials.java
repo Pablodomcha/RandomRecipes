@@ -11,7 +11,7 @@ import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
 public class Materials {
 
     // List of Components
-    private List<Component> components = new ArrayList<>();
+    private final List<Component> components = new ArrayList<>();
     // List of craftable items at the start of the game
     private List<CraftStation> stations = new ArrayList<>();
 
@@ -47,13 +47,13 @@ public class Materials {
                 1, 1, 0, 0));
         tempStations.add(new CraftStation("FoundryMk1", false, false, "Recipe_FoundryMk1", "Build_FoundryMk1",
                 2, 1, 0, 0));
-        stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
+        this.stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
 
         // Initialize the available materials
         // Starting you only have directly gatherable materials
-        components.add(new Component("Desc_OreIron", true, false));
-        components.add(new Component("Desc_OreCopper", true, false));
-        components.add(new Component("Desc_Stone", true, false));
+        this.components.add(new Component("Desc_OreIron", true, false));
+        this.components.add(new Component("Desc_OreCopper", true, false));
+        this.components.add(new Component("Desc_Stone", true, false));
 
         // available at Onboarding, Is available but not nececessarily craftable
         // /Recipes/Constructor/
@@ -67,7 +67,7 @@ public class Materials {
         tempList.add(new Component("Desc_Leaves", "Recipe_Biomass_Wood", true, false, false));
 
         prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Constructor/");
-        components.addAll(prefixedTempList);
+        this.components.addAll(prefixedTempList);
         tempList.clear();
         prefixedTempList.clear();
 
@@ -77,7 +77,7 @@ public class Materials {
         tempList.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", true, false, false));
 
         prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Smelter/");
-        components.addAll(prefixedTempList);
+        this.components.addAll(prefixedTempList);
         tempList.clear();
         prefixedTempList.clear();
 
@@ -86,13 +86,13 @@ public class Materials {
                 new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
 
         prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Assembler/");
-        components.addAll(prefixedTempList);
+        this.components.addAll(prefixedTempList);
         tempList.clear();
         prefixedTempList.clear();
 
         // Now the rest of resources.
         // Resource/RawResources/
-        // components.add(new Component("", "", false, false));
+        // this.components.add(new Component("", "", false, false));
     }
 
     private List<Component> AddPrefix(List<Component> list, String prefix) {
@@ -124,7 +124,7 @@ public class Materials {
     // Getters and Setters
 
     public Component getComponentByName(String name) {
-        for (Component component : components) {
+        for (Component component : this.components) {
             if (component.getName().equals(name)) {
                 return component;
             }
@@ -134,7 +134,7 @@ public class Materials {
     }
 
     public CraftStation getStationByName(String name) {
-        for (CraftStation station : stations) {
+        for (CraftStation station : this.stations) {
             if (station.getName().equals(name)) {
                 return station;
             }
@@ -144,9 +144,9 @@ public class Materials {
     }
 
     public Boolean replaceComponentByName(String name, Component newComponent) {
-        for (int i = 0; i < components.size(); i++) {
-            if (components.get(i).getName().equals(name)) {
-                components.set(i, newComponent);
+        for (int i = 0; i < this.components.size(); i++) {
+            if (this.components.get(i).getName().equals(name)) {
+                this.components.set(i, newComponent);
                 return true;
             }
         }
@@ -156,7 +156,7 @@ public class Materials {
 
     public List<Component> getAvailableAndCraftableComponents(Boolean liquid) {
         List<Component> result = new ArrayList<>();
-        for (Component component : components) {
+        for (Component component : this.components) {
             if (component.isAvailable() && component.isCraftable() && component.isLiquid().equals(liquid)) {
                 result.add(component);
             }
@@ -166,7 +166,7 @@ public class Materials {
 
     public List<Component> getAvailableButUncraftableComponents() {
         List<Component> result = new ArrayList<>();
-        for (Component component : components) {
+        for (Component component : this.components) {
             if (component.isAvailable() && !component.isCraftable()) {
                 result.add(component);
             }
@@ -176,7 +176,7 @@ public class Materials {
 
     public List<Component> getAvailableComponents(Boolean liquid) {
         List<Component> result = new ArrayList<>();
-        for (Component component : components) {
+        for (Component component : this.components) {
             if (component.isAvailable() && component.isLiquid().equals(liquid)) {
                 result.add(component);
             }
@@ -186,7 +186,7 @@ public class Materials {
 
     public List<Component> getUnavailableComponents() {
         List<Component> result = new ArrayList<>();
-        for (Component component : components) {
+        for (Component component : this.components) {
             if (!component.isAvailable()) {
                 result.add(component);
             }
@@ -196,7 +196,7 @@ public class Materials {
 
     public CraftStation getRandomAvailableAndCraftableStation(int seed) {
         List<CraftStation> availableStations = new ArrayList<>();
-        for (CraftStation station : stations) {
+        for (CraftStation station : this.stations) {
             if (station.isAvailable() && station.isCraftable()) {
                 availableStations.add(station);
             }
@@ -211,7 +211,7 @@ public class Materials {
 
     public List<CraftStation> getAvailableButUncraftableStations() {
         List<CraftStation> result = new ArrayList<>();
-        for (CraftStation station : stations) {
+        for (CraftStation station : this.stations) {
             if (station.isAvailable() && !station.isCraftable()) {
                 result.add(station);
             }
@@ -220,7 +220,7 @@ public class Materials {
     }
 
     public Boolean setComponentAvailable(String name, Boolean available) {
-        for (Component component : components) {
+        for (Component component : this.components) {
             if (component.getName().equals(name)) {
                 component.setAvailable(true);
                 return true;
@@ -231,7 +231,7 @@ public class Materials {
     }
 
     public Boolean setComponentCraftable(String name, Boolean craftable) {
-        for (Component component : components) {
+        for (Component component : this.components) {
             if (component.getName().equals(name)) {
                 component.setCraftable(craftable);
                 return true;
@@ -262,24 +262,39 @@ public class Materials {
      * to the lack of material uses.
      */
     public void refillComponents() {
-        for (Component component : components) {
+        for (Component component : this.components) {
             component.refill();
         }
     }
 
     public void fillExtraChecks() throws Exception {
         // Get the Randomizables enabled by this component
-        for (Component c : components) {
-            for (String check : c.getCheckAlso()) {
+        for (Component c : this.components) {
+            for (String extra : c.getExtraCheck()) {
                 // If the Randomizable is not of a certain type, check the next one, search it as a Station
-                if (getComponentByName(check) == null) {
-                    if (getStationByName(check) == null) {
+                if (getComponentByName(extra) == null) {
+                    if (getStationByName(extra) == null) {
                         // Add here any other type of Randomizable created that influences this part of the logic
-                        throw new Exception("Randomizable not found: " + check);
+                        throw new Exception("Randomizable not found: " + extra);
                     }
-                    getStationByName(check).addExtraCheck(c.getName());
+                    getStationByName(extra).addCheckAlso(c.getName());
                 }
-                getComponentByName(check).addExtraCheck(c.getName());
+                getComponentByName(extra).addCheckAlso(c.getName());
+            }
+        }
+
+        // Get the Randomizables enabled by this station
+        for (CraftStation s : this.stations) {
+            for (String extra : s.getExtraCheck()) {
+                // If the Randomizable is not of a certain type, check the next one, search it as a Station
+                if (getComponentByName(extra) == null) {
+                    if (getStationByName(extra) == null) {
+                        // Add here any other type of Randomizable created that influences this part of the logic
+                        throw new Exception("Randomizable not found: " + extra);
+                    }
+                    getStationByName(extra).addCheckAlso(s.getName());
+                }
+                getComponentByName(extra).addCheckAlso(s.getName());
             }
         }
     }

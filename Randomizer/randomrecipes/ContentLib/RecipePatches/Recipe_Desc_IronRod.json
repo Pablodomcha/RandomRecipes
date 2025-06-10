@@ -8,16 +8,11 @@
       "Amount": 2
     }
   ],
-  "Ingredients": [
-    {
-      "Item": "Desc_Cement",
-      "Amount": 2
-    }
-  ],
+  "Ingredients": [],
   "ProducedIn": [
     "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.21,
-  "ManualManufacturingMultiplier": 0.21
+  "ManufacturingDuration": 0.03,
+  "ManualManufacturingMultiplier": 0.03
 }

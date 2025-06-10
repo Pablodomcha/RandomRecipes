@@ -8,16 +8,11 @@
       "Amount": 2
     }
   ],
-  "Ingredients": [
-    {
-      "Item": "Desc_OreCopper",
-      "Amount": 2
-    }
-  ],
+  "Ingredients": [],
   "ProducedIn": [
     "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.35,
-  "ManualManufacturingMultiplier": 0.35
+  "ManufacturingDuration": 0.3,
+  "ManualManufacturingMultiplier": 0.3
 }

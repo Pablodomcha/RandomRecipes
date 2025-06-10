@@ -8,16 +8,11 @@
       "Amount": 1
     }
   ],
-  "Ingredients": [
-    {
-      "Item": "Desc_Stone",
-      "Amount": 1
-    }
-  ],
+  "Ingredients": [],
   "ProducedIn": [
-    "Build_ConstructorMk1",
+    "Build_SmelterMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.93,
-  "ManualManufacturingMultiplier": 0.93
+  "ManufacturingDuration": 0.5,
+  "ManualManufacturingMultiplier": 0.5
 }

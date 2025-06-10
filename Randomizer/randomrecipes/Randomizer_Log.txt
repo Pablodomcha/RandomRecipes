@@ -3,4 +3,15 @@ Prefixed List with //Game/FactoryGame/Recipes/Constructor/:
 Prefixed List with //Game/FactoryGame/Recipes/Smelter/:
 Prefixed List with //Game/FactoryGame/Recipes/Assembler/:
 Generating seed because it wasn't provided.
-Using seed: 952304673472625072
+Using seed: 3870394232779561307
+Randomizable array size: 11
+Randomizable array size: 10
+Randomizable array size: 9
+Randomizable array size: 8
+Randomizable array size: 7
+Randomizable array size: 6
+Randomizable array size: 5
+Randomizable array size: 4
+Randomizable array size: 3
+Randomizable array size: 2
+Randomizable array size: 1

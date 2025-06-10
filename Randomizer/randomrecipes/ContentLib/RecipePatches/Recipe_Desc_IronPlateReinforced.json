@@ -5,19 +5,14 @@
   "Products": [
     {
       "Item": "Desc_IronPlateReinforced",
-      "Amount": 1
-    }
-  ],
-  "Ingredients": [
-    {
-      "Item": "Desc_Stone",
       "Amount": 2
     }
   ],
+  "Ingredients": [],
   "ProducedIn": [
     "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.48,
-  "ManualManufacturingMultiplier": 0.48
+  "ManufacturingDuration": 0.89,
+  "ManualManufacturingMultiplier": 0.89
 }

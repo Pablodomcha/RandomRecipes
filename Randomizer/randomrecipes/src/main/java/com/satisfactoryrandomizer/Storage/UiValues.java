@@ -10,7 +10,9 @@ public class UiValues {
     static int belts = 0;
     static int electricity = 0;
     static int waste = 0;
+    static int stationBias = 0;
     static int liquids = 0;
+    static Boolean balanceProg = true;
 
     // Inventory Slots Weirdo
     static int inventorySlots = 0; // 0 = fixed, 1 = random
@@ -24,6 +26,9 @@ public class UiValues {
     static int maxItemStruct = 2;
     static int maxStackMile = 2;
     static int maxItemMile = 2;
+
+    // The elevator isn't randomized, but no harm in keeping this in case it is in
+    // the future.
     static int maxStackEle = 2;
     static int maxItemEle = 2;
 
@@ -139,6 +144,23 @@ public class UiValues {
     }
 
     /**
+     * Retrieves the current station bias setting.
+     * 
+     * @return 6. Station bias:
+     *         True: Make crafing stations be obtained evenly spread to get a better
+     *         crafting station spread.
+     *         False: Crafting stations are completely randomized, may lead to a
+     *         game where mostly a few stations are used for everything.
+     */
+    public static int getStationBias() {
+        return stationBias;
+    }
+
+    public static void setStationBias(int stationBias) {
+        UiValues.stationBias = stationBias;
+    }
+
+    /**
      * Retrieves the current inventory slots setting.
      * 
      * @return 7. Inventory slots: (The number of upgrades that give slots is not
@@ -173,6 +195,23 @@ public class UiValues {
 
     public static void setInventoryRange(int[] inventoryRange) {
         UiValues.inventoryRange = inventoryRange;
+    }
+
+    /**
+     * Retrieves the setting for progression balance.
+     * 
+     * @return 8. Balance progression:
+     *         True: Make crafing stations be obtained evenly spread to get a better
+     *         crafting station spread.
+     *         False: Crafting stations are completely randomized, may lead to a
+     *         game where mostly a few stations are used for everything.
+     */
+    public static Boolean getBalanceProg() {
+        return balanceProg;
+    }
+
+    public static void setBalanceProg(Boolean balanceProg) {
+        UiValues.balanceProg = balanceProg;
     }
 
     public static int getSeed() {

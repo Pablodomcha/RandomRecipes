@@ -8,16 +8,11 @@
       "Amount": 1
     }
   ],
-  "Ingredients": [
-    {
-      "Item": "Desc_Wire",
-      "Amount": 1
-    }
-  ],
+  "Ingredients": [],
   "ProducedIn": [
-    "Build_ConstructorMk1",
+    "Build_SmelterMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.52,
-  "ManualManufacturingMultiplier": 0.52
+  "ManufacturingDuration": 0.35,
+  "ManualManufacturingMultiplier": 0.35
 }

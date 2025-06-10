@@ -5,19 +5,14 @@
   "Products": [
     {
       "Item": "Desc_Cable",
-      "Amount": 2
-    }
-  ],
-  "Ingredients": [
-    {
-      "Item": "Desc_IronScrew",
       "Amount": 1
     }
   ],
+  "Ingredients": [],
   "ProducedIn": [
-    "Build_ConstructorMk1",
+    "Build_SmelterMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.09,
-  "ManualManufacturingMultiplier": 0.09
+  "ManufacturingDuration": 0.65,
+  "ManualManufacturingMultiplier": 0.65
 }

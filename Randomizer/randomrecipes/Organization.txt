@@ -65,11 +65,19 @@ Info:
         Only liquid: Liquids can only be used in their liquid form for recipes (this is the case for the base game).
         Packaged and Liquid: Packaged liquids can be part of recipes. Packaging could be really expensive (or not).
         Random: I felt like adding this. The idea is really funny, the gameplay isn't (the min value is 10MW and the max is 2GW).
+    6. Station bias:
+        None: The stations are selected completely random, this makes the earlier unlocked stations have way more recipes than the later ones.
+        Slight bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning slightly on newer unlocked stations.
+        Medium Bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning on newer unlocked stations.
+        Heavy Bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning heavily on newer unlocked stations.
     7. Inventory slots: (The number of upgrades that give slots is not randomized, only the amount of slots they give and the milestones/MAM research they appear in).
         Fixed: The amount of slots is fixed, uses Max value (with this option Min values is ignored). MAM researches that give these give double.
         Random: The amount of slots is random between the values provided. MAM researches double the randomized value (yes, this means MAM always gives an even number of slots).
         Max: Number (min 1).
         Min: Number (min 1).
+    8. Balance progression:
+        True: Make crafing stations be obtained evenly spread to get a better crafting station spread.
+        False: Crafting stations are completely randomized, may lead to a game where mostly a few stations are used for everything. 
 
     1. Materials inicialization, add other ores as available or not.
     2. Structure randomization, use or not generic logic for belts.

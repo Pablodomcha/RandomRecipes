@@ -1,5 +1,6 @@
 package com.satisfactoryrandomizer.Storage.Randomizables;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Randomizable {
@@ -8,8 +9,11 @@ public class Randomizable {
     private String recipepath;
     private Boolean available;
     private Boolean craftable;
-    private List<String> extraCheck = null; // Items that need to be craftable before this component can be crafted
-    private List<String> checkAlso = null; // Items that this component is an extraCheck for
+    private final List<String> extraCheck; // Items that need to be craftable before this component can be crafted
+    private List<String> checkAlso = new ArrayList<>(); // Items that this component is an extraCheck for
+
+    // Extra checks can be in form of generic "station with liquid output" form or
+    // specific items.
 
     public Randomizable(String name, String recipepath, Boolean available, Boolean craftable,
             List<String> extraCheck) {
@@ -17,15 +21,19 @@ public class Randomizable {
         this.recipepath = recipepath;
         this.available = available;
         this.craftable = craftable;
-        this.extraCheck = extraCheck;
+
+        if (extraCheck == null)
+            this.extraCheck = new ArrayList<>();
+        else
+            this.extraCheck = extraCheck;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public String getRecipePath() {
-        return recipepath;
+        return this.recipepath;
     }
 
     public void setRecipePath(String recipepath) {
@@ -33,7 +41,7 @@ public class Randomizable {
     }
 
     public Boolean isAvailable() {
-        return available && extraCheck.isEmpty();
+        return this.available && extraCheck.isEmpty();
     }
 
     public void setAvailable(Boolean available) {
@@ -41,7 +49,7 @@ public class Randomizable {
     }
 
     public Boolean isCraftable() {
-        return craftable;
+        return this.craftable;
     }
 
     public void setCraftable(Boolean craftable) {
@@ -49,22 +57,18 @@ public class Randomizable {
     }
 
     public List<String> getExtraCheck() {
-        return extraCheck;
+        return this.extraCheck;
     }
 
-    public void addExtraCheck(String extraCheck) {
-        this.extraCheck.add(extraCheck);
-    }
-
-        public void removeExtraCheck(String extraCheck) {
+    public void removeExtraCheck(String extraCheck) {
         this.extraCheck.remove(extraCheck);
     }
 
     public List<String> getCheckAlso() {
-        return checkAlso;
+        return this.checkAlso;
     }
 
-    public void setCheckAlso(List<String> checkAlso) {
-        this.checkAlso = checkAlso;
+    public void addCheckAlso(String checkAlso) {
+        this.checkAlso.add(checkAlso);
     }
 }
