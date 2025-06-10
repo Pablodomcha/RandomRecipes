@@ -18,6 +18,12 @@ public class Console {
         Console.cheatsheet += message + "\n";
     }
 
+    public static void test() {
+        String testMessage = "You are running test code. If this message is on release, some test code was left in.";
+        System.out.println(testMessage);
+        Console.log += testMessage + "\n";
+    }
+
     public static void saveLogs() {
 
         try {

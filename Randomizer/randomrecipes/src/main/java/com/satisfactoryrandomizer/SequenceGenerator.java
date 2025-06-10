@@ -25,6 +25,8 @@ public class SequenceGenerator {
         // Create the materials variable to store all materials / structures
         SequenceGenerator.materials = new Materials();
 
+        materials.testSetup();
+
         // Generate the extraChecks
         try {
             materials.fillExtraChecks();

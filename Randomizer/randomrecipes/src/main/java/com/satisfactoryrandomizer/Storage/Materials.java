@@ -15,7 +15,8 @@ public class Materials {
     private final List<Component> components = new ArrayList<>();
     // List of craftable items at the start of the game
     private List<CraftStation> stations = new ArrayList<>();
-    private List<Structure> structures = new ArrayList<>();
+    private List<Structure> structures = new ArrayList<>(); //Generic structures that don't affect the logic
+    private List<Structure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by the logic
 
     public Materials() {
 
@@ -23,6 +24,8 @@ public class Materials {
         List<Component> tempList = new ArrayList<>();
         List<Component> prefixedTempList;
         List<CraftStation> tempStations = new ArrayList<>();
+
+
 
         // Initialize the list of available stations
         tempStations
@@ -51,7 +54,7 @@ public class Materials {
                         "Build_QuantumEncoder", 3, 1, 1, 1));
         tempStations.add(new CraftStation("Desc_SmelterMk1", true, false, "Recipe_SmelterBasicMk1", "Build_SmelterMk1",
                 1, 1, 0, 0));
-        tempStations.add(new CraftStation("Desc_FoundryMk1", false, false, "Recipe_FoundryMk1", "Build_FoundryMk1",
+        tempStations.add(new CraftStation("Desc_FoundryMk1", false, false, "Recipe_SmelterMk1", "Build_FoundryMk1",
                 2, 1, 0, 0));
         this.stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
 
@@ -99,6 +102,9 @@ public class Materials {
         // Now the rest of resources.
         // Resource/RawResources/
         // this.components.add(new Component("", "", false, false));
+
+        // Milestones
+
     }
 
     private List<Component> AddPrefix(List<Component> list, String prefix) {
@@ -330,8 +336,15 @@ public class Materials {
     }
 
     // Only for debugging
-    public List<CraftStation> getCraftStations() {
-        return this.stations;
+    public void testSetup() {
+        Console.test();
+        for(CraftStation stat : this.stations){
+            getStationByName(stat.getName()).setAvailable(true);
+        }
     }
+
+    
+        // Test only
+
 
 }

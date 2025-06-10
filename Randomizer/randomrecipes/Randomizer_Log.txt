@@ -2,9 +2,19 @@ Prefixed CraftStation List with //Game/FactoryGame/Recipes/Buildings/
 Prefixed List with //Game/FactoryGame/Recipes/Constructor/
 Prefixed List with //Game/FactoryGame/Recipes/Smelter/
 Prefixed List with //Game/FactoryGame/Recipes/Assembler/
+You are running test code. If this message is on release, some test code was left in.
 Generating seed because it wasn't provided.
-Using seed: 5489809260315099573
+Using seed: 3572203258745481599
+Randomizable array size: 22
+Randomizable array size: 20
+Randomizable array size: 19
+Randomizable array size: 18
+Randomizable array size: 17
+Randomizable array size: 16
+Randomizable array size: 15
+Randomizable array size: 14
 Randomizable array size: 13
+Randomizable array size: 12
 Randomizable array size: 11
 Randomizable array size: 10
 Randomizable array size: 9

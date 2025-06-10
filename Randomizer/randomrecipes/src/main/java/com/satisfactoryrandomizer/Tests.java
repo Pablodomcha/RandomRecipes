@@ -17,11 +17,12 @@ public class Tests {
     // does.
     public static void test() {
 
-        for (CraftStation station : materials.getCraftStations()) {
-            Console.log("Generating Structure for " + station.getName());
-            generateStructure(station);
-        }
-
+        /*
+         * for (CraftStation station : materials.getCraftStations()) {
+         * Console.log("Generating Structure for " + station.getName());
+         * generateStructure(station);
+         * }
+         */
     }
 
     private static void generateStructure(CraftStation station) {
