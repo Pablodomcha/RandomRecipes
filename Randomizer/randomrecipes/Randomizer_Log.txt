@@ -3,10 +3,8 @@ Prefixed List with //Game/FactoryGame/Recipes/Constructor/
 Prefixed List with //Game/FactoryGame/Recipes/Smelter/
 Prefixed List with //Game/FactoryGame/Recipes/Assembler/
 Generating seed because it wasn't provided.
-Using seed: 5584654682534704149
-Craftable Structure: Desc_ConstructorMk1
+Using seed: 5489809260315099573
 Randomizable array size: 13
-Generated Desc_SmelterMk1
 Randomizable array size: 11
 Randomizable array size: 10
 Randomizable array size: 9

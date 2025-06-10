@@ -45,7 +45,7 @@ public class CreateJSON {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonRecipe);
         json = json.replace("\n", "\r\n"); // Make the breaks CRLF
-        json = recipePath + "\n" + json;
+        json = recipePath + "\r\n" + json;
 
         try (FileWriter writer = new FileWriter(recipe.getFilename())) {
             writer.write(json);

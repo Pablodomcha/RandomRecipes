@@ -5,32 +5,46 @@ import java.util.List;
 import java.util.Random;
 
 import com.satisfactoryrandomizer.Storage.Mat;
+import com.satisfactoryrandomizer.Storage.Materials;
+import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
 import com.satisfactoryrandomizer.Storage.Recipe;
 
 public class Tests {
+    static Materials materials = new Materials();
     static Random random = new Random();
-    // Simply to try out things, just run this in App.java to check what the content does.
-    public static void test(){
 
-        //ensure that we're going into this function at all.
-        System.out.println("Starting Test...");
+    // Simply to try out things, just run this in App.java to check what the content
+    // does.
+    public static void test() {
 
-        List<Mat> products = new ArrayList<>();
-        List<Mat> ingredients = new ArrayList<>();
-        String producedIn = "Build_ManufacturerMk1";
-        String filename = "Recipe_test.json";
-        String filepath = "//Game/FactoryGame/Recipes/Constructor/Recipe_IronPlate.Recipe_IronPlate_C";
-        int time = 2;
+        for (CraftStation station : materials.getCraftStations()) {
+            Console.log("Generating Structure for " + station.getName());
+            generateStructure(station);
+        }
 
-        products.add(new Mat("Desc_IronPlate", 10));
-        products.add(new Mat("Desc_LiquidOil", 5000));
-        //ingredients.add(new Mat("Desc_OreIron", 20));
-        //ingredients.add(new Mat("Desc_CopperWire", 10));
+    }
 
+    private static void generateStructure(CraftStation station) {
+        // Needed variables. Prod will always only have the station, but has to be a
+        // string regardless.
+        List<Mat> mats = new ArrayList<>();
+        List<Mat> prod = new ArrayList<>();
 
-        Recipe rec = new Recipe(products, ingredients, filename, producedIn, time, 1.0);
+        // Only produces one of the structure
+        prod.add(new Mat(station.getName(), 1));
+        mats.add(new Mat("Desc_OreIron", random.nextInt(100) + 1));
 
-        //CreateJSON.saveRecipeAsJson(rec, filepath);
+        Recipe recipe = new Recipe(
+                prod, // Products
+                mats, // Ingredients
+                "Recipe_" + station.getName() + ".json", // Filename
+                "", // Doesn't apply
+                1, // Doesn't apply
+                1.0 // Doesn't apply
+        );
+
+        // Create Recipe JSON file
+        CreateJSON.saveStructureAsJson(recipe, station.getRecipePath());
     }
 
 }

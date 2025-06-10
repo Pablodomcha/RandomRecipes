@@ -11,7 +11,7 @@ public final class App {
 
         SequenceGenerator.generateSequence();
 
-        // Tests.test();
+        //Tests.test();
 
         Console.saveLogs();
     }

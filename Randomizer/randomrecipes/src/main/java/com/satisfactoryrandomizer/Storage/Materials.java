@@ -25,32 +25,35 @@ public class Materials {
         List<CraftStation> tempStations = new ArrayList<>();
 
         // Initialize the list of available stations
-        tempStations.add(new CraftStation("Desc_AssemblerMk1", false, false, "Recipe_AssemblerMk1", "Build_AssemblerMk1",
-                2, 1, 0, 0));
+        tempStations
+                .add(new CraftStation("Desc_AssemblerMk1", false, false, "Recipe_AssemblerMk1", "Build_AssemblerMk1",
+                        2, 1, 0, 0));
         tempStations.add(new CraftStation("Desc_Blender", false, false, "Recipe_Blender", "Build_Blender",
                 2, 1, 2, 1));
-        tempStations.add(new CraftStation("Desc_ConstructorMk1", true, false, "Recipe_ConstructorMk1", "Build_ConstructorMk1",
-                1, 1, 0, 0));
+        tempStations.add(
+                new CraftStation("Desc_ConstructorMk1", true, false, "Recipe_ConstructorMk1", "Build_ConstructorMk1",
+                        1, 1, 0, 0));
         tempStations
-                .add(new CraftStation("Desc_ManufacturerMk1", false, false, "Recipe_ManufacturerMk1", "Build_ManufacturerMk1",
+                .add(new CraftStation("Desc_ManufacturerMk1", false, false, "Recipe_ManufacturerMk1",
+                        "Build_ManufacturerMk1",
                         4, 1, 0, 0));
         tempStations.add(new CraftStation("Desc_Packager", false, false, "Recipe_Packager", "Build_Packager",
                 1, 1, 1, 1));
-        tempStations.add(new CraftStation("Desc_HadronCollider", false, false, "Recipe_HadronCollider", "Build_HadronCollider",
-                2, 1, 1, 0));
+        tempStations.add(
+                new CraftStation("Desc_HadronCollider", false, false, "Recipe_HadronCollider", "Build_HadronCollider",
+                        2, 1, 1, 0));
         tempStations.add(new CraftStation("Desc_OilRefinery", false, false, "Recipe_OilRefinery", "Build_OilRefinery",
                 1, 1, 1, 1));
         tempStations.add(new CraftStation("Desc_Converter", false, false, "Recipe_Converter", "Build_Converter",
                 2, 1, 0, 1));
         tempStations
-                .add(new CraftStation("Desc_QuantumEncoder", false, false, "Recipe_QuantumEncoder", "Build_QuantumEncoder",
-                        3, 1, 1, 1));
-        tempStations.add(new CraftStation("Desc_SmelterMk1", true, false, "Recipe_SmelterMk1", "Build_SmelterMk1",
+                .add(new CraftStation("Desc_QuantumEncoder", false, false, "Recipe_QuantumEncoder",
+                        "Build_QuantumEncoder", 3, 1, 1, 1));
+        tempStations.add(new CraftStation("Desc_SmelterMk1", true, false, "Recipe_SmelterBasicMk1", "Build_SmelterMk1",
                 1, 1, 0, 0));
         tempStations.add(new CraftStation("Desc_FoundryMk1", false, false, "Recipe_FoundryMk1", "Build_FoundryMk1",
                 2, 1, 0, 0));
         this.stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
-
 
         // Initialize the available materials
         // Starting you only have directly gatherable materials
@@ -324,6 +327,11 @@ public class Materials {
                 getComponentByName(extra).addCheckAlso(s.getName());
             }
         }
+    }
+
+    // Only for debugging
+    public List<CraftStation> getCraftStations() {
+        return this.stations;
     }
 
 }

@@ -62,6 +62,9 @@ public class SequenceGenerator {
                     continue;
                 } else {
                     generateMaterial(comp);
+                    if (comp.isLiquid()) {
+                        SequenceGenerator.liquidUnlocked = true;
+                    }
                 }
             } else if (randomizable instanceof CraftStation) {
                 generateStructure((CraftStation) randomizable);

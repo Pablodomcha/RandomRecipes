@@ -1,13 +1,14 @@
-Seed: 5584654682534704149
+Seed: 5489809260315099573
 Items in order of generation (only ensured way to reach a material is to have all the previous):
-Desc_Cement is made in Desc_ConstructorMk1
-Desc_Leaves is made in Desc_SmelterMk1
-Desc_IronScrew is made in Desc_ConstructorMk1
-Desc_Wire is made in Desc_ConstructorMk1
+Desc_IronRod is made in Desc_ConstructorMk1
+Desc_Cable is made in Desc_ConstructorMk1
 Desc_GenericBiomass is made in Desc_ConstructorMk1
-Desc_IronPlateReinforced is made in Desc_ConstructorMk1
-Desc_Cable is made in Desc_SmelterMk1
-Desc_CopperIngot is made in Desc_ConstructorMk1
-Desc_IronIngot is made in Desc_ConstructorMk1
-Desc_IronPlate is made in Desc_ConstructorMk1
-Desc_IronRod is made in Desc_SmelterMk1
+Desc_IronScrew is made in Desc_ConstructorMk1
+Desc_Leaves is made in Desc_ConstructorMk1
+Desc_SmelterMk1 can be made
+Desc_CopperIngot is made in Desc_SmelterMk1
+Desc_Cement is made in Desc_SmelterMk1
+Desc_Wire is made in Desc_SmelterMk1
+Desc_IronIngot is made in Desc_SmelterMk1
+Desc_IronPlate is made in Desc_SmelterMk1
+Desc_IronPlateReinforced is made in Desc_SmelterMk1

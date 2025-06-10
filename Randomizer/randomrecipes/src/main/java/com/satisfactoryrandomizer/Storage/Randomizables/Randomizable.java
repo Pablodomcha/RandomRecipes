@@ -10,7 +10,7 @@ public class Randomizable {
     private Boolean available;
     private Boolean craftable;
     private final List<String> extraCheck; // Items that need to be craftable before this component can be crafted
-    private List<String> checkAlso = new ArrayList<>(); // Items that this component is an extraCheck for
+    private final List<String> checkAlso = new ArrayList<>(); // Items that this component is an extraCheck for
 
     // Extra checks can be in form of generic "station with liquid output" form or
     // specific items.
