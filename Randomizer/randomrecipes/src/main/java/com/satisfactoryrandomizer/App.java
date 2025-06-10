@@ -9,6 +9,8 @@ public final class App {
 
     public static void main(String[] args) {
 
+        CreateJSON.createDirectories();
+
         SequenceGenerator.generateSequence();
 
         //Tests.test();

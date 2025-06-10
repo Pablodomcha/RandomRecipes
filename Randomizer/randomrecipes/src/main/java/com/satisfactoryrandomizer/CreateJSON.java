@@ -1,5 +1,6 @@
 package com.satisfactoryrandomizer;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +37,10 @@ public class CreateJSON {
             json = recipePath + "\r\n" + json;
         }
 
+        // Create the directory and file if they don't exist.
+        File file = new File(recipe.getFilename());
+        file.getParentFile().mkdirs();
+
         try (FileWriter writer = new FileWriter(recipe.getFilename())) {
             writer.write(json);
         } catch (IOException e) {
@@ -53,11 +58,31 @@ public class CreateJSON {
         json = json.replace("\n", "\r\n"); // Make the breaks CRLF
         json = recipePath + "\r\n" + json;
 
+        // Create the directory and file if they don't exist.
+        File file = new File(recipe.getFilename());
+        file.getParentFile().mkdirs();
+
         try (FileWriter writer = new FileWriter(recipe.getFilename())) {
             writer.write(json);
             writer.close();
         } catch (IOException e) {
             Console.log("Error writing JSON file: " + e.getMessage());
         }
+    }
+
+    /**
+     * Creates the directories of ContentLib in case they don't exist.
+     */
+
+    public static void createDirectories() {
+        new File("ContentLib/CDOs").mkdirs();
+        new File("ContentLib/Icons").mkdirs();
+        new File("ContentLib/ItemPatches").mkdirs();
+        new File("ContentLib/Items").mkdirs();
+        new File("ContentLib/RecipePatches").mkdirs();
+        new File("ContentLib/Recipes").mkdirs();
+        new File("ContentLib/SchematicPatches").mkdirs();
+        new File("ContentLib/Schematics").mkdirs();
+        new File("ContentLib/VisualKits").mkdirs();
     }
 }
