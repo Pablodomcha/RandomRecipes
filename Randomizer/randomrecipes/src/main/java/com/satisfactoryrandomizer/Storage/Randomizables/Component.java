@@ -5,7 +5,6 @@ import java.util.List;
 import com.satisfactoryrandomizer.Storage.UiValues;
 
 public class Component extends Randomizable {
-    private List<String> extraCheck = null; // Items that need to be craftable before this component can be crafted
     private Boolean liquid;
     private int remainingUses = UiValues.getMaxRecipesUsed();
 
@@ -30,16 +29,8 @@ public class Component extends Randomizable {
         this.liquid = liquid;
     }
 
-    public List<String> getExtraCheck() {
-        return extraCheck;
-    }
-
     public Boolean isLiquid() {
         return liquid;
-    }
-
-    public void setExtraCheck(List<String> extraCheck) {
-        this.extraCheck = extraCheck;
     }
 
     public void setLiquid(Boolean liquid) {

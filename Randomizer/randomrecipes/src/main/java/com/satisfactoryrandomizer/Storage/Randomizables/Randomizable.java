@@ -9,6 +9,7 @@ public class Randomizable {
     private Boolean available;
     private Boolean craftable;
     private List<String> extraCheck = null; // Items that need to be craftable before this component can be crafted
+    private List<String> checkAlso = null; // Items that this component is an extraCheck for
 
     public Randomizable(String name, String recipepath, Boolean available, Boolean craftable,
             List<String> extraCheck) {
@@ -32,7 +33,7 @@ public class Randomizable {
     }
 
     public Boolean isAvailable() {
-        return available;
+        return available && extraCheck.isEmpty();
     }
 
     public void setAvailable(Boolean available) {
@@ -51,7 +52,19 @@ public class Randomizable {
         return extraCheck;
     }
 
-    public void setExtraCheck(List<String> extraCheck) {
-        this.extraCheck = extraCheck;
+    public void addExtraCheck(String extraCheck) {
+        this.extraCheck.add(extraCheck);
+    }
+
+        public void removeExtraCheck(String extraCheck) {
+        this.extraCheck.remove(extraCheck);
+    }
+
+    public List<String> getCheckAlso() {
+        return checkAlso;
+    }
+
+    public void setCheckAlso(List<String> checkAlso) {
+        this.checkAlso = checkAlso;
     }
 }

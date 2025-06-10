@@ -8,6 +8,7 @@ import com.satisfactoryrandomizer.Storage.Mat;
 import com.satisfactoryrandomizer.Storage.Materials;
 import com.satisfactoryrandomizer.Storage.Randomizables.Component;
 import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
+import com.satisfactoryrandomizer.Storage.Randomizables.Randomizable;
 import com.satisfactoryrandomizer.Storage.Recipe;
 import com.satisfactoryrandomizer.Storage.UiValues;
 
@@ -22,6 +23,13 @@ public class SequenceGenerator {
         // Create the materials variable to store all materials / structures
         materials = new Materials();
 
+        // Generate the extraChecks
+        try{
+        materials.fillExtraChecks();
+        } catch (Exception e) {
+            Console.log("Exception in the extra checks: " + e.getMessage());
+        }
+
         // Generate a random seed if not provided and set it to the random generator
         if (seed == 0) {
             generateSeed();
@@ -30,16 +38,15 @@ public class SequenceGenerator {
         Console.log("Using seed: " + seed);
         random = new Random(seed);
 
+        //Create the starting array of items
+        List<Randomizable> randomizables = new ArrayList<>();
+        randomizables.addAll(materials.getAvailableButUncraftableComponents());
+        randomizables.addAll(materials.getAvailableButUncraftableStations());
+
         // Main loop, runs until there's nothing left to randomize
-        List toDoList = new ArrayList<>();
+        while (!randomizables.isEmpty()) {
 
-        do {
-            
-
-
-        } while(true);
-
-
+        }
 
     }
 

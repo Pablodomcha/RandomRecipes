@@ -133,6 +133,16 @@ public class Materials {
         return null;
     }
 
+    public CraftStation getStationByName(String name) {
+        for (CraftStation station : stations) {
+            if (station.getName().equals(name)) {
+                return station;
+            }
+        }
+        Console.log("Station not found: " + name);
+        return null;
+    }
+
     public Boolean replaceComponentByName(String name, Component newComponent) {
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i).getName().equals(name)) {
@@ -254,6 +264,23 @@ public class Materials {
     public void refillComponents() {
         for (Component component : components) {
             component.refill();
+        }
+    }
+
+    public void fillExtraChecks() throws Exception {
+        // Get the Randomizables enabled by this component
+        for (Component c : components) {
+            for (String check : c.getCheckAlso()) {
+                // If the Randomizable is not of a certain type, check the next one, search it as a Station
+                if (getComponentByName(check) == null) {
+                    if (getStationByName(check) == null) {
+                        // Add here any other type of Randomizable created that influences this part of the logic
+                        throw new Exception("Randomizable not found: " + check);
+                    }
+                    getStationByName(check).addExtraCheck(c.getName());
+                }
+                getComponentByName(check).addExtraCheck(c.getName());
+            }
         }
     }
 

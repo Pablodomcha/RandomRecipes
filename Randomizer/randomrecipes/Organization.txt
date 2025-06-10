@@ -115,3 +115,5 @@ Structures recipe path is wrong.
 Make the Tutorial Phase.
 
 Make recipes to create/use leaves and wood (Can use the 2nd biomass recipe for one of them)
+
+Remember to add any Randomizable that influences the extraChecks logic into materials.fillExtraChecks()
