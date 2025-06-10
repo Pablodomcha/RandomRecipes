@@ -5,14 +5,14 @@
   "Products": [
     {
       "Item": "Desc_IronIngot",
-      "Amount": 1
+      "Amount": 2
     }
   ],
   "Ingredients": [],
   "ProducedIn": [
-    "Build_SmelterMk1",
+    "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.5,
-  "ManualManufacturingMultiplier": 0.5
+  "ManufacturingDuration": 0.67,
+  "ManualManufacturingMultiplier": 0.67
 }

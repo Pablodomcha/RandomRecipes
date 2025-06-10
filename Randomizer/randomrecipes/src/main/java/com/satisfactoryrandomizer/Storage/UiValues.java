@@ -38,6 +38,7 @@ public class UiValues {
 
     static int inputBias = 50; // 0 = min unputs, 100 = max inputs
     static int maxRecipesUsed = 10; // In how many recipes can a component be used
+    static int freeChance = 10; // Frequency wich a free component is given
 
     // Could just make them public, but nope.
 
@@ -55,7 +56,7 @@ public class UiValues {
      */
 
     public static int getOreLocation() {
-        return oreLocation;
+        return UiValues.oreLocation;
     }
 
     public static void setOreLocation(int oreLocation) {
@@ -74,7 +75,7 @@ public class UiValues {
      *         part/most of your playthrough.
      */
     public static int getBelts() {
-        return belts;
+        return UiValues.belts;
     }
 
     public static void setBelts(int belts) {
@@ -93,7 +94,7 @@ public class UiValues {
      *         expensive).
      */
     public static int getElectricity() {
-        return electricity;
+        return UiValues.electricity;
     }
 
     public static void setElectricity(int electricity) {
@@ -119,7 +120,7 @@ public class UiValues {
      *         may need tons deposits and manual flushing.
      */
     public static int getWaste() {
-        return waste;
+        return UiValues.waste;
     }
 
     public static void setWaste(int waste) {
@@ -136,7 +137,7 @@ public class UiValues {
      *         Packaging could be really expensive (or not).
      */
     public static int getLiquids() {
-        return liquids;
+        return UiValues.liquids;
     }
 
     public static void setLiquids(int liquids) {
@@ -153,7 +154,7 @@ public class UiValues {
      *         game where mostly a few stations are used for everything.
      */
     public static int getStationBias() {
-        return stationBias;
+        return UiValues.stationBias;
     }
 
     public static void setStationBias(int stationBias) {
@@ -176,7 +177,7 @@ public class UiValues {
      *         Min: Number (min 1).
      */
     public static int getInventorySlots() {
-        return inventorySlots;
+        return UiValues.inventorySlots;
     }
 
     public static void setInventorySlots(int inventorySlots) {
@@ -190,7 +191,7 @@ public class UiValues {
      *         max value.
      */
     public static int[] getInventoryRange() {
-        return inventoryRange;
+        return UiValues.inventoryRange;
     }
 
     public static void setInventoryRange(int[] inventoryRange) {
@@ -207,7 +208,7 @@ public class UiValues {
      *         game where mostly a few stations are used for everything.
      */
     public static Boolean getBalanceProg() {
-        return balanceProg;
+        return UiValues.balanceProg;
     }
 
     public static void setBalanceProg(Boolean balanceProg) {
@@ -215,7 +216,7 @@ public class UiValues {
     }
 
     public static int getSeed() {
-        return seed;
+        return UiValues.seed;
     }
 
     public static void setSeed(int seed) {
@@ -227,7 +228,7 @@ public class UiValues {
      *         for a craft. Over 50 will crash.
      */
     public static int getMaxStackComp() {
-        return maxStackComp;
+        return UiValues.maxStackComp;
     }
 
     public static void setMaxStackComp(int maxStackComp) {
@@ -240,7 +241,7 @@ public class UiValues {
      */
 
     public static int getMaxCompCraft() {
-        return maxCompCraft;
+        return UiValues.maxCompCraft;
     }
 
     public static void setMaxCompCraft(int maxCompCraft) {
@@ -252,7 +253,7 @@ public class UiValues {
      *         to build with the builder tool.
      */
     public static int getMaxStackStruct() {
-        return maxStackStruct;
+        return UiValues.maxStackStruct;
     }
 
     public static void setMaxStackStruct(int maxStackStruct) {
@@ -264,7 +265,7 @@ public class UiValues {
      *         build with the builder tool.
      */
     public static int getMaxItemStruct() {
-        return maxItemStruct;
+        return UiValues.maxItemStruct;
     }
 
     public static void setMaxItemStruct(int maxItemStruct) {
@@ -276,7 +277,7 @@ public class UiValues {
      *         to complete a milestone.
      */
     public static int getMaxStackMile() {
-        return maxStackMile;
+        return UiValues.maxStackMile;
     }
 
     public static void setMaxStackMile(int maxStackMile) {
@@ -288,7 +289,7 @@ public class UiValues {
      *         complete a milestone.
      */
     public static int getMaxItemMile() {
-        return maxItemMile;
+        return UiValues.maxItemMile;
     }
 
     public static void setMaxItemMile(int maxItemMile) {
@@ -302,7 +303,7 @@ public class UiValues {
      * @return 7. Max time per milestone.
      */
     public static double getMaxTimeMile() {
-        return maxTimeMile;
+        return UiValues.maxTimeMile;
     }
 
     public static void setMaxTimeMile(int maxTimeMile) {
@@ -315,7 +316,7 @@ public class UiValues {
      */
 
     public static int getMaxStackEle() {
-        return maxStackEle;
+        return UiValues.maxStackEle;
     }
 
     public static void setMaxStackEle(int maxStackEle) {
@@ -330,7 +331,7 @@ public class UiValues {
      */
 
     public static int getMaxItemEle() {
-        return maxItemEle;
+        return UiValues.maxItemEle;
     }
 
     public static void setMaxItemEle(int maxItemEle) {
@@ -343,7 +344,7 @@ public class UiValues {
      * @return 10. Max time to craft.
      */
     public static double getMaxTimeCraft() {
-        return maxTimeCraft;
+        return UiValues.maxTimeCraft;
     }
 
     public static void setMaxTimeCraft(int maxTimeCraft) {
@@ -357,7 +358,7 @@ public class UiValues {
      * @return 11. Handcrafting speed array {min,max}.
      */
     public static double[] getHandcraftSpeed() {
-        return handcraftSpeed;
+        return UiValues.handcraftSpeed;
     }
 
     public static void setHandcraftSpeed(double[] handcraftSpeed) {
@@ -374,7 +375,7 @@ public class UiValues {
      * @return 12. Input bias.
      */
     public static int getInputBias() {
-        return inputBias;
+        return UiValues.inputBias;
     }
 
     public static void setInputBias(int inputBias) {
@@ -388,11 +389,24 @@ public class UiValues {
      * @return 13. Max recipes used.
      */
     public static int getMaxRecipesUsed() {
-        return maxRecipesUsed;
+        return UiValues.maxRecipesUsed;
     }
 
     public static void setMaxRecipesUsed(int maxRecipesUsed) {
         UiValues.maxRecipesUsed = maxRecipesUsed;
     }
 
+    /**
+     * Retrieves the chance for a material to be free (like Excited Photonic Matter,
+     * except that one may no longer be free).
+     * 
+     * @return 14. Free Chance.
+     */
+    public static int getFreeChance() {
+        return UiValues.freeChance;
+    }
+
+    public static void setFreeChance(int waste) {
+        UiValues.waste = waste;
+    }
 }

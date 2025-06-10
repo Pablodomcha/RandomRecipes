@@ -46,7 +46,7 @@ public class SequenceGenerator {
 
         // Main loop, runs until there's nothing left to randomize
         int cap = 1000;
-        while (!randomizables.isEmpty() && cap -- > 0) {
+        while (!randomizables.isEmpty() && cap-- > 0) {
             // Pick a random item to randomize
             Randomizable randomizable = randomizables.get(random.nextInt(randomizables.size()));
             if (randomizable instanceof Component) {
@@ -71,7 +71,7 @@ public class SequenceGenerator {
             randomizables.addAll(materials.getAvailableButUncraftableStations());
         }
 
-        if(cap <= 0) {
+        if (cap <= 0) {
             Console.log("Too many iterations of the main loop, exiting.");
         }
     }
@@ -176,6 +176,11 @@ public class SequenceGenerator {
     private static List<Mat> generateIngredients(CraftStation station, Boolean isStructure) {
         List<Mat> ingredients = new ArrayList<>();
 
+        // If it's free, we don't need no ingredients.
+        if (random.nextInt(100) < UiValues.getFreeChance()) {
+            return ingredients;
+        }
+
         // Get slots for the station
         int liquidslots = station.getLiquidIn();
         int solidslots = station.getSolidIn();
@@ -244,9 +249,11 @@ public class SequenceGenerator {
     private static List<Mat> generateProducts(CraftStation station, Boolean mainliquid) {
         List<Mat> products = new ArrayList<>();
 
-        // Get slots for the station (liquid slots are 0 if Waste is 3)
+        // Get slots for the station:
+        // Cannot have liquid slots if waste is not 3
+        // If waste is 0, the only product is the already added main product
         int liquidslots = (UiValues.getWaste() == 3) ? station.getLiquidOut() : 0;
-        int solidslots = station.getSolidOut();
+        int solidslots = (UiValues.getWaste() == 0) ? station.getSolidOut() : 0;
 
         // Remove the slot of the main product, as it's already used
         if (mainliquid && UiValues.getWaste() == 3)
@@ -254,14 +261,8 @@ public class SequenceGenerator {
         if (!mainliquid)
             solidslots--;
 
-        // Ensure we didn't put a recipe in a slot it can't be
-        if (liquidslots < 0 || solidslots < 0) {
-            Console.log("Slots went negative, the main ingredient can't be crafted there.");
-            return products;
-        }
-
         // Use random resources between 1 and the max possible for the station
-        int totalresources = getBiasedRandomInt(0, liquidslots + solidslots, UiValues.getInputBias());
+        int totalresources = getBiasedRandomInt(0, Math.min(0, liquidslots + solidslots), UiValues.getInputBias());
 
         for (int i = 0; i < totalresources; i++) {
             Boolean selectedLiquid;
@@ -274,7 +275,7 @@ public class SequenceGenerator {
                 selectedLiquid = false;
             } else {
                 Console.log(
-                        "No more slots available for ingredients, this message does not stop the program, but means there's an error somewhere.");
+                        "Tried to add ingredients without slots. This should never happen. The randomization might still work.");
                 break; // No more slots available, break the loop to stop the program from crashing
             }
             // Select a random component from the available components (craftable or not)

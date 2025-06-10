@@ -5,7 +5,7 @@
   "Products": [
     {
       "Item": "Desc_IronPlateReinforced",
-      "Amount": 2
+      "Amount": 1
     }
   ],
   "Ingredients": [],
@@ -13,6 +13,6 @@
     "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.89,
-  "ManualManufacturingMultiplier": 0.89
+  "ManufacturingDuration": 0.38,
+  "ManualManufacturingMultiplier": 0.38
 }

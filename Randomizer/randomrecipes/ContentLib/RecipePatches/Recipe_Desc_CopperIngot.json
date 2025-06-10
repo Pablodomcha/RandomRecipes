@@ -5,7 +5,7 @@
   "Products": [
     {
       "Item": "Desc_CopperIngot",
-      "Amount": 1
+      "Amount": 2
     }
   ],
   "Ingredients": [],
@@ -13,6 +13,6 @@
     "Build_SmelterMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.35,
-  "ManualManufacturingMultiplier": 0.35
+  "ManufacturingDuration": 0.72,
+  "ManualManufacturingMultiplier": 0.72
 }

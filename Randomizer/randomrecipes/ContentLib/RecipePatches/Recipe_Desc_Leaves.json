@@ -10,9 +10,9 @@
   ],
   "Ingredients": [],
   "ProducedIn": [
-    "Build_SmelterMk1",
+    "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.9,
-  "ManualManufacturingMultiplier": 0.9
+  "ManufacturingDuration": 0.06,
+  "ManualManufacturingMultiplier": 0.06
 }

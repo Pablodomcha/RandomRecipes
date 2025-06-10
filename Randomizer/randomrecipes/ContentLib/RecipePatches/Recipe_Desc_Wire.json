@@ -5,14 +5,14 @@
   "Products": [
     {
       "Item": "Desc_Wire",
-      "Amount": 1
+      "Amount": 2
     }
   ],
   "Ingredients": [],
   "ProducedIn": [
-    "Build_SmelterMk1",
+    "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.8,
-  "ManualManufacturingMultiplier": 0.8
+  "ManufacturingDuration": 0.46,
+  "ManualManufacturingMultiplier": 0.46
 }

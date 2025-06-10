@@ -5,14 +5,14 @@
   "Products": [
     {
       "Item": "Desc_Cable",
-      "Amount": 1
+      "Amount": 2
     }
   ],
   "Ingredients": [],
   "ProducedIn": [
-    "Build_SmelterMk1",
+    "Build_ConstructorMk1",
     "manual"
   ],
-  "ManufacturingDuration": 0.65,
-  "ManualManufacturingMultiplier": 0.65
+  "ManufacturingDuration": 0.45,
+  "ManualManufacturingMultiplier": 0.45
 }
