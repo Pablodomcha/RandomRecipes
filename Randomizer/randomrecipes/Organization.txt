@@ -11,25 +11,6 @@ Tutorial costs are free (the mod assumes you use "Onboarding")
 *Hazmat, Iodine filter and Uranium Scan need an external check to enable uranium.
 **Hard to ensure they are in order.
 
-
--Treatment:
-    1. Materials
-        Moved from unavailable to available when added to a tier.
-    2. Structures
-        If Crafting, increases 
-    3. MAM Research
-
--Costs:
-    1. Milestones:
-        1-16 resources.*
-    2. Elevtor Parts:
-        1-4 resources.*
-    3. Items:
-        1-X where X is the max number of slots for the selected production structure
-        First Randomize production structure, then randomize materials.
-
-*More may work, but testing it is not worth it.
-
 Info:
     1. Handcrafts: The first unlockable crafting station will have it's recipes able to be made by hand. Recipes with liquids may appear for handcrafting, but you obviously can't make them.
     2. Craft unlocked != Craft Possible.
@@ -46,6 +27,8 @@ Info:
     13. If the randomizer takes too long, it's probably in an infinite loop, happens in some seeds. Close it and run again (chaning the seed if you introduced it manually).
     14. Values of 0 may crash the randomizer if they are for quantities. For probabilities, 0 should be fine.
     15. Negative values for porbabilities will be either treated as 0, produce unexpected results or crash the randomizer. Don't put any preferably.
+    16. Space elevator stages untouched (Changing them would be a pain and the path to get to it is already random anyway).
+    17. Milestones are not necessarily linear, tier 1 milestones could need tier 9 materials to unlock. In this case, anything unlocked by that tier 1 milestone won't be needed until it's unlockable.
 
 -Options (Toggle):
     1. Ore location:

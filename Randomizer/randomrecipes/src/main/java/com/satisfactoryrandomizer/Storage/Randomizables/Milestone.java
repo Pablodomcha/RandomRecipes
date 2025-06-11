@@ -9,7 +9,7 @@ public class Milestone extends Randomizable {
 
     // Basic constructor
     public Milestone(String name, Boolean available, Boolean craftable, String recipepath, List<String> extraCheck) {
-        super(name, recipepath + "." + recipepath + "_C", available, craftable, extraCheck);
+        super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, extraCheck);
     }
 
     /**
@@ -40,5 +40,9 @@ public class Milestone extends Randomizable {
      */
     public void setRewards(List<String[]> rewards) {
         this.rewards = rewards;
+    }
+
+    public void addRewards(List<String[]> rewards) {
+        this.rewards.addAll(rewards);
     }
 }

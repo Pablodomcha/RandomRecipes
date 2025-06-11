@@ -6,6 +6,7 @@ import java.util.List;
 public class Randomizable {
 
     private final String name;
+    private final String path;
     private String recipepath;
     private Boolean available;
     private Boolean craftable;
@@ -15,9 +16,10 @@ public class Randomizable {
     // Extra checks can be in form of generic "station with liquid output" form or
     // specific items.
 
-    public Randomizable(String name, String recipepath, Boolean available, Boolean craftable,
+    public Randomizable(String name, String path, String recipepath, Boolean available, Boolean craftable,
             List<String> extraCheck) {
         this.name = name;
+        this.path = path;
         this.recipepath = recipepath;
         this.available = available;
         this.craftable = craftable;
@@ -34,6 +36,10 @@ public class Randomizable {
 
     public String getRecipePath() {
         return this.recipepath;
+    }
+
+    public String getPath() {
+        return this.path;
     }
 
     public void setRecipePath(String recipepath) {

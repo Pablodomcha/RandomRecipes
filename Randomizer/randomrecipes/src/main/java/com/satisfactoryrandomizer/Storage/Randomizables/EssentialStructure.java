@@ -2,23 +2,23 @@ package com.satisfactoryrandomizer.Storage.Randomizables;
 
 public class EssentialStructure extends Structure {
 
-    private Boolean isTutorial = false;
+    private int addWhen = 0;
     private Boolean isCheap = false;
 
     // Basic constructor
     public EssentialStructure(String name, Boolean available, Boolean craftable, String recipepath, Boolean isCheap,
-            Boolean isTutorial) {
+            int isTutorial) {
         super(name, available, craftable, recipepath);
         this.isCheap = isCheap;
-        this.isTutorial = isTutorial;
+        this.addWhen = isTutorial;
     }
 
     public boolean isCheap() {
-        return isCheap;
+        return this.isCheap;
     }
 
-    public boolean isTutorial() {
-        return isTutorial;
+    public int addWhen() {
+        return this.addWhen;
     }
 
 }

@@ -334,7 +334,7 @@ public class SequenceGenerator {
      */
     private static Component ensureUnused(List<Mat> list, List<Component> craftableComponents, Boolean liquid) {
 
-        Component component = new Component("placeholder in ensureUnused in SequenceGenerator", false, false);
+        Component component = new Component("placeholder in ensureUnused in SequenceGenerator", false, false, null);
         Boolean success = false;
         int loops = 0;
 

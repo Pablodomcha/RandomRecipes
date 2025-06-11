@@ -1,6 +1,7 @@
 package com.satisfactoryrandomizer.Storage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -24,9 +25,9 @@ public class Materials {
     public Materials() {
 
         // Create a temporary lists to add the prefixes to before adding to components
-        List<Component> tempList = new ArrayList<>();
-        List<Component> prefixedTempList;
+        List<Component> tempComp = new ArrayList<>();
         List<CraftStation> tempStations = new ArrayList<>();
+        List<Milestone> tempMilestones = new ArrayList<>();
 
         // Crafting Stations
         tempStations
@@ -58,50 +59,54 @@ public class Materials {
         tempStations.add(new CraftStation("Desc_FoundryMk1", false, false, "Recipe_SmelterMk1", "Build_FoundryMk1",
                 2, 1, 0, 0));
         this.stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
+        tempStations.clear();
 
         // Components
 
         // Raw materials
-        this.components.add(new Component("Desc_OreIron", true, false));
-        this.components.add(new Component("Desc_OreCopper", true, false));
-        this.components.add(new Component("Desc_Stone", true, false));
+        this.components.add(new Component("Desc_OreIron", true, false, null));
+        this.components.add(new Component("Desc_OreCopper", true, false, null));
+        this.components.add(new Component("Desc_Stone", true, false, null));
 
         // /Recipes/Constructor/
-        tempList.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
-        tempList.add(new Component("Desc_IronRod", "Recipe_IronRod", true, false, false));
-        tempList.add(new Component("Desc_Wire", "Recipe_Wire", true, false, false));
-        tempList.add(new Component("Desc_Cable", "Recipe_Cable", true, false, false));
-        tempList.add(new Component("Desc_Cement", "Recipe_Concrete", true, false, false));
-        tempList.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false, false));
-        tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
+        tempComp.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
+        tempComp.add(new Component("Desc_IronRod", "Recipe_IronRod", true, false, false));
+        tempComp.add(new Component("Desc_Wire", "Recipe_Wire", true, false, false));
+        tempComp.add(new Component("Desc_Cable", "Recipe_Cable", true, false, false));
+        tempComp.add(new Component("Desc_Cement", "Recipe_Concrete", true, false, false));
+        tempComp.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false, false));
+        tempComp.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
 
-        prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Constructor/");
-
-        this.components.addAll(prefixedTempList);
-        tempList.clear();
-        prefixedTempList.clear();
+        this.components.addAll((List<Component>) AddPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
+        tempComp.clear();
 
         // /Recipes/Smelter/
-        tempList.add(
+        tempComp.add(
                 new Component("Desc_IronIngot", "Recipe_IngotIron", true, false, false));
-        tempList.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", true, false, false));
+        tempComp.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", true, false, false));
 
-        prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Smelter/");
-        this.components.addAll(prefixedTempList);
-        tempList.clear();
-        prefixedTempList.clear();
+        this.components.addAll(AddPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
+        tempComp.clear();
 
         // /Recipes/Assembler/
-        tempList.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
+        tempComp.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
 
-        prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Assembler/");
-        this.components.addAll(prefixedTempList);
-        tempList.clear();
-        prefixedTempList.clear();
+        this.components.addAll(AddPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
+        tempComp.clear();
 
         // Structures
 
         // Milestones
+        // //Game/FactoryGame/Schematics/Tutorial/
+        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null));
+        tempMilestones.add(new Milestone("Tutorial_2", false, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1")));
+        tempMilestones.add(new Milestone("Tutorial_3", false, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2")));
+        tempMilestones.add(new Milestone("Tutorial_4", false, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3")));
+        tempMilestones.add(new Milestone("Tutorial_5", false, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4")));
+        tempMilestones.add(new Milestone("Tutorial_6", false, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5")));
+
+        this.milestones.addAll(AddPrefixMilestone(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
+        tempMilestones.clear();
 
         // Essential structures are structures too they are just forced to be craftable
         // early.
@@ -114,7 +119,7 @@ public class Materials {
         this.components.add(new Component("Desc_Wood", null, true, false, false));
     }
 
-    private List<Component> AddPrefix(List<Component> list, String prefix) {
+    private static List<Component> AddPrefixComp(List<Component> list, String prefix) {
         List<Component> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -127,11 +132,37 @@ public class Materials {
         return prefixedList;
     }
 
-    private List<CraftStation> AddPrefixStat(List<CraftStation> list, String prefixRecipe) {
+    private static List<Milestone> AddPrefixMile(List<Milestone> list, String prefix) {
+        List<Milestone> prefixedList = new ArrayList<>(list);
+
+        for (int i = 0; i < prefixedList.size(); i++) {
+            Milestone c = prefixedList.get(i);
+            if (c.getRecipePath() != null && !c.getRecipePath().startsWith(prefix)) {
+                prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
+            }
+        }
+        Console.log("Prefixed List with " + prefix);
+        return prefixedList;
+    }
+
+    private static List<CraftStation> AddPrefixStat(List<CraftStation> list, String prefixRecipe) {
         List<CraftStation> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
             CraftStation c = prefixedList.get(i);
+            if (c.getRecipePath() != null && !c.getRecipePath().startsWith(prefixRecipe)) {
+                prefixedList.get(i).setRecipePath(prefixRecipe + c.getRecipePath());
+            }
+        }
+        Console.log("Prefixed CraftStation List with " + prefixRecipe);
+        return prefixedList;
+    }
+
+    private static List<Milestone> AddPrefixMilestone(List<Milestone> list, String prefixRecipe) {
+        List<Milestone> prefixedList = new ArrayList<>(list);
+
+        for (int i = 0; i < prefixedList.size(); i++) {
+            Milestone c = prefixedList.get(i);
             if (c.getRecipePath() != null && !c.getRecipePath().startsWith(prefixRecipe)) {
                 prefixedList.get(i).setRecipePath(prefixRecipe + c.getRecipePath());
             }

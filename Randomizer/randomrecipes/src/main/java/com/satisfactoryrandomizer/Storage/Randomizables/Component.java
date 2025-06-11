@@ -10,14 +10,14 @@ public class Component extends Randomizable {
 
     // Constructor for raw materials, set as craftable as soon as available so that
     // no recipe is created for them.
-    public Component(String name, Boolean available, Boolean liquid) {
-        super(name, null, available, true, null);
+    public Component(String name, Boolean available, Boolean liquid, List<String> extraCheck) {
+        super(name, null, null, available, true, extraCheck);
         this.liquid = liquid;
     }
 
     // Full constructor
     public Component(String name, String recipepath, Boolean available, Boolean craftable, Boolean liquid) {
-        super(name, recipepath + "." + recipepath + "_C", available, craftable, null);
+        super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, null);
         this.liquid = liquid;
     }
 
@@ -25,7 +25,7 @@ public class Component extends Randomizable {
     // (like uranium needs to check for several items)
     public Component(String name, String recipepath, Boolean available, Boolean craftable, Boolean liquid,
             List<String> extraCheck) {
-        super(name, recipepath + "." + recipepath + "_C", available, craftable, null);
+        super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, null);
         this.liquid = liquid;
     }
 

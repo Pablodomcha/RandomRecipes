@@ -11,7 +11,7 @@ public class CraftStation extends Randomizable {
     // Basic constructor
     public CraftStation(String name, Boolean available, Boolean craftable, String recipepath,
             String builderpath, int solidIn, int solidOut, int liquidIn, int liquidOut) {
-        super(name, recipepath + "." + recipepath + "_C", available, craftable, null);
+        super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, null);
         this.builderpath = builderpath;
         this.solidIn = solidIn;
         this.solidOut = solidOut;
