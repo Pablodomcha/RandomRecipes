@@ -18,7 +18,7 @@ public class SequenceGenerator {
     private static Materials materials;
     private static Boolean liquidUnlocked = false;
     private static String lastObtainedStation = null;
-    private static String firstStation= null;
+    private static String firstStation = null;
 
     public static void generateSequence() {
 
@@ -54,7 +54,7 @@ public class SequenceGenerator {
         firstStation = "Desc_ConstructorMk1";
 
         // Main loop, runs until there's nothing left to randomize
-        int cap = 1000;
+        int cap = 10000;
         while (!randomizables.isEmpty() && cap-- > 0) {
             // Pick a random item to randomize
             Randomizable randomizable = randomizables.get(random.nextInt(randomizables.size()));
@@ -63,7 +63,7 @@ public class SequenceGenerator {
                 if (comp.isLiquid() && !SequenceGenerator.liquidUnlocked) { // If liquids aren't unlocked, skip them
                     continue;
                 } else {
-                    generateMaterial(comp);
+                    generateMaterial(comp, cap);
                     if (comp.isLiquid()) {
                         SequenceGenerator.liquidUnlocked = true;
                     }
@@ -86,6 +86,7 @@ public class SequenceGenerator {
         if (cap <= 0) {
             Console.log("Too many iterations of the main loop, exiting.");
         }
+        Console.log("Remaining loops to cap: " + cap);
     }
 
     private static void generateStructure(CraftStation station) {
@@ -118,7 +119,7 @@ public class SequenceGenerator {
         SequenceGenerator.lastObtainedStation = station.getName();
     }
 
-    private static void generateMaterial(Component comp) {
+    private static void generateMaterial(Component comp, int cap) {
         // Select a random crafting Station
         CraftStation station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
 
@@ -161,8 +162,16 @@ public class SequenceGenerator {
                 handSpeed // Handcraft speed
         );
 
-        // Create Recipe JSON file
-        CreateJSON.saveRecipeAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation);
+        // Create Recipe JSON file (RecipeVN if it goes into a machine with variable
+        // consumption)
+        if (station.getBuilderPath().equals("Build_HadronCollider")
+                || station.getBuilderPath().equals("Build_HadronCollider")) {
+            CreateJSON.saveRecipeVNAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation,
+                    random.nextInt(10000 - cap) + 10);
+
+        } else {
+            CreateJSON.saveRecipeAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation);
+        }
 
         // Mark the component as craftable and update the list of available but
         // uncraftable components
@@ -228,6 +237,10 @@ public class SequenceGenerator {
             List<Component> craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
 
             Component comp = ensureUnused(ingredients, craftableComponents, selectedLiquid);
+
+            if (comp == null) {
+                return ingredients;
+            }
 
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
@@ -323,6 +336,20 @@ public class SequenceGenerator {
         int loops = 0;
 
         while (!success) {
+
+            if (loops > 101) {
+                Console.log("Looping through the available materials for the " + loops
+                        + "th time, trying to create a recipe with more materials than available.Happens with some seeds for early structures when \"Max items per structure\" is high. This shouldn't stop the randomizer from working.");
+                return null;
+            }
+            if (loops++ > 100 || craftableComponents.size() < 1) {
+                Console.log("Looping through the available materials for the " + loops
+                        + "th time, \"Max recipes used\" is too low. The uses of all components will be increased by 1 to procceed");
+                materials.refillComponents();
+                craftableComponents = materials.getAvailableAndCraftableComponents(liquid);
+                continue;
+            }
+
             component = craftableComponents.get(random.nextInt(craftableComponents.size()));
 
             Boolean alreadyExists = false;
@@ -333,13 +360,6 @@ public class SequenceGenerator {
             }
             if (!alreadyExists) {
                 success = true;
-            }
-            loops++;
-            if (loops > 100) {
-                Console.log("Looping through the available materials for the " + loops
-                        + "th time, \"Max recipes used\" is too low. The uses of all components will be increased by 1 to procceed");
-                materials.refillComponents();
-                craftableComponents = materials.getAvailableAndCraftableComponents(liquid);
             }
         }
 

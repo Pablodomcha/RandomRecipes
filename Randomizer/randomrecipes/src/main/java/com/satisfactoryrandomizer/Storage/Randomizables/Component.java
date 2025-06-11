@@ -30,7 +30,7 @@ public class Component extends Randomizable {
     }
 
     public Boolean isLiquid() {
-        return liquid;
+        return this.liquid;
     }
 
     public void setLiquid(Boolean liquid) {
@@ -53,5 +53,17 @@ public class Component extends Randomizable {
      */
     public int refill() {
         return ++this.remainingUses;
+    }
+
+
+    /**
+     * Check if the component is available, i.e. if it has remaining uses and is
+     * generally available.
+     * 
+     * @return True if the component is available, false if not.
+     */
+    @Override
+    public Boolean isAvailable() {
+        return super.isAvailable() && this.remainingUses > 0;
     }
 }

@@ -37,7 +37,7 @@ public class UiValues {
     static double[] handcraftSpeed = { 0.5, 1.0 };
 
     static int inputBias = 50; // 0 = min unputs, 100 = max inputs
-    static int maxRecipesUsed = 10; // In how many recipes can a component be used
+    static int maxRecipesUsed = 1; // In how many recipes can a component be used
     static int freeChance = 10; // Frequency wich a free component is given
 
     // Could just make them public, but nope.

@@ -9,6 +9,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.satisfactoryrandomizer.Storage.JSONableRecipe;
+import com.satisfactoryrandomizer.Storage.JSONableRecipeVN;
 import com.satisfactoryrandomizer.Storage.JSONableStructure;
 import com.satisfactoryrandomizer.Storage.Recipe;
 
@@ -31,11 +32,63 @@ public class CreateJSON {
         json = json.replace("\n", "\r\n"); // Make the line breaks CRLF
 
         if (recipePath.contains("null")) {
-            Console.log(recipe.getProducts().get(0).getName()
-                    + " has a null path (this is normal for wood, but not for other items)");
+            Console.log(recipe.getProducts().get(0).getName() + " has a null path, adding as new recipe.");
+            try (FileWriter writer = new FileWriter(
+                    "ContentLib/Recipes/" + recipe.getProducts().get(0).getName() + ".json")) {
+                writer.write(json);
+            } catch (IOException e) {
+                Console.log("Error writing JSON file: " + e.getMessage());
+            }
         } else {
             json = recipePath + "\r\n" + json;
         }
+
+        // Create the directory and file if they don't exist.
+        File file = new File(recipe.getFilename());
+        file.getParentFile().mkdirs();
+
+        try (FileWriter writer = new FileWriter(recipe.getFilename())) {
+            writer.write(json);
+        } catch (IOException e) {
+            Console.log("Error writing JSON file: " + e.getMessage());
+        }
+    }
+
+    public static void saveRecipeVNAsJson(Recipe recipe, String recipePath, String firstStation, int energy) {
+
+        // Convert the station to list and add manual if it's from constructor or
+        // smelter.
+        // Also prefix it with "Build_" to make it the correct name.
+        List<String> stations = new ArrayList<>();
+        stations.add(recipe.getStation());
+        if (recipe.getStation().equals(firstStation)) {
+            stations.add("manual");
+        }
+        JSONableRecipeVN jsonVNRecipe = new JSONableRecipeVN(recipe.getProducts(), recipe.getIngredients(), stations,
+                recipe.getTime(), recipe.getHandcraftSpeed(), energy);
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .excludeFieldsWithModifiers(java.lang.reflect.Modifier.TRANSIENT)
+                .create();
+        String json = gson.toJson(jsonVNRecipe);
+        json = json.replace("\n", "\r\n"); // Make the line breaks CRLF
+
+        if (recipePath.contains("null")) {
+            Console.log(recipe.getProducts().get(0).getName() + " has a null path, adding as new recipe.");
+            try (FileWriter writer = new FileWriter(
+                    "ContentLib/Recipes/" + recipe.getProducts().get(0).getName() + ".json")) {
+                writer.write(json);
+                return;
+            } catch (IOException e) {
+                Console.log("Error writing JSON file: " + e.getMessage());
+            }
+        } else {
+            json = recipePath + "\r\n" + json;
+        }
+
+        Console.log("Got a VN recipe: " + recipe.getProducts().get(0).getName());
+        Console.log("energy: " + energy);
+        Console.log("filetype: " + jsonVNRecipe.getClass().getName());
 
         // Create the directory and file if they don't exist.
         File file = new File(recipe.getFilename());

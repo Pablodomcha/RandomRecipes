@@ -17,7 +17,8 @@ public class Materials {
     private final List<Component> components = new ArrayList<>();// Components
     private List<CraftStation> stations = new ArrayList<>(); // Crafting Stations
     private List<Structure> structures = new ArrayList<>(); // Generic structures that don't affect the logic
-    private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by the logic
+    private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by
+                                                                              // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
 
     public Materials() {
@@ -60,7 +61,7 @@ public class Materials {
 
         // Components
 
-        // Starting you only have directly gatherable materials
+        // Raw materials
         this.components.add(new Component("Desc_OreIron", true, false));
         this.components.add(new Component("Desc_OreCopper", true, false));
         this.components.add(new Component("Desc_Stone", true, false));
@@ -73,8 +74,6 @@ public class Materials {
         tempList.add(new Component("Desc_Cement", "Recipe_Concrete", true, false, false));
         tempList.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false, false));
         tempList.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
-        tempList.add(new Component("Desc_Leaves", "Recipe_Biomass_Wood", true, false, false));
-        tempList.add(new Component("Desc_Wood", null, true, false, false));
 
         prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Constructor/");
 
@@ -93,21 +92,26 @@ public class Materials {
         prefixedTempList.clear();
 
         // /Recipes/Assembler/
-        tempList.add(
-                new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
+        tempList.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
 
         prefixedTempList = AddPrefix(tempList, "//Game/FactoryGame/Recipes/Assembler/");
         this.components.addAll(prefixedTempList);
         tempList.clear();
         prefixedTempList.clear();
 
-        // this.components.add(new Component("", "", false, false));
+        // Structures
 
         // Milestones
 
-
-        // Essential structures are structures too they are just forced to be gotten early.
+        // Essential structures are structures too they are just forced to be craftable
+        // early.
         this.structures.addAll(this.essentialStructures);
+    }
+
+    public void generateLimitedMats() {
+        // Materials without associated recipe and can't be crafted.
+        // They will be added at the end for alternate recipes.
+        this.components.add(new Component("Desc_Wood", null, true, false, false));
     }
 
     private List<Component> AddPrefix(List<Component> list, String prefix) {
@@ -365,7 +369,5 @@ public class Materials {
             getStationByName(stat.getName()).setAvailable(true);
         }
     }
-
-    // Test only
 
 }
