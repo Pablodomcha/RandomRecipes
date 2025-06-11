@@ -279,7 +279,10 @@ public class SequenceGenerator {
         // Cannot have liquid slots if waste is not 3
         // If waste is 0, the only product is the already added main product
         int liquidslots = (UiValues.getWaste() == 3) ? station.getLiquidOut() : 0;
-        int solidslots = (UiValues.getWaste() == 0) ? station.getSolidOut() : 0;
+        if (UiValues.getWaste() == 0) {
+            return products;
+        }
+        int solidslots = station.getSolidOut();
 
         // Remove the slot of the main product, as it's already used
         if (mainliquid && UiValues.getWaste() == 3)
@@ -301,7 +304,7 @@ public class SequenceGenerator {
                 selectedLiquid = false;
             } else {
                 Console.log(
-                        "Tried to add ingredients without slots. This should never happen. The randomization might still work.");
+                        "Tried to add ingredients without slots. This should never happen.");
                 break; // No more slots available, break the loop to stop the program from crashing
             }
             // Select a random component from the available components (craftable or not)
@@ -337,17 +340,15 @@ public class SequenceGenerator {
 
         while (!success) {
 
-            if (loops > 101) {
+            if (loops > 200) {
                 Console.log("Looping through the available materials for the " + loops
-                        + "th time, trying to create a recipe with more materials than available.Happens with some seeds for early structures when \"Max items per structure\" is high. This shouldn't stop the randomizer from working.");
+                        + "th time, trying to create a recipe with more materials than available. Happens with some seeds for early structures when \"Max items per structure\" is high. This shouldn't stop the randomizer from working.");
                 return null;
-            }
-            if (loops++ > 100 || craftableComponents.size() < 1) {
+            } else if (loops++ == 100 || craftableComponents.size() <= 0) {
                 Console.log("Looping through the available materials for the " + loops
                         + "th time, \"Max recipes used\" is too low. The uses of all components will be increased by 1 to procceed");
                 materials.refillComponents();
                 craftableComponents = materials.getAvailableAndCraftableComponents(liquid);
-                continue;
             }
 
             component = craftableComponents.get(random.nextInt(craftableComponents.size()));
@@ -392,7 +393,6 @@ public class SequenceGenerator {
             double power = 1 + (bias - 51.0) / 49.0 * 9.0; // power: 1 at bias=50, 10 at bias=100
             r = 1 - Math.pow(1 - r, power);
         }
-        Console.log("getBiasedRandomInt: min=" + (min + (int) ((max - min + 1) * r)));
         return min + (int) ((max - min + 1) * r);
     }
 

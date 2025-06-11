@@ -16,6 +16,7 @@ public class Console {
 
     public static void cheatsheet(String message) {
         Console.cheatsheet += message + "\n";
+        Console.log += message + "\n";
     }
 
     public static void test() {

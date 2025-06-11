@@ -86,10 +86,6 @@ public class CreateJSON {
             json = recipePath + "\r\n" + json;
         }
 
-        Console.log("Got a VN recipe: " + recipe.getProducts().get(0).getName());
-        Console.log("energy: " + energy);
-        Console.log("filetype: " + jsonVNRecipe.getClass().getName());
-
         // Create the directory and file if they don't exist.
         File file = new File(recipe.getFilename());
         file.getParentFile().mkdirs();

@@ -9,7 +9,7 @@ public class UiValues {
     static int oreLocation = 0;
     static int belts = 0;
     static int electricity = 0;
-    static int waste = 0;
+    static int waste = 3;
     static int stationBias = 0;
     static int liquids = 0;
     static Boolean balanceProg = true;
@@ -36,7 +36,7 @@ public class UiValues {
     static double maxTimeCraft = 1; // Seconds
     static double[] handcraftSpeed = { 0.5, 1.0 };
 
-    static int inputBias = 50; // 0 = min unputs, 100 = max inputs
+    static int inputBias = 90; // 0 = min unputs, 100 = max inputs
     static int maxRecipesUsed = 1; // In how many recipes can a component be used
     static int freeChance = 10; // Frequency wich a free component is given
 
