@@ -32,7 +32,7 @@ public class UiValues {
     static int maxStackEle = 2;
     static int maxItemEle = 2;
 
-    static double maxTimeMile = 1; // Seconds
+    static int maxTimeMile = 1; // Seconds
     static double maxTimeCraft = 1; // Seconds
     static double[] handcraftSpeed = { 0.5, 1.0 };
 
@@ -302,7 +302,7 @@ public class UiValues {
      * 
      * @return 7. Max time per milestone.
      */
-    public static double getMaxTimeMile() {
+    public static int getMaxTimeMile() {
         return UiValues.maxTimeMile;
     }
 

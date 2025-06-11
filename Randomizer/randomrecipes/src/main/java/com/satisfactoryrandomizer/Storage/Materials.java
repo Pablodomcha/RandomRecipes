@@ -296,6 +296,16 @@ public class Materials {
         return result;
     }
 
+    public List<Milestone> getAvailableButUncraftableMilestones() {
+        List<Milestone> result = new ArrayList<>();
+        for (Milestone milestone : this.milestones) {
+            if (milestone.isAvailable() && !milestone.isCraftable()) {
+                result.add(milestone);
+            }
+        }
+        return result;
+    }
+
     public Boolean setComponentAvailable(String name, Boolean available) {
         for (Component component : this.components) {
             if (component.getName().equals(name)) {
@@ -336,6 +346,26 @@ public class Materials {
             }
         }
         Console.log("Could not set Craftable, station not found: " + name);
+    }
+
+    public void setMilestoneAvailable(String name, Boolean available) {
+        for (Milestone milestone : this.milestones) {
+            if (milestone.getName().equals(name)) {
+                milestone.setAvailable(available);
+                return;
+            }
+        }
+        Console.log("Could not set Available, Milestone not found: " + name);
+    }
+
+    public void setMilestoneCraftable(String name, Boolean craftable) {
+        for (Milestone milestone : this.milestones) {
+            if (milestone.getName().equals(name)) {
+                milestone.setCraftable(craftable);
+                return;
+            }
+        }
+        Console.log("Could not set Craftable, Milestone not found: " + name);
     }
 
     /**

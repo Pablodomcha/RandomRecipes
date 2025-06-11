@@ -8,10 +8,12 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.satisfactoryrandomizer.Storage.JSONableRecipe;
-import com.satisfactoryrandomizer.Storage.JSONableRecipeVN;
-import com.satisfactoryrandomizer.Storage.JSONableStructure;
-import com.satisfactoryrandomizer.Storage.Recipe;
+import com.satisfactoryrandomizer.Storage.Data.MilestoneSchematic;
+import com.satisfactoryrandomizer.Storage.Data.Recipe;
+import com.satisfactoryrandomizer.Storage.JSONables.JSONableMilestone;
+import com.satisfactoryrandomizer.Storage.JSONables.JSONableRecipe;
+import com.satisfactoryrandomizer.Storage.JSONables.JSONableRecipeVN;
+import com.satisfactoryrandomizer.Storage.JSONables.JSONableStructure;
 
 public class CreateJSON {
 
@@ -101,7 +103,7 @@ public class CreateJSON {
 
         // Convert the station to list and add manual if it's from constructor or
         // smelter.
-        JSONableStructure jsonRecipe = new JSONableStructure(recipe.getProducts(), recipe.getIngredients());
+        JSONableStructure jsonRecipe = new JSONableStructure(recipe.getIngredients());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonRecipe);
         json = json.replace("\n", "\r\n"); // Make the breaks CRLF
@@ -112,6 +114,28 @@ public class CreateJSON {
         file.getParentFile().mkdirs();
 
         try (FileWriter writer = new FileWriter(recipe.getFilename())) {
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            Console.log("Error writing JSON file: " + e.getMessage());
+        }
+    }
+
+        public static void saveMilestoneAsJson(MilestoneSchematic milestone, String recipePath) {
+
+        // Convert the station to list and add manual if it's from constructor or
+        // smelter.
+        JSONableMilestone jsonRecipe = new JSONableMilestone(milestone.getIngredients(), milestone.getUnlocks(), milestone.getTime());
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(jsonRecipe);
+        json = json.replace("\n", "\r\n"); // Make the breaks CRLF
+        json = recipePath + "\r\n" + json;
+
+        // Create the directory and file if they don't exist.
+        File file = new File(milestone.getFilename());
+        file.getParentFile().mkdirs();
+
+        try (FileWriter writer = new FileWriter(milestone.getFilename())) {
             writer.write(json);
             writer.close();
         } catch (IOException e) {

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.satisfactoryrandomizer.Storage.Mat;
 import com.satisfactoryrandomizer.Storage.Materials;
+import com.satisfactoryrandomizer.Storage.Data.Mat;
+import com.satisfactoryrandomizer.Storage.Data.Recipe;
 import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
-import com.satisfactoryrandomizer.Storage.Recipe;
 
 public class Tests {
     static Materials materials = new Materials();

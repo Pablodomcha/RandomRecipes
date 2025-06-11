@@ -1,4 +1,4 @@
-package com.satisfactoryrandomizer.Storage;
+package com.satisfactoryrandomizer.Storage.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,7 +9,6 @@ public class Recipe {
     private final List<Mat> products;
     private final List<Mat> ingredients;
     private String recipePath;
-    private final String schema;
     private final String filename;
     private final String station;
     private final double time;
@@ -20,7 +19,6 @@ public class Recipe {
             double handSpeed) {
         this.products = products;
         this.ingredients = ingredients;
-        this.schema = "https://raw.githubusercontent.com/budak7273/ContentLib_Documentation/refs/heads/main/JsonSchemas/CL_Recipe.json";
         this.filename = this.path + filename;
         this.station = station;
 
@@ -45,10 +43,6 @@ public class Recipe {
 
     public String getRecipePath() {
         return recipePath;
-    }
-
-    public String getSchema() {
-        return schema;
     }
 
     public String getFilename() {

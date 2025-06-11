@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.satisfactoryrandomizer.Storage.Mat;
+import com.satisfactoryrandomizer.Storage.Data.Mat;
+import com.satisfactoryrandomizer.Storage.Data.MilestoneSchematic;
+import com.satisfactoryrandomizer.Storage.Data.Recipe;
 import com.satisfactoryrandomizer.Storage.Materials;
-import com.satisfactoryrandomizer.Storage.Randomizables.*;
-import com.satisfactoryrandomizer.Storage.Recipe;
+import com.satisfactoryrandomizer.Storage.Randomizables.Component;
+import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
+import com.satisfactoryrandomizer.Storage.Randomizables.Milestone;
+import com.satisfactoryrandomizer.Storage.Randomizables.Randomizable;
 import com.satisfactoryrandomizer.Storage.UiValues;
 
 public class SequenceGenerator {
@@ -46,6 +50,7 @@ public class SequenceGenerator {
         List<Randomizable> randomizables = new ArrayList<>();
         randomizables.addAll(materials.getAvailableButUncraftableComponents());
         randomizables.addAll(materials.getAvailableButUncraftableStations());
+        randomizables.addAll(materials.getAvailableButUncraftableMilestones());
 
         // Temporarily set Constructor craftable to be able to run the main loop
         materials.setStructureCraftable("Desc_ConstructorMk1", true);
@@ -81,6 +86,7 @@ public class SequenceGenerator {
             randomizables.clear();
             randomizables.addAll(materials.getAvailableButUncraftableComponents());
             randomizables.addAll(materials.getAvailableButUncraftableStations());
+            randomizables.addAll(materials.getAvailableButUncraftableMilestones());
         }
 
         Console.log("Randomization done. Remaining loops to cap: " + cap);
@@ -95,43 +101,31 @@ public class SequenceGenerator {
         // Needed variables. Prod will always only have the station, but has to be a
         // string regardless.
         List<Mat> mats = generateIngredients(type);
-        List<Mat> prod = new ArrayList<>();
+        List<String> unlocks = generateUnlocks(milestone.getnRecipes(), milestone.getfixedUnlocks());
 
-        // Only produces one of the structure
-        prod.add(new Mat(milestone.getName(), 1));
-
-        Recipe recipe = new Recipe(
-                prod, // Products
+        MilestoneSchematic recipe = new MilestoneSchematic(
+                unlocks, // Unlocks
                 mats, // Ingredients
-                "Recipe_" + station.getName() + ".json", // Filename
-                "", // Doesn't apply
-                1, // Doesn't apply
-                1.0 // Doesn't apply
+                "Schematic_" + milestone.getName() + ".json", // Filename
+                random.nextInt(UiValues.getMaxTimeMile())// Time
         );
 
         // Create Recipe JSON file
-        CreateJSON.saveStructureAsJson(recipe, station.getRecipePath());
+        CreateJSON.saveMilestoneAsJson(recipe, milestone.getRecipePath());
 
-        Console.cheatsheet(station.getName() + " can be made");
+        Console.cheatsheet(milestone.getName() + " can be made");
 
         // Mark the component as craftable
-        materials.setStructureCraftable(station.getName(), true);
-
-        // Update the last obtained station
-        SequenceGenerator.lastObtainedStation = station.getName();
+        materials.setMilestoneCraftable(milestone.getName(), true);
     }
 
     private static void generateStructure(CraftStation station, String type) {
         // Needed variables. Prod will always only have the station, but has to be a
         // string regardless.
         List<Mat> mats = generateIngredients(type);
-        List<Mat> prod = new ArrayList<>();
-
-        // Only produces one of the structure
-        prod.add(new Mat(station.getName(), 1));
 
         Recipe recipe = new Recipe(
-                prod, // Products
+                mats, // Doesn't apply
                 mats, // Ingredients
                 "Recipe_" + station.getName() + ".json", // Filename
                 "", // Doesn't apply
@@ -272,7 +266,7 @@ public class SequenceGenerator {
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
             // Multiply by 1000 for liquids
-            int amount = getBiasedRandomInt(1, liquidslots + solidslots, UiValues.getInputBias());
+            int amount = random.nextInt(Math.min(50, liquidslots + solidslots));
 
             if (selectedLiquid) {
                 amount = amount * 1000;
@@ -282,7 +276,7 @@ public class SequenceGenerator {
         return ingredients;
     }
 
-        private static List<Mat> generateIngredients(String type) {
+    private static List<Mat> generateIngredients(String type) {
         List<Mat> ingredients = new ArrayList<>();
 
         // If it's free, we don't need no ingredients.
@@ -290,23 +284,23 @@ public class SequenceGenerator {
             return ingredients;
         }
 
-        // Use random resources between 1 and the max possible for the station for
-        // production.
+        // Use random resources between 1 and the max selected value.
         int totalresources;
         if (type.equals("structure")) {
             totalresources = getBiasedRandomInt(1, UiValues.getMaxItemStruct(), UiValues.getInputBias());
+        } else if (type.equals("milestone")) {
+            totalresources = getBiasedRandomInt(1, UiValues.getMaxItemMile(), UiValues.getInputBias());
         } else {
             Console.log("Invalid recipe type: " + type);
             return ingredients;
         }
 
         for (int i = 0; i < totalresources; i++) {
-            Boolean selectedLiquid = false;
 
             // Select a random component from the usable components
-            List<Component> craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
+            List<Component> craftableComponents = materials.getAvailableAndCraftableComponents(false);
 
-            Component comp = ensureUnused(ingredients, craftableComponents, selectedLiquid);
+            Component comp = ensureUnused(ingredients, craftableComponents, false);
 
             if (comp == null) {
                 return ingredients;
@@ -314,21 +308,28 @@ public class SequenceGenerator {
 
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
-            // Multiply by 1000 for liquids
+
             int amount;
             if (type.equals("structure")) {
                 amount = random.nextInt(UiValues.getMaxItemStruct()) + 1;
+            } else if (type.equals("milestone")) {
+                amount = random.nextInt(UiValues.getMaxItemMile()) + 1;
             } else {
                 Console.log("Invalid recipe type: " + type + ". This shouldn't happen.");
                 return ingredients;
             }
 
-            if (selectedLiquid) {
-                amount = amount * 1000;
-            }
             ingredients.add(new Mat(comp.getName(), amount));
         }
         return ingredients;
+    }
+
+    private static List<String> generateUnlocks(int numberOfUnlocks, String extraUnlocks) {
+        List<String> unlocks = new ArrayList<>();
+        for (int i = 0; i < numberOfUnlocks; i++) {
+            unlocks.add("");
+        }
+        return unlocks;
     }
 
     /**

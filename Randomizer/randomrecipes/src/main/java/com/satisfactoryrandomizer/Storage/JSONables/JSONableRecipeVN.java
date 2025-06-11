@@ -1,6 +1,8 @@
-package com.satisfactoryrandomizer.Storage;
+package com.satisfactoryrandomizer.Storage.JSONables;
 
 import java.util.List;
+
+import com.satisfactoryrandomizer.Storage.Data.Mat;
 
 public class JSONableRecipeVN extends JSONableRecipe {
     private int VariablePowerConsumptionConstant = 1;

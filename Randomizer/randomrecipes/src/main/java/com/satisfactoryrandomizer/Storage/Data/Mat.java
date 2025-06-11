@@ -1,4 +1,4 @@
-package com.satisfactoryrandomizer.Storage;
+package com.satisfactoryrandomizer.Storage.Data;
 
 // Material for recipe, only has the material name and amount of it created.
 public class Mat {
