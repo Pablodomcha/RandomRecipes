@@ -58,7 +58,7 @@ public class Materials {
                 1, 1, 0, 0));
         tempStations.add(new CraftStation("Desc_FoundryMk1", false, false, "Recipe_SmelterMk1", "Build_FoundryMk1",
                 2, 1, 0, 0));
-        this.stations = AddPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
+        this.stations = addPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
         tempStations.clear();
 
         // Components
@@ -77,7 +77,7 @@ public class Materials {
         tempComp.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false, false));
         tempComp.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
 
-        this.components.addAll((List<Component>) AddPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
+        this.components.addAll((List<Component>) addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
         tempComp.clear();
 
         // /Recipes/Smelter/
@@ -85,28 +85,35 @@ public class Materials {
                 new Component("Desc_IronIngot", "Recipe_IngotIron", true, false, false));
         tempComp.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", true, false, false));
 
-        this.components.addAll(AddPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
+        this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
         tempComp.clear();
 
         // /Recipes/Assembler/
         tempComp.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
 
-        this.components.addAll(AddPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
+        this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
         tempComp.clear();
 
         // Structures
 
         // Milestones
         // //Game/FactoryGame/Schematics/Tutorial/
-        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null));
-        tempMilestones.add(new Milestone("Tutorial_2", false, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1")));
-        tempMilestones.add(new Milestone("Tutorial_3", false, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2")));
-        tempMilestones.add(new Milestone("Tutorial_4", false, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3")));
-        tempMilestones.add(new Milestone("Tutorial_5", false, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4")));
-        tempMilestones.add(new Milestone("Tutorial_6", false, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5")));
+        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null, 3));
+        tempMilestones.add(
+                new Milestone("Tutorial_2", false, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1"), 6));
+        tempMilestones
+                .add(new Milestone("Tutorial_3", false, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2"), 6));
+        tempMilestones
+                .add(new Milestone("Tutorial_4", false, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3"), 3));
+        tempMilestones
+                .add(new Milestone("Tutorial_5", false, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4"), 3));
+        tempMilestones
+                .add(new Milestone("Tutorial_6", false, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5"), 4));
 
-        this.milestones.addAll(AddPrefixMilestone(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
+        this.milestones.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
         tempMilestones.clear();
+
+        this.milestones = addHubUpgrades(milestones);
 
         // Essential structures are structures too they are just forced to be craftable
         // early.
@@ -119,7 +126,7 @@ public class Materials {
         this.components.add(new Component("Desc_Wood", null, true, false, false));
     }
 
-    private static List<Component> AddPrefixComp(List<Component> list, String prefix) {
+    private static List<Component> addPrefixComp(List<Component> list, String prefix) {
         List<Component> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -132,7 +139,7 @@ public class Materials {
         return prefixedList;
     }
 
-    private static List<Milestone> AddPrefixMile(List<Milestone> list, String prefix) {
+    private static List<Milestone> addPrefixMile(List<Milestone> list, String prefix) {
         List<Milestone> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -145,7 +152,7 @@ public class Materials {
         return prefixedList;
     }
 
-    private static List<CraftStation> AddPrefixStat(List<CraftStation> list, String prefixRecipe) {
+    private static List<CraftStation> addPrefixStat(List<CraftStation> list, String prefixRecipe) {
         List<CraftStation> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -158,7 +165,7 @@ public class Materials {
         return prefixedList;
     }
 
-    private static List<Milestone> AddPrefixMilestone(List<Milestone> list, String prefixRecipe) {
+    private static List<Milestone> addPrefixMilestone(List<Milestone> list, String prefixRecipe) {
         List<Milestone> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -391,6 +398,20 @@ public class Materials {
                 getComponentByName(extra).addCheckAlso(s.getName());
             }
         }
+    }
+
+    public static List<Milestone> addHubUpgrades(List<Milestone> milestones) {
+        List<Milestone> result = new ArrayList<>(milestones);
+        for (Milestone milestone : milestones) {
+
+            if (false) {
+                // Check for Milestones that have one of these and add it
+            } else {
+                result.add(milestone);
+            }
+
+        }
+        return result;
     }
 
     // Only for debugging

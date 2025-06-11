@@ -6,9 +6,7 @@ import java.util.Random;
 
 import com.satisfactoryrandomizer.Storage.Mat;
 import com.satisfactoryrandomizer.Storage.Materials;
-import com.satisfactoryrandomizer.Storage.Randomizables.Component;
-import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
-import com.satisfactoryrandomizer.Storage.Randomizables.Randomizable;
+import com.satisfactoryrandomizer.Storage.Randomizables.*;
 import com.satisfactoryrandomizer.Storage.Recipe;
 import com.satisfactoryrandomizer.Storage.UiValues;
 
@@ -63,13 +61,15 @@ public class SequenceGenerator {
                 if (comp.isLiquid() && !SequenceGenerator.liquidUnlocked) { // If liquids aren't unlocked, skip them
                     continue;
                 } else {
-                    generateMaterial(comp, cap);
+                    generateComp(comp, cap, "component");
                     if (comp.isLiquid()) {
                         SequenceGenerator.liquidUnlocked = true;
                     }
                 }
             } else if (randomizable instanceof CraftStation) {
-                generateStructure((CraftStation) randomizable);
+                generateStructure((CraftStation) randomizable, "structure");
+            } else if (randomizable instanceof Milestone) {
+                generateMilestone((Milestone) randomizable, "milestone");
             } else {
                 Console.log("Unknown item type: " + randomizable);
                 Console.log("Exiting the randomize loop.");
@@ -83,16 +83,48 @@ public class SequenceGenerator {
             randomizables.addAll(materials.getAvailableButUncraftableStations());
         }
 
+        Console.log("Randomization done. Remaining loops to cap: " + cap);
+
         if (cap <= 0) {
-            Console.log("Too many iterations of the main loop, exiting.");
+            Console.log("Randomization failed, loop cap reached.");
         }
-        Console.log("Remaining loops to cap: " + cap);
+
     }
 
-    private static void generateStructure(CraftStation station) {
+    private static void generateMilestone(Milestone milestone, String type) {
         // Needed variables. Prod will always only have the station, but has to be a
         // string regardless.
-        List<Mat> mats = generateIngredients(station, true);
+        List<Mat> mats = generateIngredients(type);
+        List<Mat> prod = new ArrayList<>();
+
+        // Only produces one of the structure
+        prod.add(new Mat(milestone.getName(), 1));
+
+        Recipe recipe = new Recipe(
+                prod, // Products
+                mats, // Ingredients
+                "Recipe_" + station.getName() + ".json", // Filename
+                "", // Doesn't apply
+                1, // Doesn't apply
+                1.0 // Doesn't apply
+        );
+
+        // Create Recipe JSON file
+        CreateJSON.saveStructureAsJson(recipe, station.getRecipePath());
+
+        Console.cheatsheet(station.getName() + " can be made");
+
+        // Mark the component as craftable
+        materials.setStructureCraftable(station.getName(), true);
+
+        // Update the last obtained station
+        SequenceGenerator.lastObtainedStation = station.getName();
+    }
+
+    private static void generateStructure(CraftStation station, String type) {
+        // Needed variables. Prod will always only have the station, but has to be a
+        // string regardless.
+        List<Mat> mats = generateIngredients(type);
         List<Mat> prod = new ArrayList<>();
 
         // Only produces one of the structure
@@ -119,7 +151,7 @@ public class SequenceGenerator {
         SequenceGenerator.lastObtainedStation = station.getName();
     }
 
-    private static void generateMaterial(Component comp, int cap) {
+    private static void generateComp(Component comp, int cap, String type) {
         // Select a random crafting Station
         CraftStation station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
 
@@ -131,7 +163,7 @@ public class SequenceGenerator {
             station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
         }
 
-        List<Mat> mats = generateIngredients(station, false);
+        List<Mat> mats = generateIngredientsComp(station);
         List<Mat> prod = new ArrayList<>();
         Boolean mainliquid;
 
@@ -196,7 +228,7 @@ public class SequenceGenerator {
      * @param isStructure Whether the station is a structure or not
      * @return A list of ingredients with their respective amounts
      */
-    private static List<Mat> generateIngredients(CraftStation station, Boolean isStructure) {
+    private static List<Mat> generateIngredientsComp(CraftStation station) {
         List<Mat> ingredients = new ArrayList<>();
 
         // If it's free, we don't need no ingredients.
@@ -209,20 +241,15 @@ public class SequenceGenerator {
         int solidslots = station.getSolidIn();
 
         // Use random resources between 1 and the max possible for the station for
-        // production
-        int totalresources;
-        if (isStructure) {
-            totalresources = getBiasedRandomInt(1, UiValues.getMaxItemStruct(), UiValues.getInputBias());
-        } else {
-            totalresources = getBiasedRandomInt(1, liquidslots + solidslots, UiValues.getInputBias());
-        }
+        // production.
+        int totalresources = getBiasedRandomInt(1, UiValues.getMaxItemStruct(), UiValues.getInputBias());
 
         for (int i = 0; i < totalresources; i++) {
             Boolean selectedLiquid = false;
 
             // If any liquid has been unlocked we check for them, otherwise, we don't.
             // If it's a structure, we don't use liquids.
-            if (SequenceGenerator.liquidUnlocked && !isStructure) {
+            if (SequenceGenerator.liquidUnlocked) {
                 if (liquidslots > 0 && solidslots > 0) {
                     // Randomly choose between liquid and solid slot
                     selectedLiquid = random.nextBoolean();
@@ -245,9 +272,57 @@ public class SequenceGenerator {
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
             // Multiply by 1000 for liquids
+            int amount = getBiasedRandomInt(1, liquidslots + solidslots, UiValues.getInputBias());
+
+            if (selectedLiquid) {
+                amount = amount * 1000;
+            }
+            ingredients.add(new Mat(comp.getName(), amount));
+        }
+        return ingredients;
+    }
+
+        private static List<Mat> generateIngredients(String type) {
+        List<Mat> ingredients = new ArrayList<>();
+
+        // If it's free, we don't need no ingredients.
+        if (random.nextInt(100) < UiValues.getFreeChance()) {
+            return ingredients;
+        }
+
+        // Use random resources between 1 and the max possible for the station for
+        // production.
+        int totalresources;
+        if (type.equals("structure")) {
+            totalresources = getBiasedRandomInt(1, UiValues.getMaxItemStruct(), UiValues.getInputBias());
+        } else {
+            Console.log("Invalid recipe type: " + type);
+            return ingredients;
+        }
+
+        for (int i = 0; i < totalresources; i++) {
+            Boolean selectedLiquid = false;
+
+            // Select a random component from the usable components
+            List<Component> craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
+
+            Component comp = ensureUnused(ingredients, craftableComponents, selectedLiquid);
+
+            if (comp == null) {
+                return ingredients;
+            }
+
+            // Add the ingredient to the list and generate the amount randomly
+            // Use the UiValues to get the max stack size for the component
+            // Multiply by 1000 for liquids
             int amount;
-            amount = isStructure ? random.nextInt(UiValues.getMaxStackComp()) + 1
-                    : random.nextInt(UiValues.getMaxStackStruct()) + 1;
+            if (type.equals("structure")) {
+                amount = random.nextInt(UiValues.getMaxItemStruct()) + 1;
+            } else {
+                Console.log("Invalid recipe type: " + type + ". This shouldn't happen.");
+                return ingredients;
+            }
+
             if (selectedLiquid) {
                 amount = amount * 1000;
             }

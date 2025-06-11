@@ -1,15 +1,19 @@
 package com.satisfactoryrandomizer.Storage.Randomizables;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Milestone extends Randomizable {
 
-    private List<String[]> rewards;
+    private List<String[]> rewards = new ArrayList<>();
+    private int nRecipes;
+    private String hubUnlocks;
     // Recipepath is a shcematic path, but W/e
 
     // Basic constructor
-    public Milestone(String name, Boolean available, Boolean craftable, String recipepath, List<String> extraCheck) {
+    public Milestone(String name, Boolean available, Boolean craftable, String recipepath, List<String> extraCheck, int nRecipes) {
         super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, extraCheck);
+        this.nRecipes = nRecipes;
     }
 
     /**
@@ -44,5 +48,17 @@ public class Milestone extends Randomizable {
 
     public void addRewards(List<String[]> rewards) {
         this.rewards.addAll(rewards);
+    }
+
+    public int getnRecipes() {
+        return this.nRecipes;
+    }
+
+    public String getHubUnlocks() {
+        return this.hubUnlocks;
+    }
+
+    public void setHubUnlocks(String hubUnlocks) {
+        this.hubUnlocks = hubUnlocks;
     }
 }
