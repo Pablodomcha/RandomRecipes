@@ -74,7 +74,7 @@ Info:
     4. Sequence Generation in products and Structure randomization.
     5. Add packaged liquid materials to Materials initialization. Extra check for Packager and the liquid.
     V6. Sequence Genneration in materials.
-    7. Milestone inicialization, edit the value for inventory slot rewards.
+    7. Milestone generation, edit the value for inventory slot rewards.
     8. Main loop, force certain item after certain amount of loops.
 
 -Options (Insert Value): Don't put the Max Stack or Max items to 0, for free recipes use the specific option.
@@ -90,7 +90,7 @@ Info:
     11. Handcrafting speed min,max: Multiplier for handcrafting speed. Lower is faster (the base game value is usually between 0.5 and 1 depending on recipe).
     12. Input bias: Higher numbers mean that the randomizer will try to use more of the slots available in the production station. 100 means always will use all slots, 0 means all recipes use 1 input/output slot, 50 means there's no bias. If waste is in easy, this only affects input. This also affects the amount of resources used for structures.
     13. Max recipes used: Maximum number of recipes that can use a materials. The randomizer will increase this value if it can't complete a randomization. Lower values ensure component diversity.
-    14. Free Chance: Chance for a material to be free (like Excited Photonic Matter, except that one may no longer be free).
+    14. Free Chance: Chance for a randomizable to be free, like Excited Photonic Matter, except that one may no longer be free. This affects Structures and milestones too.
 
     1. In component sequencer. V
     2. In component sequencer. V
@@ -103,6 +103,7 @@ Info:
     11. In component sequencer. V
     12. In component sequencer. V
     13. In component sequencer. V
+    13. In Material selection. V
 
 TODO:
 

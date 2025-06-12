@@ -49,6 +49,10 @@ public class Randomizable {
         return this.available && extraCheck.isEmpty();
     }
 
+    public Boolean trueAvailable(){
+        return this.available;
+    }
+
     public void setAvailable(Boolean available) {
         this.available = available;
     }

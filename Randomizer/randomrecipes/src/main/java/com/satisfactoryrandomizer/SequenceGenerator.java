@@ -53,10 +53,23 @@ public class SequenceGenerator {
         // Create the starting array of items
         List<Randomizable> randomizables = materials.getAvailableButUncraftableRandomizables();
 
-        // Temporarily set Constructor craftable to be able to run the main loop
+        // Temporarily set a CraftingStation craftable to be able to run the main loop
         Console.test(""); // This code below is for tests
-        materials.setStructureCraftable("Desc_ConstructorMk1", true);
-        SequenceGenerator.firstStation = "Desc_ConstructorMk1";
+        materials.setStructureCraftable("Desc_HadronCollider", true);
+        materials.setStructureAvailable("Desc_HadronCollider", true);
+        SequenceGenerator.firstStation = "Desc_HadronCollider";
+
+        // Spread the Randomizables evenly across the milestones
+        int nDistributableRandomizables = materials.getAllNonMilestonedRandomizables();
+
+        for (Milestone mile : materials.getAllMilestones()) {
+            mile.setnRecipes((nDistributableRandomizables / materials.getAllMilestones().size()));
+        }
+        Console.log("Distributed " + (nDistributableRandomizables)
+                + " randomizables across "
+                + materials.getAllMilestones().size()
+                + " milestones. Total randomizables per milestone: "
+                + materials.getMilestoneByName("Tutorial_1").getnRecipes());
 
         // Main loop, runs until there's nothing left to randomize
         int cap = 10000;
@@ -76,7 +89,7 @@ public class SequenceGenerator {
                 if (comp.isLiquid() && !SequenceGenerator.liquidUnlocked) { // If liquids aren't unlocked, skip them
                     continue;
                 } else {
-                    generateComp(comp, cap, "component");
+                    generateComp(comp, materials.getCraftableRandomizables().size(), "component");
                     if (comp.isLiquid()) {
                         SequenceGenerator.liquidUnlocked = true;
                     }
@@ -101,7 +114,10 @@ public class SequenceGenerator {
             randomizables = materials.getAvailableButUncraftableRandomizables();
         }
 
-        Console.log("Randomization done. Remaining loops to cap: " + (cap - iteration));
+        Console.log("Remaining " + randomizables.size() + " items. Done "
+                + materials.getCraftableRandomizables().size() + "/" + SequenceGenerator.nItems + " items.");
+
+        Console.log("Randomization completed. Remaining loops to cap: " + (cap - iteration));
 
         if (iteration >= cap) {
             Console.log("Randomization failed, loop cap reached.");
@@ -173,7 +189,7 @@ public class SequenceGenerator {
         SequenceGenerator.lastObtainedStation = station.getName();
     }
 
-    private static void generateComp(Component comp, int iteration, String type) {
+    private static void generateComp(Component comp, int addedItems, String type) {
         // Select a random crafting Station
         CraftStation station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
 
@@ -206,25 +222,30 @@ public class SequenceGenerator {
 
         double handSpeed = random.nextDouble() * (UiValues.getHandcraftSpeed()[1] - UiValues.getHandcraftSpeed()[0])
                 + UiValues.getHandcraftSpeed()[0];
+        double time = random.nextDouble() * (UiValues.getMaxTimeCraft());
 
         Recipe recipe = new Recipe(
                 prod, // Products
                 mats, // Ingredients
                 "Recipe_" + comp.getName() + ".json", // Filename
                 station.getBuilderPath(), // Station
-                random.nextDouble() * (UiValues.getMaxTimeCraft()), // Time
+                time, // Time
                 handSpeed // Handcraft speed
         );
+        Console.test("Time to craft: " + recipe.getTime());
+        Console.test("Handcraft speed: " + recipe.getHandcraftSpeed());
 
         // Create Recipe JSON file (RecipeVN if it goes into a machine with variable
         // consumption)
         if (station.getBuilderPath().equals("Build_HadronCollider")
-                || station.getBuilderPath().equals("Build_HadronCollider")) {
+                || station.getBuilderPath().equals("Build_Converter")) {
 
             // Amount of energy used by the recipe, the value is randomized with min and max
             // from 10 to 750 based on the percentage of recipes unlocked
             // the rounding to int has losses, but we don't need such precise values.
-            int energy = (int) (random.nextDouble() * iteration / SequenceGenerator.nItems);
+
+            double max = (double) addedItems * 740 / SequenceGenerator.nItems;
+            int energy = (int) (random.nextDouble() * max + 10);
 
             CreateJSON.saveRecipeVNAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation,
                     energy);
@@ -378,7 +399,7 @@ public class SequenceGenerator {
         for (int i = 0; i < numberOfUnlocks; i++) {
             if (itemList.isEmpty()) {
                 Console.log(
-                        "No more unlocks available. This may happen in the last milestone, but if it happens anywhere else, it is a bug.");
+                        "No more unlocks available. This may happen once (in the last milestone), but if it happens more, it is a bug.");
                 return unlocks;
             }
             Randomizable r = itemList.get(random.nextInt(itemList.size()));

@@ -28,6 +28,8 @@ public class Materials {
         List<Component> tempComp = new ArrayList<>();
         List<CraftStation> tempStations = new ArrayList<>();
         List<Milestone> tempMilestones = new ArrayList<>();
+        List<Structure> tempStructures = new ArrayList<>();
+        List<EssentialStructure> tempEssentialStructures = new ArrayList<>();
 
         // Crafting Stations
         tempStations
@@ -36,7 +38,7 @@ public class Materials {
         tempStations.add(new CraftStation("Desc_Blender", false, false, "Recipe_Blender", "Build_Blender",
                 2, 1, 2, 1));
         tempStations.add(
-                new CraftStation("Desc_ConstructorMk1", true, false, "Recipe_ConstructorMk1", "Build_ConstructorMk1",
+                new CraftStation("Desc_ConstructorMk1", false, false, "Recipe_ConstructorMk1", "Build_ConstructorMk1",
                         1, 1, 0, 0));
         tempStations
                 .add(new CraftStation("Desc_ManufacturerMk1", false, false, "Recipe_ManufacturerMk1",
@@ -100,26 +102,35 @@ public class Materials {
         // Tutorial are marked as available so that they unlock when their extraChecks
         // are met (the previous tutorial)
         // //Game/FactoryGame/Schematics/Tutorial/
-        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null, 3));
+        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null));
         tempMilestones.add(
-                new Milestone("Tutorial_2", true, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1"), 6));
+                new Milestone("Tutorial_2", true, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1")));
         tempMilestones
-                .add(new Milestone("Tutorial_3", true, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2"), 6));
+                .add(new Milestone("Tutorial_3", true, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2")));
         tempMilestones
-                .add(new Milestone("Tutorial_4", true, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3"), 3));
+                .add(new Milestone("Tutorial_4", true, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3")));
         tempMilestones
-                .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4"), 3));
+                .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4")));
         tempMilestones
-                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5"), 4));
+                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5")));
 
         this.milestones.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
         tempMilestones.clear();
 
         // this.milestones = addHubUpgrades(milestones);
 
-        // Essential structures are structures too they are just forced to be craftable
-        // early.
-        this.structures.addAll(this.essentialStructures);
+        // EssentialStructures
+        
+        // Structures
+        for(EssentialStructure structure : this.essentialStructures) {
+            if(structure.addWhen() == 9){ // Can be added whenever, so it's actually not essential
+                structures.add(structure);
+                essentialStructures.remove(structure);
+
+                Console.log(structure.getName() + " moved to non-essential structures.");
+            }
+        }
+
     }
 
     public void generateLimitedMats() {
@@ -460,6 +471,16 @@ public class Materials {
             component.refill();
         }
     }
+
+public int getAllNonMilestonedRandomizables(){
+    int result = 0;
+    for (Randomizable r : this.getAllRandomizables()){
+        if (!(r instanceof Milestone) && !r.trueAvailable()){
+            result++;
+        }
+    }
+    return result;
+}
 
     public void fillExtraChecks() throws Exception {
 

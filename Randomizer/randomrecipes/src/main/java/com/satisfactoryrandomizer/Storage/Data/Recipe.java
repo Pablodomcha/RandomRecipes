@@ -27,7 +27,7 @@ public class Recipe {
         double roundedTime = bigTime.doubleValue();
         this.time = roundedTime;
 
-        BigDecimal ManTime = new BigDecimal(time);
+        BigDecimal ManTime = new BigDecimal(handSpeed);
         ManTime = ManTime.setScale(2, BigDecimal.ROUND_UP);
         double roundedMan = ManTime.doubleValue();
         this.handcraftingSpeed = roundedMan;
