@@ -32,11 +32,11 @@ public class UiValues {
     static int maxStackEle = 2;
     static int maxItemEle = 2;
 
-    static int maxTimeMile = 1; // Seconds
+    static int maxTimeMile = 5; // Seconds
     static double maxTimeCraft = 1; // Seconds
     static double[] handcraftSpeed = { 0.5, 1.0 };
 
-    static int inputBias = 90; // 0 = min unputs, 100 = max inputs
+    static int inputBias = 50; // 0 = min unputs, 100 = max inputs
     static int maxRecipesUsed = 1; // In how many recipes can a component be used
     static int freeChance = 10; // Frequency wich a free component is given
 

@@ -29,11 +29,12 @@ Info:
     15. Negative values for porbabilities will be either treated as 0, produce unexpected results or crash the randomizer. Don't put any preferably.
     16. Space elevator stages untouched (Changing them would be a pain and the path to get to it is already random anyway).
     17. Milestones are not necessarily linear, tier 1 milestones could need tier 9 materials to unlock. In this case, anything unlocked by that tier 1 milestone won't be needed until it's unlockable.
+    18. Yes, map unlock is randomized. No, it's not essential, and therefore can be anywhere.
 
 -Options (Toggle):
     1. Ore location:
-        Easy: You don't need ores you can't scan to unlock the ability to scan them. Uranium will only be needed if you can have radiation protection.
-        Medium: Any ore can be part of any recipe. Uranium will only be needed if you can have radiation protection.
+        Located: You don't need ores you can't scan to unlock the ability to scan them. Uranium will only be needed if you can have radiation protection. A lot of things will come from iron (for better or worse).
+        Unlocated: Any ore can be part of any recipe. Uranium will only be needed if you can have radiation protection.
         Radiation Party: Uranium could be needed for recipes unlocked before you can have radiation protection.
     2. Belts:
         Easy: Use small amounts of early materials for all belts making it more likely that large amounts of them can be crafted. Tier 1 belts are unlocked in the tutorial.
@@ -106,8 +107,6 @@ Info:
 TODO:
 
 Add milestones, structures and essential structures to be able to create the logic.
-
-Make the Tutorial Phase.
 
 Make the game select the first Crafting station. Make sure it's enabled by the end of the tutorial.
 

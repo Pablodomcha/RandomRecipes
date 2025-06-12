@@ -22,7 +22,7 @@ public class Milestone extends Randomizable {
         return this.fixedUnlocks;
     }
 
-    public void setfixedUnlocks(String hubUnlocks) {
-        this.fixedUnlocks = hubUnlocks;
+    public void setfixedUnlocks(String fixedUnlocks) {
+        this.fixedUnlocks = fixedUnlocks;
     }
 }

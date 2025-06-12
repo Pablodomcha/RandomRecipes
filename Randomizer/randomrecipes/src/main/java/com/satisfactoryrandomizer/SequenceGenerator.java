@@ -21,11 +21,15 @@ public class SequenceGenerator {
     private static Boolean liquidUnlocked = false;
     private static String lastObtainedStation = null;
     private static String firstStation = null;
+    private static int nItems = 0;
 
     public static void generateSequence() {
 
         // Create the materials variable to store all materials / structures
         SequenceGenerator.materials = new Materials();
+
+        // Set the number of items for percentage related things
+        SequenceGenerator.nItems = materials.getAllRandomizables().size(); // Removing iron since it starts unlocked.
 
         materials.testSetup();
 
@@ -47,20 +51,26 @@ public class SequenceGenerator {
                 + "\nItems in order of generation (only ensured way to reach a material is to have all the previous):");
 
         // Create the starting array of items
-        List<Randomizable> randomizables = new ArrayList<>();
-        randomizables.addAll(materials.getAvailableButUncraftableComponents());
-        randomizables.addAll(materials.getAvailableButUncraftableStations());
-        randomizables.addAll(materials.getAvailableButUncraftableMilestones());
+        List<Randomizable> randomizables = materials.getAvailableButUncraftableRandomizables();
 
         // Temporarily set Constructor craftable to be able to run the main loop
+        Console.test(""); // This code below is for tests
         materials.setStructureCraftable("Desc_ConstructorMk1", true);
-        firstStation = "Desc_ConstructorMk1";
+        SequenceGenerator.firstStation = "Desc_ConstructorMk1";
 
         // Main loop, runs until there's nothing left to randomize
         int cap = 10000;
-        while (!randomizables.isEmpty() && cap-- > 0) {
+        int iteration = 0;
+        while (!randomizables.isEmpty() && iteration++ < cap) {
+
             // Pick a random item to randomize
-            Randomizable randomizable = randomizables.get(random.nextInt(randomizables.size()));
+            int size = randomizables.size();
+            Randomizable randomizable = randomizables.get(random.nextInt(size));
+
+            // Starting value will include all ores.
+            Console.log("Creating one of the remaining " + size + " available items. Done "
+                    + materials.getCraftableRandomizables().size() + "/" + SequenceGenerator.nItems + " items.");
+
             if (randomizable instanceof Component) {
                 Component comp = (Component) randomizable;
                 if (comp.isLiquid() && !SequenceGenerator.liquidUnlocked) { // If liquids aren't unlocked, skip them
@@ -81,27 +91,45 @@ public class SequenceGenerator {
                 break;
             }
 
-            Console.log("Randomizable array size: " + randomizables.size());
+            // Remove the name of the created randomizable from any randomizables for which
+            // it is an estraCheck
+            if (!randomizable.getCheckAlso().isEmpty())
+                materials.doExtraChecks(randomizable.getName(), randomizable.getCheckAlso());
+
             // Update the list (the item is set craftable by the methods above)
             randomizables.clear();
-            randomizables.addAll(materials.getAvailableButUncraftableComponents());
-            randomizables.addAll(materials.getAvailableButUncraftableStations());
-            randomizables.addAll(materials.getAvailableButUncraftableMilestones());
+            randomizables = materials.getAvailableButUncraftableRandomizables();
         }
 
-        Console.log("Randomization done. Remaining loops to cap: " + cap);
+        Console.log("Randomization done. Remaining loops to cap: " + (cap - iteration));
 
-        if (cap <= 0) {
+        if (iteration >= cap) {
             Console.log("Randomization failed, loop cap reached.");
         }
 
+        if (!materials.getUncraftableRandomizables().isEmpty()) {
+            Console.log("\nMissing Unlocks: ");
+            for (Randomizable elem : materials.getUncraftableRandomizables()) {
+                Console.log(elem.getName());
+            }
+            Console.log(
+                    "These items didn't get randomized properly, they may be missing from the game or have their default recipe."
+                            + "\nEither way, as long as none of these are Space Elevator parts, the game is completable without them.");
+        }
     }
 
     private static void generateMilestone(Milestone milestone, String type) {
         // Needed variables. Prod will always only have the station, but has to be a
         // string regardless.
+
         List<Mat> mats = generateIngredients(type);
-        List<String> unlocks = generateUnlocks(milestone.getnRecipes(), milestone.getfixedUnlocks());
+        List<String> checkAlso = new ArrayList<>();
+
+        for (Object mile : milestone.getCheckAlso()) {
+            checkAlso.add((String) mile);
+        }
+
+        List<String> unlocks = generateUnlocks(milestone.getnRecipes(), milestone.getfixedUnlocks(), checkAlso);
 
         MilestoneSchematic recipe = new MilestoneSchematic(
                 unlocks, // Unlocks
@@ -145,7 +173,7 @@ public class SequenceGenerator {
         SequenceGenerator.lastObtainedStation = station.getName();
     }
 
-    private static void generateComp(Component comp, int cap, String type) {
+    private static void generateComp(Component comp, int iteration, String type) {
         // Select a random crafting Station
         CraftStation station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
 
@@ -192,8 +220,14 @@ public class SequenceGenerator {
         // consumption)
         if (station.getBuilderPath().equals("Build_HadronCollider")
                 || station.getBuilderPath().equals("Build_HadronCollider")) {
+
+            // Amount of energy used by the recipe, the value is randomized with min and max
+            // from 10 to 750 based on the percentage of recipes unlocked
+            // the rounding to int has losses, but we don't need such precise values.
+            int energy = (int) (random.nextDouble() * iteration / SequenceGenerator.nItems);
+
             CreateJSON.saveRecipeVNAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation,
-                    random.nextInt(10000 - cap) + 10);
+                    energy);
 
         } else {
             CreateJSON.saveRecipeAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation);
@@ -324,11 +358,35 @@ public class SequenceGenerator {
         return ingredients;
     }
 
-    private static List<String> generateUnlocks(int numberOfUnlocks, String extraUnlocks) {
+    private static List<String> generateUnlocks(int numberOfUnlocks, String extraUnlocks, List<String> checkAlso) {
         List<String> unlocks = new ArrayList<>();
-        for (int i = 0; i < numberOfUnlocks; i++) {
-            unlocks.add("");
+
+        // Add extra unlocks if it's not null
+        if (extraUnlocks != null) {
+            unlocks.add(extraUnlocks);
         }
+
+        // Make a list with all possible randomizables
+        List<Randomizable> itemList = materials.getUnavailableAndUncraftableRandomizables();
+        itemList.removeAll(materials.getAllMilestones());
+
+        for (String s : checkAlso) {
+            itemList.remove(materials.getRandomizableByName(s));
+        }
+
+        // Add extra unlocks
+        for (int i = 0; i < numberOfUnlocks; i++) {
+            if (itemList.isEmpty()) {
+                Console.log(
+                        "No more unlocks available. This may happen in the last milestone, but if it happens anywhere else, it is a bug.");
+                return unlocks;
+            }
+            Randomizable r = itemList.get(random.nextInt(itemList.size()));
+            itemList.remove(r);
+            unlocks.add(r.getName());
+            materials.setRandomizableAvailable(r.getName(), true);
+        }
+
         return unlocks;
     }
 

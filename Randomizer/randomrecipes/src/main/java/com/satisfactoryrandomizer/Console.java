@@ -7,6 +7,7 @@ public class Console {
 
     static String log = "";
     static String cheatsheet = "";
+    static Boolean testPrinted = false;
 
     public static void log(String message) {
         String temp = message;
@@ -19,10 +20,20 @@ public class Console {
         Console.log += message + "\n";
     }
 
-    public static void test() {
-        String testMessage = "You are running test code. If this message is on release, some test code was left in.";
-        System.out.println(testMessage);
-        Console.log += testMessage + "\n";
+    public static void test(String message) {
+
+        String temp = message;
+        System.out.println(temp);
+        Console.log += temp + "\n";
+
+        if (!Console.testPrinted) {
+            String testMessage = "----------------------------------------------------------------------------------------------------\n"
+                    + "You are running test code. If this message is on release, some test code was left in."
+                    + "\n----------------------------------------------------------------------------------------------------";
+            System.out.println(testMessage);
+            Console.log += testMessage + "\n";
+            Console.testPrinted = true;
+        }
     }
 
     public static void saveLogs() {

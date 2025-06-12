@@ -10,7 +10,8 @@ public class Randomizable {
     private String recipepath;
     private Boolean available;
     private Boolean craftable;
-    private final List<String> extraCheck; // Items that need to be craftable before this component can be crafted
+    private final List<String> extraCheck = new ArrayList<>(); // Items that need to be craftable before this component can be
+                                                         // crafted
     private final List<String> checkAlso = new ArrayList<>(); // Items that this component is an extraCheck for
 
     // Extra checks can be in form of generic "station with liquid output" form or
@@ -24,10 +25,8 @@ public class Randomizable {
         this.available = available;
         this.craftable = craftable;
 
-        if (extraCheck == null)
-            this.extraCheck = new ArrayList<>();
-        else
-            this.extraCheck = extraCheck;
+        if (extraCheck != null)
+            this.extraCheck.addAll(extraCheck);
     }
 
     public String getName() {
@@ -67,7 +66,11 @@ public class Randomizable {
     }
 
     public void removeExtraCheck(String extraCheck) {
-        this.extraCheck.remove(extraCheck);
+        for (int i = 0; i < this.extraCheck.size(); i++) {
+            if (this.extraCheck.get(i).equals(extraCheck)) {
+                this.extraCheck.remove(i);
+            }
+        }
     }
 
     public List<String> getCheckAlso() {

@@ -54,7 +54,7 @@ public class Materials {
         tempStations
                 .add(new CraftStation("Desc_QuantumEncoder", false, false, "Recipe_QuantumEncoder",
                         "Build_QuantumEncoder", 3, 1, 1, 1));
-        tempStations.add(new CraftStation("Desc_SmelterMk1", true, false, "Recipe_SmelterBasicMk1", "Build_SmelterMk1",
+        tempStations.add(new CraftStation("Desc_SmelterMk1", false, false, "Recipe_SmelterBasicMk1", "Build_SmelterMk1",
                 1, 1, 0, 0));
         tempStations.add(new CraftStation("Desc_FoundryMk1", false, false, "Recipe_SmelterMk1", "Build_FoundryMk1",
                 2, 1, 0, 0));
@@ -65,17 +65,17 @@ public class Materials {
 
         // Raw materials
         this.components.add(new Component("Desc_OreIron", true, false, null));
-        this.components.add(new Component("Desc_OreCopper", true, false, null));
-        this.components.add(new Component("Desc_Stone", true, false, null));
+        this.components.add(new Component("Desc_OreCopper", false, false, null));
+        this.components.add(new Component("Desc_Stone", false, false, null));
 
         // /Recipes/Constructor/
         tempComp.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
         tempComp.add(new Component("Desc_IronRod", "Recipe_IronRod", true, false, false));
-        tempComp.add(new Component("Desc_Wire", "Recipe_Wire", true, false, false));
-        tempComp.add(new Component("Desc_Cable", "Recipe_Cable", true, false, false));
-        tempComp.add(new Component("Desc_Cement", "Recipe_Concrete", true, false, false));
-        tempComp.add(new Component("Desc_IronScrew", "Recipe_Screw", true, false, false));
-        tempComp.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", true, false, false));
+        tempComp.add(new Component("Desc_Wire", "Recipe_Wire", false, false, false));
+        tempComp.add(new Component("Desc_Cable", "Recipe_Cable", false, false, false));
+        tempComp.add(new Component("Desc_Cement", "Recipe_Concrete", false, false, false));
+        tempComp.add(new Component("Desc_IronScrew", "Recipe_Screw", false, false, false));
+        tempComp.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", false, false, false));
 
         this.components.addAll((List<Component>) addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
         tempComp.clear();
@@ -83,13 +83,13 @@ public class Materials {
         // /Recipes/Smelter/
         tempComp.add(
                 new Component("Desc_IronIngot", "Recipe_IngotIron", true, false, false));
-        tempComp.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", true, false, false));
+        tempComp.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", false, false, false));
 
         this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
         tempComp.clear();
 
         // /Recipes/Assembler/
-        tempComp.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", true, false, false));
+        tempComp.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", false, false, false));
 
         this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
         tempComp.clear();
@@ -97,23 +97,25 @@ public class Materials {
         // Structures
 
         // Milestones
+        // Tutorial are marked as available so that they unlock when their extraChecks
+        // are met (the previous tutorial)
         // //Game/FactoryGame/Schematics/Tutorial/
         tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null, 3));
         tempMilestones.add(
-                new Milestone("Tutorial_2", false, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1"), 6));
+                new Milestone("Tutorial_2", true, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1"), 6));
         tempMilestones
-                .add(new Milestone("Tutorial_3", false, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2"), 6));
+                .add(new Milestone("Tutorial_3", true, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2"), 6));
         tempMilestones
-                .add(new Milestone("Tutorial_4", false, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3"), 3));
+                .add(new Milestone("Tutorial_4", true, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3"), 3));
         tempMilestones
-                .add(new Milestone("Tutorial_5", false, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4"), 3));
+                .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4"), 3));
         tempMilestones
-                .add(new Milestone("Tutorial_6", false, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5"), 4));
+                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5"), 4));
 
         this.milestones.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
         tempMilestones.clear();
 
-        this.milestones = addHubUpgrades(milestones);
+        // this.milestones = addHubUpgrades(milestones);
 
         // Essential structures are structures too they are just forced to be craftable
         // early.
@@ -165,19 +167,6 @@ public class Materials {
         return prefixedList;
     }
 
-    private static List<Milestone> addPrefixMilestone(List<Milestone> list, String prefixRecipe) {
-        List<Milestone> prefixedList = new ArrayList<>(list);
-
-        for (int i = 0; i < prefixedList.size(); i++) {
-            Milestone c = prefixedList.get(i);
-            if (c.getRecipePath() != null && !c.getRecipePath().startsWith(prefixRecipe)) {
-                prefixedList.get(i).setRecipePath(prefixRecipe + c.getRecipePath());
-            }
-        }
-        Console.log("Prefixed CraftStation List with " + prefixRecipe);
-        return prefixedList;
-    }
-
     // Getters and Setters
 
     public Component getComponentByName(String name) {
@@ -197,6 +186,47 @@ public class Materials {
             }
         }
         Console.log("Station not found: " + name);
+        return null;
+    }
+
+    public Milestone getMilestoneByName(String name) {
+        for (Milestone milestone : this.milestones) {
+            if (milestone.getName().equals(name)) {
+                return milestone;
+            }
+        }
+        Console.log("Milestone not found: " + name);
+        return null;
+    }
+
+    public Randomizable getRandomizableByName(String name) {
+        List<Randomizable> randomizables = this.getAllRandomizables();
+        for (Randomizable randomizable : randomizables) {
+            if (randomizable.getName().equals(name)) {
+                return randomizable;
+            }
+        }
+        Console.log("Randomizable not found: " + name);
+        return null;
+    }
+
+    public EssentialStructure getEssentialStructureByName(String name) {
+        for (EssentialStructure structure : this.essentialStructures) {
+            if (structure.getName().equals(name)) {
+                return structure;
+            }
+        }
+        Console.log("Structure not found: " + name);
+        return null;
+    }
+
+    public Structure getStructureByName(String name) {
+        for (Structure structure : this.structures) {
+            if (structure.getName().equals(name)) {
+                return structure;
+            }
+        }
+        Console.log("Structure not found: " + name);
         return null;
     }
 
@@ -221,11 +251,21 @@ public class Materials {
         return result;
     }
 
-    public List<Component> getAvailableButUncraftableComponents() {
-        List<Component> result = new ArrayList<>();
-        for (Component component : this.components) {
-            if (component.isAvailable() && !component.isCraftable()) {
-                result.add(component);
+    public List<Randomizable> getAvailableAndCraftableRandomizables() {
+        List<Randomizable> result = new ArrayList<>();
+        for (Randomizable randomizable : this.getAllRandomizables()) {
+            if (randomizable.isAvailable() && randomizable.isCraftable()) {
+                result.add(randomizable);
+            }
+        }
+        return result;
+    }
+
+    public List<Randomizable> getCraftableRandomizables() {
+        List<Randomizable> result = new ArrayList<>();
+        for (Randomizable randomizable : this.getAllRandomizables()) {
+            if (randomizable.isCraftable()) {
+                result.add(randomizable);
             }
         }
         return result;
@@ -266,11 +306,37 @@ public class Materials {
         return availableStations.get(index);
     }
 
-    public List<CraftStation> getAvailableButUncraftableStations() {
-        List<CraftStation> result = new ArrayList<>();
-        for (CraftStation station : this.stations) {
-            if (station.isAvailable() && !station.isCraftable()) {
-                result.add(station);
+    public List<Randomizable> getAllRandomizables() {
+        List<Randomizable> result = new ArrayList<>();
+        result.addAll(this.stations);
+        result.addAll(this.components);
+        result.addAll(this.essentialStructures);
+        result.addAll(this.milestones);
+        result.addAll(this.structures);
+        return result;
+    }
+
+    public List<Milestone> getAllMilestones() {
+        return this.milestones;
+    }
+
+    public List<Randomizable> getUnavailableRandomizables() {
+        List<Randomizable> result = new ArrayList<>();
+
+        for (Randomizable randomizable : this.getAllRandomizables()) {
+            if (!randomizable.isAvailable()) {
+                result.add(randomizable);
+            }
+        }
+
+        return result;
+    }
+
+    public List<Randomizable> getUncraftableRandomizables() {
+        List<Randomizable> result = new ArrayList<>();
+        for (Randomizable randomizable : this.getAllRandomizables()) {
+            if (!randomizable.isCraftable()) {
+                result.add(randomizable);
             }
         }
         return result;
@@ -278,29 +344,30 @@ public class Materials {
 
     public List<Randomizable> getUnavailableAndUncraftableRandomizables() {
         List<Randomizable> result = new ArrayList<>();
-        for (CraftStation station : this.stations) {
-            if (!station.isAvailable() && !station.isCraftable()) {
-                result.add(station);
-            }
-        }
-        for (Component component : this.components) {
-            if (!component.isAvailable() && !component.isCraftable()) {
-                result.add(component);
-            }
-        }
-        for (Structure structure : this.structures) {
-            if (!structure.isAvailable() && !structure.isCraftable()) {
-                result.add(structure);
+        for (Randomizable randomizable : this.getAllRandomizables()) {
+            if (!randomizable.isAvailable() && !randomizable.isCraftable()) {
+                result.add(randomizable);
             }
         }
         return result;
     }
 
-    public List<Milestone> getAvailableButUncraftableMilestones() {
-        List<Milestone> result = new ArrayList<>();
-        for (Milestone milestone : this.milestones) {
-            if (milestone.isAvailable() && !milestone.isCraftable()) {
-                result.add(milestone);
+    public void setRandomizableAvailable(String name, Boolean available) {
+
+        for (Randomizable r : this.getAllRandomizables()) {
+            if (r.getName().equals(name)) {
+                r.setAvailable(available);
+                return;
+            }
+        }
+
+    }
+
+    public List<Randomizable> getAvailableButUncraftableRandomizables() {
+        List<Randomizable> result = new ArrayList<>();
+        for (Randomizable randomizable : this.getAllRandomizables()) {
+            if (randomizable.isAvailable() && !randomizable.isCraftable()) {
+                result.add(randomizable);
             }
         }
         return result;
@@ -395,38 +462,83 @@ public class Materials {
     }
 
     public void fillExtraChecks() throws Exception {
-        // Get the Randomizables enabled by this component
-        for (Component c : this.components) {
-            for (String extra : c.getExtraCheck()) {
-                // If the Randomizable is not of a certain type, check the next one, search it
-                // as a Station
-                if (getComponentByName(extra) == null) {
-                    if (getStationByName(extra) == null) {
-                        // Add here any other type of Randomizable created that influences this part of
-                        // the logic
-                        throw new Exception("Randomizable not found: " + extra);
+
+        // Get the randomizables enabled by this randomizable
+
+        List<Randomizable> randomizables = this.getAllRandomizables();
+
+        for (Randomizable r : randomizables) {
+            for (String extra : r.getExtraCheck()) {
+                if (extra != null) {
+                    Randomizable item = this.getRandomizableByName(extra);
+                    if (item instanceof Component) {
+                        getComponentByName(extra).addCheckAlso(r.getName());
+                    } else if (item instanceof CraftStation) {
+                        getStructureByName(extra).addCheckAlso(r.getName());
+                    } else if (item instanceof EssentialStructure) {
+                        getStructureByName(extra).addCheckAlso(r.getName());
+                    } else if (item instanceof Milestone) {
+                        getMilestoneByName(extra).addCheckAlso(r.getName());
+                    } else if (item instanceof Structure) {
+                        getStructureByName(extra).addCheckAlso(r.getName());
+                    } else {
+                        Console.log("Unknown extra check: " + extra);
                     }
-                    getStationByName(extra).addCheckAlso(c.getName());
                 }
-                getComponentByName(extra).addCheckAlso(c.getName());
             }
         }
+    }
 
-        // Get the Randomizables enabled by this station
-        for (CraftStation s : this.stations) {
-            for (String extra : s.getExtraCheck()) {
-                // If the Randomizable is not of a certain type, check the next one, search it
-                // as a Station
-                if (getComponentByName(extra) == null) {
-                    if (getStationByName(extra) == null) {
-                        // Add here any other type of Randomizable created that influences this part of
-                        // the logic
-                        throw new Exception("Randomizable not found: " + extra);
-                    }
-                    getStationByName(extra).addCheckAlso(s.getName());
+    public void doExtraChecks(String nameToRemove, List<String> whereToRemove) {
+
+        for (String where : whereToRemove) {
+            Boolean done = false;
+            for (Component c : this.components) {
+                if (c.getName().equals(where)) {
+                    c.removeExtraCheck(nameToRemove);
+                    done = true;
                 }
-                getComponentByName(extra).addCheckAlso(s.getName());
             }
+            if (done)
+                continue;
+
+            for (CraftStation s : this.stations) {
+                if (s.getName().equals(where)) {
+                    s.removeExtraCheck(nameToRemove);
+                    done = true;
+                }
+            }
+            if (done)
+                continue;
+
+            for (EssentialStructure s : this.essentialStructures) {
+                if (s.getName().equals(where)) {
+                    s.removeExtraCheck(nameToRemove);
+                    done = true;
+                }
+            }
+            if (done)
+                continue;
+
+            for (Milestone m : this.milestones) {
+                if (m.getName().equals(where)) {
+                    m.removeExtraCheck(nameToRemove);
+                    done = true;
+                }
+            }
+            if (done)
+                continue;
+
+            for (Structure s : this.structures) {
+                if (s.getName().equals(where)) {
+                    s.removeExtraCheck(nameToRemove);
+                    done = true;
+                }
+            }
+            if (done)
+                continue;
+
+            Console.log("Could not remove extra check, Randomizable not found: " + whereToRemove);
         }
     }
 
@@ -446,10 +558,8 @@ public class Materials {
 
     // Only for debugging
     public void testSetup() {
-        Console.test();
-        for (CraftStation stat : this.stations) {
-            getStationByName(stat.getName()).setAvailable(true);
-        }
+        Console.test("Generating data for testing...");
+        // Does nothing RN
     }
 
 }
