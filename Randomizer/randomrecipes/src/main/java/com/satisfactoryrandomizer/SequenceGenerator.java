@@ -375,11 +375,18 @@ public class SequenceGenerator {
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
 
+            int liquid;
+            if (comp.isLiquid()) {
+                liquid = 1000;
+            } else {
+                liquid = 1;
+            }
+
             int amount;
             if (type.equals("structure")) {
-                amount = random.nextInt(UiValues.getMaxItemStruct()) + 1;
+                amount = random.nextInt(liquid * UiValues.getMaxStackStruct()) + 1;
             } else if (type.equals("milestone")) {
-                amount = random.nextInt(UiValues.getMaxItemMile()) + 1;
+                amount = random.nextInt(liquid * UiValues.getMaxStackMile()) + 1;
             } else {
                 Console.log("Invalid recipe type: " + type + ". This shouldn't happen.");
                 return ingredients;

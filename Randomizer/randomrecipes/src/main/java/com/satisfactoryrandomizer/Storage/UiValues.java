@@ -24,8 +24,8 @@ public class UiValues {
     static int maxCompCraft = 2;
     static int maxStackStruct = 2;
     static int maxItemStruct = 2;
-    static int maxStackMile = 2;
-    static int maxItemMile = 2;
+    static int maxStackMile = 20;
+    static int maxItemMile = 20;
 
     // The elevator isn't randomized, but no harm in keeping this in case it is in
     // the future.
@@ -37,8 +37,8 @@ public class UiValues {
     static double[] handcraftSpeed = { 0.5, 1.0 };
 
     static int inputBias = 50; // 0 = min unputs, 100 = max inputs
-    static int maxRecipesUsed = 1; // In how many recipes can a component be used
-    static int freeChance = 10; // Frequency wich a free component is given
+    static int maxRecipesUsed = 100; // In how many recipes can a component be used
+    static int freeChance = 0; // Frequency wich a free component is given
 
     // Could just make them public, but nope.
 

@@ -6,12 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.satisfactoryrandomizer.Console;
-import com.satisfactoryrandomizer.Storage.Randomizables.Component;
-import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
-import com.satisfactoryrandomizer.Storage.Randomizables.EssentialStructure;
-import com.satisfactoryrandomizer.Storage.Randomizables.Milestone;
-import com.satisfactoryrandomizer.Storage.Randomizables.Randomizable;
-import com.satisfactoryrandomizer.Storage.Randomizables.Structure;
+import com.satisfactoryrandomizer.Storage.Randomizables.*;
 
 public class Materials {
 
@@ -99,6 +94,14 @@ public class Materials {
         // Milestones
         // Tutorial are marked as available so that they unlock when their extraChecks
         // are met (the previous tutorial)
+
+        //Elevator Phases
+        List<String> phase1 = Arrays.asList("Desc_SpaceElevatorPart_1");
+        List<String> phase2 = Arrays.asList("Desc_SpaceElevatorPart_2", "Desc_SpaceElevatorPart_3");
+        List<String> phase3 = Arrays.asList("Desc_SpaceElevatorPart_4", "Desc_SpaceElevatorPart_5");
+        List<String> phase4 = Arrays.asList("Desc_SpaceElevatorPart_6", "Desc_SpaceElevatorPart_7", "Desc_SpaceElevatorPart_8", "Desc_SpaceElevatorPart_9");
+        List<String> phase5 = Arrays.asList("Desc_SpaceElevatorPart_10", "Desc_SpaceElevatorPart_11", "Desc_SpaceElevatorPart_12");
+
         // //Game/FactoryGame/Schematics/Tutorial/
         tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null));
         tempMilestones.add(
@@ -113,6 +116,90 @@ public class Materials {
                 .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5")));
 
         this.milestones.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
+        tempMilestones.clear();
+
+        tempMilestones
+                .add(new Milestone("Milestone_1-1", true, false, "Schematic_1-1", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_1-2", true, false, "Schematic_1-2", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_1-3", true, false, "Schematic_1-3", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_2-1", true, false, "Schematic_2-1", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_2-2", true, false, "Schematic_2-2", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_2-3", true, false, "Schematic_2-3", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_2-5", true, false, "Schematic_2-5", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_3-1", true, false, "Schematic_3-1", phase1));
+        tempMilestones // This one and the one avove are right despite not looking like it
+                .add(new Milestone("Milestone_3-2", true, false, "Schematic_3-2", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_3-3", true, false, "Schematic_3-3", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_3-4", true, false, "Schematic_3-4", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-1", true, false, "Schematic_4-1", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-2", true, false, "Schematic_4-2", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-3", true, false, "Schematic_4-3", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-4", true, false, "Schematic_4-4",phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-5", true, false, "Schematic_4-5", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_5-1", true, false, "Schematic_5-1", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_5-2", true, false, "Schematic_5-2", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_5-4", true, false, "Schematic_5-4", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_5-5", true, false, "Schematic_5-5", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-1", true, false, "Schematic_6-1", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-2", true, false, "Schematic_6-2", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-3", true, false, "Schematic_6-3", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-5", true, false, "Schematic_6-5",phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-7", true, false, "Schematic_6-7", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_7-1", true, false, "Schematic_7-1", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_7-2", true, false, "Schematic_7-2", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_7-3", true, false, "Schematic_7-3", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_7-4", true, false, "Schematic_7-4", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_7-5", true, false, "Schematic_7-5", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-1", true, false, "Schematic_8-1", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-2", true, false, "Schematic_8-2", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-3", true, false, "Schematic_8-3", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-4", true, false, "Schematic_8-4", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-5", true, false, "Schematic_8-5", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_9-1", true, false, "Schematic_9-1", phase4));
+        tempMilestones
+                .add(new Milestone("Milestone_9-2", true, false, "Schematic_9-2", phase4));
+        tempMilestones
+                .add(new Milestone("Milestone_9-3", true, false, "Schematic_9-3", phase4));
+        tempMilestones
+                .add(new Milestone("Milestone_9-4", true, false, "Schematic_9-4", phase4));
+        tempMilestones
+                .add(new Milestone("Milestone_9-5", true, false, "Schematic_9-5", phase4));
+
+        this.milestones.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Progression/"));
         tempMilestones.clear();
 
         // EssentialStructures
@@ -133,6 +220,7 @@ public class Materials {
         tempStructures.add(new Structure("Desc_GeneratorFuel", false, false, "Recipe_GeneratorFuel", true));
         tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));
         // Hard to check if it can be used to produce power:
+        tempStructures.add(new Structure("GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", false));
         tempStructures.add(new Structure("GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", false));
 
     }
