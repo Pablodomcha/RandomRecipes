@@ -1,14 +1,9 @@
 Tutorial costs are free (the mod assumes you use "Onboarding")
 
 -Categories:
-    1. Materials* (equipment things are materials)
-    2. Structures
-    2.1. Progressive Structures (ie: Belts, Crafters)
     3. MAM Research
     3.1. Progressive MAM (ie: Depot Upgrades) positions are not randomized, but their costs are.**
-    
-*A minable resource is only considered unlocked when scannable.
-*Hazmat, Iodine filter and Uranium Scan need an external check to enable uranium.
+
 **Hard to ensure they are in order.
 
 Info:
@@ -67,10 +62,10 @@ Info:
         True: Make crafing stations be obtained evenly spread to get a better crafting station spread.
         False: Crafting stations are completely randomized, may lead to a game where mostly a few stations are used for everything. 
 
-    1. Materials inicialization, add other ores as available or not.
-    2. Structure randomization, use or not generic logic for belts.
-    3. Structure randomization, use or not generic logic for Poles/cables.
-    4. Sequence Generation in products and Structure randomization.
+    V1. Materials inicialization, add corresponding milestone as extraCheck.
+    V2. Structure randomization, use or not generic logic for belts.
+    V3. Structure randomization, use or not generic logic for Poles/cables.
+    V4. Sequence Generation in products and Structure randomization.
     5. Add packaged liquid materials to Materials initialization. Extra check for Packager and the liquid.
     V6. Sequence Genneration in materials.
     7. Milestone generation, edit the value for inventory slot rewards.
@@ -78,10 +73,10 @@ Info:
 
 -Options (Insert Value): Don't put the Max Stack or Max items to 0, for free recipes use the specific option.
     0. Seed.
-    1. Max stack per component: Maximum number of each component needed for a craft. Over 50 will generate recipes that cannot be made.
-    2. Max component per craft: Maximum number of each component produced by a craft. Over 50 will generate recipes that cannot be made.
-    3. Max stack per structure: Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build.
-    4. Max items per structure: Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build.
+    1. Max stack per component: Maximum number of each component needed for a craft. Over 50 will generate recipes that cannot be made (the code actually caps it at 50 though).
+    2. Max component per craft: Maximum number of each component produced by a craft. Over 50 will generate recipes that cannot be made (the code actually caps it at 50 though).
+    3. Max stack per structure: Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed unbeatable).
+    4. Max items per structure: Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed unbeatable).
     5. Max stack per milestone: Maximum number of each component needed to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.
     6. Max items per milestone: Maximum number of different items to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.
     7. Max time per milestone: Maximum time to research a new milestone after completing one or time to complete a MAM research.
@@ -95,9 +90,9 @@ Info:
     2. In component sequencer. V
     3. In Structure Sequencer. V
     4. In Structure Sequencer. V
-    5. In Milestone Sequencer. 
-    6. In Milestone Sequencer. 
-    7. In Milestone Sequencer.  
+    5. In Milestone Sequencer. V
+    6. In Milestone Sequencer. V
+    7. In Milestone Sequencer.  V
     10. In component sequencer. V
     11. In component sequencer. V
     12. In component sequencer. V

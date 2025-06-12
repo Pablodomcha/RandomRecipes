@@ -21,4 +21,8 @@ public class EssentialStructure extends Structure {
         return this.addWhen;
     }
 
+    public void setAddWhen(int addWhen) {
+        this.addWhen = addWhen;
+    }
+
 }

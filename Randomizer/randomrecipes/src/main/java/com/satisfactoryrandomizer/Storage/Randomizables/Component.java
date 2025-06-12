@@ -7,11 +7,12 @@ import com.satisfactoryrandomizer.Storage.UiValues;
 public class Component extends Randomizable {
     private Boolean liquid;
     private int remainingUses = UiValues.getMaxRecipesUsed();
+    private int maxstack = 50;
 
     // Constructor for raw materials, set as craftable as soon as available so that
     // no recipe is created for them.
     public Component(String name, Boolean liquid, List<String> extraCheck) {
-        super(name, "", null, true, true, extraCheck);
+        super(name, null, null, true, true, extraCheck);
         this.liquid = liquid;
     }
 
@@ -23,10 +24,11 @@ public class Component extends Randomizable {
 
     // Full constructor for components that enable other components
     // (like uranium needs to check for several items)
-    public Component(String name, String recipepath, Boolean available, Boolean craftable, Boolean liquid,
+    public Component(String name, String recipepath, Boolean available, Boolean craftable, Boolean liquid, int maxstack,
             List<String> extraCheck) {
-        super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, null);
+        super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, extraCheck);
         this.liquid = liquid;
+        this.maxstack = maxstack;
     }
 
     public Boolean isLiquid() {
@@ -35,6 +37,10 @@ public class Component extends Randomizable {
 
     public void setLiquid(Boolean liquid) {
         this.liquid = liquid;
+    }
+
+    public int getStack(){
+        return this.maxstack;
     }
 
     /**
@@ -54,7 +60,6 @@ public class Component extends Randomizable {
     public int refill() {
         return ++this.remainingUses;
     }
-
 
     /**
      * Check if the component is available, i.e. if it has remaining uses and is

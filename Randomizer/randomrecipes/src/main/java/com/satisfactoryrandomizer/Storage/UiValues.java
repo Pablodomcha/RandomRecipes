@@ -19,7 +19,7 @@ public class UiValues {
     static int[] inventoryRange = { 1, 3 };
 
     // Numeric values here
-    static long seed = 849752659243524261L;
+    static long seed = 0;
     static int maxStackComp = 2;
     static int maxCompCraft = 2;
     static int maxStackStruct = 2;

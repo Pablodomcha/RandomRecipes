@@ -12,6 +12,7 @@ import com.satisfactoryrandomizer.Storage.Randomizables.Component;
 import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
 import com.satisfactoryrandomizer.Storage.Randomizables.Milestone;
 import com.satisfactoryrandomizer.Storage.Randomizables.Randomizable;
+import com.satisfactoryrandomizer.Storage.Randomizables.*;
 import com.satisfactoryrandomizer.Storage.UiValues;
 
 public class SequenceGenerator {
@@ -27,6 +28,7 @@ public class SequenceGenerator {
 
         // Create the materials variable to store all materials / structures
         SequenceGenerator.materials = new Materials();
+        materials.prepare();
 
         // Set the number of items for percentage related things
         SequenceGenerator.nItems = materials.getAllRandomizables().size(); // Removing iron since it starts unlocked.
@@ -106,6 +108,8 @@ public class SequenceGenerator {
                 generateStructure((CraftStation) randomizable, "structure");
             } else if (randomizable instanceof Milestone) {
                 generateMilestone((Milestone) randomizable, "milestone");
+            } else if (randomizable instanceof Structure) {
+                generateStructure((Structure) randomizable, "structure");
             } else {
                 Console.log("Unknown item type: " + randomizable);
                 Console.log("Exiting the randomize loop.");
@@ -141,12 +145,11 @@ public class SequenceGenerator {
                             + "\nEither way, as long as none of these are Space Elevator parts, the game is completable without them.");
         }
 
-        Console.log("Checksum = " + random.nextInt(UiValues.addAll()) + " | If you're playing multiplayer and you are all randomizing separately, this should be the same for all players");
+        Console.log("Checksum = " + random.nextInt(UiValues.addAll())
+                + " | If you're playing multiplayer and you are all randomizing separately, this should be the same for all players.");
     }
 
     private static void generateMilestone(Milestone milestone, String type) {
-        // Needed variables. Prod will always only have the station, but has to be a
-        // string regardless.
 
         List<Mat> mats = generateIngredients(type);
         List<String> checkAlso = new ArrayList<>();
@@ -173,30 +176,30 @@ public class SequenceGenerator {
         materials.setMilestoneCraftable(milestone.getName(), true);
     }
 
-    private static void generateStructure(CraftStation station, String type) {
-        // Needed variables. Prod will always only have the station, but has to be a
+    private static void generateStructure(Randomizable structure, String type) {
+        // Needed variables. Prod will always only have the structure, but has to be a
         // string regardless.
         List<Mat> mats = generateIngredients(type);
 
         Recipe recipe = new Recipe(
                 mats, // Doesn't apply
                 mats, // Ingredients
-                "Recipe_" + station.getName() + ".json", // Filename
+                "Recipe_" + structure.getName() + ".json", // Filename
                 "", // Doesn't apply
                 1, // Doesn't apply
                 1.0 // Doesn't apply
         );
 
         // Create Recipe JSON file
-        CreateJSON.saveStructureAsJson(recipe, station.getRecipePath());
+        CreateJSON.saveStructureAsJson(recipe, structure.getRecipePath());
 
-        Console.cheatsheet(station.getName() + " can be made");
+        Console.cheatsheet(structure.getName() + " can be made");
 
         // Mark the component as craftable
-        materials.setStructureCraftable(station.getName(), true);
+        materials.setRandomizableCraftable(structure.getName(), true);
 
         // Update the last obtained station
-        SequenceGenerator.lastObtainedStation = station.getName();
+        SequenceGenerator.lastObtainedStation = structure.getName();
     }
 
     private static void generateComp(Component comp, int addedItems, String type) {
@@ -329,7 +332,7 @@ public class SequenceGenerator {
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
             // Multiply by 1000 for liquids
-            int amount = random.nextInt(Math.min(50, liquidslots + solidslots));
+            int amount = random.nextInt(Math.min(comp.getStack(), liquidslots + solidslots));
 
             if (selectedLiquid) {
                 amount = amount * 1000;
@@ -500,8 +503,8 @@ public class SequenceGenerator {
      */
     private static Component ensureUnused(List<Mat> list, List<Component> craftableComponents, Boolean liquid) {
 
-        Component component = new Component("placeholder in ensureUnused in SequenceGenerator", "", false, false, null,
-                new ArrayList<>());
+        Component component = new Component("placeholder in ensureUnused in SequenceGenerator", null, false, false,
+                false);
         Boolean success = false;
         int loops = 0;
 

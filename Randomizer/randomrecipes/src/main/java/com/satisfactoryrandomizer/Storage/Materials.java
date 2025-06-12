@@ -22,15 +22,17 @@ public class Materials {
                                                                               // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
 
-    public Materials() {
+    public void prepare() {
 
         // Create a temporary lists to add the prefixes to before adding to components
         List<Component> tempComp = new ArrayList<>();
         List<CraftStation> tempStations = new ArrayList<>();
         List<Milestone> tempMilestones = new ArrayList<>();
         List<Structure> tempStructures = new ArrayList<>();
+        List<EssentialStructure> tempEssentialStructures = new ArrayList<>();
 
         // Crafting Stations
+        // //Game/FactoryGame/Recipes/Buildings/
         tempStations
                 .add(new CraftStation("Desc_AssemblerMk1", false, false, "Recipe_AssemblerMk1", "Build_AssemblerMk1",
                         2, 1, 0, 0));
@@ -65,12 +67,10 @@ public class Materials {
         // Components
 
         // Raw materials
-        // Have to add empty arraylists or the constructor will be ambiguous
-        this.components.add(new Component("Desc_OreIron", false, null));
-        this.components.add(new Component("Desc_OreCopper", false, Arrays.asList("Tutorial_2")));
-        this.components.add(new Component("Desc_Stone", false, Arrays.asList("Tutorial_3")));
+        this.components.add(new Component("Desc_Water", false, Arrays.asList("Desc_WaterPump")));
+        this.components.addAll(generateComponents());
 
-        // /Recipes/Constructor/
+        // //Game/FactoryGame/Recipes/Constructor/
         tempComp.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
         tempComp.add(new Component("Desc_IronRod", "Recipe_IronRod", true, false, false));
         tempComp.add(new Component("Desc_Wire", "Recipe_Wire", false, false, false));
@@ -82,18 +82,18 @@ public class Materials {
         this.components.addAll((List<Component>) addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
         tempComp.clear();
 
-        // /Recipes/Smelter/
+        // //Game/FactoryGame/Recipes/Smelter/
         tempComp.add(
                 new Component("Desc_IronIngot", "Recipe_IngotIron", true, false, false));
         tempComp.add(new Component("Desc_CopperIngot", "Recipe_IngotCopper", false, false, false));
 
-        this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
+        this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Smelter/"));
         tempComp.clear();
 
         // /Recipes/Assembler/
         tempComp.add(new Component("Desc_IronPlateReinforced", "Recipe_IronPlateReinforced", false, false, false));
 
-        this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
+        this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Assembler/"));
         tempComp.clear();
 
         // Milestones
@@ -116,9 +116,36 @@ public class Materials {
         tempMilestones.clear();
 
         // EssentialStructures
-        // Game/FactoryGame/Recipes/Buildings/
-        tempStructures.add(new EssentialStructure("Desc_GeneratorBiomass_Automated", false, false,
-                "Recipe_GeneratorBiomass_Automated", true, false, 0));
+        // //Game/FactoryGame/Recipes/Buildings/
+        tempEssentialStructures = generateEssentialBuildings();
+        this.essentialStructures
+                .addAll(addPrefixEssStr(tempEssentialStructures, "//Game/FactoryGame/Recipes/Buildings/"));
+
+        // Structures
+        for (EssentialStructure structure : this.essentialStructures) {
+            if (structure.addWhen() == 9) { // Can be added whenever, so it's actually not essential
+                structures.add(structure);
+                essentialStructures.remove(structure);
+                Console.log(structure.getName() + " moved to non-essential structures.");
+            }
+        }
+        tempStructures.add(new Structure("Desc_GeneratorCoal", false, false, "Recipe_GeneratorCoal", true));
+        tempStructures.add(new Structure("Desc_GeneratorFuel", false, false, "Recipe_GeneratorFuel", true));
+        tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));
+        // Hard to check if it can be used to produce power:
+        tempStructures.add(new Structure("GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", false));
+
+    }
+
+    public void generateLimitedMats() {
+        // Materials without associated recipe and can't be crafted.
+        // They will be added at the end for alternate recipes.
+        this.components.add(new Component("Desc_Wood", null, true, false, false));
+    }
+
+    public static List<EssentialStructure> generateEssentialBuildings() {
+
+        List<EssentialStructure> tempStructures = new ArrayList<>();
 
         // Belts settings
         if (UiValues.getBelts() <= 1) {
@@ -138,32 +165,86 @@ public class Materials {
                     "Recipe_ConveyorAttachmentSplitter", true, true, 0));
         } else {
             tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMerger", false, false,
-                    "Recipe_ConveyorAttachmentSplitter", false, false, 0));
+                    "Recipe_ConveyorAttachmentSplitter", false, false, 9));
             tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitter", false, false,
-                    "Recipe_ConveyorAttachmentSplitter", false, false, 0));
+                    "Recipe_ConveyorAttachmentSplitter", false, false, 9));
         }
 
         // Electricity settings
-
-        // Structures
-        for (EssentialStructure structure : this.essentialStructures) {
-            if (structure.addWhen() == 9) { // Can be added whenever, so it's actually not essential
-                structures.add(structure);
-                essentialStructures.remove(structure);
-                Console.log(structure.getName() + " moved to non-essential structures.");
-            }
+        if (UiValues.getElectricity() == 0) {
+            tempStructures.add(new EssentialStructure("Desc_GeneratorBiomass_Automated", false, false,
+                    "Recipe_GeneratorBiomass_Automated", true, false, 0));
+            tempStructures.add(new EssentialStructure("Desc_PowerPoleMk1", false, false,
+                    "Recipe_PowerPoleMk1", false, true, 0));
+            tempStructures.add(new EssentialStructure("Desc_PowerLine", false, false,
+                    "Recipe_PowerLine", false, true, 0));
+        } else if (UiValues.getElectricity() == 1) {
+            tempStructures.add(new EssentialStructure("Desc_GeneratorBiomass_Automated", false, false,
+                    "Recipe_GeneratorBiomass_Automated", true, false, 0));
+            tempStructures.add(new EssentialStructure("Desc_PowerPoleMk1", false, false,
+                    "Recipe_PowerPoleMk1", false, false, 0));
+            tempStructures.add(new EssentialStructure("Desc_PowerLine", false, false,
+                    "Recipe_PowerLine", false, false, 0));
+        } else if (UiValues.getElectricity() == 2) {
+            tempStructures.add(new EssentialStructure("Desc_GeneratorBiomass_Automated", false, false,
+                    "Recipe_GeneratorBiomass_Automated", true, false, 9));
+            tempStructures.add(new EssentialStructure("Desc_PowerPoleMk1", false, false,
+                    "Recipe_PowerPoleMk1", false, false, 0));
+            tempStructures.add(new EssentialStructure("Desc_PowerLine", false, false,
+                    "Recipe_PowerLine", false, false, 0));
+        } else {
+            tempStructures.add(new EssentialStructure("Desc_GeneratorBiomass_Automated", false, false,
+                    "Recipe_GeneratorBiomass_Automated", true, false, 9));
+            tempStructures.add(new EssentialStructure("Desc_PowerPoleMk1", false, false,
+                    "Recipe_PowerPoleMk1", false, false, 9));
+            tempStructures.add(new EssentialStructure("Desc_PowerLine", false, false,
+                    "Recipe_PowerLine", false, false, 9));
         }
-        tempStructures.add(new Structure("Desc_GeneratorCoal", false, false, "Recipe_GeneratorCoal", true));
-        tempStructures.add(new Structure("Desc_GeneratorFuel", false, false, "Recipe_GeneratorFuel", true));
-        tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));
-        tempStructures.add(new Structure("GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", true));
+
+        return tempStructures;
 
     }
 
-    public void generateLimitedMats() {
-        // Materials without associated recipe and can't be crafted.
-        // They will be added at the end for alternate recipes.
-        this.components.add(new Component("Desc_Wood", null, true, false, false));
+    public static List<Component> generateComponents() {
+
+        List<Component> tempRawOre = new ArrayList<>();
+
+        if (UiValues.getOreLocation() == 0) {
+            tempRawOre.add(new Component("Desc_OreIron", false, null));
+            tempRawOre.add(new Component("Desc_OreCopper", false, Arrays.asList("Tutorial_2")));
+            tempRawOre.add(new Component("Desc_Stone", false, Arrays.asList("Tutorial_3")));
+            tempRawOre.add(new Component("Desc_Coal", false, Arrays.asList("Milestone_3-1")));
+            tempRawOre.add(new Component("Desc_LiquidOil", false, Arrays.asList("Milestone_5-2")));
+            tempRawOre.add(new Component("Desc_OreGold", false, Arrays.asList("Milestone_5-5")));
+            tempRawOre.add(new Component("Desc_OreBauxite", false, Arrays.asList("Milestone_7-1")));
+            tempRawOre.add(new Component("Desc_RawQuartz", false, Arrays.asList("Milestone_7-1")));
+            tempRawOre.add(new Component("Desc_Sulfur", false, Arrays.asList("Milestone_7-5")));
+            tempRawOre.add(new Component("Desc_OreUranium", false,
+                    Arrays.asList("Milestone_8-2", "Desc_HazmatFilter", "Recipe_HazmatSuit")));
+            tempRawOre.add(new Component("Desc_NitrogenGas", false, Arrays.asList("Milestone_8-3")));
+            tempRawOre.add(new Component("Desc_SAM", false, Arrays.asList("Milestone_9-1")));
+        } else {
+            tempRawOre.add(new Component("Desc_OreIron", false, null));
+            tempRawOre.add(new Component("Desc_OreCopper", false, null));
+            tempRawOre.add(new Component("Desc_Stone", false, null));
+            tempRawOre.add(new Component("Desc_Coal", false, null));
+            tempRawOre.add(new Component("Desc_LiquidOil", false, null));
+            tempRawOre.add(new Component("Desc_OreGold", false, null));
+            tempRawOre.add(new Component("Desc_OreBauxite", false, null));
+            tempRawOre.add(new Component("Desc_RawQuartz", false, null));
+            tempRawOre.add(new Component("Desc_Sulfur", false, null));
+            tempRawOre.add(new Component("Desc_NitrogenGas", false, null));
+            tempRawOre.add(new Component("Desc_SAM", false, null));
+
+            if (UiValues.getOreLocation() == 1) {
+                tempRawOre.add(new Component("Desc_OreUranium", false,
+                        Arrays.asList("Desc_HazmatFilter", "Recipe_HazmatSuit")));
+            } else {
+                tempRawOre.add(new Component("Desc_OreUranium", false, null));
+            }
+        }
+
+        return tempRawOre;
     }
 
     private static List<Component> addPrefixComp(List<Component> list, String prefix) {
@@ -202,6 +283,19 @@ public class Materials {
             }
         }
         Console.log("Prefixed CraftStation List with " + prefixRecipe);
+        return prefixedList;
+    }
+
+    private static List<EssentialStructure> addPrefixEssStr(List<EssentialStructure> list, String prefixRecipe) {
+        List<EssentialStructure> prefixedList = new ArrayList<>(list);
+
+        for (int i = 0; i < prefixedList.size(); i++) {
+            EssentialStructure c = prefixedList.get(i);
+            if (c.getRecipePath() != null && !c.getRecipePath().startsWith(prefixRecipe)) {
+                prefixedList.get(i).setRecipePath(prefixRecipe + c.getRecipePath());
+            }
+        }
+        Console.log("Prefixed EssentialStructure List with " + prefixRecipe);
         return prefixedList;
     }
 
@@ -430,6 +524,17 @@ public class Materials {
             }
         }
         Console.log("Could not set Craftable, component not found: " + name);
+        return false;
+    }
+
+    public Boolean setRandomizableCraftable(String name, Boolean craftable) {
+        for (Randomizable rand : this.getAvailableButUncraftableRandomizables()) {
+            if (rand.getName().equals(name)) {
+                rand.setCraftable(craftable);
+                return true;
+            }
+        }
+        Console.log("Could not set Craftable, randomizable not found: " + name);
         return false;
     }
 
