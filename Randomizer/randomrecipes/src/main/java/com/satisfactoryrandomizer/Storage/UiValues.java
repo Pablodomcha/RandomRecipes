@@ -19,7 +19,7 @@ public class UiValues {
     static int[] inventoryRange = { 1, 3 };
 
     // Numeric values here
-    static int seed = 0;
+    static long seed = 849752659243524261L;
     static int maxStackComp = 2;
     static int maxCompCraft = 2;
     static int maxStackStruct = 2;
@@ -54,6 +54,12 @@ public class UiValues {
      *         Radiation Party: Uranium could be needed for recipes unlocked before
      *         you can have radiation protection.
      */
+
+    public static int addAll(){
+        return  1000 * (int) (UiValues.seed % 100 + UiValues.oreLocation + UiValues.belts + UiValues.electricity + UiValues.waste + UiValues.stationBias + UiValues.liquids + UiValues.inventorySlots +
+                UiValues.maxStackComp + UiValues.maxCompCraft + UiValues.maxStackStruct + UiValues.maxItemStruct + UiValues.maxStackMile + UiValues.maxItemMile + UiValues.maxStackEle + UiValues.maxItemEle +
+                UiValues.maxTimeMile + UiValues.maxTimeCraft + UiValues.handcraftSpeed[1] + UiValues.inputBias + UiValues.maxRecipesUsed + UiValues.freeChance);
+    }
 
     public static int getOreLocation() {
         return UiValues.oreLocation;
@@ -215,7 +221,7 @@ public class UiValues {
         UiValues.balanceProg = balanceProg;
     }
 
-    public static int getSeed() {
+    public static long getSeed() {
         return UiValues.seed;
     }
 

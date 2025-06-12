@@ -29,7 +29,6 @@ public class Materials {
         List<CraftStation> tempStations = new ArrayList<>();
         List<Milestone> tempMilestones = new ArrayList<>();
         List<Structure> tempStructures = new ArrayList<>();
-        List<EssentialStructure> tempEssentialStructures = new ArrayList<>();
 
         // Crafting Stations
         tempStations
@@ -67,9 +66,9 @@ public class Materials {
 
         // Raw materials
         // Have to add empty arraylists or the constructor will be ambiguous
-        this.components.add(new Component("Desc_OreIron", "", true, false, new ArrayList<>()));
-        this.components.add(new Component("Desc_OreCopper", "", false, false, new ArrayList<>()));
-        this.components.add(new Component("Desc_Stone", "", false, false, new ArrayList<>()));
+        this.components.add(new Component("Desc_OreIron", false, null));
+        this.components.add(new Component("Desc_OreCopper", false, Arrays.asList("Tutorial_2")));
+        this.components.add(new Component("Desc_Stone", false, Arrays.asList("Tutorial_3")));
 
         // /Recipes/Constructor/
         tempComp.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
@@ -97,8 +96,6 @@ public class Materials {
         this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
         tempComp.clear();
 
-        // Structures
-
         // Milestones
         // Tutorial are marked as available so that they unlock when their extraChecks
         // are met (the previous tutorial)
@@ -118,19 +115,48 @@ public class Materials {
         this.milestones.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
         tempMilestones.clear();
 
-        // this.milestones = addHubUpgrades(milestones);
-
         // EssentialStructures
+        // Game/FactoryGame/Recipes/Buildings/
+        tempStructures.add(new EssentialStructure("Desc_GeneratorBiomass_Automated", false, false,
+                "Recipe_GeneratorBiomass_Automated", true, false, 0));
+
+        // Belts settings
+        if (UiValues.getBelts() <= 1) {
+            tempStructures.add(new EssentialStructure("Desc_ConveyorBeltMk1", false, false, "Recipe_ConveyorBeltMk1",
+                    true, true, 0));
+        } else if (UiValues.getBelts() == 2) {
+            tempStructures.add(new EssentialStructure("Desc_ConveyorBeltMk1", false, false, "Recipe_ConveyorBeltMk1",
+                    true, false, 0));
+        } else {
+            tempStructures.add(new EssentialStructure("Desc_ConveyorBeltMk1", false, false, "Recipe_ConveyorBeltMk1",
+                    true, false, 9));
+        }
+        if (UiValues.getBelts() == 0) {
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMerger", false, false,
+                    "Recipe_ConveyorAttachmentSplitter", true, true, 0));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitter", false, false,
+                    "Recipe_ConveyorAttachmentSplitter", true, true, 0));
+        } else {
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMerger", false, false,
+                    "Recipe_ConveyorAttachmentSplitter", false, false, 0));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitter", false, false,
+                    "Recipe_ConveyorAttachmentSplitter", false, false, 0));
+        }
+
+        // Electricity settings
 
         // Structures
         for (EssentialStructure structure : this.essentialStructures) {
             if (structure.addWhen() == 9) { // Can be added whenever, so it's actually not essential
                 structures.add(structure);
                 essentialStructures.remove(structure);
-
                 Console.log(structure.getName() + " moved to non-essential structures.");
             }
         }
+        tempStructures.add(new Structure("Desc_GeneratorCoal", false, false, "Recipe_GeneratorCoal", true));
+        tempStructures.add(new Structure("Desc_GeneratorFuel", false, false, "Recipe_GeneratorFuel", true));
+        tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));
+        tempStructures.add(new Structure("GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", true));
 
     }
 
@@ -364,16 +390,6 @@ public class Materials {
         return result;
     }
 
-    public List<Randomizable> rawUnavailable() {
-        List<Randomizable> result = new ArrayList<>();
-        for (Component comp : this.components) {
-            if (!comp.trueAvailable() && comp.isRaw()) {
-                result.add(comp);
-            }
-        }
-        return result;
-    }
-
     public void setRandomizableAvailable(String name, Boolean available) {
 
         for (Randomizable r : this.getAllRandomizables()) {
@@ -572,20 +588,6 @@ public class Materials {
 
             Console.log("Could not remove extra check, Randomizable not found: " + whereToRemove);
         }
-    }
-
-    public static List<Milestone> addHubUpgrades(List<Milestone> milestones) {
-        List<Milestone> result = new ArrayList<>(milestones);
-        for (Milestone milestone : milestones) {
-
-            if (false) {
-                // Check for Milestones that have one of these and add it
-            } else {
-                result.add(milestone);
-            }
-
-        }
-        return result;
     }
 
     // Only for debugging

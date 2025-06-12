@@ -66,7 +66,7 @@ public class SequenceGenerator {
 
         for (Milestone mile : materials.getAllMilestones()) {
             int nUnlocksMilestone = (nDistributableRandomizables - distributed) / milestonesAvailable;
-            int distributing = nUnlocksMilestone + random.nextInt(2);
+            int distributing = (nUnlocksMilestone + random.nextInt(2));
             mile.setnRecipes(distributing);
             Console.test("Recipes in " + mile.getName() + ": " + mile.getnRecipes());
             distributed += distributing;
@@ -140,6 +140,8 @@ public class SequenceGenerator {
                     "These items didn't get randomized properly, they may be missing from the game or have their default recipe."
                             + "\nEither way, as long as none of these are Space Elevator parts, the game is completable without them.");
         }
+
+        Console.log("Checksum = " + random.nextInt(UiValues.addAll()) + " | If you're playing multiplayer and you are all randomizing separately, this should be the same for all players");
     }
 
     private static void generateMilestone(Milestone milestone, String type) {
@@ -403,13 +405,12 @@ public class SequenceGenerator {
         // Make a list with all possible randomizables
         List<Randomizable> itemList = materials.getUnavailableAndUncraftableRandomizables();
         itemList.removeAll(materials.getAllMilestones());
-        itemList.addAll(materials.rawUnavailable());
 
         // Add extra unlocks
         for (int i = 0; i < numberOfUnlocks; i++) {
             if (itemList.isEmpty()) {
                 Console.log(
-                        "No more unlocks available. This will happen in 50% of seeds once. If it happens more than once, it's a bug, otherwise, ignore this message.");
+                        "No more unlocks available. This can safely be ignored if it only appears once.");
                 return unlocks;
             }
             Randomizable r = itemList.get(random.nextInt(itemList.size()));

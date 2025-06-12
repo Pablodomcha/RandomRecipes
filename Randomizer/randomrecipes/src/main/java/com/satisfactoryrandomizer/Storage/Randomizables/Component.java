@@ -7,14 +7,12 @@ import com.satisfactoryrandomizer.Storage.UiValues;
 public class Component extends Randomizable {
     private Boolean liquid;
     private int remainingUses = UiValues.getMaxRecipesUsed();
-    private Boolean raw = false;
 
     // Constructor for raw materials, set as craftable as soon as available so that
     // no recipe is created for them.
-    public Component(String name, String recipepath, Boolean available, Boolean liquid, List<String> extraCheck) {
-        super(name, recipepath, null, available, true, extraCheck);
+    public Component(String name, Boolean liquid, List<String> extraCheck) {
+        super(name, "", null, true, true, extraCheck);
         this.liquid = liquid;
-        this.raw = true;
     }
 
     // Full constructor
@@ -37,10 +35,6 @@ public class Component extends Randomizable {
 
     public void setLiquid(Boolean liquid) {
         this.liquid = liquid;
-    }
-
-    public Boolean isRaw() {
-        return this.raw;
     }
 
     /**

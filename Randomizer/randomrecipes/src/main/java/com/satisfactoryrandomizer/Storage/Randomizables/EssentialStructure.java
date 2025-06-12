@@ -6,9 +6,9 @@ public class EssentialStructure extends Structure {
     private Boolean isCheap = false;
 
     // Basic constructor
-    public EssentialStructure(String name, Boolean available, Boolean craftable, String recipepath, Boolean isCheap,
-            int addWhen) {
-        super(name, available, craftable, recipepath);
+    public EssentialStructure(String name, Boolean available, Boolean craftable, String recipepath, Boolean power,
+            Boolean isCheap, int addWhen) {
+        super(name, available, craftable, recipepath, power);
         this.isCheap = isCheap;
         this.addWhen = addWhen;
     }

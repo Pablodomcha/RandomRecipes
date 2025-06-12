@@ -18,18 +18,17 @@ Info:
     4. Production buildings may not be able to reach 100% efficiency on certain recipes.
     5. Packaging/unpackaging recipes unaffected (the container recipes are though).
     6. Excited Photonic Matter may not be free. Blame Ficsit.
-    7. Recipes obtained from tier 0 are craftable using only each other.
+    7. Scannable resources and basic game essentials are not moved. I didn't know how to do it and I dont' get paid enough for that (or paid at all tbh).
     8. MAM researches are all considered non-essential, the ones that are will be moved to milestones. Non-essential things will be moved from milestones to MAM in exchange.
-    9. All materials are treated the same, so you could end up with the screw being as expensive as a vanilla uranium fuel rod and vice versa.
-    10. If for whatever reason introducing the same seed creates different paths for different players, you can work arround it by having one player create the files and send them to the others. This should be reported as a bug regardless.
+    9. All materials are treated the same, so you could end up with the screw being as expensive as a vanilla plutonium fuel rod and vice versa.
+    10. If for whatever reason introducing the same seed and settings create different paths for different players, you can work arround it by having one player create the files and send them to the others. This should be reported as a bug regardless.
     11. Particle accelerator/Converter recipes use energy based on the tier of the recipe. Generating 1500MW on Biomass Burners is only fun the 1st time.
     12. Crafting times used have 2 decimals, the game only shows 1, so the craft time displayed might be slightly inaccurate, the production/consumption per miute is correcth though.
     13. If the randomizer takes too long, it's probably in an infinite loop, happens in some seeds. Close it and run again (chaning the seed if you introduced it manually).
     14. Values of 0 may crash the randomizer if they are for quantities. For probabilities, 0 should be fine.
-    15. Negative values for porbabilities will be either treated as 0, produce unexpected results or crash the randomizer. Don't put any preferably.
+    15. Negative values for probabilities will be either treated as 0, produce unexpected results or crash the randomizer. Idem for 100 and values over it.  Don't put either preferably.
     16. Space elevator stages untouched (Changing them would be a pain and the path to get to it is already random anyway).
     17. Milestones are not necessarily linear, tier 1 milestones could need tier 9 materials to unlock. In this case, anything unlocked by that tier 1 milestone won't be needed until it's unlockable.
-    18. Yes, map unlock is randomized. No, it's not essential, and therefore can be anywhere.
 
 -Options (Toggle):
     1. Ore location:
@@ -37,24 +36,24 @@ Info:
         Unlocated: Any ore can be part of any recipe. Uranium will only be needed for progression if you can have radiation protection.
         Radiation Party: Uranium could be needed for progression before having radiation protection.
     2. Belts:
-        Easy: Use small amounts of early materials for all belts making it more likely that large amounts of them can be crafted. Tier 1 belts are unlocked in the tutorial.
+        Easy: Tier 1 belts, splitters and mergers use small amounts of early materials and are unlocked in the tutorial.
         Medium: Tier 1 belts use small amounts of early materials and are unlocked in the tutorial. Other belts and poles can use anything.
         Hard: Guarantees access to tier 1 belts in the tutorial. Their recipes may be expensive.
-        Happy Handcrafting: Completely random, you could end up with no access to belts for part/most of your playthrough.
+        Mr Transport Wagon: Completely random, you could end up with no access to belts for part/most of your playthrough.
     3. Electricity:
         Easy: Basic electric poles, powerlines and biomass burners use early materials only and are unlocked in the tutorial. Basic electric poles and powerlines also use small amounts of them.
         Medium: Basic electric poles, powerlines and biomass burners use early materials only and are unlocked in the tutorial. They may be expensive.
         Hub Burners Carry: Basic electric poles and powerlines are unlocked early. They may be expensive. You're not guaranteed a powersource.
         Happy Handcrafting: Completely random.
-    4. Waste (the "desired" output is the one for which the recipe is generated, even if you like more the other output):
+    4. Waste (The "desired" output is the one for which the recipe is generated, even if you like more the other output):
         Easy: Recipes only have 1 output, so you don't need to handle a second resource you may not need.
         Medium: Recipes can have solid outputs other than the desired, but the Awesome sink recipe will be available early and will have a simple recipe.
         Hard: Recipes can have solid outputs other than the desired and the Awesome sink may not be available or have really hard crafting recipe.
-        No U: Recipes can have solid/liquid outputs other than the desired and the sink may not be available or have really hard crafting recipe. Packaging to get rid of liquids may or may not be easy, you may need tons deposits (if they're even available) and manual flushing.
+        No U: Recipes can have solid/liquid outputs other than the desired and the sink may not be available or have really hard crafting recipe. Packaging to get rid of liquids may or may not be easy, you may need many deposits (if they're even available) and manual flushing.
     5. Liquids:
         Only liquid: Liquids can only be used in their liquid form for recipes (this is the case for the base game).
         Packaged and Liquid: Packaged liquids can be part of recipes. Packaging could be really expensive (or not).
-    6. Station bias:
+    6. Station bias (I don't know which provides better results, you'll have to try them):
         None: The stations are selected completely random, this makes the earlier unlocked stations have way more recipes than the later ones.
         Slight bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning slightly on newer unlocked stations.
         Medium Bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning on newer unlocked stations.
@@ -79,16 +78,16 @@ Info:
 
 -Options (Insert Value): Don't put the Max Stack or Max items to 0, for free recipes use the specific option.
     0. Seed.
-    1. Max stack per component: Maximum number of each component needed for a craft. Over 50 will crash.
-    2. Max component per craft: Maximum number of each component produced by a craft. Over 50 will crash.
+    1. Max stack per component: Maximum number of each component needed for a craft. Over 50 will generate recipes that cannot be made.
+    2. Max component per craft: Maximum number of each component produced by a craft. Over 50 will generate recipes that cannot be made.
     3. Max stack per structure: Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build.
     4. Max items per structure: Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build.
-    5. Max stack per milestone: Maximum number of each component needed to complete a milestone.
-    6. Max items per milestone: Maximum number of different items to complete a milestone.
+    5. Max stack per milestone: Maximum number of each component needed to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.
+    6. Max items per milestone: Maximum number of different items to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.
     7. Max time per milestone: Maximum time to research a new milestone after completing one or time to complete a MAM research.
     10. Max time to craft: Maximum time needed for a craft.
     11. Handcrafting speed min,max: Multiplier for handcrafting speed. Lower is faster (the base game value is usually between 0.5 and 1 depending on recipe).
-    12. Input bias: Higher numbers mean that the randomizer will try to use more of the slots available in the production station. 100 means always will use all slots, 0 means all recipes use 1 input/output slot, 50 means there's no bias. If waste is in easy, this only affects input. This also affects the amount of resources used for structures.
+    12. Input bias: Higher numbers mean that the randomizer will try to use more different ingredients per recipe/milestone. 100 means always will use all slots, 0 means all recipes use 1 input/output slot, 50 means there's no bias. If waste is in easy, this only affects ingredients.
     13. Max recipes used: Maximum number of recipes that can use a materials. The randomizer will increase this value if it can't complete a randomization. Lower values ensure component diversity.
     14. Free Chance: Chance for a randomizable to be free, like Excited Photonic Matter, except that one may no longer be free. This affects Structures and milestones too.
 
@@ -115,4 +114,6 @@ Make recipes to create/use leaves and wood (Can use the 2nd biomass recipe for o
 
 Remember to add any Randomizable that influences the extraChecks logic into materials.fillExtraChecks()
 
-Recipe_Biomass_Wood will be handled as alternate recipe.
+Recipe_Biomass_Wood will be handled as alternate recipe. Ficsites besides the first one too.
+
+Randomly assign elevator parts as extraunlocks for milestones that don't have them.
