@@ -66,9 +66,10 @@ public class Materials {
         // Components
 
         // Raw materials
-        this.components.add(new Component("Desc_OreIron", true, false, null));
-        this.components.add(new Component("Desc_OreCopper", false, false, null));
-        this.components.add(new Component("Desc_Stone", false, false, null));
+        // Have to add empty arraylists or the constructor will be ambiguous
+        this.components.add(new Component("Desc_OreIron", "", true, false, new ArrayList<>()));
+        this.components.add(new Component("Desc_OreCopper", "", false, false, new ArrayList<>()));
+        this.components.add(new Component("Desc_Stone", "", false, false, new ArrayList<>()));
 
         // /Recipes/Constructor/
         tempComp.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
@@ -120,10 +121,10 @@ public class Materials {
         // this.milestones = addHubUpgrades(milestones);
 
         // EssentialStructures
-        
+
         // Structures
-        for(EssentialStructure structure : this.essentialStructures) {
-            if(structure.addWhen() == 9){ // Can be added whenever, so it's actually not essential
+        for (EssentialStructure structure : this.essentialStructures) {
+            if (structure.addWhen() == 9) { // Can be added whenever, so it's actually not essential
                 structures.add(structure);
                 essentialStructures.remove(structure);
 
@@ -363,6 +364,16 @@ public class Materials {
         return result;
     }
 
+    public List<Randomizable> rawUnavailable() {
+        List<Randomizable> result = new ArrayList<>();
+        for (Component comp : this.components) {
+            if (!comp.trueAvailable() && comp.isRaw()) {
+                result.add(comp);
+            }
+        }
+        return result;
+    }
+
     public void setRandomizableAvailable(String name, Boolean available) {
 
         for (Randomizable r : this.getAllRandomizables()) {
@@ -472,15 +483,15 @@ public class Materials {
         }
     }
 
-public int getAllNonMilestonedRandomizables(){
-    int result = 0;
-    for (Randomizable r : this.getAllRandomizables()){
-        if (!(r instanceof Milestone) && !r.trueAvailable()){
-            result++;
+    public int getAllNonMilestonedRandomizables() {
+        int result = 0;
+        for (Randomizable r : this.getAllRandomizables()) {
+            if (!(r instanceof Milestone) && !r.trueAvailable()) {
+                result++;
+            }
         }
+        return result;
     }
-    return result;
-}
 
     public void fillExtraChecks() throws Exception {
 

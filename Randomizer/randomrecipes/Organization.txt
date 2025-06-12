@@ -33,9 +33,9 @@ Info:
 
 -Options (Toggle):
     1. Ore location:
-        Located: You don't need ores you can't scan to unlock the ability to scan them. Uranium will only be needed if you can have radiation protection. A lot of things will come from iron (for better or worse).
-        Unlocated: Any ore can be part of any recipe. Uranium will only be needed if you can have radiation protection.
-        Radiation Party: Uranium could be needed for recipes unlocked before you can have radiation protection.
+        Located: You don't need ores you can't scan to unlock the ability to scan them. Uranium will only be needed for progression if you can have radiation protection. A lot of things will come from iron (for better or worse).
+        Unlocated: Any ore can be part of any recipe. Uranium will only be needed for progression if you can have radiation protection.
+        Radiation Party: Uranium could be needed for progression before having radiation protection.
     2. Belts:
         Easy: Use small amounts of early materials for all belts making it more likely that large amounts of them can be crafted. Tier 1 belts are unlocked in the tutorial.
         Medium: Tier 1 belts use small amounts of early materials and are unlocked in the tutorial. Other belts and poles can use anything.
