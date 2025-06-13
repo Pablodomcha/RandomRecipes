@@ -8,10 +8,6 @@ import com.satisfactoryrandomizer.Storage.Data.Mat;
 import com.satisfactoryrandomizer.Storage.Data.MilestoneSchematic;
 import com.satisfactoryrandomizer.Storage.Data.Recipe;
 import com.satisfactoryrandomizer.Storage.Materials;
-import com.satisfactoryrandomizer.Storage.Randomizables.Component;
-import com.satisfactoryrandomizer.Storage.Randomizables.CraftStation;
-import com.satisfactoryrandomizer.Storage.Randomizables.Milestone;
-import com.satisfactoryrandomizer.Storage.Randomizables.Randomizable;
 import com.satisfactoryrandomizer.Storage.Randomizables.*;
 import com.satisfactoryrandomizer.Storage.UiValues;
 
@@ -34,6 +30,11 @@ public class SequenceGenerator {
         SequenceGenerator.nItems = materials.getAllRandomizables().size(); // Removing iron since it starts unlocked.
 
         materials.testSetup();
+
+        for (Randomizable r : materials.getAllRandomizables()) {
+            Console.hiddenLog("Randomizable: " + r.getName() + " available: " + r.trueAvailable() + " craftable: "
+                    + r.isCraftable() + " extraChecks: " + r.getExtraCheck());
+        }
 
         // Generate the extraChecks
         try {
@@ -61,24 +62,17 @@ public class SequenceGenerator {
         materials.setStructureAvailable("Desc_HadronCollider", true);
         SequenceGenerator.firstStation = "Desc_HadronCollider";
 
-        // Spread the Randomizables evenly across the milestones
-        int milestonesAvailable = materials.getAllMilestones().size();
-        int nDistributableRandomizables = materials.getAllNonMilestonedRandomizables();
+        // Spread available randomizables across available milestones evenly
+        int milestonesAvailable = materials.getTutorials().size();
+        int nDistributableRandomizables = materials.getAllNonMilestonedRandomizables() / 10;
         int distributed = 0;
-
-        for (Milestone mile : materials.getAllMilestones()) {
+        for (Milestone mile : materials.getTutorials()) {
             int nUnlocksMilestone = (nDistributableRandomizables - distributed) / milestonesAvailable;
             int distributing = (nUnlocksMilestone + random.nextInt(2));
+            Console.hiddenLog("Distributing " + distributing + " randomizables to milestone " + mile.getName());
             mile.setnRecipes(distributing);
-            Console.test("Recipes in " + mile.getName() + ": " + mile.getnRecipes());
             distributed += distributing;
             milestonesAvailable--;
-        }
-        Console.log("Distributed " + (nDistributableRandomizables) + " randomizables across "
-                + materials.getAllMilestones().size() + " milestones.");
-
-        for (Randomizable r : materials.getCraftableRandomizables()) {
-            Console.log("Craftable from the start: " + r.getName());
         }
 
         // Main loop, runs until there's nothing left to randomize
@@ -394,7 +388,7 @@ public class SequenceGenerator {
                 amount = random.nextInt(liquid * UiValues.getMaxStackStruct()) + 1;
             } else if (type.equals("milestone")) {
                 amount = random.nextInt(liquid * UiValues.getMaxStackMile()) + 1;
-            }else if(type.equals("cheap")){
+            } else if (type.equals("cheap")) {
                 amount = random.nextInt(2) + 1;
             } else {
                 Console.log("Invalid recipe type: " + type + ". This shouldn't happen.");

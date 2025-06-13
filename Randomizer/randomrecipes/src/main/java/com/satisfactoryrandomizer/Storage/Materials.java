@@ -16,6 +16,7 @@ public class Materials {
     private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by
                                                                               // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
+    private int[] phase;
 
     public void prepare() {
 
@@ -249,7 +250,7 @@ public class Materials {
         return tempComps;
     }
 
-    private static List<Milestone> generateMilestones() {
+    private List<Milestone> generateMilestones() {
         List<Milestone> tempMilestones = new ArrayList<>();
         List<Milestone> tempReturn = new ArrayList<>();
         // Tutorial are marked as available so that they unlock when their extraChecks
@@ -261,21 +262,19 @@ public class Materials {
         List<String> phase3 = Arrays.asList("Desc_SpaceElevatorPart_4", "Desc_SpaceElevatorPart_5");
         List<String> phase4 = Arrays.asList("Desc_SpaceElevatorPart_6", "Desc_SpaceElevatorPart_7",
                 "Desc_SpaceElevatorPart_8", "Desc_SpaceElevatorPart_9");
-        List<String> phase5 = Arrays.asList("Desc_SpaceElevatorPart_10", "Desc_SpaceElevatorPart_11",
-                "Desc_SpaceElevatorPart_12");
 
         // //Game/FactoryGame/Schematics/Tutorial/
-        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null));
+        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null,true));
         tempMilestones.add(
-                new Milestone("Tutorial_2", true, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1")));
+                new Milestone("Tutorial_2", true, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1"),true));
         tempMilestones
-                .add(new Milestone("Tutorial_3", true, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2")));
+                .add(new Milestone("Tutorial_3", true, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2"),true));
         tempMilestones
-                .add(new Milestone("Tutorial_4", true, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3")));
+                .add(new Milestone("Tutorial_4", true, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3"),true));
         tempMilestones
-                .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4")));
+                .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4"),true));
         tempMilestones
-                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5")));
+                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5"),true));
 
         tempReturn.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
         tempMilestones.clear();
@@ -362,6 +361,29 @@ public class Materials {
                 .add(new Milestone("Milestone_9-5", true, false, "Schematic_9-5", phase4));
 
         tempReturn.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Progression/"));
+
+        this.phase = new int[5];
+
+        for (Milestone milestone : tempMilestones) {
+            if (milestone.getExtraCheck().equals(Arrays.asList("Tutorial_6"))) {
+                Console.hiddenLog(milestone.getName() + " is in phase 1.");
+                this.phase[1]++;
+            } else if (milestone.getExtraCheck().equals(phase1)) {
+                Console.hiddenLog(milestone.getName() + " is in phase 2.");
+                this.phase[2]++;
+            } else if (milestone.getExtraCheck().equals(phase2)) {
+                Console.hiddenLog(milestone.getName() + " is in phase 3.");
+                this.phase[3]++;
+            } else if (milestone.getExtraCheck().equals(phase3)) {
+                Console.hiddenLog(milestone.getName() + " is in phase 4.");
+                this.phase[4]++;
+            } else if (milestone.getExtraCheck().equals(phase4)) {
+                Console.hiddenLog(milestone.getName() + " is in phase 5.");
+            } else {
+                Console.log(milestone.getName()
+                        + " has no elevator phase assigned. This should be the case for all tutorials but the last one, but not for the other milestones.");
+            }
+        }
 
         return tempReturn;
     }
@@ -630,8 +652,9 @@ public class Materials {
             List<String> list = (i > 0) ? Arrays.asList(temComps.get(i - 1).getName()) : null;
 
             temComps.add(
-                    new Component(recipe.replace("Recipe", "Desc").replace("1", (String.valueOf(i+1))),
-                            recipe.replace("1", (String.valueOf(i+1))), false, false, false, 50, list));
+                    new Component(recipe.replace("Recipe", "Desc").replace("1", (String.valueOf(i + 1))),
+                            recipe.replace("1", (String.valueOf(i + 1))), false, false, false, 50, list));
+
         }
         return temComps;
     }
@@ -645,7 +668,7 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
             }
         }
-        Console.log("Prefixed List with " + prefix);
+        Console.hiddenLog("Prefixed List with " + prefix);
         return prefixedList;
 
     }
@@ -659,7 +682,7 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
             }
         }
-        Console.log("Prefixed List with " + prefix);
+        Console.hiddenLog("Prefixed List with " + prefix);
         return prefixedList;
     }
 
@@ -672,7 +695,7 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
             }
         }
-        Console.log("Prefixed List with " + prefix);
+        Console.hiddenLog("Prefixed List with " + prefix);
         return prefixedList;
     }
 
@@ -685,7 +708,7 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefixRecipe + c.getRecipePath());
             }
         }
-        Console.log("Prefixed CraftStation List with " + prefixRecipe);
+        Console.hiddenLog("Prefixed CraftStation List with " + prefixRecipe);
         return prefixedList;
     }
 
@@ -698,7 +721,7 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefixRecipe + c.getRecipePath());
             }
         }
-        Console.log("Prefixed EssentialStructure List with " + prefixRecipe);
+        Console.hiddenLog("Prefixed EssentialStructure List with " + prefixRecipe);
         return prefixedList;
     }
 
@@ -814,6 +837,36 @@ public class Materials {
             }
         }
         return result;
+    }
+
+    public List<Milestone> getAvailableMilestones() {
+        List<Milestone> result = new ArrayList<>();
+        for (Milestone milestone : this.milestones) {
+            if (milestone.isAvailable()) {
+                result.add(milestone);
+            }
+        }
+        return result;
+    }
+
+public List<Milestone> getTutorials(){
+    List<Milestone> result = new ArrayList<>();
+    for (Milestone milestone : this.milestones) {
+        if (milestone.isTutorial()) {
+            result.add(milestone);
+        }
+    }
+    return result;
+}
+
+    public int getPhase() {
+        for(int i=0; i<this.phase.length; i++) {
+            if (this.phase[i] > 0) {
+                return i;
+            }
+        }
+        Console.log("Phase not found.");
+        return -1;
     }
 
     public List<Component> getUnavailableComponents() {
@@ -965,6 +1018,21 @@ public class Materials {
         for (Milestone milestone : this.milestones) {
             if (milestone.getName().equals(name)) {
                 milestone.setAvailable(available);
+                if (milestone.getName().equals("Tutorial_6")) {
+                    this.phase[0] = 0;
+                } else if (milestone.getExtraCheck().equals(Arrays.asList("Desc_SpaceElevatorPart_1"))) {
+                    this.phase[1]--;
+                } else if (milestone.getExtraCheck().equals(Arrays.asList("Desc_SpaceElevatorPart_2", "Desc_SpaceElevatorPart_3"))) {
+                    this.phase[2]--;
+                } else if (milestone.getExtraCheck().equals(Arrays.asList("Desc_SpaceElevatorPart_4", "Desc_SpaceElevatorPart_5"))) {
+                    this.phase[3]--;
+                } else if (milestone.getExtraCheck().equals(Arrays.asList("Desc_SpaceElevatorPart_6", "Desc_SpaceElevatorPart_7",
+                "Desc_SpaceElevatorPart_8", "Desc_SpaceElevatorPart_9"))) {
+                    this.phase[4]--;
+                } else {
+                    Console.log(milestone.getName()
+                            + " did not update phase counter. This should be the case for all tutorials but the last one, but not for the other milestones.");
+                }
                 return;
             }
         }

@@ -9,6 +9,11 @@ public class Console {
     static String cheatsheet = "";
     static Boolean testPrinted = false;
 
+    public static void hiddenLog(String message) {
+        String temp = message;
+        Console.log += temp + "\n";
+    }
+
     public static void log(String message) {
         String temp = message;
         System.out.println(temp);

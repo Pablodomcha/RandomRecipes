@@ -123,3 +123,5 @@ Milestones per phase:
 3: 5-1 to 6-7
 4: 7-1 to 8-5
 5: 9-1 to 9-5
+
+Space elevator parts ad milestones are locking each other.
