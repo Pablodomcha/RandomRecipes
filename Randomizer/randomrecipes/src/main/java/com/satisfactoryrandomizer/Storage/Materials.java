@@ -64,6 +64,8 @@ public class Materials {
         // Raw materials
         this.components.add(new Component("Desc_Water", false, Arrays.asList("Desc_WaterPump")));
         this.components.addAll(generateComponents());
+        this.components.addAll(addPrefixComp(generateSeries("Recipe_SpaceElevatorPart_1", 1, 12),
+                "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
 
         // //Game/FactoryGame/Recipes/Constructor/
         tempComp.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
@@ -74,7 +76,7 @@ public class Materials {
         tempComp.add(new Component("Desc_IronScrew", "Recipe_Screw", false, false, false));
         tempComp.add(new Component("Desc_GenericBiomass", "Recipe_Biomass_Leaves", false, false, false));
 
-        this.components.addAll((List<Component>) addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
+        this.components.addAll(addPrefixComp(tempComp, "//Game/FactoryGame/Recipes/Constructor/"));
         tempComp.clear();
 
         // //Game/FactoryGame/Recipes/Smelter/
@@ -92,115 +94,8 @@ public class Materials {
         tempComp.clear();
 
         // Milestones
-        // Tutorial are marked as available so that they unlock when their extraChecks
-        // are met (the previous tutorial)
 
-        //Elevator Phases
-        List<String> phase1 = Arrays.asList("Desc_SpaceElevatorPart_1");
-        List<String> phase2 = Arrays.asList("Desc_SpaceElevatorPart_2", "Desc_SpaceElevatorPart_3");
-        List<String> phase3 = Arrays.asList("Desc_SpaceElevatorPart_4", "Desc_SpaceElevatorPart_5");
-        List<String> phase4 = Arrays.asList("Desc_SpaceElevatorPart_6", "Desc_SpaceElevatorPart_7", "Desc_SpaceElevatorPart_8", "Desc_SpaceElevatorPart_9");
-        List<String> phase5 = Arrays.asList("Desc_SpaceElevatorPart_10", "Desc_SpaceElevatorPart_11", "Desc_SpaceElevatorPart_12");
-
-        // //Game/FactoryGame/Schematics/Tutorial/
-        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null));
-        tempMilestones.add(
-                new Milestone("Tutorial_2", true, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1")));
-        tempMilestones
-                .add(new Milestone("Tutorial_3", true, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2")));
-        tempMilestones
-                .add(new Milestone("Tutorial_4", true, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3")));
-        tempMilestones
-                .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4")));
-        tempMilestones
-                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5")));
-
-        this.milestones.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
-        tempMilestones.clear();
-
-        tempMilestones
-                .add(new Milestone("Milestone_1-1", true, false, "Schematic_1-1", Arrays.asList("Tutorial_6")));
-        tempMilestones
-                .add(new Milestone("Milestone_1-2", true, false, "Schematic_1-2", Arrays.asList("Tutorial_6")));
-        tempMilestones
-                .add(new Milestone("Milestone_1-3", true, false, "Schematic_1-3", Arrays.asList("Tutorial_6")));
-        tempMilestones
-                .add(new Milestone("Milestone_2-1", true, false, "Schematic_2-1", Arrays.asList("Tutorial_6")));
-        tempMilestones
-                .add(new Milestone("Milestone_2-2", true, false, "Schematic_2-2", Arrays.asList("Tutorial_6")));
-        tempMilestones
-                .add(new Milestone("Milestone_2-3", true, false, "Schematic_2-3", Arrays.asList("Tutorial_6")));
-        tempMilestones
-                .add(new Milestone("Milestone_2-5", true, false, "Schematic_2-5", Arrays.asList("Tutorial_6")));
-        tempMilestones
-                .add(new Milestone("Milestone_3-1", true, false, "Schematic_3-1", phase1));
-        tempMilestones // This one and the one avove are right despite not looking like it
-                .add(new Milestone("Milestone_3-2", true, false, "Schematic_3-2", Arrays.asList("Tutorial_6")));
-        tempMilestones
-                .add(new Milestone("Milestone_3-3", true, false, "Schematic_3-3", phase1));
-        tempMilestones
-                .add(new Milestone("Milestone_3-4", true, false, "Schematic_3-4", phase1));
-        tempMilestones
-                .add(new Milestone("Milestone_4-1", true, false, "Schematic_4-1", phase1));
-        tempMilestones
-                .add(new Milestone("Milestone_4-2", true, false, "Schematic_4-2", phase1));
-        tempMilestones
-                .add(new Milestone("Milestone_4-3", true, false, "Schematic_4-3", phase1));
-        tempMilestones
-                .add(new Milestone("Milestone_4-4", true, false, "Schematic_4-4",phase1));
-        tempMilestones
-                .add(new Milestone("Milestone_4-5", true, false, "Schematic_4-5", phase1));
-        tempMilestones
-                .add(new Milestone("Milestone_5-1", true, false, "Schematic_5-1", phase2));
-        tempMilestones
-                .add(new Milestone("Milestone_5-2", true, false, "Schematic_5-2", phase2));
-        tempMilestones
-                .add(new Milestone("Milestone_5-4", true, false, "Schematic_5-4", phase2));
-        tempMilestones
-                .add(new Milestone("Milestone_5-5", true, false, "Schematic_5-5", phase2));
-        tempMilestones
-                .add(new Milestone("Milestone_6-1", true, false, "Schematic_6-1", phase2));
-        tempMilestones
-                .add(new Milestone("Milestone_6-2", true, false, "Schematic_6-2", phase2));
-        tempMilestones
-                .add(new Milestone("Milestone_6-3", true, false, "Schematic_6-3", phase2));
-        tempMilestones
-                .add(new Milestone("Milestone_6-5", true, false, "Schematic_6-5",phase2));
-        tempMilestones
-                .add(new Milestone("Milestone_6-7", true, false, "Schematic_6-7", phase2));
-        tempMilestones
-                .add(new Milestone("Milestone_7-1", true, false, "Schematic_7-1", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_7-2", true, false, "Schematic_7-2", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_7-3", true, false, "Schematic_7-3", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_7-4", true, false, "Schematic_7-4", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_7-5", true, false, "Schematic_7-5", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_8-1", true, false, "Schematic_8-1", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_8-2", true, false, "Schematic_8-2", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_8-3", true, false, "Schematic_8-3", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_8-4", true, false, "Schematic_8-4", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_8-5", true, false, "Schematic_8-5", phase3));
-        tempMilestones
-                .add(new Milestone("Milestone_9-1", true, false, "Schematic_9-1", phase4));
-        tempMilestones
-                .add(new Milestone("Milestone_9-2", true, false, "Schematic_9-2", phase4));
-        tempMilestones
-                .add(new Milestone("Milestone_9-3", true, false, "Schematic_9-3", phase4));
-        tempMilestones
-                .add(new Milestone("Milestone_9-4", true, false, "Schematic_9-4", phase4));
-        tempMilestones
-                .add(new Milestone("Milestone_9-5", true, false, "Schematic_9-5", phase4));
-
-        this.milestones.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Progression/"));
-        tempMilestones.clear();
+        this.milestones.addAll(generateMilestones());
 
         // EssentialStructures
         // //Game/FactoryGame/Recipes/Buildings/
@@ -221,7 +116,10 @@ public class Materials {
         tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));
         // Hard to check if it can be used to produce power:
         tempStructures.add(new Structure("GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", false));
-        tempStructures.add(new Structure("GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", false));
+        structures.addAll(addPrefixStruc(tempStructures, "//Game/FactoryGame/Recipes/Buildings/"));
+        tempStructures.clear();
+        structures.addAll(addPrefixStruc(generateStructures(), "//Game/FactoryGame/Recipes/Buildings/"));
+        structures.addAll(addPrefixStruc(generateMoreStructures(), "//Game/FactoryGame/Recipes/Buildings/"));
 
     }
 
@@ -231,7 +129,7 @@ public class Materials {
         this.components.add(new Component("Desc_Wood", null, true, false, false));
     }
 
-    public static List<EssentialStructure> generateEssentialBuildings() {
+    private static List<EssentialStructure> generateEssentialBuildings() {
 
         List<EssentialStructure> tempStructures = new ArrayList<>();
 
@@ -239,23 +137,29 @@ public class Materials {
         if (UiValues.getBelts() <= 1) {
             tempStructures.add(new EssentialStructure("Desc_ConveyorBeltMk1", false, false, "Recipe_ConveyorBeltMk1",
                     true, true, 0));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorPole", false, false,
+                    "Recipe_ConveyorPole", false, false, 0));
         } else if (UiValues.getBelts() == 2) {
             tempStructures.add(new EssentialStructure("Desc_ConveyorBeltMk1", false, false, "Recipe_ConveyorBeltMk1",
                     true, false, 0));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorPole", false, false,
+                    "Recipe_ConveyorPole", false, false, 0));
         } else {
             tempStructures.add(new EssentialStructure("Desc_ConveyorBeltMk1", false, false, "Recipe_ConveyorBeltMk1",
                     true, false, 9));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorPole", false, false,
+                    "Recipe_ConveyorPole", false, false, 9));
         }
         if (UiValues.getBelts() == 0) {
-            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMerger", false, false,
-                    "Recipe_ConveyorAttachmentSplitter", true, true, 0));
-            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitter", false, false,
-                    "Recipe_ConveyorAttachmentSplitter", true, true, 0));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMergerLift", false, false,
+                    "Recipe_ConveyorAttachmentMergerLift", true, true, 0));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitterLift", false, false,
+                    "Recipe_ConveyorAttachmentSplitterLift", true, true, 0));
         } else {
-            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMerger", false, false,
-                    "Recipe_ConveyorAttachmentSplitter", false, false, 9));
-            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitter", false, false,
-                    "Recipe_ConveyorAttachmentSplitter", false, false, 9));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMergerLift", false, false,
+                    "Recipe_ConveyorAttachmentMergerLift", false, false, 9));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitterLift", false, false,
+                    "Recipe_ConveyorAttachmentSplitterLift", false, false, 9));
         }
 
         // Electricity settings
@@ -289,11 +193,15 @@ public class Materials {
                     "Recipe_PowerLine", false, false, 9));
         }
 
+        tempStructures.add(
+                new EssentialStructure("Desc_SpaceElevator", false, false, "TowTruck/Recipe_SpaceElevator", false,
+                        false, 0));
+
         return tempStructures;
 
     }
 
-    public static List<Component> generateComponents() {
+    private static List<Component> generateComponents() {
 
         List<Component> tempRawOre = new ArrayList<>();
 
@@ -333,6 +241,413 @@ public class Materials {
         }
 
         return tempRawOre;
+    }
+
+    private static List<Component> generateMoreComponents() {
+        List<Component> tempComps = new ArrayList<>();
+
+        return tempComps;
+    }
+
+    private static List<Milestone> generateMilestones() {
+        List<Milestone> tempMilestones = new ArrayList<>();
+        List<Milestone> tempReturn = new ArrayList<>();
+        // Tutorial are marked as available so that they unlock when their extraChecks
+        // are met (the previous tutorial)
+
+        // Elevator Phases
+        List<String> phase1 = Arrays.asList("Desc_SpaceElevatorPart_1");
+        List<String> phase2 = Arrays.asList("Desc_SpaceElevatorPart_2", "Desc_SpaceElevatorPart_3");
+        List<String> phase3 = Arrays.asList("Desc_SpaceElevatorPart_4", "Desc_SpaceElevatorPart_5");
+        List<String> phase4 = Arrays.asList("Desc_SpaceElevatorPart_6", "Desc_SpaceElevatorPart_7",
+                "Desc_SpaceElevatorPart_8", "Desc_SpaceElevatorPart_9");
+        List<String> phase5 = Arrays.asList("Desc_SpaceElevatorPart_10", "Desc_SpaceElevatorPart_11",
+                "Desc_SpaceElevatorPart_12");
+
+        // //Game/FactoryGame/Schematics/Tutorial/
+        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null));
+        tempMilestones.add(
+                new Milestone("Tutorial_2", true, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1")));
+        tempMilestones
+                .add(new Milestone("Tutorial_3", true, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2")));
+        tempMilestones
+                .add(new Milestone("Tutorial_4", true, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3")));
+        tempMilestones
+                .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4")));
+        tempMilestones
+                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5")));
+
+        tempReturn.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
+        tempMilestones.clear();
+
+        tempMilestones
+                .add(new Milestone("Milestone_1-1", true, false, "Schematic_1-1", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_1-2", true, false, "Schematic_1-2", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_1-3", true, false, "Schematic_1-3", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_2-1", true, false, "Schematic_2-1", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_2-2", true, false, "Schematic_2-2", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_2-3", true, false, "Schematic_2-3", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_2-5", true, false, "Schematic_2-5", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_3-1", true, false, "Schematic_3-1", phase1));
+        tempMilestones // This one and the one avove are right despite not looking like it
+                .add(new Milestone("Milestone_3-2", true, false, "Schematic_3-2", Arrays.asList("Tutorial_6")));
+        tempMilestones
+                .add(new Milestone("Milestone_3-3", true, false, "Schematic_3-3", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_3-4", true, false, "Schematic_3-4", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-1", true, false, "Schematic_4-1", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-2", true, false, "Schematic_4-2", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-3", true, false, "Schematic_4-3", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-4", true, false, "Schematic_4-4", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_4-5", true, false, "Schematic_4-5", phase1));
+        tempMilestones
+                .add(new Milestone("Milestone_5-1", true, false, "Schematic_5-1", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_5-2", true, false, "Schematic_5-2", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_5-4", true, false, "Schematic_5-4", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_5-5", true, false, "Schematic_5-5", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-1", true, false, "Schematic_6-1", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-2", true, false, "Schematic_6-2", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-3", true, false, "Schematic_6-3", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-5", true, false, "Schematic_6-5", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_6-7", true, false, "Schematic_6-7", phase2));
+        tempMilestones
+                .add(new Milestone("Milestone_7-1", true, false, "Schematic_7-1", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_7-2", true, false, "Schematic_7-2", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_7-3", true, false, "Schematic_7-3", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_7-4", true, false, "Schematic_7-4", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_7-5", true, false, "Schematic_7-5", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-1", true, false, "Schematic_8-1", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-2", true, false, "Schematic_8-2", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-3", true, false, "Schematic_8-3", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-4", true, false, "Schematic_8-4", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_8-5", true, false, "Schematic_8-5", phase3));
+        tempMilestones
+                .add(new Milestone("Milestone_9-1", true, false, "Schematic_9-1", phase4));
+        tempMilestones
+                .add(new Milestone("Milestone_9-2", true, false, "Schematic_9-2", phase4));
+        tempMilestones
+                .add(new Milestone("Milestone_9-3", true, false, "Schematic_9-3", phase4));
+        tempMilestones
+                .add(new Milestone("Milestone_9-4", true, false, "Schematic_9-4", phase4));
+        tempMilestones
+                .add(new Milestone("Milestone_9-5", true, false, "Schematic_9-5", phase4));
+
+        tempReturn.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Progression/"));
+
+        return tempReturn;
+    }
+
+    private static List<Structure> generateStructures() {
+        List<Structure> tempStructures = new ArrayList<>();
+        tempStructures.add(new Structure("Desc_ResourceSinkShop", false, false, "Recipe_ResourceSinkShop",
+                Arrays.asList("Recipe_ResourceSink")));
+        tempStructures.add(new Structure("Desc_Mam", false, false, "Recipe_Mam", Arrays.asList("Recipe_ResourceSink")));
+        tempStructures.add(generateStructure("Recipe_ResourceSinkShop"));
+        tempStructures.add(generateStructure("Recipe_AlienPowerBuilding"));
+        tempStructures.add(generateStructure("Recipe_BlueprintDesigner"));
+        tempStructures.add(generateStructure("Recipe_BlueprintDesigner_Mk3"));
+        tempStructures.add(generateStructure("Recipe_CeilingLight"));
+        tempStructures.add(generateStructure("Recipe_CentralStorage"));
+        tempStructures.add(generateStructure("Recipe_ConveyorAttachmentMergerPriorityLift"));
+        tempStructures.add(generateStructure("Recipe_ConveyorAttachmentSplitterSmartLift"));
+        tempStructures.add(generateStructure("Recipe_ConveyorAttachmentSplitterProgrammableLift"));
+        tempStructures.add(generateStructure("Recipe_ConveyorCeilingAttachment"));
+        tempStructures.add(generateStructure("Recipe_ConveyorMonitor"));
+        tempStructures.add(generateStructure("Recipe_ConveyorPoleStackable"));
+        tempStructures.add(generateStructure("Recipe_ConveyorPoleWall"));
+        tempStructures.add(generateStructure("Recipe_DroneStation"));
+        tempStructures.add(generateStructure("Recipe_DroneTransport"));
+        tempStructures.add(generateStructure("Recipe_FloodlightPole"));
+        tempStructures.add(generateStructure("Recipe_FloodlightWall"));
+        tempStructures.add(generateStructure("Recipe_FrackingExtractor"));
+        tempStructures.add(generateStructure("Recipe_FrackingSmasher"));
+        tempStructures.add(generateStructure("Recipe_HyperPoleStackable"));
+        tempStructures.add(generateStructure("Recipe_HyperTubeJunction"));
+        tempStructures.add(generateStructure("Recipe_HyperTubeTJunction"));
+        tempStructures.add(generateStructure("Recipe_HyperTubeWallHole"));
+        tempStructures.add(generateStructure("Recipe_HyperTubeWallSupport"));
+        tempStructures.add(generateStructure("Recipe_IndustrialTank"));
+        tempStructures.add(generateStructure("Recipe_JumpPad"));
+        tempStructures.add(generateStructure("Recipe_LookoutTower"));
+        tempStructures.add(generateStructure("Recipe_OilPump"));
+        tempStructures.add(generateStructure("Recipe_OilRefinery"));
+        tempStructures.add(generateStructure("Recipe_PipeHyperSupport"));
+        tempStructures.add(generateStructure("Recipe_Pipeline"));
+        tempStructures.add(generateStructure("Recipe_PipelineMK2"));
+        tempStructures.add(generateStructure("Recipe_PipelinePump"));
+        tempStructures.add(generateStructure("Recipe_PipelinePumpMK2"));
+        tempStructures.add(generateStructure("Recipe_PipeStorageTank"));
+        tempStructures.add(generateStructure("Recipe_PipeSupport"));
+        tempStructures.add(generateStructure("Recipe_PipeSupportStackable"));
+        tempStructures.add(generateStructure("Recipe_PipeSupportWall"));
+        tempStructures.add(generateStructure("Recipe_PipeSupportWallHole"));
+        tempStructures.add(generateStructure("Recipe_Portal"));
+        tempStructures.add(generateStructure("Recipe_PortalSatellite"));
+        tempStructures.add(generateStructure("Recipe_PowerPoleMk2"));
+        tempStructures.add(generateStructure("Recipe_PowerPoleMk3"));
+        tempStructures.add(generateStructure("Recipe_PowerPoleWall"));
+        tempStructures.add(generateStructure("Recipe_PowerPoleWallDouble"));
+        tempStructures.add(generateStructure("Recipe_PowerPoleWallDoubleMk2"));
+        tempStructures.add(generateStructure("Recipe_PowerPoleWallDoubleMk3"));
+        tempStructures.add(generateStructure("Recipe_PowerPoleWallMk2"));
+        tempStructures.add(generateStructure("Recipe_PowerPoleWallMk3"));
+        tempStructures.add(generateStructure("Recipe_PowerStorageMk1"));
+        tempStructures.add(generateStructure("Recipe_PowerSwitch"));
+        tempStructures.add(generateStructure("Recipe_PowerTower"));
+        tempStructures.add(generateStructure("Recipe_PowerTowerPlatform"));
+        tempStructures.add(generateStructure("Recipe_PriorityPowerSwitch"));
+        tempStructures.add(generateStructure("Recipe_RadarTower"));
+        tempStructures.add(generateStructure("Recipe_RailroadTrack"));
+        tempStructures.add(generateStructure("Recipe_RailroadTrackIntegrated"));
+        tempStructures.add(generateStructure("Recipe_SignPole_Huge"));
+        tempStructures.add(generateStructure("Recipe_SignPole_Large"));
+        tempStructures.add(generateStructure("Recipe_SignPole_Medium"));
+        tempStructures.add(generateStructure("Recipe_SignPole_Portrait"));
+        tempStructures.add(generateStructure("Recipe_SignPole_Small"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Huge"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Large"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Medium"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Portrait"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Small"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_SmallVeryWide"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_SmallWide"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Square"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Square_Small"));
+        tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Square_Tiny"));
+        tempStructures.add(generateStructure("Recipe_StorageContainerMk1"));
+        tempStructures.add(generateStructure("Recipe_StorageContainerMk2"));
+        tempStructures.add(generateStructure("Recipe_TruckStation"));
+        tempStructures.add(generateStructure("Recipe_UJellyLandingPad"));
+        tempStructures.add(generateStructure("Recipe_Valve"));
+        tempStructures.add(generateStructure("Recipe_WaterPump"));
+        tempStructures.add(generateStructure("Recipe_WorkBench"));
+        tempStructures.add(generateStructure("Recipe_Workshop"));
+
+        tempStructures.addAll(generateMkN("Recipe_ConveyorBeltMk1", 2, 6));
+        tempStructures.addAll(generateMkN("Recipe_ConveyorLiftMk1", 1, 6));
+        tempStructures.addAll(generateMkN("Recipe_MinerMk1", 1, 3));
+
+        return tempStructures;
+    }
+
+    private static List<Structure> generateMoreStructures() {
+        List<Structure> tempStructures = new ArrayList<>();
+        List<Structure> tempReturnStructures = new ArrayList<>();
+
+        tempStructures.add(generateStructure("Recipe_Flat_Frame_01"));
+        tempStructures.add(generateStructure("Recipe_Foundation_8x1_01"));
+        tempStructures.add(generateStructure("Recipe_Foundation_8x2_01"));
+        tempStructures.add(generateStructure("Recipe_Foundation_8x4_01"));
+        tempStructures.add(generateStructure("Recipe_Foundation_Frame_01"));
+        tempStructures.add(generateStructure("Recipe_FoundationGlass_01"));
+        tempStructures.add(generateStructure("Recipe_PillarBase"));
+        tempStructures.add(generateStructure("Recipe_PillarMiddle"));
+        tempStructures.add(generateStructure("Recipe_PillarMiddle_Concrete"));
+        tempStructures.add(generateStructure("Recipe_PillarMiddle_Frame"));
+        tempStructures.add(generateStructure("Recipe_PillarTop"));
+        tempStructures.add(generateStructure("Recipe_QuarterPipe"));
+        tempStructures.add(generateStructure("Recipe_QuarterPipe_02"));
+        tempStructures.add(generateStructure("Recipe_QuarterPipeCorner_01"));
+        tempStructures.add(generateStructure("Recipe_QuarterPipeCorner_02"));
+        tempStructures.add(generateStructure("Recipe_QuarterPipeCorner_03"));
+        tempStructures.add(generateStructure("Recipe_QuarterPipeCorner_04"));
+        tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Foundations/"));
+        tempStructures.clear();
+
+        tempStructures.add(generateStructure("Recipe_Catwalk_Cross"));
+        tempStructures.add(generateStructure("Recipe_Catwalk_Ramp"));
+        tempStructures.add(generateStructure("Recipe_Catwalk_Stairs"));
+        tempStructures.add(generateStructure("Recipe_Catwalk_Straight"));
+        tempStructures.add(generateStructure("Recipe_Catwalk_T"));
+        tempStructures.add(generateStructure("Recipe_Catwalk_Turn"));
+        tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Catwalks/"));
+        tempStructures.clear();
+
+        tempStructures.add(generateStructure("Recipe_Barrier_Corner"));
+        tempStructures.add(generateStructure("Recipe_Barrier_Low_01"));
+        tempStructures.add(generateStructure("Recipe_Barrier_Tall_01"));
+        tempStructures.add(generateStructure("Recipe_ChainLinkFence"));
+        tempStructures.add(generateStructure("Recipe_Concrete_Barrier_01"));
+        tempStructures.add(generateStructure("Recipe_Fence_01"));
+        tempStructures.add(generateStructure("Recipe_Railing_01"));
+        tempStructures.add(generateStructure("Recipe_TarpFence"));
+        tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Fence/"));
+        tempStructures.clear();
+
+        tempReturnStructures.add(generateStructure("Ladder/Recipe_Ladder"));
+        tempReturnStructures.add(generateStructure("Stairs/Recipe_Stairs_Left_01"));
+        tempReturnStructures.add(generateStructure("Stairs/Recipe_Stairs_Right_01"));
+
+        tempStructures.add(generateStructure("Recipe_Ramp_8x1_01"));
+        tempStructures.add(generateStructure("Recipe_Ramp_8x2_01"));
+        tempStructures.add(generateStructure("Recipe_Ramp_8x4_01"));
+        tempStructures.add(generateStructure("Recipe_Ramp_8x4_Inverted_01"));
+        tempStructures.add(generateStructure("Recipe_Ramp_8x8x8"));
+        tempStructures.add(generateStructure("Recipe_Ramp_Diagonal_8x1_01"));
+        tempStructures.add(generateStructure("Recipe_Ramp_Diagonal_8x1_02"));
+        tempStructures.add(generateStructure("Recipe_Ramp_Diagonal_8x2_01"));
+        tempStructures.add(generateStructure("Recipe_Ramp_Diagonal_8x2_02"));
+        tempStructures.add(generateStructure("Recipe_Ramp_Diagonal_8x4_01"));
+        tempStructures.add(generateStructure("Recipe_Ramp_Diagonal_8x4_02"));
+        tempStructures.add(generateStructure("Recipe_Ramp_Frame_01"));
+        tempStructures.add(generateStructure("Recipe_Ramp_Frame_Inverted_01"));
+        tempStructures.add(generateStructure("Recipe_RampDouble"));
+        tempStructures.add(generateStructure("Recipe_RampDouble_8x1"));
+        tempStructures.add(generateStructure("Recipe_RampInverted_8x1"));
+        tempStructures.add(generateStructure("Recipe_RampInverted_8x1_Corner_01"));
+        tempStructures.add(generateStructure("Recipe_RampInverted_8x1_Corner_02"));
+        tempStructures.add(generateStructure("Recipe_RampInverted_8x2_01"));
+        tempStructures.add(generateStructure("Recipe_RampInverted_8x2_Corner_01"));
+        tempStructures.add(generateStructure("Recipe_RampInverted_8x2_Corner_02"));
+        tempStructures.add(generateStructure("Recipe_RampInverted_8x4_Corner_01"));
+        tempStructures.add(generateStructure("Recipe_RampInverted_8x4_Corner_02"));
+        tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Ramps/"));
+        tempStructures.clear();
+
+        tempStructures.addAll(generateMkN("Recipe_Roof_A_01", 1, 4));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Metal_InCorner_01", 1, 3));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Metal_OutCorner_01", 1, 3));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Orange_01", 1, 4));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Orange_InCorner_01", 1, 3));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Orange_OutCorner_01", 1, 3));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Tar_01", 1, 4));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Tar_InCorner_01", 1, 3));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Tar_OutCorner_01", 1, 3));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Window_01", 1, 4));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Window_InCorner_01", 1, 3));
+        tempStructures.addAll(generateMkN("Recipe_Roof_Window_OutCorner_01", 1, 3));
+        tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Roof/"));
+        tempStructures.clear();
+
+        tempStructures.add(generateStructure("Recipe_Walkway_Cross"));
+        tempStructures.add(generateStructure("Recipe_Walkway_Ramp"));
+        tempStructures.add(generateStructure("Recipe_Walkway_Straight"));
+        tempStructures.add(generateStructure("Recipe_Walkway_T"));
+        tempStructures.add(generateStructure("Recipe_Walkway_Turn"));
+        tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Walkways/"));
+        tempStructures.clear();
+
+        tempStructures.add(generateStructure("Recipe_SteelWall_8x1"));
+        tempStructures.add(generateStructure("Recipe_SteelWall_8x4"));
+        tempStructures.add(generateStructure("Recipe_SteelWall_FlipTris_8x1"));
+        tempStructures.add(generateStructure("Recipe_SteelWall_FlipTris_8x2"));
+        tempStructures.add(generateStructure("Recipe_SteelWall_FlipTris_8x4"));
+        tempStructures.add(generateStructure("Recipe_SteelWall_FlipTris_8x8"));
+        tempStructures.add(generateStructure("Recipe_SteelWall_Tris_8x1"));
+        tempStructures.add(generateStructure("Recipe_SteelWall_Tris_8x2"));
+        tempStructures.add(generateStructure("Recipe_SteelWall_Tris_8x4"));
+        tempStructures.add(generateStructure("Recipe_SteelWall_Tris_8x8"));
+        tempStructures.add(generateStructure("Recipe_Wall_8x4_01"));
+        tempStructures.add(generateStructure("Recipe_Wall_8x4_01"));
+        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_01"));
+        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_01_Steel"));
+        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_02"));
+        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_02_Steel"));
+        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_03"));
+        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_03_Steel"));
+        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_04"));
+        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_04_Steel"));
+        tempStructures.add(generateStructure("Recipe_Wall_Door_8x4_01"));
+        tempStructures.add(generateStructure("Recipe_Wall_Door_8x4_01_Steel"));
+        tempStructures.add(generateStructure("Recipe_Wall_Door_8x4_03"));
+        tempStructures.add(generateStructure("Recipe_Wall_Door_8x4_03_Steel"));
+        tempStructures.add(generateStructure("Recipe_Wall_Frame_01"));
+        tempStructures.add(generateStructure("Recipe_Wall_Gate_8x4_01"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_8x1"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_8x4_Corner_01"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_8x4_Corner_02"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_8x8_Corner_01"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_8x8_Corner_02"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_Angular_8x4"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_Angular_8x8"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_FlipTris_8x1"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_FlipTris_8x2"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_FlipTris_8x4"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_FlipTris_8x8"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_Tris_8x1"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_Tris_8x2"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_Tris_8x4"));
+        tempStructures.add(generateStructure("Recipe_Wall_Orange_Tris_8x8"));
+        tempStructures.addAll(generateMkN("Recipe_Wall_Window_8x4_01", 1, 7));
+        tempStructures.add(generateStructure("Recipe_Wall_Window_8x4_03_Steel"));
+        tempStructures.add(generateStructure("Recipe_Wall_Window_Thin_8x4_01"));
+        tempStructures.add(generateStructure("Recipe_Wall_Window_Thin_8x4_02"));
+        tempStructures.add(generateStructure("Recipe_WallSet_Steel_Angular_8x4"));
+        tempStructures.add(generateStructure("Recipe_WallSet_Steel_Angular_8x8"));
+        tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Walls/"));
+        tempStructures.clear();
+
+        return tempReturnStructures;
+    }
+
+    private static Structure generateStructure(String recipe) {
+        return new Structure(recipe.replace("Recipe", "Desc"), false, false, recipe, false);
+    }
+
+    private static List<Structure> generateMkN(String recipe, int min, int max) {
+        List<Structure> tempStructures = new ArrayList<>();
+        for (int i = min; i <= max; i++) {
+            tempStructures.add(
+                    new Structure(recipe.replace("Recipe", "Desc").replace("1", (String.valueOf(i))), false, false,
+                            recipe.replace("1", (String.valueOf(i))), false));
+        }
+        return tempStructures;
+    }
+
+    private static List<Component> generateSeries(String recipe, int min, int max) {
+        List<Component> temComps = new ArrayList<>();
+        for (int i = 0; i <= max - min; i++) {
+
+            List<String> list = (i > 0) ? Arrays.asList(temComps.get(i - 1).getName()) : null;
+
+            temComps.add(
+                    new Component(recipe.replace("Recipe", "Desc").replace("1", (String.valueOf(i+1))),
+                            recipe.replace("1", (String.valueOf(i+1))), false, false, false, 50, list));
+        }
+        return temComps;
+    }
+
+    private static List<Structure> addPrefixStruc(List<Structure> list, String prefix) {
+        List<Structure> prefixedList = new ArrayList<>(list);
+
+        for (int i = 0; i < prefixedList.size(); i++) {
+            Structure c = prefixedList.get(i);
+            if (c.getRecipePath() != null && !c.getRecipePath().startsWith(prefix)) {
+                prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
+            }
+        }
+        Console.log("Prefixed List with " + prefix);
+        return prefixedList;
+
     }
 
     private static List<Component> addPrefixComp(List<Component> list, String prefix) {

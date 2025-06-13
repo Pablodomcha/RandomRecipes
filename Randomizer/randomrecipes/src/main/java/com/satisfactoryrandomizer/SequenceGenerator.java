@@ -179,6 +179,11 @@ public class SequenceGenerator {
     private static void generateStructure(Randomizable structure, String type) {
         // Needed variables. Prod will always only have the structure, but has to be a
         // string regardless.
+        if (structure instanceof EssentialStructure) {
+            if (((EssentialStructure) structure).isCheap()) {
+                type = "cheap";
+            }
+        }
         List<Mat> mats = generateIngredients(type);
 
         Recipe recipe = new Recipe(
@@ -356,6 +361,8 @@ public class SequenceGenerator {
             totalresources = getBiasedRandomInt(1, UiValues.getMaxItemStruct(), UiValues.getInputBias());
         } else if (type.equals("milestone")) {
             totalresources = getBiasedRandomInt(1, UiValues.getMaxItemMile(), UiValues.getInputBias());
+        } else if (type.equals("cheap")) {
+            totalresources = 1;
         } else {
             Console.log("Invalid recipe type: " + type);
             return ingredients;
@@ -387,6 +394,8 @@ public class SequenceGenerator {
                 amount = random.nextInt(liquid * UiValues.getMaxStackStruct()) + 1;
             } else if (type.equals("milestone")) {
                 amount = random.nextInt(liquid * UiValues.getMaxStackMile()) + 1;
+            }else if(type.equals("cheap")){
+                amount = random.nextInt(2) + 1;
             } else {
                 Console.log("Invalid recipe type: " + type + ". This shouldn't happen.");
                 return ingredients;

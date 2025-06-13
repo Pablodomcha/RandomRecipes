@@ -115,25 +115,11 @@ Randomly assign elevator parts as extraunlocks for milestones that don't have th
 
 Liquid oil not marked as liquid?
 
+Randomize HUB recipe in case ores is not easy. "Recipe_TradingPost"
+
+Milestones per phase:
 1: 1-1 to 2-5 + 3-2
 2: 3-1 to 4-5
 3: 5-1 to 6-7
 4: 7-1 to 8-5
 5: 9-1 to 9-5
-
-1. Smart plating
-
-2. versatile framework
-3. automated wiring
-
-4. modular engine
-5. adaptive control unit
-
-6. Magnetic field generator
-7. Assembly director system
-8. Thermal propulsion rocket
-9. Nuclear Pasta
-
-Biochemical Sculptor
-AI expansion server
-Ballistic Warp Drive

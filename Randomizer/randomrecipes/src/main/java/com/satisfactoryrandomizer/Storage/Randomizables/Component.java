@@ -22,7 +22,7 @@ public class Component extends Randomizable {
         this.liquid = liquid;
     }
 
-    // Full constructor for components that enable other components
+    // Full constructor for components that need other checks
     // (like uranium needs to check for several items)
     public Component(String name, String recipepath, Boolean available, Boolean craftable, Boolean liquid, int maxstack,
             List<String> extraCheck) {
