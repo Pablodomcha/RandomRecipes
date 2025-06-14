@@ -116,6 +116,10 @@ public class Materials {
             }
         }
 
+        Console.hiddenLog("\nSelected values:");
+        UiValues.logAll();
+        Console.hiddenLog("\n");
+
         tempStructures.add(new Structure("Desc_GeneratorCoal", false, false, "Recipe_GeneratorCoal", true));
         tempStructures.add(new Structure("Desc_GeneratorFuel", false, false, "Recipe_GeneratorFuel", true));
         tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));

@@ -22,8 +22,8 @@ public class UiValues {
 
     // Numeric values here
     static long seed = 0;
-    static int maxStackComp = 2;
-    static int maxCompCraft = 2;
+    static int maxStackCraft = 2;
+    static int maxProdCraft = 2;
     static int maxStackStruct = 2;
     static int maxItemStruct = 2;
     static int maxStackMile = 20;
@@ -59,7 +59,7 @@ public class UiValues {
 
     public static int addAll(){
         return  1000 * (int) (UiValues.seed % 100 + UiValues.oreLocation + UiValues.belts + UiValues.electricity + UiValues.waste + UiValues.stationBias + UiValues.liquids + UiValues.inventorySlots +
-                UiValues.maxStackComp + UiValues.maxCompCraft + UiValues.maxStackStruct + UiValues.maxItemStruct + UiValues.maxStackMile + UiValues.maxItemMile + UiValues.maxStackEle + UiValues.maxItemEle +
+                UiValues.maxStackCraft + UiValues.maxProdCraft + UiValues.maxStackStruct + UiValues.maxItemStruct + UiValues.maxStackMile + UiValues.maxItemMile + UiValues.maxStackEle + UiValues.maxItemEle +
                 UiValues.maxTimeMile + UiValues.maxTimeCraft + UiValues.handcraftSpeed[1] + UiValues.inputBias + UiValues.maxRecipesUsed + UiValues.freeChance);
     }
 
@@ -71,9 +71,11 @@ public class UiValues {
         Console.hiddenLog("Waste: " + UiValues.waste);
         Console.hiddenLog("Station Bias: " + UiValues.stationBias);
         Console.hiddenLog("Liquids: " + UiValues.liquids);
+        Console.hiddenLog("Balance Prog: " + UiValues.balanceProg);
         Console.hiddenLog("Inventory Slots: " + UiValues.inventorySlots);
-        Console.hiddenLog("Max Stack Comp: " + UiValues.maxStackComp);
-        Console.hiddenLog("Max Comp Craft: " + UiValues.maxCompCraft);
+        Console.hiddenLog("Inventory Range: " + UiValues.inventoryRange[0] + " - " + UiValues.inventoryRange[1]);
+        Console.hiddenLog("Max Stack Craft: " + UiValues.maxStackCraft);
+        Console.hiddenLog("Max Product Craft: " + UiValues.maxProdCraft);
         Console.hiddenLog("Max Stack Struct: " + UiValues.maxStackStruct);
         Console.hiddenLog("Max Item Struct: " + UiValues.maxItemStruct);
         Console.hiddenLog("Max Stack Mile: " + UiValues.maxStackMile);
@@ -82,7 +84,7 @@ public class UiValues {
         Console.hiddenLog("Max Item Ele: " + UiValues.maxItemEle);
         Console.hiddenLog("Max Time Mile: " + UiValues.maxTimeMile);
         Console.hiddenLog("Max Time Craft: " + UiValues.maxTimeCraft);
-        Console.hiddenLog("Handcraft Speed: " + UiValues.handcraftSpeed[1]);
+        Console.hiddenLog("Handcraft Speed: " + UiValues.handcraftSpeed[0] + " - " + UiValues.handcraftSpeed[1]);
         Console.hiddenLog("Input Bias: " + UiValues.inputBias);
         Console.hiddenLog("Max Recipes Used: " + UiValues.maxRecipesUsed);
         Console.hiddenLog("Free Chance: " + UiValues.freeChance);
@@ -260,12 +262,12 @@ public class UiValues {
      * @return 1. Max stack per component: Maximum number of each component needed
      *         for a craft. Over 50 will crash.
      */
-    public static int getMaxStackComp() {
-        return UiValues.maxStackComp;
+    public static int getMaxProdCraft() {
+        return UiValues.maxProdCraft;
     }
 
-    public static void setMaxStackComp(int maxStackComp) {
-        UiValues.maxStackComp = maxStackComp;
+    public static void setMaxProdCraft(int maxProdCraft) {
+        UiValues.maxProdCraft = maxProdCraft;
     }
 
     /**
@@ -273,12 +275,12 @@ public class UiValues {
      *         by a craft. Over 50 will crash.
      */
 
-    public static int getMaxCompCraft() {
-        return UiValues.maxCompCraft;
+    public static int getMaxStackCraft() {
+        return UiValues.maxStackCraft;
     }
 
-    public static void setMaxCompCraft(int maxCompCraft) {
-        UiValues.maxCompCraft = maxCompCraft;
+    public static void setMaxStackCraft(int maxStackCraft) {
+        UiValues.maxStackCraft = maxStackCraft;
     }
 
     /**

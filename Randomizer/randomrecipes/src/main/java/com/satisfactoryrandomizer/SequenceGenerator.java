@@ -236,10 +236,10 @@ public class SequenceGenerator {
         // Then add the rest of the products if the option is enabled and there's space.
         if (station.getLiquidIn() + station.getSolidIn() > 0) {
             if (comp.isLiquid()) {
-                prod.add(new Mat(comp.getName(), 1000 * random.nextInt(UiValues.getMaxStackComp()) + 1));
+                prod.add(new Mat(comp.getName(), 1000 * random.nextInt(UiValues.getMaxStackCraft()) + 1));
                 mainliquid = true;
             } else {
-                prod.add(new Mat(comp.getName(), random.nextInt(UiValues.getMaxStackComp()) + 1));
+                prod.add(new Mat(comp.getName(), random.nextInt(UiValues.getMaxStackCraft()) + 1));
                 mainliquid = false;
             }
             prod.addAll(generateProducts(station, mainliquid));
@@ -535,7 +535,7 @@ public class SequenceGenerator {
 
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
-            products.add(new Mat(component.getName(), random.nextInt(UiValues.getMaxCompCraft()) + 1));
+            products.add(new Mat(component.getName(), random.nextInt(UiValues.getMaxStackCraft()) + 1));
         }
 
         return products;
