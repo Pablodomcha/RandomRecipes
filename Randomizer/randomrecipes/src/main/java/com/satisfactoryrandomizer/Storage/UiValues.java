@@ -1,5 +1,7 @@
 package com.satisfactoryrandomizer.Storage;
 
+import com.satisfactoryrandomizer.Console;
+
 // Stores the values from the UI inputs, to have them somewhere organized and easily accessible
 
 public class UiValues {
@@ -59,6 +61,31 @@ public class UiValues {
         return  1000 * (int) (UiValues.seed % 100 + UiValues.oreLocation + UiValues.belts + UiValues.electricity + UiValues.waste + UiValues.stationBias + UiValues.liquids + UiValues.inventorySlots +
                 UiValues.maxStackComp + UiValues.maxCompCraft + UiValues.maxStackStruct + UiValues.maxItemStruct + UiValues.maxStackMile + UiValues.maxItemMile + UiValues.maxStackEle + UiValues.maxItemEle +
                 UiValues.maxTimeMile + UiValues.maxTimeCraft + UiValues.handcraftSpeed[1] + UiValues.inputBias + UiValues.maxRecipesUsed + UiValues.freeChance);
+    }
+
+    public static void logAll(){
+        Console.hiddenLog("Seed: " + UiValues.seed);
+        Console.hiddenLog("Ore Location: " + UiValues.oreLocation);
+        Console.hiddenLog("Belts: " + UiValues.belts);
+        Console.hiddenLog("Electricity: " + UiValues.electricity);
+        Console.hiddenLog("Waste: " + UiValues.waste);
+        Console.hiddenLog("Station Bias: " + UiValues.stationBias);
+        Console.hiddenLog("Liquids: " + UiValues.liquids);
+        Console.hiddenLog("Inventory Slots: " + UiValues.inventorySlots);
+        Console.hiddenLog("Max Stack Comp: " + UiValues.maxStackComp);
+        Console.hiddenLog("Max Comp Craft: " + UiValues.maxCompCraft);
+        Console.hiddenLog("Max Stack Struct: " + UiValues.maxStackStruct);
+        Console.hiddenLog("Max Item Struct: " + UiValues.maxItemStruct);
+        Console.hiddenLog("Max Stack Mile: " + UiValues.maxStackMile);
+        Console.hiddenLog("Max Item Mile: " + UiValues.maxItemMile);
+        Console.hiddenLog("Max Stack Ele: " + UiValues.maxStackEle);
+        Console.hiddenLog("Max Item Ele: " + UiValues.maxItemEle);
+        Console.hiddenLog("Max Time Mile: " + UiValues.maxTimeMile);
+        Console.hiddenLog("Max Time Craft: " + UiValues.maxTimeCraft);
+        Console.hiddenLog("Handcraft Speed: " + UiValues.handcraftSpeed[1]);
+        Console.hiddenLog("Input Bias: " + UiValues.inputBias);
+        Console.hiddenLog("Max Recipes Used: " + UiValues.maxRecipesUsed);
+        Console.hiddenLog("Free Chance: " + UiValues.freeChance);
     }
 
     public static int getOreLocation() {

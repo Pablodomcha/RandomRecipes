@@ -69,6 +69,10 @@ public class Randomizable {
         return this.extraCheck;
     }
 
+    public void addExtraCheck(String extraCheck) {
+        this.extraCheck.add(extraCheck);
+    }
+
     public void removeExtraCheck(String extraCheck) {
         for (int i = 0; i < this.extraCheck.size(); i++) {
             if (this.extraCheck.get(i).equals(extraCheck)) {

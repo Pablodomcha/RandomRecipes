@@ -24,6 +24,7 @@ Info:
     15. Negative values for probabilities will be either treated as 0, produce unexpected results or crash the randomizer. Idem for 100 and values over it.  Don't put either preferably.
     16. Space elevator stages untouched (Changing them would be a pain and the path to get to it is already random anyway).
     17. Milestones are not necessarily linear, tier 1 milestones could need tier 9 materials to unlock. In this case, anything unlocked by that tier 1 milestone won't be needed until it's unlockable.
+    18. Limited resources like slugs, hard drives and wood/leaves are only used in alternate recipes to avoid softlocks.
 
 -Options (Toggle):
     1. Ore location:
@@ -125,3 +126,5 @@ Milestones per phase:
 5: 9-1 to 9-5
 
 Space elevator parts ad milestones are locking each other.
+
+Check phases and ensure mandatory items are in them.

@@ -16,7 +16,7 @@ public class Materials {
     private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by
                                                                               // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
-    private int[] phase;
+    private int[] phase = {};
 
     public void prepare() {
 
@@ -63,10 +63,11 @@ public class Materials {
         // Components
 
         // Raw materials
-        this.components.add(new Component("Desc_Water", false, Arrays.asList("Desc_WaterPump")));
-        this.components.addAll(generateComponents());
-        this.components.addAll(addPrefixComp(generateSeries("Recipe_SpaceElevatorPart_1", 1, 12),
-                "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
+        this.components.add(new Component("Desc_Water", false, Arrays.asList("Desc_WaterPump", "pipe")));
+        this.components.addAll(generateComponents()); // They have no path, so no prefix is added.
+
+        // //Game/FactoryGame/Recipes/SpaceElevatorParts/
+        this.components.addAll(addPrefixComp(generateElevator(), "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
 
         // //Game/FactoryGame/Recipes/Constructor/
         tempComp.add(new Component("Desc_IronPlate", "Recipe_IronPlate", true, false, false));
@@ -106,17 +107,20 @@ public class Materials {
 
         // Structures
         for (EssentialStructure structure : this.essentialStructures) {
-            if (structure.addWhen() == 9) { // Can be added whenever, so it's actually not essential
+            if (structure.addWhen() == 1) {
+                getMilestoneByName("Tutorial_6").addExtraCheck(structure.getName());
+                Console.log(structure.getName() + " added to Tutorial_6.");
+            } else { // Can be added whenever, so it's actually not essential
                 structures.add(structure);
-                essentialStructures.remove(structure);
                 Console.log(structure.getName() + " moved to non-essential structures.");
             }
         }
+
         tempStructures.add(new Structure("Desc_GeneratorCoal", false, false, "Recipe_GeneratorCoal", true));
         tempStructures.add(new Structure("Desc_GeneratorFuel", false, false, "Recipe_GeneratorFuel", true));
         tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));
         // Hard to check if it can be used to produce power:
-        tempStructures.add(new Structure("GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", false));
+        tempStructures.add(new Structure("Desc_GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", false));
         structures.addAll(addPrefixStruc(tempStructures, "//Game/FactoryGame/Recipes/Buildings/"));
         tempStructures.clear();
         structures.addAll(addPrefixStruc(generateStructures(), "//Game/FactoryGame/Recipes/Buildings/"));
@@ -194,6 +198,14 @@ public class Materials {
                     "Recipe_PowerLine", false, false, 9));
         }
 
+        if (UiValues.getWaste() == 1) {
+            tempStructures.add(new EssentialStructure("Desc_ResourceSinkShop", false, false, "Recipe_ResourceSinkShop",
+                    true, 0, Arrays.asList("Desc_ResourceSink", "power")));
+        } else {
+            tempStructures.add(new EssentialStructure("Desc_ResourceSinkShop", false, false, "Recipe_ResourceSinkShop",
+                    false, 9, Arrays.asList("Desc_ResourceSink", "power")));
+        }
+
         tempStructures.add(
                 new EssentialStructure("Desc_SpaceElevator", false, false, "TowTruck/Recipe_SpaceElevator", false,
                         false, 0));
@@ -211,31 +223,34 @@ public class Materials {
             tempRawOre.add(new Component("Desc_OreCopper", false, Arrays.asList("Tutorial_2")));
             tempRawOre.add(new Component("Desc_Stone", false, Arrays.asList("Tutorial_3")));
             tempRawOre.add(new Component("Desc_Coal", false, Arrays.asList("Milestone_3-1")));
-            tempRawOre.add(new Component("Desc_LiquidOil", false, Arrays.asList("Milestone_5-2")));
+            tempRawOre.add(new Component("Desc_LiquidOil", false,
+                    Arrays.asList("Milestone_5-2", "Desc_OilPump", "pipe", "power")));
             tempRawOre.add(new Component("Desc_OreGold", false, Arrays.asList("Milestone_5-5")));
             tempRawOre.add(new Component("Desc_OreBauxite", false, Arrays.asList("Milestone_7-1")));
             tempRawOre.add(new Component("Desc_RawQuartz", false, Arrays.asList("Milestone_7-1")));
             tempRawOre.add(new Component("Desc_Sulfur", false, Arrays.asList("Milestone_7-5")));
             tempRawOre.add(new Component("Desc_OreUranium", false,
-                    Arrays.asList("Milestone_8-2", "Desc_HazmatFilter", "Recipe_HazmatSuit")));
-            tempRawOre.add(new Component("Desc_NitrogenGas", false, Arrays.asList("Milestone_8-3")));
+                    Arrays.asList("Milestone_8-2", "Desc_HazmatFilter", "Desc_HazmatSuit")));
+            tempRawOre.add(new Component("Desc_NitrogenGas", false,
+                    Arrays.asList("Milestone_8-3", "Desc_FrackingExtractor", "Desc_FrackingSmasher", "pipe", "power")));
             tempRawOre.add(new Component("Desc_SAM", false, Arrays.asList("Milestone_9-1")));
         } else {
             tempRawOre.add(new Component("Desc_OreIron", false, null));
             tempRawOre.add(new Component("Desc_OreCopper", false, null));
             tempRawOre.add(new Component("Desc_Stone", false, null));
             tempRawOre.add(new Component("Desc_Coal", false, null));
-            tempRawOre.add(new Component("Desc_LiquidOil", false, null));
+            tempRawOre.add(new Component("Desc_LiquidOil", false, Arrays.asList("Desc_OilPump", "pipe", "power")));
             tempRawOre.add(new Component("Desc_OreGold", false, null));
             tempRawOre.add(new Component("Desc_OreBauxite", false, null));
             tempRawOre.add(new Component("Desc_RawQuartz", false, null));
             tempRawOre.add(new Component("Desc_Sulfur", false, null));
-            tempRawOre.add(new Component("Desc_NitrogenGas", false, null));
+            tempRawOre.add(new Component("Desc_NitrogenGas", false,
+                    Arrays.asList("Desc_FrackingExtractor", "Desc_FrackingSmasher", "pipe", "power")));
             tempRawOre.add(new Component("Desc_SAM", false, null));
 
             if (UiValues.getOreLocation() == 1) {
                 tempRawOre.add(new Component("Desc_OreUranium", false,
-                        Arrays.asList("Desc_HazmatFilter", "Recipe_HazmatSuit")));
+                        Arrays.asList("Desc_HazmatFilter", "Desc_HazmatSuit")));
             } else {
                 tempRawOre.add(new Component("Desc_OreUranium", false, null));
             }
@@ -263,137 +278,120 @@ public class Materials {
         List<String> phase4 = Arrays.asList("Desc_SpaceElevatorPart_6", "Desc_SpaceElevatorPart_7",
                 "Desc_SpaceElevatorPart_8", "Desc_SpaceElevatorPart_9");
 
+        int[] p = { 1, phase1.size(), phase2.size(), phase3.size(), phase4.size() };
+        this.phase = p;
+
         // //Game/FactoryGame/Schematics/Tutorial/
-        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null,true));
+        tempMilestones.add(new Milestone("Tutorial_1", true, false, "Schematic_Tutorial1", null, 0));
         tempMilestones.add(
-                new Milestone("Tutorial_2", true, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1"),true));
+                new Milestone("Tutorial_2", true, false, "Schematic_Tutorial1_5", Arrays.asList("Tutorial_1"), 0));
         tempMilestones
-                .add(new Milestone("Tutorial_3", true, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2"),true));
+                .add(new Milestone("Tutorial_3", true, false, "Schematic_Tutorial2", Arrays.asList("Tutorial_2"), 0));
         tempMilestones
-                .add(new Milestone("Tutorial_4", true, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3"),true));
+                .add(new Milestone("Tutorial_4", true, false, "Schematic_Tutorial3", Arrays.asList("Tutorial_3"), 0));
         tempMilestones
-                .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4"),true));
+                .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4"), 0));
         tempMilestones
-                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5"),true));
+                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5"), 0));
 
         tempReturn.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
         tempMilestones.clear();
 
         tempMilestones
-                .add(new Milestone("Milestone_1-1", true, false, "Schematic_1-1", Arrays.asList("Tutorial_6")));
+                .add(new Milestone("Milestone_1-1", true, false, "Schematic_1-1", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
-                .add(new Milestone("Milestone_1-2", true, false, "Schematic_1-2", Arrays.asList("Tutorial_6")));
+                .add(new Milestone("Milestone_1-2", true, false, "Schematic_1-2", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
-                .add(new Milestone("Milestone_1-3", true, false, "Schematic_1-3", Arrays.asList("Tutorial_6")));
+                .add(new Milestone("Milestone_1-3", true, false, "Schematic_1-3", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
-                .add(new Milestone("Milestone_2-1", true, false, "Schematic_2-1", Arrays.asList("Tutorial_6")));
+                .add(new Milestone("Milestone_2-1", true, false, "Schematic_2-1", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
-                .add(new Milestone("Milestone_2-2", true, false, "Schematic_2-2", Arrays.asList("Tutorial_6")));
+                .add(new Milestone("Milestone_2-2", true, false, "Schematic_2-2", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
-                .add(new Milestone("Milestone_2-3", true, false, "Schematic_2-3", Arrays.asList("Tutorial_6")));
+                .add(new Milestone("Milestone_2-3", true, false, "Schematic_2-3", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
-                .add(new Milestone("Milestone_2-5", true, false, "Schematic_2-5", Arrays.asList("Tutorial_6")));
+                .add(new Milestone("Milestone_2-5", true, false, "Schematic_2-5", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
-                .add(new Milestone("Milestone_3-1", true, false, "Schematic_3-1", phase1));
+                .add(new Milestone("Milestone_3-1", true, false, "Schematic_3-1", phase1, 2));
         tempMilestones // This one and the one avove are right despite not looking like it
-                .add(new Milestone("Milestone_3-2", true, false, "Schematic_3-2", Arrays.asList("Tutorial_6")));
+                .add(new Milestone("Milestone_3-2", true, false, "Schematic_3-2", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
-                .add(new Milestone("Milestone_3-3", true, false, "Schematic_3-3", phase1));
+                .add(new Milestone("Milestone_3-3", true, false, "Schematic_3-3", phase1, 2));
         tempMilestones
-                .add(new Milestone("Milestone_3-4", true, false, "Schematic_3-4", phase1));
+                .add(new Milestone("Milestone_3-4", true, false, "Schematic_3-4", phase1, 2));
         tempMilestones
-                .add(new Milestone("Milestone_4-1", true, false, "Schematic_4-1", phase1));
+                .add(new Milestone("Milestone_4-1", true, false, "Schematic_4-1", phase1, 2));
         tempMilestones
-                .add(new Milestone("Milestone_4-2", true, false, "Schematic_4-2", phase1));
+                .add(new Milestone("Milestone_4-2", true, false, "Schematic_4-2", phase1, 2));
         tempMilestones
-                .add(new Milestone("Milestone_4-3", true, false, "Schematic_4-3", phase1));
+                .add(new Milestone("Milestone_4-3", true, false, "Schematic_4-3", phase1, 2));
         tempMilestones
-                .add(new Milestone("Milestone_4-4", true, false, "Schematic_4-4", phase1));
+                .add(new Milestone("Milestone_4-4", true, false, "Schematic_4-4", phase1, 2));
         tempMilestones
-                .add(new Milestone("Milestone_4-5", true, false, "Schematic_4-5", phase1));
+                .add(new Milestone("Milestone_4-5", true, false, "Schematic_4-5", phase1, 2));
         tempMilestones
-                .add(new Milestone("Milestone_5-1", true, false, "Schematic_5-1", phase2));
+                .add(new Milestone("Milestone_5-1", true, false, "Schematic_5-1", phase2, 3));
         tempMilestones
-                .add(new Milestone("Milestone_5-2", true, false, "Schematic_5-2", phase2));
+                .add(new Milestone("Milestone_5-2", true, false, "Schematic_5-2", phase2, 3));
         tempMilestones
-                .add(new Milestone("Milestone_5-4", true, false, "Schematic_5-4", phase2));
+                .add(new Milestone("Milestone_5-4", true, false, "Schematic_5-4", phase2, 3));
         tempMilestones
-                .add(new Milestone("Milestone_5-5", true, false, "Schematic_5-5", phase2));
+                .add(new Milestone("Milestone_5-5", true, false, "Schematic_5-5", phase2, 3));
         tempMilestones
-                .add(new Milestone("Milestone_6-1", true, false, "Schematic_6-1", phase2));
+                .add(new Milestone("Milestone_6-1", true, false, "Schematic_6-1", phase2, 3));
         tempMilestones
-                .add(new Milestone("Milestone_6-2", true, false, "Schematic_6-2", phase2));
+                .add(new Milestone("Milestone_6-2", true, false, "Schematic_6-2", phase2, 3));
         tempMilestones
-                .add(new Milestone("Milestone_6-3", true, false, "Schematic_6-3", phase2));
+                .add(new Milestone("Milestone_6-3", true, false, "Schematic_6-3", phase2, 3));
         tempMilestones
-                .add(new Milestone("Milestone_6-5", true, false, "Schematic_6-5", phase2));
+                .add(new Milestone("Milestone_6-5", true, false, "Schematic_6-5", phase2, 3));
         tempMilestones
-                .add(new Milestone("Milestone_6-7", true, false, "Schematic_6-7", phase2));
+                .add(new Milestone("Milestone_6-7", true, false, "Schematic_6-7", phase2, 3));
         tempMilestones
-                .add(new Milestone("Milestone_7-1", true, false, "Schematic_7-1", phase3));
+                .add(new Milestone("Milestone_7-1", true, false, "Schematic_7-1", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_7-2", true, false, "Schematic_7-2", phase3));
+                .add(new Milestone("Milestone_7-2", true, false, "Schematic_7-2", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_7-3", true, false, "Schematic_7-3", phase3));
+                .add(new Milestone("Milestone_7-3", true, false, "Schematic_7-3", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_7-4", true, false, "Schematic_7-4", phase3));
+                .add(new Milestone("Milestone_7-4", true, false, "Schematic_7-4", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_7-5", true, false, "Schematic_7-5", phase3));
+                .add(new Milestone("Milestone_7-5", true, false, "Schematic_7-5", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_8-1", true, false, "Schematic_8-1", phase3));
+                .add(new Milestone("Milestone_8-1", true, false, "Schematic_8-1", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_8-2", true, false, "Schematic_8-2", phase3));
+                .add(new Milestone("Milestone_8-2", true, false, "Schematic_8-2", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_8-3", true, false, "Schematic_8-3", phase3));
+                .add(new Milestone("Milestone_8-3", true, false, "Schematic_8-3", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_8-4", true, false, "Schematic_8-4", phase3));
+                .add(new Milestone("Milestone_8-4", true, false, "Schematic_8-4", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_8-5", true, false, "Schematic_8-5", phase3));
+                .add(new Milestone("Milestone_8-5", true, false, "Schematic_8-5", phase3, 4));
         tempMilestones
-                .add(new Milestone("Milestone_9-1", true, false, "Schematic_9-1", phase4));
+                .add(new Milestone("Milestone_9-1", true, false, "Schematic_9-1", phase4, 5));
         tempMilestones
-                .add(new Milestone("Milestone_9-2", true, false, "Schematic_9-2", phase4));
+                .add(new Milestone("Milestone_9-2", true, false, "Schematic_9-2", phase4, 5));
         tempMilestones
-                .add(new Milestone("Milestone_9-3", true, false, "Schematic_9-3", phase4));
+                .add(new Milestone("Milestone_9-3", true, false, "Schematic_9-3", phase4, 5));
         tempMilestones
-                .add(new Milestone("Milestone_9-4", true, false, "Schematic_9-4", phase4));
+                .add(new Milestone("Milestone_9-4", true, false, "Schematic_9-4", phase4, 5));
         tempMilestones
-                .add(new Milestone("Milestone_9-5", true, false, "Schematic_9-5", phase4));
+                .add(new Milestone("Milestone_9-5", true, false, "Schematic_9-5", phase4, 5));
 
         tempReturn.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Progression/"));
 
-        this.phase = new int[5];
-
         for (Milestone milestone : tempMilestones) {
-            if (milestone.getExtraCheck().equals(Arrays.asList("Tutorial_6"))) {
-                Console.hiddenLog(milestone.getName() + " is in phase 1.");
-                this.phase[1]++;
-            } else if (milestone.getExtraCheck().equals(phase1)) {
-                Console.hiddenLog(milestone.getName() + " is in phase 2.");
-                this.phase[2]++;
-            } else if (milestone.getExtraCheck().equals(phase2)) {
-                Console.hiddenLog(milestone.getName() + " is in phase 3.");
-                this.phase[3]++;
-            } else if (milestone.getExtraCheck().equals(phase3)) {
-                Console.hiddenLog(milestone.getName() + " is in phase 4.");
-                this.phase[4]++;
-            } else if (milestone.getExtraCheck().equals(phase4)) {
-                Console.hiddenLog(milestone.getName() + " is in phase 5.");
-            } else {
-                Console.log(milestone.getName()
-                        + " has no elevator phase assigned. This should be the case for all tutorials but the last one, but not for the other milestones.");
-            }
+            Console.hiddenLog(milestone.getName() + " is in phase " + milestone.getPhase());
         }
+        Console.hiddenLog("Yes, 3-2 is correctly in phase 1 (at least as of patch 1.1).");
 
         return tempReturn;
     }
 
     private static List<Structure> generateStructures() {
         List<Structure> tempStructures = new ArrayList<>();
-        tempStructures.add(new Structure("Desc_ResourceSinkShop", false, false, "Recipe_ResourceSinkShop",
-                Arrays.asList("Recipe_ResourceSink")));
-        tempStructures.add(new Structure("Desc_Mam", false, false, "Recipe_Mam", Arrays.asList("Recipe_ResourceSink")));
-        tempStructures.add(generateStructure("Recipe_ResourceSinkShop"));
+        tempStructures.add(new Structure("Desc_Mam", false, false, "Recipe_Mam", Arrays.asList("power")));
+        tempStructures.add(generateStructure("Recipe_ResourceSink", Arrays.asList("power")));
         tempStructures.add(generateStructure("Recipe_AlienPowerBuilding"));
         tempStructures.add(generateStructure("Recipe_BlueprintDesigner"));
         tempStructures.add(generateStructure("Recipe_BlueprintDesigner_Mk3"));
@@ -421,7 +419,6 @@ public class Materials {
         tempStructures.add(generateStructure("Recipe_JumpPad"));
         tempStructures.add(generateStructure("Recipe_LookoutTower"));
         tempStructures.add(generateStructure("Recipe_OilPump"));
-        tempStructures.add(generateStructure("Recipe_OilRefinery"));
         tempStructures.add(generateStructure("Recipe_PipeHyperSupport"));
         tempStructures.add(generateStructure("Recipe_Pipeline"));
         tempStructures.add(generateStructure("Recipe_PipelineMK2"));
@@ -525,9 +522,11 @@ public class Materials {
         tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Fence/"));
         tempStructures.clear();
 
-        tempReturnStructures.add(generateStructure("Ladder/Recipe_Ladder"));
-        tempReturnStructures.add(generateStructure("Stairs/Recipe_Stairs_Left_01"));
-        tempReturnStructures.add(generateStructure("Stairs/Recipe_Stairs_Right_01"));
+        tempReturnStructures.addAll(addPrefixStruc(Arrays.asList(generateStructure("Recipe_Ladder")), "Ladder/"));
+        tempReturnStructures
+                .addAll(addPrefixStruc(Arrays.asList(generateStructure("Recipe_Stairs_Left_01")), "Stairs/"));
+        tempReturnStructures
+                .addAll(addPrefixStruc(Arrays.asList(generateStructure("Recipe_Stairs_Right_01")), "Stairs/"));
 
         tempStructures.add(generateStructure("Recipe_Ramp_8x1_01"));
         tempStructures.add(generateStructure("Recipe_Ramp_8x2_01"));
@@ -589,7 +588,6 @@ public class Materials {
         tempStructures.add(generateStructure("Recipe_SteelWall_Tris_8x4"));
         tempStructures.add(generateStructure("Recipe_SteelWall_Tris_8x8"));
         tempStructures.add(generateStructure("Recipe_Wall_8x4_01"));
-        tempStructures.add(generateStructure("Recipe_Wall_8x4_01"));
         tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_01"));
         tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_01_Steel"));
         tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_02"));
@@ -635,6 +633,10 @@ public class Materials {
         return new Structure(recipe.replace("Recipe", "Desc"), false, false, recipe, false);
     }
 
+    private static Structure generateStructure(String recipe, List<String> extraChecks) {
+        return new Structure(recipe.replace("Recipe", "Desc"), false, false, recipe, extraChecks);
+    }
+
     private static List<Structure> generateMkN(String recipe, int min, int max) {
         List<Structure> tempStructures = new ArrayList<>();
         for (int i = min; i <= max; i++) {
@@ -645,15 +647,30 @@ public class Materials {
         return tempStructures;
     }
 
-    private static List<Component> generateSeries(String recipe, int min, int max) {
+    private static List<Component> generateElevator() {
         List<Component> temComps = new ArrayList<>();
-        for (int i = 0; i <= max - min; i++) {
+        for (int i = 0; i < 12; i++) {
+            String recipe = "Desc_SpaceElevatorPart_1";
+            int phase;
 
-            List<String> list = (i > 0) ? Arrays.asList(temComps.get(i - 1).getName()) : null;
+            if (i == 0) {
+                phase = 0;
+            } else if (i < 3) {
+                phase = 1;
+            } else if (i < 5) {
+                phase = 2;
+            } else if (i < 9) {
+                phase = 3;
+            } else if (i < 12) {
+                phase = 4;
+            } else {
+                Console.hiddenLog("Couldn't assign requirements for: " + recipe);
+                return temComps;
+            }
 
             temComps.add(
-                    new Component(recipe.replace("Recipe", "Desc").replace("1", (String.valueOf(i + 1))),
-                            recipe.replace("1", (String.valueOf(i + 1))), false, false, false, 50, list));
+                    new ElevatorPart(recipe.replace("Recipe", "Desc").replace("1", (String.valueOf(i + 1))),
+                            recipe.replace("1", (String.valueOf(i + 1))), true, false, false, 50, null, phase));
 
         }
         return temComps;
@@ -788,6 +805,16 @@ public class Materials {
         return null;
     }
 
+    public List<Structure> getGenerators() {
+        List<Structure> result = new ArrayList<>();
+        for (Structure structure : this.structures) {
+            if (structure.getName().contains("Desc_Generator")) {
+                result.add(structure);
+            }
+        }
+        return result;
+    }
+
     public Boolean replaceComponentByName(String name, Component newComponent) {
         for (int i = 0; i < this.components.size(); i++) {
             if (this.components.get(i).getName().equals(name)) {
@@ -849,24 +876,72 @@ public class Materials {
         return result;
     }
 
-public List<Milestone> getTutorials(){
-    List<Milestone> result = new ArrayList<>();
-    for (Milestone milestone : this.milestones) {
-        if (milestone.isTutorial()) {
-            result.add(milestone);
+    public List<Milestone> getCraftableMilestones() {
+        List<Milestone> result = new ArrayList<>();
+        for (Milestone milestone : this.milestones) {
+            if (milestone.isCraftable()) {
+                result.add(milestone);
+            }
         }
+        return result;
     }
-    return result;
-}
+
+    public List<String> getMilestonesPhase(int phase) {
+        List<String> result = new ArrayList<>();
+        for (Milestone milestone : this.milestones) {
+            if (milestone.getPhase() == phase) {
+                result.add(milestone.getName());
+            }
+        }
+        return result;
+    }
+
+    public List<Component> getElevatorPhase() {
+        List<Component> result = new ArrayList<>();
+        for (Component part : this.components) {
+            if (part instanceof ElevatorPart) {
+                if (((ElevatorPart) part).addWhen() == this.getPhase()) {
+                    result.add(part);
+                }
+            }
+        }
+        return result;
+
+    }
+
+    public Component getRandomElevatorPhase(int phase, int seed) {
+        List<Component> result = new ArrayList<>();
+        for (Component part : this.components) {
+            if (part instanceof ElevatorPart) {
+                if (((ElevatorPart) part).addWhen() == phase) {
+                    if (part.isCraftable() == false) {
+                        result.add(part);
+                    }
+                }
+            }
+        }
+        Random random = new Random(seed);
+        return result.get(random.nextInt(result.size()));
+    }
 
     public int getPhase() {
-        for(int i=0; i<this.phase.length; i++) {
+        for (int i = 0; i < this.phase.length; i++) {
             if (this.phase[i] > 0) {
                 return i;
             }
         }
-        Console.log("Phase not found.");
-        return -1;
+        return 5;
+    }
+
+    public void setPhase() {
+        int currentPhase = this.getPhase();
+        if (currentPhase == 5) {
+            return;
+        }
+        this.phase[currentPhase]--;
+        if (this.phase[currentPhase] <= 0) {
+            Console.hiddenLog("Phase " + currentPhase + " finished.");
+        }
     }
 
     public List<Component> getUnavailableComponents() {
@@ -1022,12 +1097,15 @@ public List<Milestone> getTutorials(){
                     this.phase[0] = 0;
                 } else if (milestone.getExtraCheck().equals(Arrays.asList("Desc_SpaceElevatorPart_1"))) {
                     this.phase[1]--;
-                } else if (milestone.getExtraCheck().equals(Arrays.asList("Desc_SpaceElevatorPart_2", "Desc_SpaceElevatorPart_3"))) {
+                } else if (milestone.getExtraCheck()
+                        .equals(Arrays.asList("Desc_SpaceElevatorPart_2", "Desc_SpaceElevatorPart_3"))) {
                     this.phase[2]--;
-                } else if (milestone.getExtraCheck().equals(Arrays.asList("Desc_SpaceElevatorPart_4", "Desc_SpaceElevatorPart_5"))) {
+                } else if (milestone.getExtraCheck()
+                        .equals(Arrays.asList("Desc_SpaceElevatorPart_4", "Desc_SpaceElevatorPart_5"))) {
                     this.phase[3]--;
-                } else if (milestone.getExtraCheck().equals(Arrays.asList("Desc_SpaceElevatorPart_6", "Desc_SpaceElevatorPart_7",
-                "Desc_SpaceElevatorPart_8", "Desc_SpaceElevatorPart_9"))) {
+                } else if (milestone.getExtraCheck()
+                        .equals(Arrays.asList("Desc_SpaceElevatorPart_6", "Desc_SpaceElevatorPart_7",
+                                "Desc_SpaceElevatorPart_8", "Desc_SpaceElevatorPart_9"))) {
                     this.phase[4]--;
                 } else {
                     Console.log(milestone.getName()
@@ -1094,19 +1172,30 @@ public List<Milestone> getTutorials(){
         for (Randomizable r : randomizables) {
             for (String extra : r.getExtraCheck()) {
                 if (extra != null) {
-                    Randomizable item = this.getRandomizableByName(extra);
-                    if (item instanceof Component) {
-                        getComponentByName(extra).addCheckAlso(r.getName());
-                    } else if (item instanceof CraftStation) {
-                        getStructureByName(extra).addCheckAlso(r.getName());
-                    } else if (item instanceof EssentialStructure) {
-                        getStructureByName(extra).addCheckAlso(r.getName());
-                    } else if (item instanceof Milestone) {
-                        getMilestoneByName(extra).addCheckAlso(r.getName());
-                    } else if (item instanceof Structure) {
-                        getStructureByName(extra).addCheckAlso(r.getName());
+
+                    if (extra.equals("power")) {
+                        for (Structure gen : getGenerators()) {
+                            gen.addCheckAlso("power");
+                        }
+                    } else if (extra.equals("pipe")) {
+                        getStructureByName("Desc_Pipeline").addCheckAlso(r.getName());
+                        getStructureByName("Desc_PipelineMK2").addCheckAlso(r.getName());
                     } else {
-                        Console.log("Unknown extra check: " + extra);
+
+                        Randomizable item = this.getRandomizableByName(extra);
+                        if (item instanceof Component) {
+                            getComponentByName(extra).addCheckAlso(r.getName());
+                        } else if (item instanceof CraftStation) {
+                            getStructureByName(extra).addCheckAlso(r.getName());
+                        } else if (item instanceof EssentialStructure) {
+                            getStructureByName(extra).addCheckAlso(r.getName());
+                        } else if (item instanceof Milestone) {
+                            getMilestoneByName(extra).addCheckAlso(r.getName());
+                        } else if (item instanceof Structure) {
+                            getStructureByName(extra).addCheckAlso(r.getName());
+                        } else {
+                            Console.log("Unknown extra check: " + extra);
+                        }
                     }
                 }
             }
@@ -1156,6 +1245,24 @@ public List<Milestone> getTutorials(){
             for (Structure s : this.structures) {
                 if (s.getName().equals(where)) {
                     s.removeExtraCheck(nameToRemove);
+                    done = true;
+                }
+            }
+            if (done)
+                continue;
+
+            if (where.equals("power")) {
+                for (Randomizable ran : getAllRandomizables()) {
+                    ran.removeExtraCheck("power");
+                    done = true;
+                }
+            }
+            if (done)
+                continue;
+
+            if (where.equals("pipe")) {
+                for (Randomizable ran : getAllRandomizables()) {
+                    ran.removeExtraCheck("pipe");
                     done = true;
                 }
             }

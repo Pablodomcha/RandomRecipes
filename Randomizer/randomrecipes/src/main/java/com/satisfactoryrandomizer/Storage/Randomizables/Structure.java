@@ -17,4 +17,10 @@ public class Structure extends Randomizable {
         super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, extraCheck);
         this.power = false;
     }
+
+    public Structure(String name, Boolean available, Boolean craftable, String recipepath, Boolean power,
+            List<String> extraCheck) {
+        super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, extraCheck);
+        this.power = power;
+    }
 }
