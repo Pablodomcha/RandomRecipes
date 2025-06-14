@@ -1,5 +1,7 @@
 package com.satisfactoryrandomizer.Storage.Randomizables;
 
+import java.util.List;
+
 public class CraftStation extends Randomizable {
 
     private final String builderpath;
@@ -10,15 +12,14 @@ public class CraftStation extends Randomizable {
 
     // Basic constructor
     public CraftStation(String name, Boolean available, Boolean craftable, String recipepath,
-            String builderpath, int solidIn, int solidOut, int liquidIn, int liquidOut) {
-        super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, null);
+            String builderpath, int solidIn, int solidOut, int liquidIn, int liquidOut, List<String> extraCheck) {
+        super(name, recipepath, recipepath + "." + recipepath + "_C", available, craftable, extraCheck);
         this.builderpath = builderpath;
         this.solidIn = solidIn;
         this.solidOut = solidOut;
         this.liquidIn = liquidIn;
         this.liquidOut = liquidOut;
     }
-
 
     public String getBuilderPath() {
         return this.builderpath;

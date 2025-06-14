@@ -17,8 +17,10 @@ public class Materials {
                                                                               // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
     private int[] phase = {};
+    private Boolean[] power = { false, false, false };
 
-    public void prepare() {
+    public void prepare(int seed) {
+        Random random = new Random(seed);
 
         // Create a temporary lists to add the prefixes to before adding to components
         List<Component> tempComp = new ArrayList<>();
@@ -31,32 +33,32 @@ public class Materials {
         // //Game/FactoryGame/Recipes/Buildings/
         tempStations
                 .add(new CraftStation("Desc_AssemblerMk1", false, false, "Recipe_AssemblerMk1", "Build_AssemblerMk1",
-                        2, 1, 0, 0));
+                        2, 1, 0, 0, Arrays.asList("power")));
         tempStations.add(new CraftStation("Desc_Blender", false, false, "Recipe_Blender", "Build_Blender",
-                2, 1, 2, 1));
+                2, 1, 2, 1, Arrays.asList("power")));
         tempStations.add(
                 new CraftStation("Desc_ConstructorMk1", false, false, "Recipe_ConstructorMk1", "Build_ConstructorMk1",
-                        1, 1, 0, 0));
+                        1, 1, 0, 0, Arrays.asList("power")));
         tempStations
                 .add(new CraftStation("Desc_ManufacturerMk1", false, false, "Recipe_ManufacturerMk1",
                         "Build_ManufacturerMk1",
-                        4, 1, 0, 0));
+                        4, 1, 0, 0, Arrays.asList("power")));
         tempStations.add(new CraftStation("Desc_Packager", false, false, "Recipe_Packager", "Build_Packager",
-                1, 1, 1, 1));
+                1, 1, 1, 1, Arrays.asList("power")));
         tempStations.add(
                 new CraftStation("Desc_HadronCollider", false, false, "Recipe_HadronCollider", "Build_HadronCollider",
-                        2, 1, 1, 0));
+                        2, 1, 1, 0, Arrays.asList("power")));
         tempStations.add(new CraftStation("Desc_OilRefinery", false, false, "Recipe_OilRefinery", "Build_OilRefinery",
-                1, 1, 1, 1));
+                1, 1, 1, 1, Arrays.asList("power")));
         tempStations.add(new CraftStation("Desc_Converter", false, false, "Recipe_Converter", "Build_Converter",
-                2, 1, 0, 1));
+                2, 1, 0, 1, Arrays.asList("power")));
         tempStations
                 .add(new CraftStation("Desc_QuantumEncoder", false, false, "Recipe_QuantumEncoder",
-                        "Build_QuantumEncoder", 3, 1, 1, 1));
+                        "Build_QuantumEncoder", 3, 1, 1, 1, Arrays.asList("power")));
         tempStations.add(new CraftStation("Desc_SmelterMk1", false, false, "Recipe_SmelterBasicMk1", "Build_SmelterMk1",
-                1, 1, 0, 0));
+                1, 1, 0, 0, Arrays.asList("power")));
         tempStations.add(new CraftStation("Desc_FoundryMk1", false, false, "Recipe_SmelterMk1", "Build_FoundryMk1",
-                2, 1, 0, 0));
+                2, 1, 0, 0, Arrays.asList("power")));
         this.stations = addPrefixStat(tempStations, "//Game/FactoryGame/Recipes/Buildings/");
         tempStations.clear();
 
@@ -64,7 +66,7 @@ public class Materials {
 
         // Raw materials
         this.components.add(new Component("Desc_Water", false, Arrays.asList("Desc_WaterPump", "pipe")));
-        this.components.addAll(generateComponents()); // They have no path, so no prefix is added.
+        this.components.addAll(generateRawOre()); // They have no path, so no prefix is added.
 
         // //Game/FactoryGame/Recipes/SpaceElevatorParts/
         this.components.addAll(addPrefixComp(generateElevator(), "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
@@ -104,22 +106,25 @@ public class Materials {
         tempEssentialStructures = generateEssentialBuildings();
         this.essentialStructures
                 .addAll(addPrefixEssStr(tempEssentialStructures, "//Game/FactoryGame/Recipes/Buildings/"));
+        tempEssentialStructures.clear();
 
-        // Structures
+        // Add the required structures to the milestones and the rest to non-essential.
         for (EssentialStructure structure : this.essentialStructures) {
-            if (structure.addWhen() == 1) {
+            if (structure.addWhen() == 0) {
+                Console.hiddenLog(structure.getName() + " added to Tutorial_6.");
                 getMilestoneByName("Tutorial_6").addExtraCheck(structure.getName());
-                Console.log(structure.getName() + " added to Tutorial_6.");
+            } else if (structure.addWhen() < 5) {
+                String name = "Milestone_" + (2 * structure.addWhen() - random.nextInt(2)) + "-1";
+                getMilestoneByName(name).addExtraCheck(structure.getName());
+                Console.log(structure.getName() + " added to " + name + ".");
             } else { // Can be added whenever, so it's actually not essential
                 structures.add(structure);
                 Console.log(structure.getName() + " moved to non-essential structures.");
             }
         }
+        this.essentialStructures.removeAll(this.structures);
 
-        Console.hiddenLog("\nSelected values:");
-        UiValues.logAll();
-        Console.hiddenLog("\n");
-
+        // Structures
         tempStructures.add(new Structure("Desc_GeneratorCoal", false, false, "Recipe_GeneratorCoal", true));
         tempStructures.add(new Structure("Desc_GeneratorFuel", false, false, "Recipe_GeneratorFuel", true));
         tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));
@@ -129,6 +134,19 @@ public class Materials {
         tempStructures.clear();
         structures.addAll(addPrefixStruc(generateStructures(), "//Game/FactoryGame/Recipes/Buildings/"));
         structures.addAll(addPrefixStruc(generateMoreStructures(), "//Game/FactoryGame/Recipes/Buildings/"));
+
+        // Last thing, add cable and pole to whatever needs power
+        for (Structure structure : this.structures) {
+                if (structure.getExtraCheck().contains("power")) {
+                    structure.addExtraCheck("cable");
+                    structure.addExtraCheck("pole");
+                }
+        }        for (CraftStation structure : this.stations) {
+                if (structure.getExtraCheck().contains("power")) {
+                    structure.addExtraCheck("cable");
+                    structure.addExtraCheck("pole");
+                }
+        }
 
     }
 
@@ -154,6 +172,7 @@ public class Materials {
             tempStructures.add(new EssentialStructure("Desc_ConveyorPole", false, false,
                     "Recipe_ConveyorPole", false, false, 0));
         } else {
+
             tempStructures.add(new EssentialStructure("Desc_ConveyorBeltMk1", false, false, "Recipe_ConveyorBeltMk1",
                     true, false, 9));
             tempStructures.add(new EssentialStructure("Desc_ConveyorPole", false, false,
@@ -218,7 +237,7 @@ public class Materials {
 
     }
 
-    private static List<Component> generateComponents() {
+    private static List<Component> generateRawOre() {
 
         List<Component> tempRawOre = new ArrayList<>();
 
@@ -795,13 +814,19 @@ public class Materials {
                 return structure;
             }
         }
-        Console.log("Structure not found: " + name);
+        Console.log("Essential Structure not found: " + name);
         return null;
     }
 
     public Structure getStructureByName(String name) {
         for (Structure structure : this.structures) {
             if (structure.getName().equals(name)) {
+                return structure;
+            }
+        }
+        for (EssentialStructure structure : this.essentialStructures) {
+            if (structure.getName().equals(name)) {
+                Console.hiddenLog("Found Essential Structure instead of Structure: " + name);
                 return structure;
             }
         }
@@ -813,6 +838,20 @@ public class Materials {
         List<Structure> result = new ArrayList<>();
         for (Structure structure : this.structures) {
             if (structure.getName().contains("Desc_Generator")) {
+                result.add(structure);
+            }
+        }
+        return result;
+    }
+
+    public List <CraftStation> getStations() {
+        return this.stations;
+    }
+
+    public List<Structure> getPoles() {
+        List<Structure> result = new ArrayList<>();
+        for (Structure structure : this.structures) {
+            if (structure.getName().contains("Desc_PowerPole")) {
                 result.add(structure);
             }
         }
@@ -1181,6 +1220,12 @@ public class Materials {
                         for (Structure gen : getGenerators()) {
                             gen.addCheckAlso("power");
                         }
+                    } else if (extra.equals("cable")) {
+                        getStructureByName("Desc_PowerLine").addCheckAlso("cable");
+                    } else if (extra.equals("pole")) {
+                        for (Structure pol : getPoles()) {
+                            pol.addCheckAlso("pole");
+                        }
                     } else if (extra.equals("pipe")) {
                         getStructureByName("Desc_Pipeline").addCheckAlso(r.getName());
                         getStructureByName("Desc_PipelineMK2").addCheckAlso(r.getName());
@@ -1189,10 +1234,10 @@ public class Materials {
                         Randomizable item = this.getRandomizableByName(extra);
                         if (item instanceof Component) {
                             getComponentByName(extra).addCheckAlso(r.getName());
-                        } else if (item instanceof CraftStation) {
-                            getStructureByName(extra).addCheckAlso(r.getName());
                         } else if (item instanceof EssentialStructure) {
                             getStructureByName(extra).addCheckAlso(r.getName());
+                        } else if (item instanceof CraftStation) {
+                            getStationByName(extra).addCheckAlso(r.getName());
                         } else if (item instanceof Milestone) {
                             getMilestoneByName(extra).addCheckAlso(r.getName());
                         } else if (item instanceof Structure) {
@@ -1207,7 +1252,7 @@ public class Materials {
     }
 
     public void doExtraChecks(String nameToRemove, List<String> whereToRemove) {
-
+        Console.test("nametoremove: " + nameToRemove + " wheretoremove: " + whereToRemove);
         for (String where : whereToRemove) {
             Boolean done = false;
             for (Component c : this.components) {
@@ -1258,7 +1303,6 @@ public class Materials {
             if (where.equals("power")) {
                 for (Randomizable ran : getAllRandomizables()) {
                     ran.removeExtraCheck("power");
-                    done = true;
                 }
             }
             if (done)
@@ -1267,7 +1311,22 @@ public class Materials {
             if (where.equals("pipe")) {
                 for (Randomizable ran : getAllRandomizables()) {
                     ran.removeExtraCheck("pipe");
-                    done = true;
+                }
+            }
+            if (done)
+                continue;
+
+            if (where.equals("cable")) {
+                for (Randomizable ran : getAllRandomizables()) {
+                    ran.removeExtraCheck("cable");
+                }
+            }
+            if (done)
+                continue;
+
+            if (where.equals("pole")) {
+                for (Randomizable ran : getAllRandomizables()) {
+                    ran.removeExtraCheck("pole");
                 }
             }
             if (done)
@@ -1275,6 +1334,25 @@ public class Materials {
 
             Console.log("Could not remove extra check, Randomizable not found: " + whereToRemove);
         }
+    }
+
+    /**
+     * Adds fixed unlocks to a milestone to make sure a recipe is available at a
+     * certain point
+     *
+     * @param mile    The name of the milestone to which the fixed unlock should be
+     *                added.
+     * @param unlocks A list of unlocks to add to the milestone's fixed unlock list.
+     */
+    public void addFixedUnlocks(String mile, List<String> unlocks) {
+        for (Milestone milestone : this.milestones) {
+            if (milestone.getName().equals(mile)) {
+                for (String unlock : unlocks) {
+                    milestone.addFixedUnlock(unlock);
+                }
+            }
+        }
+
     }
 
     // Only for debugging

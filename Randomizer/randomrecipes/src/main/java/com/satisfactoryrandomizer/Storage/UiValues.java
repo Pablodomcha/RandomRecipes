@@ -9,12 +9,13 @@ public class UiValues {
     // In general, 0 = Easy, 1 = Medium, 2 = Hard, 3 = Insane. The UI displayed
     // names may not be these.
     static int oreLocation = 0;
-    static int belts = 0;
+    static int belts = 3;
     static int electricity = 0;
     static int waste = 3;
     static int stationBias = 0;
     static int liquids = 0;
     static Boolean balanceProg = true;
+    static Boolean advLog = false;
 
     // Inventory Slots Weirdo
     static int inventorySlots = 0; // 0 = fixed, 1 = random
@@ -57,13 +58,17 @@ public class UiValues {
      *         you can have radiation protection.
      */
 
-    public static int addAll(){
-        return  1000 * (int) (UiValues.seed % 100 + UiValues.oreLocation + UiValues.belts + UiValues.electricity + UiValues.waste + UiValues.stationBias + UiValues.liquids + UiValues.inventorySlots +
-                UiValues.maxStackCraft + UiValues.maxProdCraft + UiValues.maxStackStruct + UiValues.maxItemStruct + UiValues.maxStackMile + UiValues.maxItemMile + UiValues.maxStackEle + UiValues.maxItemEle +
-                UiValues.maxTimeMile + UiValues.maxTimeCraft + UiValues.handcraftSpeed[1] + UiValues.inputBias + UiValues.maxRecipesUsed + UiValues.freeChance);
+    public static int addAll() {
+        return 1000 * (int) (UiValues.seed % 100 + UiValues.oreLocation + UiValues.belts + UiValues.electricity
+                + UiValues.waste + UiValues.stationBias + UiValues.liquids + UiValues.inventorySlots +
+                UiValues.maxStackCraft + UiValues.maxProdCraft + UiValues.maxStackStruct + UiValues.maxItemStruct
+                + UiValues.maxStackMile + UiValues.maxItemMile + UiValues.maxStackEle + UiValues.maxItemEle +
+                UiValues.maxTimeMile + UiValues.maxTimeCraft + UiValues.handcraftSpeed[1] + UiValues.inputBias
+                + UiValues.maxRecipesUsed + UiValues.freeChance);
     }
 
-    public static void logAll(){
+    public static void logAll() {
+        Console.hiddenLog("Advanced Logging: " + UiValues.advLog);
         Console.hiddenLog("Seed: " + UiValues.seed);
         Console.hiddenLog("Ore Location: " + UiValues.oreLocation);
         Console.hiddenLog("Belts: " + UiValues.belts);
@@ -443,5 +448,19 @@ public class UiValues {
 
     public static void setFreeChance(int waste) {
         UiValues.waste = waste;
+    }
+
+    /**
+     * Retrieves the advanced logging setting. Logs many things helpful for
+     * troubleshooting, but is way slower. Use only for debugging.
+     * 
+     * @return 15. Advanced Logging.
+     */
+    public static Boolean getAdvLog() {
+        return UiValues.advLog;
+    }
+
+    public static void setAdvLog(Boolean advLog) {
+        UiValues.advLog = advLog;
     }
 }

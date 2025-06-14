@@ -3,6 +3,8 @@ package com.satisfactoryrandomizer;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.satisfactoryrandomizer.Storage.UiValues;
+
 public class Console {
 
     static String log = "";
@@ -18,6 +20,12 @@ public class Console {
         String temp = message;
         System.out.println(temp);
         Console.log += temp + "\n";
+    }
+
+    public static void advLog( String message){
+        if(UiValues.getAdvLog()){
+            Console.hiddenLog(message);
+        }
     }
 
     public static void importantLog(String message) {

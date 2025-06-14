@@ -3,6 +3,8 @@ package com.satisfactoryrandomizer.Storage.Randomizables;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.satisfactoryrandomizer.Console;
+
 public class Randomizable {
 
     private final String name;

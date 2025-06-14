@@ -1,11 +1,12 @@
 package com.satisfactoryrandomizer.Storage.Randomizables;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Milestone extends Randomizable {
 
     private int nRecipes;
-    private List<String> fixedUnlocks;
+    private List<String> fixedUnlocks = new ArrayList<>();
     private int phase;
     // Recipepath is a shcematic path, but W/e
 

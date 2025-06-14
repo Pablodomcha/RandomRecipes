@@ -62,6 +62,7 @@ Info:
     8. Balance progression:
         True: Make crafing stations be obtained evenly spread to get a better crafting station spread.
         False: Crafting stations are completely randomized, may lead to a game where mostly a few stations are used for everything. 
+    9. Advanced Logging (true/false): Logs many things helpful for troubleshooting, but is way slower. Use only for debugging.
 
     V1. Materials inicialization, add corresponding milestone as extraCheck.
     V2. Structure randomization, use or not generic logic for belts.
@@ -102,29 +103,10 @@ Info:
 
 TODO:
 
-Add milestones, structures and essential structures to be able to create the logic.
-
 Make the game select the first Crafting station. Make sure it's enabled by the end of the tutorial.
-
-Make recipes to create/use leaves and wood (Can use the 2nd biomass recipe for one of them)
-
-Remember to add any Randomizable that influences the extraChecks logic into materials.fillExtraChecks()
 
 Recipe_Biomass_Wood will be handled as alternate recipe. Ficsites besides the first one too.
 
-Randomly assign elevator parts as extraunlocks for milestones that don't have them.
-
-Liquid oil not marked as liquid?
-
-Randomize HUB recipe in case ores is not easy. "Recipe_TradingPost"
-
-Milestones per phase:
-1: 1-1 to 2-5 + 3-2
-2: 3-1 to 4-5
-3: 5-1 to 6-7
-4: 7-1 to 8-5
-5: 9-1 to 9-5
-
-Space elevator parts ad milestones are locking each other.
-
 Check phases and ensure mandatory items are in them.
+
+Add a toggle variable that rerolls milestones sometimes, making it more likely to need more milestones to beat the game.

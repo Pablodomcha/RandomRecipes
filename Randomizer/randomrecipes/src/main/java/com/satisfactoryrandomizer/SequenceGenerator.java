@@ -1,8 +1,13 @@
 package com.satisfactoryrandomizer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import javax.sound.midi.Sequence;
+
+import java.util.Collections;
 
 import com.satisfactoryrandomizer.Storage.Data.Mat;
 import com.satisfactoryrandomizer.Storage.Data.MilestoneSchematic;
@@ -21,16 +26,19 @@ public class SequenceGenerator {
     private static int nItems = 0;
 
     public static void generateSequence() {
+        // Log the selected values
+        Console.hiddenLog("\nSelected values:");
+        UiValues.logAll();
+        Console.hiddenLog("\n");
 
         // Create the materials variable to store all materials / structures
         SequenceGenerator.materials = new Materials();
-        materials.prepare();
+        materials.prepare(random.nextInt(10000));
 
         // Set the number of items for percentage related things
         SequenceGenerator.nItems = materials.getAllRandomizables().size(); // Removing iron since it starts unlocked.
 
-        Console.hiddenLog("\nStatus at start:");
-        logAvailability();
+        logAvailability("Status at start:");
 
         // Generate the extraChecks
         try {
@@ -52,11 +60,16 @@ public class SequenceGenerator {
         // Create the starting array of items
         List<Randomizable> randomizables = materials.getAvailableButUncraftableRandomizables();
 
-        // Temporarily set a CraftingStation craftable to be able to run the main loop
-        Console.test(""); // This code below is for tests
-        materials.setStructureCraftable("Desc_HadronCollider", true);
-        materials.setStructureAvailable("Desc_HadronCollider", true);
-        SequenceGenerator.firstStation = "Desc_HadronCollider";
+        // Set a random Crafting Station as the first one
+        SequenceGenerator.firstStation = materials.getStations().get(random.nextInt(materials.getGenerators().size())).getName();
+        Console.log("Fstation: " + SequenceGenerator.firstStation);
+        SequenceGenerator.lastObtainedStation = SequenceGenerator.firstStation;
+        materials.setStructureAvailable(SequenceGenerator.firstStation, true);
+        materials.doExtraChecks("power", Arrays.asList(SequenceGenerator.firstStation));
+        materials.doExtraChecks("cable", Arrays.asList(SequenceGenerator.firstStation));
+        materials.doExtraChecks("pole", Arrays.asList(SequenceGenerator.firstStation));
+        generateStructure(materials.getStationByName(SequenceGenerator.firstStation), "structure");
+
 
         // Spread the Randomizables evenly across the milestones
         int milestonesAvailable = materials.getAllMilestones().size();
@@ -164,6 +177,22 @@ public class SequenceGenerator {
             checkAlso.add((String) mile);
         }
 
+        // Force Tutorials to have at least some of the to ensure they are
+        // craftable by the time they are needed for Tutorial_6
+        if (milestone.getName().contains("Tutorial_")) {
+            Milestone tut6 = materials.getMilestoneByName("Tutorial_6");
+            int cont = 2;
+            while (tut6.getExtraCheck().size() > 1 && cont-- > 0) {
+                // Remove the extra check belonging to a milestone and get an extra check at
+                // random
+                List<String> extraCheck = new ArrayList<>(tut6.getExtraCheck());
+                extraCheck.remove("Tutorial_5");
+                milestone.addFixedUnlock(tut6.getExtraCheck().get(random.nextInt(tut6.getExtraCheck().size())));
+            }
+        }
+
+        logAvailability("Status before unlock generation:");
+
         List<String> unlocks = generateUnlocks(milestone.getnRecipes(), milestone.getFixedUnlocks(),
                 milestone.getPhase());
 
@@ -181,6 +210,8 @@ public class SequenceGenerator {
 
         // Mark the component as craftable
         materials.setMilestoneCraftable(milestone.getName(), true);
+
+        logAvailability("Status after creating milestone: " + milestone.getName());
     }
 
     private static void generateStructure(Randomizable structure, String type) {
@@ -191,6 +222,7 @@ public class SequenceGenerator {
                 type = "cheap";
             }
         }
+
         List<Mat> mats = generateIngredients(type);
 
         Recipe recipe = new Recipe(
@@ -217,12 +249,18 @@ public class SequenceGenerator {
     private static void generateComp(Component comp, int addedItems, String type) {
         // Select a random crafting Station
         CraftStation station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
+        if (station == null) {
+            Console.test("Station is: " + station + " it will be changed to: " + firstStation);
+            station = materials.getStationByName(firstStation);
+            Console.test("Station is: " + station);
+        }
 
         // If the station is not the last one obtained, reroll to increase station
         // variability.
         int count = UiValues.getStationBias();
-        while (!station.getName().equals(SequenceGenerator.lastObtainedStation) && count-- > 0
-                && SequenceGenerator.lastObtainedStation != null) {
+
+        // Check if there's even a last obtained station before checking it's name
+        while (!station.getName().equals(SequenceGenerator.lastObtainedStation) && count-- > 0) {
             station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
         }
 
@@ -282,7 +320,8 @@ public class SequenceGenerator {
         materials.setComponentCraftable(comp.getName(), true);
     }
 
-    private static void logAvailability() {
+    private static void logAvailability(String title) {
+        Console.advLog("\n" + title);
         for (Randomizable r : materials.getAllRandomizables()) {
             // Align:
             String name = r.getName();
@@ -303,9 +342,9 @@ public class SequenceGenerator {
                 craftab = "Not Craftable";
             }
 
-            Console.hiddenLog(name + " | " + avail + " | " + craftab + " | extraChecks: " + r.getExtraCheck());
+            Console.advLog(name + " | " + avail + " | " + craftab + " | extraChecks: " + r.getExtraCheck());
         }
-        Console.hiddenLog("\n");
+        Console.advLog("\n");
     }
 
     private static void phaseChange(List<Milestone> milestones, int percent) {
@@ -456,6 +495,20 @@ public class SequenceGenerator {
         // Add extra unlocks if it's not null
         if (extraUnlocks != null) {
             unlocks.addAll(extraUnlocks);
+
+            // Removing the first element (since it's either a milestone or a component)
+            List<String> extUnl = extraUnlocks;
+            extUnl.remove("Tutorial_5");
+            Collections.shuffle(extUnl);
+
+            for (String unlock : extUnl) {
+                Console.hiddenLog("Forcing unlock: " + unlock);
+                Randomizable randomizable = materials.getRandomizableByName(unlock);
+                materials.setRandomizableAvailable(unlock, true);
+                generateStructure(materials.getEssentialStructureByName(unlock), "structure");
+                if (!randomizable.getCheckAlso().isEmpty())
+                    materials.doExtraChecks(randomizable.getName(), randomizable.getCheckAlso());
+            }
         }
 
         // Make a list with all possible randomizables
