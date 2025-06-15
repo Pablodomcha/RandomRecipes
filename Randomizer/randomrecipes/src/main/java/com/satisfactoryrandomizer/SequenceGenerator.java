@@ -61,7 +61,7 @@ public class SequenceGenerator {
         // Set a random Crafting Station as the first one
         SequenceGenerator.firstStation = materials.getStations().get(random.nextInt(materials.getGenerators().size()))
                 .getName();
-        Console.log("Fstation: " + SequenceGenerator.firstStation);
+        Console.log("First station: " + SequenceGenerator.firstStation);
         SequenceGenerator.lastObtainedStation = SequenceGenerator.firstStation;
         materials.setStructureAvailable(SequenceGenerator.firstStation, true);
         materials.doExtraChecks("power", Arrays.asList(SequenceGenerator.firstStation));
@@ -149,8 +149,6 @@ public class SequenceGenerator {
             // Update the list (the item is set craftable by the methods above)
             randomizables.clear();
             randomizables = materials.getAvailableButUncraftableRandomizables();
-
-            // Update the phase
         }
 
         Console.log("Remaining " + randomizables.size() + " items. Done "
@@ -190,11 +188,11 @@ public class SequenceGenerator {
         if (milestone.getName().contains("Tutorial_")) {
             Milestone tut6 = materials.getMilestoneByName("Tutorial_6");
             int cont = 2;
-            while (tut6.getExtraCheck().size() > 1 && cont-- > 0) {
+            while (tut6.getExtraCheck().size() > 0 && cont-- > 0) {
                 // Remove the extra check belonging to a milestone and get an extra check at
                 // random
                 List<String> extraCheck = new ArrayList<>(tut6.getExtraCheck());
-                extraCheck.remove("Tutorial_5");
+                extraCheck.removeIf(s -> s.contains("Tutorial_"));
                 milestone.addFixedUnlock(tut6.getExtraCheck().get(random.nextInt(tut6.getExtraCheck().size())));
             }
         }
@@ -263,9 +261,8 @@ public class SequenceGenerator {
         // Select a random crafting Station
         CraftStation station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
         if (station == null) {
-            Console.test("Station is: " + station + " it will be changed to: " + firstStation);
+            Console.hiddenLog("Station is: " + station + " it will be changed to: " + firstStation);
             station = materials.getStationByName(firstStation);
-            Console.test("Station is: " + station);
         }
 
         // If the station is not the last one obtained, reroll to increase station
@@ -356,10 +353,10 @@ public class SequenceGenerator {
             }
             String log = name + " | " + avail + " | " + craftab;
 
-            if(!r.getExtraCheck().isEmpty()) {
+            if (!r.getExtraCheck().isEmpty()) {
                 log += " | extraChecks: " + r.getExtraCheck();
             }
-            if(!r.getCheckAlso().isEmpty()) {
+            if (!r.getCheckAlso().isEmpty()) {
                 log += " | checkAlso: " + r.getCheckAlso();
             }
             Console.advLog(log);
@@ -512,7 +509,8 @@ public class SequenceGenerator {
         if (fixedUnlocks != null) {
             unlocks.addAll(fixedUnlocks);
 
-            // Removing the first element (since it's either a milestone or a component)
+            // Removing the tutorials (they may be in fixed unlocks and can't be generated
+            // here)
             List<String> fixUnl = fixedUnlocks;
             fixUnl.removeIf(s -> s.contains("Tutorial_"));
             Collections.shuffle(fixUnl);
@@ -524,9 +522,9 @@ public class SequenceGenerator {
                 Randomizable r = materials.getRandomizableByName(unlock);
                 if (r instanceof EssentialStructure) {
                     generateStructure(materials.getEssentialStructureByName(unlock), "structure");
-                } else if(r instanceof Structure){
+                } else if (r instanceof Structure) {
                     generateStructure(materials.getEssentialStructureByName(unlock), "structure");
-                } else{
+                } else {
                     Console.log(unlock + " is not one of the allowed categories.");
                 }
                 if (!randomizable.getCheckAlso().isEmpty())

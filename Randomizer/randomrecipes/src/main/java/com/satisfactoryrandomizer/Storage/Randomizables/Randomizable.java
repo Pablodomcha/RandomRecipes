@@ -71,8 +71,8 @@ public class Randomizable {
     }
 
     public void addExtraCheck(String extraCheck) {
-        if (!this.checkAlso.contains(extraCheck)) {
-            this.checkAlso.add(extraCheck);
+        if (!this.extraCheck.contains(extraCheck)) {
+            this.extraCheck.add(extraCheck);
         }
     }
 

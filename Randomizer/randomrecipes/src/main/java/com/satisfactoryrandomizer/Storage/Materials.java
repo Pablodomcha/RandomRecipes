@@ -64,7 +64,7 @@ public class Materials {
         // Components
 
         // Raw materials
-        this.components.add(new Component("Desc_Water", false, Arrays.asList("Desc_WaterPump", "pipe")));
+        this.components.add(new Component("Desc_Water", true, Arrays.asList("Desc_WaterPump", "power")));
         this.components.addAll(generateRawOre()); // They have no path, so no prefix is added.
         this.components.addAll(addPrefixComp(generateMoreComponents(), "//Game/FactoryGame/Recipes/"));
 
@@ -102,7 +102,6 @@ public class Materials {
         tempStructures.add(new Structure("Desc_GeneratorCoal", false, false, "Recipe_GeneratorCoal", true));
         tempStructures.add(new Structure("Desc_GeneratorFuel", false, false, "Recipe_GeneratorFuel", true));
         tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));
-        // Hard to check if it can be used to produce power:
         tempStructures.add(new Structure("Desc_GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", false));
         structures.addAll(addPrefixStruc(tempStructures, "//Game/FactoryGame/Recipes/Buildings/"));
         tempStructures.clear();
@@ -111,15 +110,26 @@ public class Materials {
 
         // Last thing, add cable and pole to whatever needs power
         for (Structure structure : this.structures) {
-                if (structure.getExtraCheck().contains("power")) {
-                    structure.addExtraCheck("cable");
-                    structure.addExtraCheck("pole");
-                }
-        }        for (CraftStation structure : this.stations) {
-                if (structure.getExtraCheck().contains("power")) {
-                    structure.addExtraCheck("cable");
-                    structure.addExtraCheck("pole");
-                }
+            if (structure.getExtraCheck().contains("power")) {
+                structure.addExtraCheck("cable");
+                structure.addExtraCheck("pole");
+                structure.removeExtraCheck("power");
+            }
+        }
+        for (CraftStation structure : this.stations) {
+            if (structure.getExtraCheck().contains("power")) {
+                structure.addExtraCheck("cable");
+                structure.addExtraCheck("pole");
+                structure.addExtraCheck("Tutorial_6");
+                structure.removeExtraCheck("power");
+            }
+        }
+        for (Component comp : this.components) {
+            if (comp.getExtraCheck().contains("power")) {
+                comp.addExtraCheck("cable");
+                comp.addExtraCheck("pole");
+                comp.removeExtraCheck("power");
+            }
         }
 
     }
@@ -220,29 +230,29 @@ public class Materials {
             tempRawOre.add(new Component("Desc_OreCopper", false, Arrays.asList("Tutorial_2")));
             tempRawOre.add(new Component("Desc_Stone", false, Arrays.asList("Tutorial_3")));
             tempRawOre.add(new Component("Desc_Coal", false, Arrays.asList("Milestone_3-1")));
-            tempRawOre.add(new Component("Desc_LiquidOil", false,
-                    Arrays.asList("Milestone_5-2", "Desc_OilPump", "pipe", "power")));
+            tempRawOre.add(new Component("Desc_LiquidOil", true,
+                    Arrays.asList("Milestone_5-2", "Desc_OilPump", "power")));
             tempRawOre.add(new Component("Desc_OreGold", false, Arrays.asList("Milestone_5-5")));
             tempRawOre.add(new Component("Desc_OreBauxite", false, Arrays.asList("Milestone_7-1")));
             tempRawOre.add(new Component("Desc_RawQuartz", false, Arrays.asList("Milestone_7-1")));
             tempRawOre.add(new Component("Desc_Sulfur", false, Arrays.asList("Milestone_7-5")));
             tempRawOre.add(new Component("Desc_OreUranium", false,
                     Arrays.asList("Milestone_8-2", "Desc_HazmatFilter", "Desc_HazmatSuit")));
-            tempRawOre.add(new Component("Desc_NitrogenGas", false,
-                    Arrays.asList("Milestone_8-3", "Desc_FrackingExtractor", "Desc_FrackingSmasher", "pipe", "power")));
+            tempRawOre.add(new Component("Desc_NitrogenGas", true,
+                    Arrays.asList("Milestone_8-3", "Desc_FrackingExtractor", "Desc_FrackingSmasher", "power")));
             tempRawOre.add(new Component("Desc_SAM", false, Arrays.asList("Milestone_9-1")));
         } else {
             tempRawOre.add(new Component("Desc_OreIron", false, null));
             tempRawOre.add(new Component("Desc_OreCopper", false, null));
             tempRawOre.add(new Component("Desc_Stone", false, null));
             tempRawOre.add(new Component("Desc_Coal", false, null));
-            tempRawOre.add(new Component("Desc_LiquidOil", false, Arrays.asList("Desc_OilPump", "pipe", "power")));
+            tempRawOre.add(new Component("Desc_LiquidOil", true, Arrays.asList("Desc_OilPump", "power")));
             tempRawOre.add(new Component("Desc_OreGold", false, null));
             tempRawOre.add(new Component("Desc_OreBauxite", false, null));
             tempRawOre.add(new Component("Desc_RawQuartz", false, null));
             tempRawOre.add(new Component("Desc_Sulfur", false, null));
-            tempRawOre.add(new Component("Desc_NitrogenGas", false,
-                    Arrays.asList("Desc_FrackingExtractor", "Desc_FrackingSmasher", "pipe", "power")));
+            tempRawOre.add(new Component("Desc_NitrogenGas", true,
+                    Arrays.asList("Desc_FrackingExtractor", "Desc_FrackingSmasher", "power")));
             tempRawOre.add(new Component("Desc_SAM", false, null));
 
             if (UiValues.getOreLocation() == 1) {
@@ -361,10 +371,6 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_Plastic", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Rubber", false));
         tempNoPrefixComps.add(generateComponent("Recipe_SulfuricAcid", true));
-        tempNoPrefixComps.add(generateComponent("Recipe_AlienPowerFuel", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_SuperpositionOscillator", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_SyntheticPowerShard", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_TemporalProcessor", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "OilRefinery/"));
         tempNoPrefixComps.clear();
 
@@ -765,10 +771,10 @@ public class Materials {
         return new Component(recipe.replace("Recipe", "Desc"), recipe, false, false, liquid);
     }
 
-    private static Component generateComponent(String name,String recipe, Boolean liquid) {
+    private static Component generateComponent(String name, String recipe, Boolean liquid) {
         return new Component(name, recipe, false, false, liquid);
     }
-  
+
     private static List<Structure> generateMkN(String recipe, int min, int max) {
         List<Structure> tempStructures = new ArrayList<>();
         for (int i = min; i <= max; i++) {
@@ -787,6 +793,11 @@ public class Materials {
 
             if (i == 0) {
                 phase = 0;
+                temComps.add(
+                        new ElevatorPart(recipe.replace("Recipe", "Desc").replace("1", (String.valueOf(i + 1))),
+                                recipe.replace("1", (String.valueOf(i + 1))), true, false, false, 50,
+                                Arrays.asList("Tutorial_6"), phase));
+                continue; // To avoid creating it twice
             } else if (i < 3) {
                 phase = 1;
             } else if (i < 5) {
@@ -953,7 +964,7 @@ public class Materials {
         return result;
     }
 
-    public List <CraftStation> getStations() {
+    public List<CraftStation> getStations() {
         return this.stations;
     }
 
@@ -1322,6 +1333,18 @@ public class Materials {
         List<Randomizable> randomizables = this.getAllRandomizables();
 
         for (Randomizable r : randomizables) {
+            if (r instanceof Component) {
+                Component liq = (Component) r;
+                if (liq.isLiquid()) {
+                    liq.addExtraCheck("pipe");
+                    Console.hiddenLog("Adding extra checks for " + r.getName() + " : pipe");
+                }
+            }
+        }
+
+        for (
+
+        Randomizable r : randomizables) {
             Console.hiddenLog("Adding extra checks for " + r.getName() + " : " + r.getExtraCheck());
             for (String extra : r.getExtraCheck()) {
                 if (extra != null) {
@@ -1338,8 +1361,8 @@ public class Materials {
                             pol.addCheckAlso("pole");
                         }
                     } else if (extra.equals("pipe")) {
-                        getStructureByName("Desc_Pipeline").addCheckAlso(r.getName());
-                        getStructureByName("Desc_PipelineMK2").addCheckAlso(r.getName());
+                        getStructureByName("Desc_Pipeline").addCheckAlso("pipe");
+                        getStructureByName("Desc_PipelineMK2").addCheckAlso("pipe");
                     } else {
 
                         Randomizable item = this.getRandomizableByName(extra);
@@ -1363,6 +1386,11 @@ public class Materials {
     }
 
     public void doExtraChecks(String nameToRemove, List<String> whereToRemove) {
+
+        if(nameToRemove == "cable"){
+            Console.test("This is a pipe----------------------------------------------------------------------------------");
+        }
+
         Console.hiddenLog("nametoremove: " + nameToRemove + " wheretoremove: " + whereToRemove);
         for (String where : whereToRemove) {
             Boolean done = false;
@@ -1443,7 +1471,7 @@ public class Materials {
             if (done)
                 continue;
 
-            Console.log("Could not remove extra check, Randomizable not found: " + whereToRemove);
+            Console.log("Could not remove extra check, Randomizable not found: " + where);
         }
     }
 
