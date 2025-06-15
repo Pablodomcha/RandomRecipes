@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import javax.sound.midi.Sequence;
-
 import java.util.Collections;
 
 import com.satisfactoryrandomizer.Storage.Data.Mat;
@@ -61,7 +59,8 @@ public class SequenceGenerator {
         List<Randomizable> randomizables = materials.getAvailableButUncraftableRandomizables();
 
         // Set a random Crafting Station as the first one
-        SequenceGenerator.firstStation = materials.getStations().get(random.nextInt(materials.getGenerators().size())).getName();
+        SequenceGenerator.firstStation = materials.getStations().get(random.nextInt(materials.getGenerators().size()))
+                .getName();
         Console.log("Fstation: " + SequenceGenerator.firstStation);
         SequenceGenerator.lastObtainedStation = SequenceGenerator.firstStation;
         materials.setStructureAvailable(SequenceGenerator.firstStation, true);
@@ -69,7 +68,6 @@ public class SequenceGenerator {
         materials.doExtraChecks("cable", Arrays.asList(SequenceGenerator.firstStation));
         materials.doExtraChecks("pole", Arrays.asList(SequenceGenerator.firstStation));
         generateStructure(materials.getStationByName(SequenceGenerator.firstStation), "structure");
-
 
         // Spread the Randomizables evenly across the milestones
         int milestonesAvailable = materials.getAllMilestones().size();
@@ -119,6 +117,16 @@ public class SequenceGenerator {
             } else if (randomizable instanceof CraftStation) {
                 generateStructure((CraftStation) randomizable, "structure");
             } else if (randomizable instanceof Milestone) {
+
+                // Chance to skip the milestone to make them appear later
+                Boolean skipMilestone = false;
+                for (int i = 0; i < UiValues.getForceLongGameBias(); i++) {
+                    skipMilestone = random.nextBoolean();
+                }
+                if (skipMilestone) {
+                    break;
+                }
+
                 if (materials.getAllMilestones().size() - materials.getCraftableMilestones().size() <= 1) {
                     ((Milestone) randomizable).setnRecipes(2 * ((Milestone) randomizable).getnRecipes());
                     Console.log("Increasing milestone " + randomizable.getName() + " recipes to "
@@ -189,6 +197,11 @@ public class SequenceGenerator {
                 extraCheck.remove("Tutorial_5");
                 milestone.addFixedUnlock(tut6.getExtraCheck().get(random.nextInt(tut6.getExtraCheck().size())));
             }
+        }
+
+        // Add the first crafting station in Tutorial_6 if it wasn't added earlier
+        if (milestone.getName().equals("Tutorial_6")) {
+            milestone.addFixedUnlock(firstStation);
         }
 
         logAvailability("Status before unlock generation:");
@@ -341,14 +354,17 @@ public class SequenceGenerator {
             } else {
                 craftab = "Not Craftable";
             }
+            String log = name + " | " + avail + " | " + craftab;
 
-            Console.advLog(name + " | " + avail + " | " + craftab + " | extraChecks: " + r.getExtraCheck());
+            if(!r.getExtraCheck().isEmpty()) {
+                log += " | extraChecks: " + r.getExtraCheck();
+            }
+            if(!r.getCheckAlso().isEmpty()) {
+                log += " | checkAlso: " + r.getCheckAlso();
+            }
+            Console.advLog(log);
         }
         Console.advLog("\n");
-    }
-
-    private static void phaseChange(List<Milestone> milestones, int percent) {
-
     }
 
     /**
@@ -489,23 +505,30 @@ public class SequenceGenerator {
      * @param extraUnlocks    An extra unlock to add to the list if it's not null.
      * @return A list of random unlocks.
      */
-    private static List<String> generateUnlocks(int numberOfUnlocks, List<String> extraUnlocks, int phase) {
+    private static List<String> generateUnlocks(int numberOfUnlocks, List<String> fixedUnlocks, int phase) {
         List<String> unlocks = new ArrayList<>();
 
         // Add extra unlocks if it's not null
-        if (extraUnlocks != null) {
-            unlocks.addAll(extraUnlocks);
+        if (fixedUnlocks != null) {
+            unlocks.addAll(fixedUnlocks);
 
             // Removing the first element (since it's either a milestone or a component)
-            List<String> extUnl = extraUnlocks;
-            extUnl.remove("Tutorial_5");
-            Collections.shuffle(extUnl);
+            List<String> fixUnl = fixedUnlocks;
+            fixUnl.removeIf(s -> s.contains("Tutorial_"));
+            Collections.shuffle(fixUnl);
 
-            for (String unlock : extUnl) {
+            for (String unlock : fixUnl) {
                 Console.hiddenLog("Forcing unlock: " + unlock);
                 Randomizable randomizable = materials.getRandomizableByName(unlock);
                 materials.setRandomizableAvailable(unlock, true);
-                generateStructure(materials.getEssentialStructureByName(unlock), "structure");
+                Randomizable r = materials.getRandomizableByName(unlock);
+                if (r instanceof EssentialStructure) {
+                    generateStructure(materials.getEssentialStructureByName(unlock), "structure");
+                } else if(r instanceof Structure){
+                    generateStructure(materials.getEssentialStructureByName(unlock), "structure");
+                } else{
+                    Console.log(unlock + " is not one of the allowed categories.");
+                }
                 if (!randomizable.getCheckAlso().isEmpty())
                     materials.doExtraChecks(randomizable.getName(), randomizable.getCheckAlso());
             }

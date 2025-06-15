@@ -121,11 +121,12 @@ public class CreateJSON {
         }
     }
 
-        public static void saveMilestoneAsJson(MilestoneSchematic milestone, String recipePath) {
+    public static void saveMilestoneAsJson(MilestoneSchematic milestone, String recipePath) {
 
         // Convert the station to list and add manual if it's from constructor or
         // smelter.
-        JSONableMilestone jsonRecipe = new JSONableMilestone(milestone.getIngredients(), milestone.getUnlocks(), milestone.getTime());
+        JSONableMilestone jsonRecipe = new JSONableMilestone(milestone.getIngredients(), milestone.getUnlocks(),
+                milestone.getTime());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonRecipe);
         json = json.replace("\n", "\r\n"); // Make the breaks CRLF

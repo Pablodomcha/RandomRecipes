@@ -3,8 +3,6 @@ package com.satisfactoryrandomizer.Storage.Randomizables;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.satisfactoryrandomizer.Console;
-
 public class Randomizable {
 
     private final String name;
@@ -12,8 +10,9 @@ public class Randomizable {
     private String recipepath;
     private Boolean available;
     private Boolean craftable;
-    private final List<String> extraCheck = new ArrayList<>(); // Items that need to be craftable before this component can be
-                                                         // crafted
+    private final List<String> extraCheck = new ArrayList<>(); // Items that need to be craftable before this component
+                                                               // can be
+    // crafted
     private final List<String> checkAlso = new ArrayList<>(); // Items that this component is an extraCheck for
 
     // Extra checks can be in form of generic "station with liquid output" form or
@@ -51,7 +50,7 @@ public class Randomizable {
         return this.available && extraCheck.isEmpty();
     }
 
-    public Boolean trueAvailable(){
+    public Boolean trueAvailable() {
         return this.available;
     }
 
@@ -72,15 +71,13 @@ public class Randomizable {
     }
 
     public void addExtraCheck(String extraCheck) {
-        this.extraCheck.add(extraCheck);
+        if (!this.checkAlso.contains(extraCheck)) {
+            this.checkAlso.add(extraCheck);
+        }
     }
 
     public void removeExtraCheck(String extraCheck) {
-        for (int i = 0; i < this.extraCheck.size(); i++) {
-            if (this.extraCheck.get(i).equals(extraCheck)) {
-                this.extraCheck.remove(i);
-            }
-        }
+        this.extraCheck.remove(extraCheck);
     }
 
     public List<String> getCheckAlso() {
@@ -88,6 +85,8 @@ public class Randomizable {
     }
 
     public void addCheckAlso(String checkAlso) {
-        this.checkAlso.add(checkAlso);
+        if (!this.checkAlso.contains(checkAlso)) {
+            this.checkAlso.add(checkAlso);
+        }
     }
 }

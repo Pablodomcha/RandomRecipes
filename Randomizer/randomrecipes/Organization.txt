@@ -9,22 +9,21 @@ Tutorial costs are free (the mod assumes you use "Onboarding")
 Info:
     1. Handcrafts: The first unlockable crafting station will have it's recipes able to be made by hand. Recipes with liquids may appear for handcrafting, but you obviously can't make them.
     2. Craft unlocked != Craft Possible.
-    3. Anything not strictly necessary is randomized at the end and therefore can use all materials (for example blueprint maker, belts, vehicles, alternate recipes).
-    4. Production buildings may not be able to reach 100% efficiency on certain recipes.
-    5. Packaging/unpackaging recipes unaffected (the container recipes are though).
-    6. Excited Photonic Matter may not be free. Blame Ficsit.
-    7. Scannable resources and basic game essentials are not moved. I didn't know how to do it and I dont' get paid enough for that (or paid at all tbh).
-    8. MAM researches are all considered non-essential, the ones that are will be moved to milestones. Non-essential things will be moved from milestones to MAM in exchange.
-    9. All materials are treated the same, so you could end up with the screw being as expensive as a vanilla plutonium fuel rod and vice versa.
-    10. If for whatever reason introducing the same seed and settings create different paths for different players, you can work arround it by having one player create the files and send them to the others. This should be reported as a bug regardless.
-    11. Particle accelerator/Converter recipes use energy based on the tier of the recipe. Generating 1500MW on Biomass Burners is only fun the 1st time.
-    12. Crafting times used have 2 decimals, the game only shows 1, so the craft time displayed might be slightly inaccurate, the production/consumption per miute is correcth though.
-    13. If the randomizer takes too long, it's probably in an infinite loop, happens in some seeds. Close it and run again (chaning the seed if you introduced it manually).
-    14. Values of 0 may crash the randomizer if they are for quantities. For probabilities, 0 should be fine.
-    15. Negative values for probabilities will be either treated as 0, produce unexpected results or crash the randomizer. Idem for 100 and values over it.  Don't put either preferably.
-    16. Space elevator stages untouched (Changing them would be a pain and the path to get to it is already random anyway).
-    17. Milestones are not necessarily linear, tier 1 milestones could need tier 9 materials to unlock. In this case, anything unlocked by that tier 1 milestone won't be needed until it's unlockable.
-    18. Limited resources like slugs, hard drives and wood/leaves are only used in alternate recipes to avoid softlocks.
+    3. Production buildings may not be able to reach 100% efficiency on certain recipes.
+    4. Excited Photonic Matter may not be free. Blame Ficsit.
+    5. Scannable resources and basic game essentials are not moved. I didn't know how to do it and I dont' get paid enough for that (or paid at all tbh).
+    6. MAM researches are treated as normal milestones.
+    7. All materials are treated the same, so you could end up with the screw being as expensive as a vanilla plutonium fuel rod and vice versa.
+    8. If for whatever reason introducing the same seed and settings create different paths for different players, you can work arround it by having one player create the files and send them to the others. This should be reported as a bug regardless.
+    9. Particle accelerator/Converter recipes use energy based on the tier of the recipe. Generating 1500MW on Biomass Burners is only fun the 1st time.
+    10. Crafting times used have 2 decimals, the game only shows 1, so the craft time displayed might be slightly inaccurate, the production/consumption per miute is correcth though.
+    11. If the randomizer takes too long, it's probably in an infinite loop, happens in some seeds. Close it and run again (chaning the seed if you introduced it manually).
+    12. Values of 0 may crash the randomizer if they are for quantities. For probabilities, 0 should be fine.
+    13. Negative values for probabilities will be either treated as 0, produce unexpected results or crash the randomizer. Idem for 100 and values over it.  Don't put either preferably.
+    14. Space elevator stages untouched (Changing them would be a pain and the path to get to it is already random anyway).
+    15. Milestones are not necessarily linear, tier 1 milestones could need tier 9 materials to unlock. In this case, anything unlocked by that tier 1 milestone won't be needed until it's unlockable.
+    16. Limited resources like slugs, hard drives and wood/leaves are only used in alternate recipes to avoid softlocks.
+    17. Blueprint maker tier 2 milestone is not randomized. I didn't find the milestone on my first try and decided not to bother.
 
 -Options (Toggle):
     1. Ore location:
@@ -47,8 +46,8 @@ Info:
         Hard: Recipes can have solid outputs other than the desired and the Awesome sink may not be available or have really hard crafting recipe.
         No U: Recipes can have solid/liquid outputs other than the desired and the sink may not be available or have really hard crafting recipe. Packaging to get rid of liquids may or may not be easy, you may need many deposits (if they're even available) and manual flushing.
     5. Liquids:
-        Only liquid: Liquids can only be used in their liquid form for recipes (this is the case for the base game).
-        Packaged and Liquid: Packaged liquids can be part of recipes. Packaging could be really expensive (or not).
+        Only liquid: Liquids can only be used in their liquid form for recipes (this is the case for the base game). Packaging/unpackaging recipes are not randomized.
+        Packaged and Liquid: Packaged liquids can be part of recipes. Packaging/unpackaging recipes are randomized.
     6. Station bias (I don't know which provides better results, you'll have to try them):
         None: The stations are selected completely random, this makes the earlier unlocked stations have way more recipes than the later ones.
         Slight bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning slightly on newer unlocked stations.
@@ -59,19 +58,26 @@ Info:
         Random: The amount of slots is random between the values provided. MAM researches double the randomized value (yes, this means MAM always gives an even number of slots).
         Max: Number (min 1).
         Min: Number (min 1).
-    8. Balance progression:
-        True: Make crafing stations be obtained evenly spread to get a better crafting station spread.
-        False: Crafting stations are completely randomized, may lead to a game where mostly a few stations are used for everything. 
-    9. Advanced Logging (true/false): Logs many things helpful for troubleshooting, but is way slower. Use only for debugging.
+    8. Alternate Recipes:
+        Nope: Alternate recipes removed from the game (still, you can get some materials as byproduct appart from their main recipe depending on Waste setting).
+        Randomized: Alternate recipes have both random ingredients and products. They may create alternative paths to beating the game.
+    9. Long Route Bias:
+        None: Milestones are randomized completely.
+        Slight: Tries to make the game longer by trying to put milestones later in the logic.
+        Medium: Tries to make the game longer by trying (harder than slight) to put milestones later in the logic.
+        Heavy: Tries to make the game longer by trying (harder than medium) to put milestones later in the logic.
+    10. Advanced Logging (true/false): Logs many things helpful for troubleshooting, but is way slower. Use only for debugging.
 
-    V1. Materials inicialization, add corresponding milestone as extraCheck.
-    V2. Structure randomization, use or not generic logic for belts.
-    V3. Structure randomization, use or not generic logic for Poles/cables.
-    V4. Sequence Generation in products and Structure randomization.
-    5. Add packaged liquid materials to Materials initialization. Extra check for Packager and the liquid.
-    V6. Sequence Genneration in materials.
-    7. Milestone generation, edit the value for inventory slot rewards.
-    8. Main loop, force certain item after certain amount of loops.
+    1. V
+    2. V
+    3. V
+    4. V
+    5. 
+    6. V
+    7. 
+    8. 
+    9. V
+    10. V
 
 -Options (Insert Value): Don't put the Max Stack or Max items to 0, for free recipes use the specific option.
     0. Seed.
@@ -99,14 +105,22 @@ Info:
     11. In component sequencer. V
     12. In component sequencer. V
     13. In component sequencer. V
-    13. In Material selection. V
+    14. In Material selection. V
 
 TODO:
 
-Make the game select the first Crafting station. Make sure it's enabled by the end of the tutorial.
+Balance progression.
 
-Recipe_Biomass_Wood will be handled as alternate recipe. Ficsites besides the first one too.
+(alternate crafts not in alternate crafts folder)
+Recipe_Biomass_Wood, Mycelia and AlienProtein will be handled as alternate recipe.
+Ficsites iron and cat too.
+Same for protein from animals.
+Same for recipe for power shards
+Same for Residual fuel, plastic and oil
+Same for ResourceConversion from converter
 
-Check phases and ensure mandatory items are in them.
+Heavy Oil Needs a essential recipe (can have it replace an alternate)
 
-Add a toggle variable that rerolls milestones sometimes, making it more likely to need more milestones to beat the game.
+Equipment is a different object
+
+MAM and store purchases not added yet.

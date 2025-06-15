@@ -9,13 +9,15 @@ public class UiValues {
     // In general, 0 = Easy, 1 = Medium, 2 = Hard, 3 = Insane. The UI displayed
     // names may not be these.
     static int oreLocation = 0;
-    static int belts = 3;
+    static int belts = 0;
     static int electricity = 0;
     static int waste = 3;
     static int stationBias = 0;
     static int liquids = 0;
-    static Boolean balanceProg = true;
-    static Boolean advLog = false;
+    static int alterReci = 0;
+    static int forceLongGameBias = 0;
+
+    static Boolean advLog = true;
 
     // Inventory Slots Weirdo
     static int inventorySlots = 0; // 0 = fixed, 1 = random
@@ -76,7 +78,7 @@ public class UiValues {
         Console.hiddenLog("Waste: " + UiValues.waste);
         Console.hiddenLog("Station Bias: " + UiValues.stationBias);
         Console.hiddenLog("Liquids: " + UiValues.liquids);
-        Console.hiddenLog("Balance Prog: " + UiValues.balanceProg);
+        Console.hiddenLog("Alternate Recipes: " + UiValues.alterReci);
         Console.hiddenLog("Inventory Slots: " + UiValues.inventorySlots);
         Console.hiddenLog("Inventory Range: " + UiValues.inventoryRange[0] + " - " + UiValues.inventoryRange[1]);
         Console.hiddenLog("Max Stack Craft: " + UiValues.maxStackCraft);
@@ -224,10 +226,19 @@ public class UiValues {
         UiValues.inventorySlots = inventorySlots;
     }
 
+    public static int getalterRecipes() {
+        return UiValues.alterReci;
+    }
+
+    public static void setalterRecipes(int i) {
+        UiValues.alterReci = i;
+    }
+
     /**
      * Retrieves the current inventory slots range.
      * 
-     * @return a 2-element array, the first element is the min and the second is the
+     * @return 7. Inventory slots: a 2-element array, the first element is the min
+     *         and the second is the
      *         max value.
      */
     public static int[] getInventoryRange() {
@@ -239,20 +250,32 @@ public class UiValues {
     }
 
     /**
-     * Retrieves the setting for progression balance.
+     * Retrieves the setting for the long game bias.
      * 
-     * @return 8. Balance progression:
-     *         True: Make crafing stations be obtained evenly spread to get a better
-     *         crafting station spread.
-     *         False: Crafting stations are completely randomized, may lead to a
-     *         game where mostly a few stations are used for everything.
+     * @return 9. The force long game bias value:
+     *         Higher values increase the likelihood of needing more milestones.
      */
-    public static Boolean getBalanceProg() {
-        return UiValues.balanceProg;
+
+    public static int getForceLongGameBias() {
+        return UiValues.forceLongGameBias;
     }
 
-    public static void setBalanceProg(Boolean balanceProg) {
-        UiValues.balanceProg = balanceProg;
+    public static void setForceLongGameBias(int forceLongGameBias) {
+        UiValues.forceLongGameBias = forceLongGameBias;
+    }
+
+    /**
+     * Retrieves the advanced logging setting. Logs many things helpful for
+     * troubleshooting, but is way slower. Use only for debugging.
+     * 
+     * @return 10. Advanced Logging.
+     */
+    public static Boolean getAdvLog() {
+        return UiValues.advLog;
+    }
+
+    public static void setAdvLog(Boolean advLog) {
+        UiValues.advLog = advLog;
     }
 
     public static long getSeed() {
@@ -448,19 +471,5 @@ public class UiValues {
 
     public static void setFreeChance(int waste) {
         UiValues.waste = waste;
-    }
-
-    /**
-     * Retrieves the advanced logging setting. Logs many things helpful for
-     * troubleshooting, but is way slower. Use only for debugging.
-     * 
-     * @return 15. Advanced Logging.
-     */
-    public static Boolean getAdvLog() {
-        return UiValues.advLog;
-    }
-
-    public static void setAdvLog(Boolean advLog) {
-        UiValues.advLog = advLog;
     }
 }
