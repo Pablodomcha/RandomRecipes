@@ -213,9 +213,11 @@ public class Materials {
                     false, 9, Arrays.asList("Desc_ResourceSink", "power")));
         }
 
-        tempStructures.add(
-                new EssentialStructure("Desc_SpaceElevator", false, false, "TowTruck/Recipe_SpaceElevator", false,
-                        false, 0));
+        EssentialStructure spaceElevator = new EssentialStructure("Desc_SpaceElevator", false, false,
+                "Recipe_SpaceElevator", false,
+                false, 0);
+        spaceElevator.setRecipePath("TowTruck" + spaceElevator.getRecipePath());
+        tempStructures.add(spaceElevator);
 
         return tempStructures;
 
@@ -514,6 +516,17 @@ public class Materials {
             Console.hiddenLog(milestone.getName() + " is in phase " + milestone.getPhase());
         }
         Console.hiddenLog("Yes, 3-2 is correctly in phase 1 (at least as of patch 1.1).");
+
+        return tempReturn;
+    }
+
+    private List<Milestone> generateMamMilestones() {
+        List<Milestone> tempReturn = new ArrayList<>();
+        List<Milestone> tempNoPrefix = new ArrayList<>();
+
+        // AlienOrganisms_RS
+        // tempMilestones.add(new Milestone("Tutorial_1", true, false,
+        // "Schematic_Tutorial1", null, 0));
 
         return tempReturn;
     }
@@ -1387,8 +1400,9 @@ public class Materials {
 
     public void doExtraChecks(String nameToRemove, List<String> whereToRemove) {
 
-        if(nameToRemove == "cable"){
-            Console.test("This is a pipe----------------------------------------------------------------------------------");
+        if (nameToRemove == "cable") {
+            Console.test(
+                    "This is a pipe----------------------------------------------------------------------------------");
         }
 
         Console.hiddenLog("nametoremove: " + nameToRemove + " wheretoremove: " + whereToRemove);

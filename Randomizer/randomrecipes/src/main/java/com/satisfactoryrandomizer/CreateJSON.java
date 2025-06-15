@@ -34,10 +34,11 @@ public class CreateJSON {
         json = json.replace("\n", "\r\n"); // Make the line breaks CRLF
 
         if (recipePath.contains("null")) {
-            Console.log(recipe.getProducts().get(0).getName() + " has a null path, adding as new recipe.");
+            Console.hiddenLog(recipe.getProducts().get(0).getName() + " has a null path, adding as new recipe.");
             try (FileWriter writer = new FileWriter(
                     "ContentLib/Recipes/" + recipe.getProducts().get(0).getName() + ".json")) {
                 writer.write(json);
+                return;
             } catch (IOException e) {
                 Console.log("Error writing JSON file: " + e.getMessage());
             }

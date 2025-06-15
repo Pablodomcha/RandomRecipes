@@ -17,7 +17,7 @@ public class UiValues {
     static int alterReci = 0;
     static int forceLongGameBias = 0;
 
-    static Boolean advLog = true;
+    static Boolean advLog = false;
 
     // Inventory Slots Weirdo
     static int inventorySlots = 0; // 0 = fixed, 1 = random

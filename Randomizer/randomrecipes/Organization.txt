@@ -123,4 +123,30 @@ MAM and store purchases not added yet.
 
 Hazmat filter is equipment?
 
-Fails for most seeds (doesn't get the check for tut 6, has other mimlestones as extrachecks)
+Check Crafting station names (quantum encoder seems to be nothing and converter is quantum encoder?)
+
+Says all elevetor parts recipes couldn't be loaded.
+
+Items to remove/edit (not found, may mean they don't exist or their Desc name is not the same as recipe):
+    IngotCopper
+    ConveyorPoleWall
+    IngotSteel
+    AluminumSheet
+    AILimiter
+    IngotSAM
+    Biomass_leaves
+    Screw
+    SyntheticPowerShard
+    Quickwire
+    Concrete
+    EncasedIndustrialBeam
+    FicsiteIngot_AL
+    FusedModularFrame
+    RadioControlUnit
+    HeatSInk
+    SuperpositionOscilator
+    IngotCaterium
+    SteelBeam
+
+    Not checked every fail (too many of them repeated).
+

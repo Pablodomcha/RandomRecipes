@@ -90,7 +90,7 @@ public class SequenceGenerator {
         }
 
         // Main loop, runs until there's nothing left to randomize
-        int cap = 10000;
+        int cap = 1000;
         int iteration = 0;
         while (!randomizables.isEmpty() && ++iteration < cap) {
 
@@ -187,14 +187,27 @@ public class SequenceGenerator {
         // craftable by the time they are needed for Tutorial_6
         if (milestone.getName().contains("Tutorial_")) {
             Milestone tut6 = materials.getMilestoneByName("Tutorial_6");
+
+            // Adds up to 2 fixed unlocks per tutorial and 10 to Tutorial_5 (increase the
+            // chance extrachecks are done)
             int cont = 2;
+            if (milestone.getName().equals("Tutorial_5")) {
+                cont = 10;
+            }
+            List<String> extraCheck;
+
             while (tut6.getExtraCheck().size() > 0 && cont-- > 0) {
                 // Remove the extra check belonging to a milestone and get an extra check at
                 // random
-                List<String> extraCheck = new ArrayList<>(tut6.getExtraCheck());
+                extraCheck = new ArrayList<>(tut6.getExtraCheck());
                 extraCheck.removeIf(s -> s.contains("Tutorial_"));
-                milestone.addFixedUnlock(tut6.getExtraCheck().get(random.nextInt(tut6.getExtraCheck().size())));
+
+                if (!extraCheck.isEmpty()) {
+                    String s = extraCheck.get(random.nextInt(extraCheck.size()));
+                    milestone.addFixedUnlock(s);
+                }
             }
+
         }
 
         // Add the first crafting station in Tutorial_6 if it wasn't added earlier
@@ -504,31 +517,35 @@ public class SequenceGenerator {
      */
     private static List<String> generateUnlocks(int numberOfUnlocks, List<String> fixedUnlocks, int phase) {
         List<String> unlocks = new ArrayList<>();
+        List<String> fixedlocks = new ArrayList<>();
 
         // Add extra unlocks if it's not null
         if (fixedUnlocks != null) {
-            unlocks.addAll(fixedUnlocks);
+            fixedlocks.addAll(fixedUnlocks);
 
             // Removing the tutorials (they may be in fixed unlocks and can't be generated
-            // here)
-            List<String> fixUnl = fixedUnlocks;
-            fixUnl.removeIf(s -> s.contains("Tutorial_"));
+            // here) and changing from the name to the recipe (it's what the milestone uses)
+            List<Randomizable> fixUnl = new ArrayList<>();
+            for(String s : fixedUnlocks){
+                fixUnl.add(materials.getRandomizableByName(s));
+            } 
+            fixUnl.removeIf(s -> s.getName().contains("Tutorial_"));
             Collections.shuffle(fixUnl);
 
-            for (String unlock : fixUnl) {
+            for (Randomizable unlock : fixUnl) {
                 Console.hiddenLog("Forcing unlock: " + unlock);
-                Randomizable randomizable = materials.getRandomizableByName(unlock);
-                materials.setRandomizableAvailable(unlock, true);
-                Randomizable r = materials.getRandomizableByName(unlock);
-                if (r instanceof EssentialStructure) {
-                    generateStructure(materials.getEssentialStructureByName(unlock), "structure");
-                } else if (r instanceof Structure) {
-                    generateStructure(materials.getEssentialStructureByName(unlock), "structure");
+                materials.setRandomizableAvailable(unlock.getName(), true);
+                if (unlock instanceof EssentialStructure) {
+                    generateStructure((EssentialStructure) unlock, "structure");
+                    unlocks.add(unlock.getPath());
+                } else if (unlock instanceof Structure) {
+                    generateStructure((EssentialStructure) unlock, "structure");
+                    unlocks.add(unlock.getPath());
                 } else {
                     Console.log(unlock + " is not one of the allowed categories.");
                 }
-                if (!randomizable.getCheckAlso().isEmpty())
-                    materials.doExtraChecks(randomizable.getName(), randomizable.getCheckAlso());
+                if (!unlock.getCheckAlso().isEmpty())
+                    materials.doExtraChecks(unlock.getName(), unlock.getCheckAlso());
             }
         }
 
@@ -536,7 +553,7 @@ public class SequenceGenerator {
         List<Randomizable> itemList = materials.getUnavailableAndUncraftableRandomizables();
         itemList.removeAll(materials.getAllMilestones());
 
-        // Add extra unlocks
+        // Add unlocks
         for (int i = 0; i < numberOfUnlocks; i++) {
             if (itemList.isEmpty()) {
                 Console.log(
