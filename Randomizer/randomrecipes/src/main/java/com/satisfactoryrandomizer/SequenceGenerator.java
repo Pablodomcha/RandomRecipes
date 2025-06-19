@@ -291,7 +291,6 @@ public class SequenceGenerator {
 
         List<Mat> mats = generateIngredientsComp(station);
         List<Mat> prod = new ArrayList<>();
-        Boolean mainliquid;
 
         if (comp == null) {
             Console.cheatsheet("Generating alternate recipe for: " + station.getName());
@@ -305,12 +304,13 @@ public class SequenceGenerator {
         if (station.getLiquidIn() + station.getSolidIn() > 0) {
             if (comp.isLiquid() && comp != null) {
                 prod.add(new Mat(comp.getName(), 1000 * random.nextInt(UiValues.getMaxStackCraft()) + 1));
-                mainliquid = true;
+                prod.addAll(generateProducts(station, true));
             } else if (comp != null) {
                 prod.add(new Mat(comp.getName(), random.nextInt(UiValues.getMaxStackCraft()) + 1));
-                mainliquid = false;
+                prod.addAll(generateProducts(station, false));
+            } else {
+                prod.addAll(generateProducts(station, null));
             }
-            prod.addAll(generateProducts(station, null));
         }
 
         double handSpeed = random.nextDouble() * (UiValues.getHandcraftSpeed()[1] - UiValues.getHandcraftSpeed()[0])
