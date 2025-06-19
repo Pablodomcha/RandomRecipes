@@ -150,3 +150,5 @@ Items to remove/edit (not found, may mean they don't exist or their Desc name is
 
     Not checked every fail (too many of them repeated).
 
+    Fill the alternate list and add it at the end of sequence generator
+

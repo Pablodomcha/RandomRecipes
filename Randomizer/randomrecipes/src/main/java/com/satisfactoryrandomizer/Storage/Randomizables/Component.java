@@ -39,7 +39,7 @@ public class Component extends Randomizable {
         this.liquid = liquid;
     }
 
-    public int getStack(){
+    public int getStack() {
         return this.maxstack;
     }
 

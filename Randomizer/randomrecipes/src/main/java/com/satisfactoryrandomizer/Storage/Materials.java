@@ -13,12 +13,14 @@ import com.satisfactoryrandomizer.Storage.Randomizables.*;
 public class Materials {
 
     private final List<Component> components = new ArrayList<>();// Components
+    private final List<Component> alternate = new ArrayList<>();// Alternate components
     private List<CraftStation> stations = new ArrayList<>(); // Crafting Stations
     private List<Structure> structures = new ArrayList<>(); // Generic structures that don't affect the logic
     private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by
                                                                               // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
     private int[] phase = {};
+
 
     public void prepare(int seed) {
         Random random = new Random(seed);
@@ -75,11 +77,14 @@ public class Materials {
 
         this.milestones.addAll(generateMilestones());
 
+        // Alternate Recipes
+        this.alternate.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/"));
+
         // EssentialStructures
         // //Game/FactoryGame/Recipes/Buildings/
         tempEssentialStructures = generateEssentialBuildings();
         this.essentialStructures
-                .addAll(addPrefixEssStr(tempEssentialStructures, "//Game/FactoryGame/Recipes/Buildings/"));
+                .addAll(addPrefixEssStr(tempEssentialStructures, "//Game/FactoryGame/Recipes/"));
         tempEssentialStructures.clear();
 
         // Add the required structures to the milestones and the rest to non-essential.
@@ -395,6 +400,14 @@ public class Materials {
         tempNoPrefixComps.clear();
 
         return tempComps;
+    }
+
+    private static List<Component> generateAlternate() {
+        List<Component> emptyRecipes = new ArrayList<>();
+
+        emptyRecipes.add(generateComponent("", false));
+
+        return emptyRecipes;
     }
 
     private List<Milestone> generateMilestones() {

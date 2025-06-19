@@ -13,8 +13,7 @@ public class UiValues {
     static int electricity = 0;
     static int waste = 3;
     static int stationBias = 0;
-    static int liquids = 0;
-    static int alterReci = 0;
+    static Boolean alterReci = false;
     static int forceLongGameBias = 0;
 
     static Boolean advLog = false;
@@ -62,7 +61,7 @@ public class UiValues {
 
     public static int addAll() {
         return 1000 * (int) (UiValues.seed % 100 + UiValues.oreLocation + UiValues.belts + UiValues.electricity
-                + UiValues.waste + UiValues.stationBias + UiValues.liquids + UiValues.inventorySlots +
+                + UiValues.waste + UiValues.stationBias + UiValues.inventorySlots +
                 UiValues.maxStackCraft + UiValues.maxProdCraft + UiValues.maxStackStruct + UiValues.maxItemStruct
                 + UiValues.maxStackMile + UiValues.maxItemMile + UiValues.maxStackEle + UiValues.maxItemEle +
                 UiValues.maxTimeMile + UiValues.maxTimeCraft + UiValues.handcraftSpeed[1] + UiValues.inputBias
@@ -77,7 +76,6 @@ public class UiValues {
         Console.hiddenLog("Electricity: " + UiValues.electricity);
         Console.hiddenLog("Waste: " + UiValues.waste);
         Console.hiddenLog("Station Bias: " + UiValues.stationBias);
-        Console.hiddenLog("Liquids: " + UiValues.liquids);
         Console.hiddenLog("Alternate Recipes: " + UiValues.alterReci);
         Console.hiddenLog("Inventory Slots: " + UiValues.inventorySlots);
         Console.hiddenLog("Inventory Range: " + UiValues.inventoryRange[0] + " - " + UiValues.inventoryRange[1]);
@@ -170,23 +168,6 @@ public class UiValues {
     }
 
     /**
-     * Retrieves the current liquid setting.
-     * 
-     * @return 5. Liquids:
-     *         Only liquid: Liquids can only be used in their liquid form for
-     *         recipes (this is the case for the base game).
-     *         Packaged and Liquid: Packaged liquids can be part of recipes.
-     *         Packaging could be really expensive (or not).
-     */
-    public static int getLiquids() {
-        return UiValues.liquids;
-    }
-
-    public static void setLiquids(int liquids) {
-        UiValues.liquids = liquids;
-    }
-
-    /**
      * Retrieves the current station bias setting.
      * 
      * @return 6. Station bias:
@@ -226,14 +207,6 @@ public class UiValues {
         UiValues.inventorySlots = inventorySlots;
     }
 
-    public static int getalterRecipes() {
-        return UiValues.alterReci;
-    }
-
-    public static void setalterRecipes(int i) {
-        UiValues.alterReci = i;
-    }
-
     /**
      * Retrieves the current inventory slots range.
      * 
@@ -247,6 +220,24 @@ public class UiValues {
 
     public static void setInventoryRange(int[] inventoryRange) {
         UiValues.inventoryRange = inventoryRange;
+    }
+
+    /**
+     * Retrieves the current alternate recipes setting.
+     * 
+     * @return 8. Alternate Recipes:
+     *         Nope: Alternate recipes removed from the game (still, you can get
+     *         some materials as byproduct appart from their main recipe depending
+     *         on Waste setting).
+     *         Randomized: Alternate recipes have both random ingredients and
+     *         products. They may create alternative paths to beating the game.
+     */
+    public static Boolean getalterRecipes() {
+        return UiValues.alterReci;
+    }
+
+    public static void setalterRecipes(Boolean i) {
+        UiValues.alterReci = i;
     }
 
     /**
