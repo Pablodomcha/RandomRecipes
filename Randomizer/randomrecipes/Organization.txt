@@ -51,15 +51,15 @@ Info:
         Medium Bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning on newer unlocked stations.
         Heavy Bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning heavily on newer unlocked stations.
     7. Inventory slots: (The number of upgrades that give slots is not randomized, only the amount of slots they give and the milestones/MAM research they appear in).
-        Fixed: The amount of slots is fixed, uses Max value (with this option Min values is ignored). MAM researches that give these give double.
-        Random: The amount of slots is random between the values provided. MAM researches double the randomized value (yes, this means MAM always gives an even number of slots).
-        Max: Number (min 1).
-        Min: Number (min 1).
+        Fixed: The amount of slots is fixed, uses Max value (with this option Min values is ignored).
+        Random: The amount of slots is random between the values provided.
+            Max: Number (min 1).
+            Min: Number (min 1).
     8. Alternate Recipes:
         Nope: Alternate recipes removed from the game (still, you can get some materials as byproduct appart from their main recipe depending on Waste setting).
         Randomized: Alternate recipes have both random ingredients and products. They may create alternative paths to beating the game.
     9. Long Route Bias:
-        None: Milestones are randomized completely.
+        None: Milestones are randomized entirely.
         Slight: Tries to make the game longer by trying to put milestones later in the logic.
         Medium: Tries to make the game longer by trying (harder than slight) to put milestones later in the logic.
         Heavy: Tries to make the game longer by trying (harder than medium) to put milestones later in the logic.

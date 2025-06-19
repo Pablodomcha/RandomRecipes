@@ -33,7 +33,7 @@ public class CreateJSON {
         String json = gson.toJson(jsonRecipe);
         json = json.replace("\n", "\r\n"); // Make the line breaks CRLF
 
-        if (recipePath.contains("null")) {
+        if (recipePath == null) {
             Console.hiddenLog(recipe.getProducts().get(0).getName() + " has a null path, adding as new recipe.");
             try (FileWriter writer = new FileWriter(
                     "ContentLib/Recipes/" + recipe.getProducts().get(0).getName() + ".json")) {

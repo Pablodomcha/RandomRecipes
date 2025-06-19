@@ -22,6 +22,7 @@ public class SequenceGenerator {
     private static String lastObtainedStation = null;
     private static String firstStation = null;
     private static int nItems = 0;
+    private static int alternateCounter = 0;
 
     public static void generateSequence() {
         // Log the selected values
@@ -282,8 +283,9 @@ public class SequenceGenerator {
         // variability.
         int count = UiValues.getStationBias();
 
-        // Check if there's even a last obtained station before checking it's name
-        while (!station.getName().equals(SequenceGenerator.lastObtainedStation) && count-- > 0) {
+        // Check if there's even a last obtained station before checking it's name.
+        // If it's an alternate recipe (comp == null), we don't reroll.
+        while (!station.getName().equals(SequenceGenerator.lastObtainedStation) && count-- > 0 && comp != null) {
             station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
         }
 
@@ -291,33 +293,53 @@ public class SequenceGenerator {
         List<Mat> prod = new ArrayList<>();
         Boolean mainliquid;
 
-        Console.cheatsheet(comp.getName() + " is made in " + station.getName());
+        if (comp == null) {
+            Console.cheatsheet("Generating alternate recipe for: " + station.getName());
+        } else {
+            Console.cheatsheet(comp.getName() + " is made in " + station.getName());
+        }
 
         // Add the main product multiplying the value range by 1000 for liquids.
         // Then add the rest of the products if the option is enabled and there's space.
+        // Don't add main product if there isn't one (alternate recipes).
         if (station.getLiquidIn() + station.getSolidIn() > 0) {
-            if (comp.isLiquid()) {
+            if (comp.isLiquid() && comp != null) {
                 prod.add(new Mat(comp.getName(), 1000 * random.nextInt(UiValues.getMaxStackCraft()) + 1));
                 mainliquid = true;
-            } else {
+            } else if (comp != null) {
                 prod.add(new Mat(comp.getName(), random.nextInt(UiValues.getMaxStackCraft()) + 1));
                 mainliquid = false;
             }
-            prod.addAll(generateProducts(station, mainliquid));
+            prod.addAll(generateProducts(station, null));
         }
 
         double handSpeed = random.nextDouble() * (UiValues.getHandcraftSpeed()[1] - UiValues.getHandcraftSpeed()[0])
                 + UiValues.getHandcraftSpeed()[0];
         double time = random.nextDouble() * (UiValues.getMaxTimeCraft());
 
-        Recipe recipe = new Recipe(
-                prod, // Products
-                mats, // Ingredients
-                "Recipe_" + comp.getName() + ".json", // Filename
-                station.getBuilderPath(), // Station
-                time, // Time
-                handSpeed // Handcraft speed
-        );
+        Recipe recipe;
+
+        // Give the recipe the name of the main component if not alternate and a generic
+        // name otherwise
+        if (comp == null) {
+            recipe = new Recipe(
+                    prod, // Products
+                    mats, // Ingredients
+                    "Recipe_Alternate" + SequenceGenerator.alternateCounter + ".json", // Filename
+                    station.getBuilderPath(), // Station
+                    time, // Time
+                    handSpeed // Handcraft speed
+            );
+        } else {
+            recipe = new Recipe(
+                    prod, // Products
+                    mats, // Ingredients
+                    "Recipe_" + comp.getName() + ".json", // Filename
+                    station.getBuilderPath(), // Station
+                    time, // Time
+                    handSpeed // Handcraft speed
+            );
+        }
 
         // Create Recipe JSON file (RecipeVN if it goes into a machine with variable
         // consumption)
@@ -330,12 +352,18 @@ public class SequenceGenerator {
 
             double max = (double) addedItems * 740 / SequenceGenerator.nItems;
             int energy = (int) (random.nextDouble() * max + 10);
+            if (comp == null) {
+                CreateJSON.saveRecipeVNAsJson(recipe, null, SequenceGenerator.firstStation,
+                        energy);
+            } else {
+                CreateJSON.saveRecipeVNAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation,
+                        energy);
+            }
 
-            CreateJSON.saveRecipeVNAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation,
-                    energy);
-
-        } else {
+        } else if (comp != null) {
             CreateJSON.saveRecipeAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation);
+        } else {
+            CreateJSON.saveRecipeAsJson(recipe, null, SequenceGenerator.firstStation);
         }
 
         // Mark the component as craftable and update the list of available but
@@ -526,9 +554,9 @@ public class SequenceGenerator {
             // Removing the tutorials (they may be in fixed unlocks and can't be generated
             // here) and changing from the name to the recipe (it's what the milestone uses)
             List<Randomizable> fixUnl = new ArrayList<>();
-            for(String s : fixedUnlocks){
+            for (String s : fixedUnlocks) {
                 fixUnl.add(materials.getRandomizableByName(s));
-            } 
+            }
             fixUnl.removeIf(s -> s.getName().contains("Tutorial_"));
             Collections.shuffle(fixUnl);
 
@@ -598,10 +626,13 @@ public class SequenceGenerator {
         int solidslots = station.getSolidOut();
 
         // Remove the slot of the main product, as it's already used
-        if (mainliquid && UiValues.getWaste() == 3)
-            liquidslots--;
-        if (!mainliquid)
-            solidslots--;
+        // Don't remove slots for alternate recipes, as they don't have main product
+        if (mainliquid != null) {
+            if (mainliquid && UiValues.getWaste() == 3)
+                liquidslots--;
+            if (!mainliquid)
+                solidslots--;
+        }
 
         // Use random resources between 1 and the max possible for the station
         int totalresources = getBiasedRandomInt(0, Math.min(0, liquidslots + solidslots), UiValues.getInputBias());
