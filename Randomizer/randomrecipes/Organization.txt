@@ -129,10 +129,10 @@ Says all elevetor parts recipes couldn't be loaded.
 
 Items to remove/edit (not found, may mean they don't exist or their Desc name is not the same as recipe):
     IngotCopper
-    ConveyorPoleWall
+    ConveyorPoleWall // Structure problem, need to look into it
     IngotSteel
     AluminumSheet
-    AILimiter
+    AILimiter 
     IngotSAM
     Biomass_leaves
     Screw
@@ -150,5 +150,6 @@ Items to remove/edit (not found, may mean they don't exist or their Desc name is
 
     Not checked every fail (too many of them repeated).
 
-    Fill the alternate list and add it at the end of sequence generator
+Fill the alternate list and add it at the end of sequence generator
 
+Package fuel not in OilRefinery

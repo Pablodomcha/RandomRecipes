@@ -21,7 +21,6 @@ public class Materials {
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
     private int[] phase = {};
 
-
     public void prepare(int seed) {
         Random random = new Random(seed);
 
@@ -278,11 +277,11 @@ public class Materials {
         List<Component> tempNoPrefixComps = new ArrayList<>();
 
         // Assembler
-        tempNoPrefixComps.add(generateComponent("Recipe_AILimiter", false));
+        tempNoPrefixComps.add(generateComponent("Desc_CircuitBoardHighSpeed", "Recipe_AILimiter", false));
         tempNoPrefixComps.add(generateComponent("Recipe_CircuitBoard", false));
         tempNoPrefixComps.add(generateComponent("Recipe_ElectromagneticControlRod", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_EncasedIndustrialBeam", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_HeatSink", false));
+        tempNoPrefixComps.add(generateComponent("Desc_SteelPlateReinforced", "Recipe_EncasedIndustrialBeam", false));
+        tempNoPrefixComps.add(generateComponent("Desc_AluminumPlateReinforced", "Recipe_HeatSink", false));
         tempNoPrefixComps.add(generateComponent("Recipe_IronPlateReinforced", false));
         tempNoPrefixComps.add(generateComponent("Recipe_ModularFrame", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Motor", false));
@@ -297,7 +296,7 @@ public class Materials {
 
         // Blender
         tempNoPrefixComps.add(generateComponent("Recipe_CoolingSystem", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_FusedModularFrame", false));
+        tempNoPrefixComps.add(generateComponent("Desc_ModularFrameFused", "Recipe_FusedModularFrame", false));
         tempNoPrefixComps.add(generateComponent("Recipe_NitricAcid", true));
         tempNoPrefixComps.add(generateComponent("Recipe_NonFissileUranium", false));
         tempNoPrefixComps.add(generateComponent("Recipe_RocketFuel", true));
@@ -307,11 +306,11 @@ public class Materials {
         // Constructor
         tempNoPrefixComps.add(generateComponent("Recipe_AlienDNACapsule", false));
         tempNoPrefixComps.add(generateComponent("Recipe_AluminumCasing", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_AluminumSheet", false));
+        tempNoPrefixComps.add(generateComponent("Desc_AluminumPlate", "Recipe_AluminumSheet", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Biofuel", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Biomass_Leaves", false));
+        tempNoPrefixComps.add(generateComponent("Desc_GenericBiomass", "Recipe_Biomass_Leaves", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Cable", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Concrete", false));
+        tempNoPrefixComps.add(generateComponent("Desc_Cement", "Recipe_Concrete", false));
         tempNoPrefixComps.add(generateComponent("Recipe_CopperDust", false));
         tempNoPrefixComps.add(generateComponent("Recipe_CopperSheet", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Fabric", false));
@@ -322,10 +321,10 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_IronRod", false));
         tempNoPrefixComps.add(generateComponent("Recipe_NuclearFuelRod", false));
         tempNoPrefixComps.add(generateComponent("Recipe_QuartzCrystal", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Quickwire", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Screw", false));
+        tempNoPrefixComps.add(generateComponent("Desc_HighSpeedWire", "Recipe_Quickwire", false));
+        tempNoPrefixComps.add(generateComponent("Desc_IronScrew", "Recipe_Screw", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Silica", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_SteelBeam", false));
+        tempNoPrefixComps.add(generateComponent("Desc_SteelPlate", "Recipe_SteelBeam", false));
         tempNoPrefixComps.add(generateComponent("Recipe_SteelPipe", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Wire", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Constructor/"));
@@ -333,7 +332,7 @@ public class Materials {
 
         // Converter
         tempNoPrefixComps.add(generateComponent("Recipe_DarkEnergy", true));
-        tempNoPrefixComps.add(generateComponent("Recipe_FicsiteIngot_AL", false));
+        tempNoPrefixComps.add(generateComponent("Desc_FicsiteIngot", "Recipe_FicsiteIngot_AL", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Ficsonium", false));
         tempNoPrefixComps.add(generateComponent("Recipe_QuantumEnergy", false));
         tempNoPrefixComps.add(generateComponent("Recipe_TimeCrystal", false));
@@ -364,7 +363,7 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_ModularFrameHeavy", false));
         tempNoPrefixComps.add(generateComponent("Recipe_MotorTurbo", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PlutoniumFuelRod", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_RadioControlUnit", false));
+        tempNoPrefixComps.add(generateComponent("Desc_ModularFrameLightweight", "Recipe_RadioControlUnit", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Manufacturer/"));
         tempNoPrefixComps.clear();
 
@@ -378,24 +377,42 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_Plastic", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Rubber", false));
         tempNoPrefixComps.add(generateComponent("Recipe_SulfuricAcid", true));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedBiofuel", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedCrudeOil", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedOilResidue", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedTurboFuel", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedWater", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "OilRefinery/"));
         tempNoPrefixComps.clear();
 
+        // Packager
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedAlumina", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedIonizedFuel", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedNitricAcid", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedNitrogen", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedRocketFuel", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedSulfuricAcid", false));
+        tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Packager/"));
+        tempNoPrefixComps.clear();
+
+        // Packaging is essential (only way to obtain packaged version, unpackage is
+        // alternative).
+
         // QuantumEncoder
         tempNoPrefixComps.add(generateComponent("Recipe_AlienPowerFuel", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_SuperpositionOscillator", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_SyntheticPowerShard", false));
+        tempNoPrefixComps.add(generateComponent("Desc_QuantumOscillator", "Recipe_SuperpositionOscillator", false));
+        tempNoPrefixComps.add(generateComponent("Desc_PowerShard", "Recipe_SyntheticPowerShard", false));
         tempNoPrefixComps.add(generateComponent("Recipe_TemporalProcessor", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "QuantumEncoder/"));
         tempNoPrefixComps.clear();
 
         // Smelter
-        tempNoPrefixComps.add(generateComponent("Recipe_IngotAluminum", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_IngotCaterium", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_IngotCopper", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_IngotIron", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_IngotSAM", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_IngotSteel", false));
+        tempNoPrefixComps.add(generateComponent("Desc_AluminumIngot", "Recipe_IngotAluminum", false));
+        tempNoPrefixComps.add(generateComponent("Desc_CateriumIngot", "Recipe_IngotCaterium", false));
+        tempNoPrefixComps.add(generateComponent("Desc_CopperIngot", "Recipe_IngotCopper", false));
+        tempNoPrefixComps.add(generateComponent("Desc_IronIngot", "Recipe_IngotIron", false));
+        tempNoPrefixComps.add(generateComponent("Desc_SAMIngot", "Recipe_IngotSAM", false));
+        tempNoPrefixComps.add(generateComponent("Desc_SteelIngot", "Recipe_IngotSteel", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Smelter/"));
         tempNoPrefixComps.clear();
 
@@ -405,6 +422,25 @@ public class Materials {
     private static List<Component> generateAlternate() {
         List<Component> emptyRecipes = new ArrayList<>();
 
+        // OilRefinery
+        emptyRecipes.add(generateComponent("Recipe_UnpackageBioFuel", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageFuel", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageOil", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageOilResidue", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageTurboFuel", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageWater", true));
+
+        // Packager
+
+        emptyRecipes.add(generateComponent("Recipe_UnpackageAlumina", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageIonizedFuel", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageNitricAcid", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageNitrogen", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageRocketFuel", true));
+        emptyRecipes.add(generateComponent("Recipe_UnpackageSulfuricAcid", true));
+
+        emptyRecipes.add(generateComponent("", false));
+        emptyRecipes.add(generateComponent("", false));
         emptyRecipes.add(generateComponent("", false));
 
         return emptyRecipes;
