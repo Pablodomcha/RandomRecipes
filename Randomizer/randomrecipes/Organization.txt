@@ -1,4 +1,4 @@
-Tutorial costs are free (the mod assumes you use "Onboarding")
+Recipe_Biomass_Wood is used for Heavy Oil
 
 -Categories:
     3. MAM Research
@@ -106,43 +106,22 @@ Info:
 
 TODO:
 
-Recipe_Biomass_Wood is used for Heavy Oil
-
 Equipment is a different object
 
 MAM and store purchases not added yet.
 
 Hazmat filter is equipment?
 
-Check Crafting station names (quantum encoder seems to be nothing and converter is quantum encoder?)
+Fill the alternate list and add it at the end of sequence generator
+
+Handcraft not working
+
+Equipment recipes for alternate ammo not found
+
+Missing Vehicle Recipes. Can be handled as structure recipes.
+
+--------------------------------------------------------------------------------------------------------------
 
 Can't be loaded:
-    ResourceSinkShop
-    PowerPoleMk1
-    PowerLine
-    Space Elevator (missing / after towtruck)
-    Generator_Biomass_Automated
-    ConveyorPole
-    ConveyorBeltMk1
-    ConveyorAttachmentSplitterLift
-    ConveyorAttachmentMergerLift
 
 Items to remove/edit (not found, may mean they don't exist or their Desc name is not the same as recipe):
-    Plutonium
-    PowerShard
-    PackagedTurboFuel
-    PackagedNitrogen
-    PackagedCrudeOil
-    NonFissileUranium
-    MotorTurbo
-    CateriumIngot
-
-
-    Not checked every fail (too many of them repeated).
-
-Fill the alternate list and add it at the end of sequence generator
-Hopefully the name can be removed so that alternate recipes can't be identified
-
-Package fuel not in OilRefinery (is it LiquidFuel?)
-
-Liquids aren't getting their values multiplied by 1000

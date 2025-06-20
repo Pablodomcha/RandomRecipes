@@ -22,7 +22,6 @@ public class SequenceGenerator {
     private static String lastObtainedStation = null;
     private static String firstStation = null;
     private static int nItems = 0;
-    private static int alternateCounter = 0;
 
     public static void generateSequence() {
         // Log the selected values
@@ -358,7 +357,7 @@ public class SequenceGenerator {
 
         // Mark the component as craftable and update the list of available but
         // uncraftable components
-        materials.setComponentCraftable(comp.getName(), true);
+        materials.setRandomizableCraftable(comp.getName(), true);
         if (comp.isLiquid()) {
             SequenceGenerator.liquidUnlocked = true;
         }
@@ -475,6 +474,11 @@ public class SequenceGenerator {
             }
             ingredients.add(new Mat(comp.getName(), amount));
         }
+
+        for (Mat m : ingredients) {
+            Console.log("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
+        }
+
         return ingredients;
     }
 

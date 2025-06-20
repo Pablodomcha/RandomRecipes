@@ -12,8 +12,9 @@ import com.satisfactoryrandomizer.Storage.Randomizables.*;
 
 public class Materials {
 
-    private final List<Component> components = new ArrayList<>();// Components
-    private final List<Component> alternate = new ArrayList<>();// Alternate components
+    private final List<Component> components = new ArrayList<>(); // Components
+    private final List<Component> alternate = new ArrayList<>(); // Alternate components
+    private final List<Component> equip = new ArrayList<>(); // Alternate components
     private List<CraftStation> stations = new ArrayList<>(); // Crafting Stations
     private List<Structure> structures = new ArrayList<>(); // Generic structures that don't affect the logic
     private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by
@@ -68,6 +69,8 @@ public class Materials {
         this.components.add(new Component("Desc_Water", true, Arrays.asList("Desc_WaterPump", "power")));
         this.components.addAll(generateRawOre()); // They have no path, so no prefix is added.
         this.components.addAll(addPrefixComp(generateMoreComponents(), "//Game/FactoryGame/Recipes/"));
+        this.components.addAll(addPrefixComp(alternateButNotReally(), "//Game/FactoryGame/Recipes/"));
+        this.equip.addAll(addPrefixComp(generateEquipment(), "//Game/FactoryGame/Recipes/"));
 
         // //Game/FactoryGame/Recipes/SpaceElevatorParts/
         this.components.addAll(addPrefixComp(generateElevator(), "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
@@ -84,7 +87,7 @@ public class Materials {
         // //Game/FactoryGame/Recipes/Buildings/
         tempEssentialStructures = generateEssentialBuildings();
         this.essentialStructures
-                .addAll(addPrefixEssStr(tempEssentialStructures, "//Game/FactoryGame/Recipes/"));
+                .addAll(addPrefixEssStr(tempEssentialStructures, "//Game/FactoryGame/Recipes/Buildings/"));
         tempEssentialStructures.clear();
 
         // Add the required structures to the milestones and the rest to non-essential.
@@ -229,7 +232,7 @@ public class Materials {
         EssentialStructure spaceElevator = new EssentialStructure("Desc_SpaceElevator", false, false,
                 "Recipe_SpaceElevator", false,
                 false, 0);
-        spaceElevator.setRecipePath("TowTruck" + spaceElevator.getRecipePath());
+        spaceElevator.setRecipePath("TowTruck/" + spaceElevator.getRecipePath());
         tempStructures.add(spaceElevator);
 
         return tempStructures;
@@ -307,7 +310,7 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_CoolingSystem", false));
         tempNoPrefixComps.add(generateComponent("Desc_ModularFrameFused", "Recipe_FusedModularFrame", false));
         tempNoPrefixComps.add(generateComponent("Recipe_NitricAcid", true));
-        tempNoPrefixComps.add(generateComponent("Desc_NonFissibleUranium","Recipe_NonFissileUranium", false));
+        tempNoPrefixComps.add(generateComponent("Desc_NonFissibleUranium", "Recipe_NonFissileUranium", false));
         tempNoPrefixComps.add(generateComponent("Recipe_RocketFuel", true));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Blender/"));
         tempNoPrefixComps.clear();
@@ -366,7 +369,7 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_CrystalOscillator", false));
         tempNoPrefixComps.add(generateComponent("Recipe_HighSpeedConnector", false));
         tempNoPrefixComps.add(generateComponent("Recipe_ModularFrameHeavy", false));
-        tempNoPrefixComps.add(generateComponent("Desc_MotorLightweight","Recipe_MotorTurbo", false));
+        tempNoPrefixComps.add(generateComponent("Desc_MotorLightweight", "Recipe_MotorTurbo", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PlutoniumFuelRod", false));
         tempNoPrefixComps.add(generateComponent("Desc_ModularFrameLightweight", "Recipe_RadioControlUnit", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Manufacturer/"));
@@ -384,9 +387,9 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_SulfuricAcid", true));
         tempNoPrefixComps.add(generateComponent("Recipe_Fuel", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PackagedBiofuel", false));
-        tempNoPrefixComps.add(generateComponent("Desc_PackagedOil","Recipe_PackagedCrudeOil", false));
+        tempNoPrefixComps.add(generateComponent("Desc_PackagedOil", "Recipe_PackagedCrudeOil", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PackagedOilResidue", false));
-        tempNoPrefixComps.add(generateComponent("Desc_TurboFuel","Recipe_PackagedTurboFuel", false));
+        tempNoPrefixComps.add(generateComponent("Desc_TurboFuel", "Recipe_PackagedTurboFuel", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PackagedWater", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "OilRefinery/"));
         tempNoPrefixComps.clear();
@@ -395,7 +398,7 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_PackagedAlumina", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PackagedIonizedFuel", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PackagedNitricAcid", false));
-        tempNoPrefixComps.add(generateComponent("Desc_PackagedNitrogenGas","Recipe_PackagedNitrogen", false));
+        tempNoPrefixComps.add(generateComponent("Desc_PackagedNitrogenGas", "Recipe_PackagedNitrogen", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PackagedRocketFuel", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PackagedSulfuricAcid", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Packager/"));
@@ -423,6 +426,62 @@ public class Materials {
         tempNoPrefixComps.clear();
 
         return tempComps;
+    }
+
+    private static List<Component> generateEquipment() {
+        List<Component> tempComps = new ArrayList<>();
+        List<Component> tempNoPrefixComps = new ArrayList<>();
+
+        // Equipment
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJumpingStilts", "Recipe_BladeRunners", 1));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorStunSpear", "Recipe_CandyCaneBasher", false));
+        tempNoPrefixComps.add(generateComponent("Desc_CartridgeStandard", "Recipe_Cartridge", false));
+        tempNoPrefixComps.add(generateComponent("Desc_Chainsaw", "Recipe_Chainsaw", false));
+        tempNoPrefixComps.add(generateComponent("Desc_Filter", "Recipe_FilterGasMask", false));
+        tempNoPrefixComps.add(generateComponent("Desc_HazmatFilter", "Recipe_FilterHazmat", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorGasmask", "Recipe_Gasmask", false));
+        tempNoPrefixComps.add(generateComponent("Desc_Gunpowder", "Recipe_Gunpowder", false));
+        tempNoPrefixComps.add(generateComponent("Desc_GunpowderMK2", "Recipe_GunpowderMK2", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHazmatSuit", "Recipe_HazmatSuit", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHoverPac", "Recipe_Hoverpack", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJetPack", "Recipe_JetPack", false));
+        tempNoPrefixComps.add(generateComponent("Desc_Medkit", "Recipe_MedicinalInhaler", false));
+        // tempNoPrefixComps.add(generateComponent("","Recipe_MedicinalInhalerAlienOrgans",
+        // false));
+        // tempNoPrefixComps.add(generateComponent("","Recipe_TherapeuticInhaler",
+        // false));
+        // tempNoPrefixComps.add(generateComponent("","Recipe_NutritionalInhaler",
+        // false));
+        tempNoPrefixComps.add(generateComponent("Desc_NobeliskExplosive", "Recipe_Nobelisk", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorNobeliskDetonator", "Recipe_NobeliskDetonator", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorObjectScanner", "Recipe_ObjectScanner", false));
+        tempNoPrefixComps.add(generateComponent("Desc_Parachute", "Recipe_Parachute", false));
+        tempNoPrefixComps.add(generateComponent("BP_ItemDescriptorPortableMiner", "Recipe_PortableMiner", false));
+        tempNoPrefixComps.add(generateComponent("Desc_RebarGunProjectile", "Recipe_RebarGun", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorRifle", "Recipe_SpaceRifleMk1", false));
+        tempNoPrefixComps.add(generateComponent("Desc_SpikedRebar", "Recipe_SpikedRebar", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorStunSpear", "Recipe_XenoBasher", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorShockShank", "Recipe_XenoZapper", false));
+        tempNoPrefixComps.add(generateComponent("BP_EqDescZipLine", "Recipe_ZipLine", false));
+        tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Equipment/"));
+        tempNoPrefixComps.clear();
+
+        // Not found recipe: Desc_Rebar_Stunshot, Desc_Rebar_Spreadshot, 
+        // Desc_Rebar_Explosive, Desc_NobeliskGas, Desc_NobeliskShockwave, Desc_NobeliskCluster, Desc_NobeliskNuke, 
+
+        return tempComps;
+    }
+
+    private static List<Component> alternateButNotReally() {
+        List<Component> emptyRecipes = new ArrayList<>();
+        List<Component> returnvalue = new ArrayList<>();
+
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Turbofuel", true));
+        returnvalue.addAll(addPrefixComp(emptyRecipes, "AlternateRecipes/Parts/"));
+        emptyRecipes.clear();
+
+        return returnvalue;
+
     }
 
     private static List<Component> generateOptional() {
@@ -626,7 +685,6 @@ public class Materials {
         emptyRecipes.add(generateComponent("Recipe_Alternate_Screw_2", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_Silica", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_Stator", false));
-        emptyRecipes.add(generateComponent("Recipe_Alternate_Turbofuel", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_TurboMotor_1", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_UraniumCell_1", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_Wire_1", false));
@@ -1030,6 +1088,10 @@ public class Materials {
         return new Component(name, recipe, false, false, liquid);
     }
 
+    private static Component generateComponent(String name, String recipe, int maxstack) {
+        return new Component(name, recipe, false, false, false, maxstack, null);
+    }
+
     private static List<Structure> generateMkN(String recipe, int min, int max) {
         List<Structure> tempStructures = new ArrayList<>();
         for (int i = min; i <= max; i++) {
@@ -1148,6 +1210,13 @@ public class Materials {
                 return component;
             }
         }
+        for (Component eq : equip) {
+            if (eq.getName().equals(name)) {
+                Console.hiddenLog("Found equipment instead of component: " + name);
+                return eq;
+            }
+        }
+
         Console.log("Component not found: " + name);
         return null;
     }
@@ -1394,6 +1463,7 @@ public class Materials {
         result.addAll(this.essentialStructures);
         result.addAll(this.milestones);
         result.addAll(this.structures);
+        result.addAll(this.equip);
         return result;
     }
 
@@ -1641,11 +1711,6 @@ public class Materials {
     }
 
     public void doExtraChecks(String nameToRemove, List<String> whereToRemove) {
-
-        if (nameToRemove == "cable") {
-            Console.test(
-                    "This is a pipe----------------------------------------------------------------------------------");
-        }
 
         Console.hiddenLog("nametoremove: " + nameToRemove + " wheretoremove: " + whereToRemove);
         for (String where : whereToRemove) {
