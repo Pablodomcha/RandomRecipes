@@ -116,28 +116,27 @@ Hazmat filter is equipment?
 
 Check Crafting station names (quantum encoder seems to be nothing and converter is quantum encoder?)
 
-Says all elevetor parts recipes couldn't be loaded.
+Can't be loaded:
+    ResourceSinkShop
+    PowerPoleMk1
+    PowerLine
+    Space Elevator (missing / after towtruck)
+    Generator_Biomass_Automated
+    ConveyorPole
+    ConveyorBeltMk1
+    ConveyorAttachmentSplitterLift
+    ConveyorAttachmentMergerLift
 
 Items to remove/edit (not found, may mean they don't exist or their Desc name is not the same as recipe):
-    IngotCopper
-    ConveyorPoleWall // Structure problem, need to look into it
-    IngotSteel
-    AluminumSheet
-    AILimiter 
-    IngotSAM
-    Biomass_leaves
-    Screw
-    SyntheticPowerShard
-    Quickwire
-    Concrete
-    EncasedIndustrialBeam
-    FicsiteIngot_AL
-    FusedModularFrame
-    RadioControlUnit
-    HeatSInk
-    SuperpositionOscilator
-    IngotCaterium
-    SteelBeam
+    Plutonium
+    PowerShard
+    PackagedTurboFuel
+    PackagedNitrogen
+    PackagedCrudeOil
+    NonFissileUranium
+    MotorTurbo
+    CateriumIngot
+
 
     Not checked every fail (too many of them repeated).
 

@@ -61,7 +61,6 @@ public class CreateJSON {
 
         // Convert the station to list and add manual if it's from constructor or
         // smelter.
-        // Also prefix it with "Build_" to make it the correct name.
         List<String> stations = new ArrayList<>();
         stations.add(recipe.getStation());
         if (recipe.getStation().equals(firstStation)) {
@@ -69,10 +68,7 @@ public class CreateJSON {
         }
         JSONableRecipeVN jsonVNRecipe = new JSONableRecipeVN(recipe.getProducts(), recipe.getIngredients(), stations,
                 recipe.getTime(), recipe.getHandcraftSpeed(), energy);
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .excludeFieldsWithModifiers(java.lang.reflect.Modifier.TRANSIENT)
-                .create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonVNRecipe);
         json = json.replace("\n", "\r\n"); // Make the line breaks CRLF
 

@@ -12,7 +12,7 @@ public class UiValues {
     static int belts = 0;
     static int electricity = 0;
     static int waste = 3;
-    static int stationBias = 0;
+    static int stationBias = 3;
     static Boolean alterReci = false;
     static int forceLongGameBias = 0;
 
@@ -171,10 +171,17 @@ public class UiValues {
      * Retrieves the current station bias setting.
      * 
      * @return 6. Station bias:
-     *         True: Make crafing stations be obtained evenly spread to get a better
-     *         crafting station spread.
-     *         False: Crafting stations are completely randomized, may lead to a
-     *         game where mostly a few stations are used for everything.
+     *         None: The stations are selected completely random, this makes the
+     *         earlier unlocked stations have way more recipes than the later ones.
+     *         Slight bias: Increases the chance of using stations unlocked later
+     *         for later recipes, increaseing (hopefully) station variability
+     *         leaning slightly on newer unlocked stations.
+     *         Medium Bias: Increases the chance of using stations unlocked later
+     *         for later recipes, increaseing (hopefully) station variability
+     *         leaning on newer unlocked stations.
+     *         Heavy Bias: Increases the chance of using stations unlocked later for
+     *         later recipes, increaseing (hopefully) station variability leaning
+     *         heavily on newer unlocked stations.
      */
     public static int getStationBias() {
         return UiValues.stationBias;
@@ -278,8 +285,8 @@ public class UiValues {
     }
 
     /**
-     * @return 1. Max stack per component: Maximum number of each component needed
-     *         for a craft. Over 50 will crash.
+     * @return 1. Max stack per component: Maximum number of each component produced
+     *         by a craft. Over 50 will crash.
      */
     public static int getMaxProdCraft() {
         return UiValues.maxProdCraft;
@@ -290,8 +297,8 @@ public class UiValues {
     }
 
     /**
-     * @return 2. Max component per craft: Maximum number of each component produced
-     *         by a craft. Over 50 will crash.
+     * @return 2. Max component per craft: Maximum number of each component needed
+     *         for a craft. Over 50 will crash.
      */
 
     public static int getMaxStackCraft() {
