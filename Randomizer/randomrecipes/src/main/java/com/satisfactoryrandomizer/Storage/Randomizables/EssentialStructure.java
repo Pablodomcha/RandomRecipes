@@ -15,7 +15,7 @@ public class EssentialStructure extends Structure {
         this.addWhen = addWhen;
     }
 
-        public EssentialStructure(String name, Boolean available, Boolean craftable, String recipepath,
+    public EssentialStructure(String name, Boolean available, Boolean craftable, String recipepath,
             Boolean isCheap, int addWhen, List<String> extraCheck) {
         super(name, available, craftable, recipepath, extraCheck);
         this.isCheap = isCheap;

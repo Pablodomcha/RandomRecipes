@@ -77,7 +77,8 @@ public class Materials {
         this.milestones.addAll(generateMilestones());
 
         // Alternate Recipes
-        this.alternate.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/"));
+        this.alternate.addAll(addPrefixComp(generateOptional(), "//Game/FactoryGame/Recipes/"));
+        this.alternate.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/AlternateRecipes/"));
 
         // EssentialStructures
         // //Game/FactoryGame/Recipes/Buildings/
@@ -137,6 +138,8 @@ public class Materials {
         }
 
     }
+
+    // Data creators
 
     public void generateLimitedMats() {
         // Materials without associated recipe and can't be crafted.
@@ -309,6 +312,8 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Desc_AluminumPlate", "Recipe_AluminumSheet", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Biofuel", false));
         tempNoPrefixComps.add(generateComponent("Desc_GenericBiomass", "Recipe_Biomass_Leaves", false));
+        // Using second biomass recipe for heavy oil
+        tempNoPrefixComps.add(generateComponent("Desc_HeavyOilResidue", "Recipe_Biomass_Wood", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Cable", false));
         tempNoPrefixComps.add(generateComponent("Desc_Cement", "Recipe_Concrete", false));
         tempNoPrefixComps.add(generateComponent("Recipe_CopperDust", false));
@@ -419,8 +424,9 @@ public class Materials {
         return tempComps;
     }
 
-    private static List<Component> generateAlternate() {
+    private static List<Component> generateOptional() {
         List<Component> emptyRecipes = new ArrayList<>();
+        List<Component> returnValues = new ArrayList<>();
 
         // OilRefinery
         emptyRecipes.add(generateComponent("Recipe_UnpackageBioFuel", true));
@@ -429,21 +435,205 @@ public class Materials {
         emptyRecipes.add(generateComponent("Recipe_UnpackageOilResidue", true));
         emptyRecipes.add(generateComponent("Recipe_UnpackageTurboFuel", true));
         emptyRecipes.add(generateComponent("Recipe_UnpackageWater", true));
+        emptyRecipes.add(generateComponent("Recipe_ResidualFuel", false));
+        emptyRecipes.add(generateComponent("Recipe_ResidualPlastic", false));
+        emptyRecipes.add(generateComponent("Recipe_ResidualRubber", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "OilRefinery/"));
+        emptyRecipes.clear();
 
         // Packager
-
         emptyRecipes.add(generateComponent("Recipe_UnpackageAlumina", true));
         emptyRecipes.add(generateComponent("Recipe_UnpackageIonizedFuel", true));
         emptyRecipes.add(generateComponent("Recipe_UnpackageNitricAcid", true));
         emptyRecipes.add(generateComponent("Recipe_UnpackageNitrogen", true));
         emptyRecipes.add(generateComponent("Recipe_UnpackageRocketFuel", true));
         emptyRecipes.add(generateComponent("Recipe_UnpackageSulfuricAcid", true));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "Packager/"));
+        emptyRecipes.clear();
 
-        emptyRecipes.add(generateComponent("", false));
-        emptyRecipes.add(generateComponent("", false));
-        emptyRecipes.add(generateComponent("", false));
+        // Constructor
+        emptyRecipes.add(generateComponent("Recipe_Biomass_Mycelia", false));
+        emptyRecipes.add(generateComponent("Recipe_Biomass_AlienProtein", false));
+        emptyRecipes.add(generateComponent("Recipe_Protein_Crab", false));
+        emptyRecipes.add(generateComponent("Recipe_Protein_Hog", false));
+        emptyRecipes.add(generateComponent("Recipe_Protein_Spitter", false));
+        emptyRecipes.add(generateComponent("Recipe_Protein_Stinger", false));
+        emptyRecipes.add(generateComponent("Recipe_PowerCrystalShard_1", false));
+        emptyRecipes.add(generateComponent("Recipe_PowerCrystalShard_2", false));
+        emptyRecipes.add(generateComponent("Recipe_PowerCrystalShard_3", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "Constructor/"));
+        emptyRecipes.clear();
 
-        return emptyRecipes;
+        // Converter
+        emptyRecipes.add(generateComponent("Recipe_FicsiteIngot_CAT", false));
+        emptyRecipes.add(generateComponent("Recipe_FicsiteIngot_Iron", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "Converter/"));
+        emptyRecipes.clear();
+
+        // Converter/ResourceConversion
+        emptyRecipes.add(generateComponent("Recipe_Bauxite_Caterium", false));
+        emptyRecipes.add(generateComponent("Recipe_Bauxite_Copper", false));
+        emptyRecipes.add(generateComponent("Recipe_Caterium_Copper", false));
+        emptyRecipes.add(generateComponent("Recipe_Caterium_Quartz", false));
+        emptyRecipes.add(generateComponent("Recipe_Coal_Iron", false));
+        emptyRecipes.add(generateComponent("Recipe_Coal_Limestone", false));
+        emptyRecipes.add(generateComponent("Recipe_Copper_Quartz", false));
+        emptyRecipes.add(generateComponent("Recipe_Copper_Sulfur", false));
+        emptyRecipes.add(generateComponent("Recipe_Iron_Limestone", false));
+        emptyRecipes.add(generateComponent("Recipe_Limestone_Sulfur", false));
+        emptyRecipes.add(generateComponent("Recipe_Nitrogen_Bauxite", false));
+        emptyRecipes.add(generateComponent("Recipe_Nitrogen_Caterium", false));
+        emptyRecipes.add(generateComponent("Recipe_Quartz_Bauxite", false));
+        emptyRecipes.add(generateComponent("Recipe_Quartz_Coal", false));
+        emptyRecipes.add(generateComponent("Recipe_Sulfur_Coal", false));
+        emptyRecipes.add(generateComponent("Recipe_Sulfur_Iron", false));
+        emptyRecipes.add(generateComponent("Recipe_Uranium_Bauxite", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "Converter/ResourceConversion/"));
+        emptyRecipes.clear();
+
+        return returnValues;
+    }
+
+    private static List<Component> generateAlternate() {
+        List<Component> emptyRecipes = new ArrayList<>();
+        List<Component> returnValues = new ArrayList<>();
+
+        // Alt_Tier9
+        emptyRecipes.add(generateComponent("Recipe_Alternate_DarkMatter_Crystallization", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_DarkMatter_Trap", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Diamond_Cloudy", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Diamond_OilBased", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Diamond_Petroleum", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Diamond_Pink", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Diamond_Turbo", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_IonizedFuel_Dark", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_RocketFuel_Nitro", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "Alt_Tier9/"));
+        emptyRecipes.clear();
+
+        // New_Update3
+        emptyRecipes.add(generateComponent("Recipe_Alternate_AdheredIronPlate", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_BoltedFrame", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CoatedCable", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CoatedIronCanister", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CoatedIronPlate", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CokeSteelIngot", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CopperAlloyIngot", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CopperRotor", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_DilutedPackagedFuel", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_ElectroAluminumScrap", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_ElectrodeCircuitBoard", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_FlexibleFramework", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_FusedWire", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_HeavyFlexibleFrame", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_HeavyOilResidue", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_HighSpeedWiring", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_PlasticSmartPlating", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_PolyesterFabric", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_PolymerResin", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_PureCateriumIngot", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_PureCopperIngot", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_PureIronIngot", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_PureQuartzCrystal", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_RecycledRubber", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_RubberConcrete", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SteamedCopperSheet", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SteelCanister", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SteelRod", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_TurboHeavyFuel", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_WetConcrete", false));
+        emptyRecipes.add(generateComponent("Recipe_PureAluminumIngot", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "New_Update3/"));
+        emptyRecipes.clear();
+
+        // New_Update4
+        emptyRecipes.add(generateComponent("Recipe_Alternate_AlcladCasing", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_AutomatedMiner", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_ClassicBattery", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CoolingDevice", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_DilutedFuel", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_ElectricMotor", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_FertileUranium", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_HeatFusedFrame", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_InstantPlutoniumCell", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_InstantScrap", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_OCSupercomputer", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_PlutoniumFuelUnit", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_RadioControlSystem", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SloppyAlumina", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SuperStateComputer", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_TurboBlendFuel", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_TurboPressureMotor", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "New_Update4/"));
+        emptyRecipes.clear();
+
+        // New_Update9
+        emptyRecipes.add(generateComponent("Recipe_Alternate_AILimiter_Plastic", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_AluminumRod", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SteelBeam_Aluminum", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SteelBeam_Molded", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SteelCastedPlate", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SteelPipe_Iron", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_SteelPipe_Molded", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "New_Update9/"));
+        emptyRecipes.clear();
+
+        // New_Update9_Ingots
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CateriumIngot_Leached", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CateriumIngot_Tempered", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CopperIngot_Leached", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CopperIngot_Tempered", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_IronIngot_Basic", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_IronIngot_Leached", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Quartz_Fused", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Quartz_Purified", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Silica_Distilled", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "New_Update9_Ingots/"));
+        emptyRecipes.clear();
+
+        // Parts
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Cable_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Cable_2", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CircuitBoard_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CircuitBoard_2", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Coal_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Coal_2", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Computer_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Computer_2", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Concrete", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_CrystalOscillator", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_ElectromagneticControlRod_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_EncasedIndustrialBeam", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_EnrichedCoal", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Gunpowder_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_HeatSink_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_HighSpeedConnector", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_IngotIron", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_IngotSteel_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_IngotSteel_2", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_ModularFrame", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_ModularFrameHeavy", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Motor_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_NuclearFuelRod_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Plastic_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Quickwire", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_RadioControlUnit_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_ReinforcedIronPlate_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_ReinforcedIronPlate_2", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Rotor", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Screw", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Screw_2", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Silica", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Stator", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Turbofuel", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_TurboMotor_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_UraniumCell_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Wire_1", false));
+        emptyRecipes.add(generateComponent("Recipe_Alternate_Wire_2", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "Parts/"));
+        emptyRecipes.clear();
+
+        return returnValues;
     }
 
     private List<Milestone> generateMilestones() {
@@ -820,6 +1010,8 @@ public class Materials {
 
         return tempReturnStructures;
     }
+
+    // Generators and prefixers
 
     private static Structure generateStructure(String recipe) {
         return new Structure(recipe.replace("Recipe", "Desc"), false, false, recipe, false);

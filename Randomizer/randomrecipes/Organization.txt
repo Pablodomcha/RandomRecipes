@@ -105,17 +105,7 @@ Info:
 
 TODO:
 
-Balance progression.
-
-(alternate crafts not in alternate crafts folder)
-Recipe_Biomass_Wood, Mycelia and AlienProtein will be handled as alternate recipe.
-Ficsites iron and cat too.
-Same for protein from animals.
-Same for recipe for power shards
-Same for Residual fuel, plastic and oil
-Same for ResourceConversion from converter
-
-Heavy Oil Needs a essential recipe (can have it replace an alternate)
+Recipe_Biomass_Wood is used for Heavy Oil
 
 Equipment is a different object
 
@@ -153,4 +143,4 @@ Items to remove/edit (not found, may mean they don't exist or their Desc name is
 Fill the alternate list and add it at the end of sequence generator
 Hopefully the name can be removed so that alternate recipes can't be identified
 
-Package fuel not in OilRefinery
+Package fuel not in OilRefinery (is it LiquidFuel?)
