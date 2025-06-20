@@ -284,32 +284,37 @@ public class SequenceGenerator {
         int count = UiValues.getStationBias();
 
         // Check if there's even a last obtained station before checking it's name.
-        // If it's an alternate recipe (comp == null), we don't reroll.
-        while (!station.getName().equals(SequenceGenerator.lastObtainedStation) && count-- > 0 && comp != null) {
+        while (!station.getName().equals(SequenceGenerator.lastObtainedStation) && count-- > 0) {
             station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
+        }
+        // Ensure it has output for the liquid component.
+        while (station.getLiquidOut() < 1 && comp.isLiquid() && count++ < 100) {
+            station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
+        }
+
+        // If no station with liquid output is available for liquid creation, return
+        // without creating the recipe.
+        if (count >= 100) {
+            Console.hiddenLog("No station with liquid output is available for: " + comp.getName());
+            return;
         }
 
         List<Mat> mats = generateIngredientsComp(station);
         List<Mat> prod = new ArrayList<>();
 
-        if (comp == null) {
-            Console.cheatsheet("Generating alternate recipe for: " + station.getName());
-        } else {
-            Console.cheatsheet(comp.getName() + " is made in " + station.getName());
-        }
+        Console.cheatsheet(comp.getName() + " is made in " + station.getName());
+        Console.test("Liquid value is : " + comp.isLiquid());
 
         // Add the main product multiplying the value range by 1000 for liquids.
         // Then add the rest of the products if the option is enabled and there's space.
         // Don't add main product if there isn't one (alternate recipes).
         if (station.getLiquidIn() + station.getSolidIn() > 0) {
-            if (comp.isLiquid() && comp != null) {
-                prod.add(new Mat(comp.getName(), 1000 * random.nextInt(UiValues.getMaxStackCraft()) + 1));
+            if (comp.isLiquid()) {
+                prod.add(new Mat(comp.getName(), (random.nextInt(UiValues.getMaxStackCraft()) + 1) * 1000));
                 prod.addAll(generateProducts(station, true));
-            } else if (comp != null) {
+            } else {
                 prod.add(new Mat(comp.getName(), random.nextInt(UiValues.getMaxStackCraft()) + 1));
                 prod.addAll(generateProducts(station, false));
-            } else {
-                prod.addAll(generateProducts(station, null));
             }
         }
 
@@ -321,25 +326,14 @@ public class SequenceGenerator {
 
         // Give the recipe the name of the main component if not alternate and a generic
         // name otherwise
-        if (comp == null) {
-            recipe = new Recipe(
-                    prod, // Products
-                    mats, // Ingredients
-                    "Recipe_Alternate" + SequenceGenerator.alternateCounter + ".json", // Filename
-                    station.getBuilderPath(), // Station
-                    time, // Time
-                    handSpeed // Handcraft speed
-            );
-        } else {
-            recipe = new Recipe(
-                    prod, // Products
-                    mats, // Ingredients
-                    "Recipe_" + comp.getName() + ".json", // Filename
-                    station.getBuilderPath(), // Station
-                    time, // Time
-                    handSpeed // Handcraft speed
-            );
-        }
+        recipe = new Recipe(
+                prod, // Products
+                mats, // Ingredients
+                "Recipe_" + comp.getName() + ".json", // Filename
+                station.getBuilderPath(), // Station
+                time, // Time
+                handSpeed // Handcraft speed
+        );
 
         // Create Recipe JSON file (RecipeVN if it goes into a machine with variable
         // consumption)
@@ -467,7 +461,7 @@ public class SequenceGenerator {
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
             // Multiply by 1000 for liquids
-            int amount = random.nextInt(Math.min(comp.getStack(), liquidslots + solidslots));
+            int amount = random.nextInt(comp.getStack());
 
             if (selectedLiquid) {
                 amount = amount * 1000;
@@ -511,19 +505,11 @@ public class SequenceGenerator {
 
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
-
-            int liquid;
-            if (comp.isLiquid()) {
-                liquid = 1000;
-            } else {
-                liquid = 1;
-            }
-
             int amount;
             if (type.equals("structure")) {
-                amount = random.nextInt(liquid * UiValues.getMaxStackStruct()) + 1;
+                amount = random.nextInt(UiValues.getMaxStackStruct()) + 1;
             } else if (type.equals("milestone")) {
-                amount = random.nextInt(liquid * UiValues.getMaxStackMile()) + 1;
+                amount = random.nextInt(UiValues.getMaxStackMile()) + 1;
             } else if (type.equals("cheap")) {
                 amount = random.nextInt(2) + 1;
             } else {
@@ -657,7 +643,12 @@ public class SequenceGenerator {
 
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
-            products.add(new Mat(component.getName(), random.nextInt(UiValues.getMaxStackCraft()) + 1));
+            int amount = random.nextInt(UiValues.getMaxStackCraft()) + 1;
+
+            if (selectedLiquid) {
+                amount = amount * 1000;
+            }
+            products.add(new Mat(component.getName(), amount));
         }
 
         return products;

@@ -12,6 +12,7 @@ public class JSONableRecipe {
     private List<String> ProducedIn;
     private double ManufacturingDuration;
     private double ManualManufacturingMultiplier = 1;
+    private String Name = " ";
 
     public JSONableRecipe(List<Mat> products, List<Mat> ingredients, List<String> producedIn, double manufacturingDuration, double manualDuration) {
         this.Products = products;
