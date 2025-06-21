@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Randomizable {
 
-    private final String name;
+    private String name;
     private final String path;
     private String recipepath;
     private Boolean available;
@@ -32,6 +32,10 @@ public class Randomizable {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRecipePath() {

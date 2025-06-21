@@ -83,6 +83,9 @@ public class Materials {
         if (UiValues.alterReci) {
             this.alternate.addAll(addPrefixComp(generateOptional(), "//Game/FactoryGame/Recipes/"));
             this.alternate.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/AlternateRecipes/"));
+            for(Component alt : this.alternate) {
+                alt.setName(null);
+            }
         }
 
         // EssentialStructures

@@ -311,7 +311,7 @@ public class SequenceGenerator {
                 prod.addAll(generateProducts(station, false));
             }
         } else {
-            generateProducts(station, null);
+            prod.addAll(generateProducts(station, null));
         }
 
         double handSpeed = random.nextDouble() * (UiValues.getHandcraftSpeed()[1] - UiValues.getHandcraftSpeed()[0])
@@ -322,10 +322,15 @@ public class SequenceGenerator {
 
         // Give the recipe the name of the main component if not alternate and a generic
         // name otherwise
+        String filename = "Recipe_" + comp.getName() + ".json";
+        if (comp.getName() == null) {
+            filename = "Recipe_Alternate" + addedItems + ".json";
+        }
+
         recipe = new Recipe(
                 prod, // Products
                 mats, // Ingredients
-                "Recipe_" + comp.getName() + ".json", // Filename
+                filename, // Filename
                 station.getBuilderPath(), // Station
                 time, // Time
                 handSpeed // Handcraft speed

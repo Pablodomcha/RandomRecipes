@@ -127,3 +127,13 @@ Recipes for alternate should be able to take not unlocked materials.
 Can't be loaded:
 
 Items to remove/edit (not found, may mean they don't exist or their Desc name is not the same as recipe):
+
+Desc_Alternate_Turbofuel
+Desc_XenoZapper
+Desc_ZipLine
+Desc_XenoBasher
+Desc_TherapeuticInhaler
+Desc_SpaceRifleMk1
+BP_EquipmentDescriptorHoverPac
+Desc_Alternate_AdheredIronPlate
+Desc_Alternate_AlcladCasing

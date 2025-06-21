@@ -13,7 +13,7 @@ public class UiValues {
     static int electricity = 0;
     static int waste = 3;
     static int stationBias = 3;
-    static Boolean alterReci = false;
+    static Boolean alterReci = true;
     static int forceLongGameBias = 0;
 
     static Boolean advLog = false;
