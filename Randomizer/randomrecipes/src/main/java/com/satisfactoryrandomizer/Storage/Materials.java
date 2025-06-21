@@ -80,8 +80,10 @@ public class Materials {
         this.milestones.addAll(generateMilestones());
 
         // Alternate Recipes
-        this.alternate.addAll(addPrefixComp(generateOptional(), "//Game/FactoryGame/Recipes/"));
-        this.alternate.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/AlternateRecipes/"));
+        if (UiValues.alterReci) {
+            this.alternate.addAll(addPrefixComp(generateOptional(), "//Game/FactoryGame/Recipes/"));
+            this.alternate.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/AlternateRecipes/"));
+        }
 
         // EssentialStructures
         // //Game/FactoryGame/Recipes/Buildings/
@@ -434,7 +436,8 @@ public class Materials {
 
         // Equipment
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJumpingStilts", "Recipe_BladeRunners", 1));
-        //tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorStunSpear", "Recipe_CandyCaneBasher", false));
+        // tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorStunSpear",
+        // "Recipe_CandyCaneBasher", false));
         tempNoPrefixComps.add(generateComponent("Desc_CartridgeStandard", "Recipe_Cartridge", false));
         tempNoPrefixComps.add(generateComponent("Desc_Chainsaw", "Recipe_Chainsaw", false));
         tempNoPrefixComps.add(generateComponent("Desc_Filter", "Recipe_FilterGasMask", false));
