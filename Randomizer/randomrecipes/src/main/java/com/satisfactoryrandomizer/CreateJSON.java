@@ -24,9 +24,11 @@ public class CreateJSON {
         // Also prefix it with "Build_" to make it the correct name.
         List<String> stations = new ArrayList<>();
         stations.add(recipe.getStation());
-        if (recipe.getStation().equals(firstStation)) {
+
+        if (recipe.getStation().equals(firstStation.replace("Desc","Build"))) {
             stations.add("manual");
         }
+
         JSONableRecipe jsonRecipe = new JSONableRecipe(recipe.getProducts(), recipe.getIngredients(), stations,
                 recipe.getTime(), recipe.getHandcraftSpeed());
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -63,9 +65,11 @@ public class CreateJSON {
         // smelter.
         List<String> stations = new ArrayList<>();
         stations.add(recipe.getStation());
-        if (recipe.getStation().equals(firstStation)) {
+
+        if (recipe.getStation().equals(firstStation.replace("Desc","Build"))) {
             stations.add("manual");
         }
+
         JSONableRecipeVN jsonVNRecipe = new JSONableRecipeVN(recipe.getProducts(), recipe.getIngredients(), stations,
                 recipe.getTime(), recipe.getHandcraftSpeed(), energy);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

@@ -434,7 +434,7 @@ public class Materials {
 
         // Equipment
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJumpingStilts", "Recipe_BladeRunners", 1));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorStunSpear", "Recipe_CandyCaneBasher", false));
+        //tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorStunSpear", "Recipe_CandyCaneBasher", false));
         tempNoPrefixComps.add(generateComponent("Desc_CartridgeStandard", "Recipe_Cartridge", false));
         tempNoPrefixComps.add(generateComponent("Desc_Chainsaw", "Recipe_Chainsaw", false));
         tempNoPrefixComps.add(generateComponent("Desc_Filter", "Recipe_FilterGasMask", false));
@@ -453,7 +453,8 @@ public class Materials {
         // tempNoPrefixComps.add(generateComponent("","Recipe_NutritionalInhaler",
         // false));
         tempNoPrefixComps.add(generateComponent("Desc_NobeliskExplosive", "Recipe_Nobelisk", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorNobeliskDetonator", "Recipe_NobeliskDetonator", false));
+        tempNoPrefixComps
+                .add(generateComponent("BP_EquipmentDescriptorNobeliskDetonator", "Recipe_NobeliskDetonator", false));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorObjectScanner", "Recipe_ObjectScanner", false));
         tempNoPrefixComps.add(generateComponent("Desc_Parachute", "Recipe_Parachute", false));
         tempNoPrefixComps.add(generateComponent("BP_ItemDescriptorPortableMiner", "Recipe_PortableMiner", false));
@@ -466,8 +467,9 @@ public class Materials {
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Equipment/"));
         tempNoPrefixComps.clear();
 
-        // Not found recipe: Desc_Rebar_Stunshot, Desc_Rebar_Spreadshot, 
-        // Desc_Rebar_Explosive, Desc_NobeliskGas, Desc_NobeliskShockwave, Desc_NobeliskCluster, Desc_NobeliskNuke, 
+        // Not found recipe: Desc_Rebar_Stunshot, Desc_Rebar_Spreadshot,
+        // Desc_Rebar_Explosive, Desc_NobeliskGas, Desc_NobeliskShockwave,
+        // Desc_NobeliskCluster, Desc_NobeliskNuke,
 
         return tempComps;
     }
@@ -489,65 +491,65 @@ public class Materials {
         List<Component> returnValues = new ArrayList<>();
 
         // OilRefinery
-        emptyRecipes.add(generateComponent("Recipe_UnpackageBioFuel", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageFuel", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageOil", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageOilResidue", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageTurboFuel", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageWater", true));
-        emptyRecipes.add(generateComponent("Recipe_ResidualFuel", false));
-        emptyRecipes.add(generateComponent("Recipe_ResidualPlastic", false));
-        emptyRecipes.add(generateComponent("Recipe_ResidualRubber", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageBioFuel", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageFuel", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageOil", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageOilResidue", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageTurboFuel", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageWater", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_ResidualFuel", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_ResidualPlastic", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_ResidualRubber", false));
         returnValues.addAll(addPrefixComp(emptyRecipes, "OilRefinery/"));
         emptyRecipes.clear();
 
         // Packager
-        emptyRecipes.add(generateComponent("Recipe_UnpackageAlumina", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageIonizedFuel", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageNitricAcid", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageNitrogen", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageRocketFuel", true));
-        emptyRecipes.add(generateComponent("Recipe_UnpackageSulfuricAcid", true));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageAlumina", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageIonizedFuel", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageNitricAcid", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageNitrogen", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageRocketFuel", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_UnpackageSulfuricAcid", false));
         returnValues.addAll(addPrefixComp(emptyRecipes, "Packager/"));
         emptyRecipes.clear();
 
         // Constructor
-        emptyRecipes.add(generateComponent("Recipe_Biomass_Mycelia", false));
-        emptyRecipes.add(generateComponent("Recipe_Biomass_AlienProtein", false));
-        emptyRecipes.add(generateComponent("Recipe_Protein_Crab", false));
-        emptyRecipes.add(generateComponent("Recipe_Protein_Hog", false));
-        emptyRecipes.add(generateComponent("Recipe_Protein_Spitter", false));
-        emptyRecipes.add(generateComponent("Recipe_Protein_Stinger", false));
-        emptyRecipes.add(generateComponent("Recipe_PowerCrystalShard_1", false));
-        emptyRecipes.add(generateComponent("Recipe_PowerCrystalShard_2", false));
-        emptyRecipes.add(generateComponent("Recipe_PowerCrystalShard_3", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Biomass_Mycelia", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Biomass_AlienProtein", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Protein_Crab", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Protein_Hog", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Protein_Spitter", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Protein_Stinger", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_PowerCrystalShard_1", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_PowerCrystalShard_2", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_PowerCrystalShard_3", false));
         returnValues.addAll(addPrefixComp(emptyRecipes, "Constructor/"));
         emptyRecipes.clear();
 
         // Converter
-        emptyRecipes.add(generateComponent("Recipe_FicsiteIngot_CAT", false));
-        emptyRecipes.add(generateComponent("Recipe_FicsiteIngot_Iron", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_FicsiteIngot_CAT", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_FicsiteIngot_Iron", false));
         returnValues.addAll(addPrefixComp(emptyRecipes, "Converter/"));
         emptyRecipes.clear();
 
         // Converter/ResourceConversion
-        emptyRecipes.add(generateComponent("Recipe_Bauxite_Caterium", false));
-        emptyRecipes.add(generateComponent("Recipe_Bauxite_Copper", false));
-        emptyRecipes.add(generateComponent("Recipe_Caterium_Copper", false));
-        emptyRecipes.add(generateComponent("Recipe_Caterium_Quartz", false));
-        emptyRecipes.add(generateComponent("Recipe_Coal_Iron", false));
-        emptyRecipes.add(generateComponent("Recipe_Coal_Limestone", false));
-        emptyRecipes.add(generateComponent("Recipe_Copper_Quartz", false));
-        emptyRecipes.add(generateComponent("Recipe_Copper_Sulfur", false));
-        emptyRecipes.add(generateComponent("Recipe_Iron_Limestone", false));
-        emptyRecipes.add(generateComponent("Recipe_Limestone_Sulfur", false));
-        emptyRecipes.add(generateComponent("Recipe_Nitrogen_Bauxite", false));
-        emptyRecipes.add(generateComponent("Recipe_Nitrogen_Caterium", false));
-        emptyRecipes.add(generateComponent("Recipe_Quartz_Bauxite", false));
-        emptyRecipes.add(generateComponent("Recipe_Quartz_Coal", false));
-        emptyRecipes.add(generateComponent("Recipe_Sulfur_Coal", false));
-        emptyRecipes.add(generateComponent("Recipe_Sulfur_Iron", false));
-        emptyRecipes.add(generateComponent("Recipe_Uranium_Bauxite", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Bauxite_Caterium", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Bauxite_Copper", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Caterium_Copper", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Caterium_Quartz", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Coal_Iron", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Coal_Limestone", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Copper_Quartz", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Copper_Sulfur", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Iron_Limestone", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Limestone_Sulfur", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Nitrogen_Bauxite", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Nitrogen_Caterium", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Quartz_Bauxite", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Quartz_Coal", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Sulfur_Coal", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Sulfur_Iron", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_Uranium_Bauxite", false));
         returnValues.addAll(addPrefixComp(emptyRecipes, "Converter/ResourceConversion/"));
         emptyRecipes.clear();
 
@@ -1221,6 +1223,16 @@ public class Materials {
         return null;
     }
 
+    public Component getComponentByPath(String path) {
+        for (Component component : this.components) {
+            if (component.getPath().equals(path)) {
+                return component;
+            }
+        }
+        Console.log("Component not found: " + path);
+        return null;
+    }
+
     public CraftStation getStationByName(String name) {
         for (CraftStation station : this.stations) {
             if (station.getName().equals(name)) {
@@ -1244,7 +1256,9 @@ public class Materials {
     public Randomizable getRandomizableByName(String name) {
         List<Randomizable> randomizables = this.getAllRandomizables();
         for (Randomizable randomizable : randomizables) {
-            if (randomizable.getName().equals(name)) {
+            if (randomizable.getName() == null) {
+                return null;
+            } else if (randomizable.getName().equals(name)) {
                 return randomizable;
             }
         }
@@ -1351,6 +1365,10 @@ public class Materials {
             }
         }
         return result;
+    }
+
+    public List<Component> getAllComponents(Boolean liquid) {
+        return this.components;
     }
 
     public List<Milestone> getAvailableMilestones() {
@@ -1464,6 +1482,7 @@ public class Materials {
         result.addAll(this.milestones);
         result.addAll(this.structures);
         result.addAll(this.equip);
+        result.addAll(this.alternate);
         return result;
     }
 
@@ -1506,12 +1525,25 @@ public class Materials {
     public void setRandomizableAvailable(String name, Boolean available) {
 
         for (Randomizable r : this.getAllRandomizables()) {
-            if (r.getName().equals(name)) {
+            if (r.getName() == null) {
+                continue;
+            } else if (r.getName().equals(name)) {
                 r.setAvailable(available);
                 return;
             }
         }
 
+    }
+
+    public void setRandomizableAvailablePath(String path, Boolean available) {
+        for (Randomizable r : this.getAllRandomizables()) {
+            if (r.getPath() == null) {
+                continue;
+            } else if (r.getPath().equals(path)) {
+                r.setAvailable(available);
+                return;
+            }
+        }
     }
 
     public List<Randomizable> getAvailableButUncraftableRandomizables() {
@@ -1548,12 +1580,25 @@ public class Materials {
 
     public Boolean setRandomizableCraftable(String name, Boolean craftable) {
         for (Randomizable rand : this.getAvailableButUncraftableRandomizables()) {
-            if (rand.getName().equals(name)) {
+            if (rand.getName() == null) {
+                continue;
+            } else if (rand.getName().equals(name)) {
                 rand.setCraftable(craftable);
                 return true;
             }
         }
         Console.log("Could not set Craftable, randomizable not found: " + name);
+        return false;
+    }
+
+    public Boolean setRandomizableCraftablePath(String path, Boolean craftable) {
+        for (Randomizable rand : this.getAvailableButUncraftableRandomizables()) {
+            if (rand.getPath().equals(path)) {
+                rand.setCraftable(craftable);
+                return true;
+            }
+        }
+        Console.log("Could not set Craftable, null randomizable not found with path: " + path);
         return false;
     }
 
@@ -1667,9 +1712,7 @@ public class Materials {
             }
         }
 
-        for (
-
-        Randomizable r : randomizables) {
+        for (Randomizable r : randomizables) {
             Console.hiddenLog("Adding extra checks for " + r.getName() + " : " + r.getExtraCheck());
             for (String extra : r.getExtraCheck()) {
                 if (extra != null) {
@@ -1689,7 +1732,6 @@ public class Materials {
                         getStructureByName("Desc_Pipeline").addCheckAlso("pipe");
                         getStructureByName("Desc_PipelineMK2").addCheckAlso("pipe");
                     } else {
-
                         Randomizable item = this.getRandomizableByName(extra);
                         if (item instanceof Component) {
                             getComponentByName(extra).addCheckAlso(r.getName());

@@ -23,7 +23,7 @@ public class SequenceGenerator {
     private static String firstStation = null;
     private static int nItems = 0;
 
-    public static void generateSequence() {
+    public static void generateSequence() throws Exception {
         // Log the selected values
         Console.hiddenLog("\nSelected values:");
         UiValues.logAll();
@@ -39,11 +39,7 @@ public class SequenceGenerator {
         logAvailability("Status at start:");
 
         // Generate the extraChecks
-        try {
-            materials.fillExtraChecks();
-        } catch (Exception e) {
-            Console.log("Exception in the extra checks: " + e.getMessage());
-        }
+        materials.fillExtraChecks();
 
         // Generate a random seed if not provided and set it to the random generator
         if (SequenceGenerator.seed == 0) {
@@ -90,7 +86,7 @@ public class SequenceGenerator {
         }
 
         // Main loop, runs until there's nothing left to randomize
-        int cap = 1000;
+        int cap = 2000;
         int iteration = 0;
         while (!randomizables.isEmpty() && ++iteration < cap) {
 
@@ -303,13 +299,10 @@ public class SequenceGenerator {
         List<Mat> mats = generateIngredientsComp(station);
         List<Mat> prod = new ArrayList<>();
 
-        Console.cheatsheet(comp.getName() + " is made in " + station.getName());
-        Console.test("Liquid value is : " + comp.isLiquid());
-
         // Add the main product multiplying the value range by 1000 for liquids.
         // Then add the rest of the products if the option is enabled and there's space.
         // Don't add main product if there isn't one (alternate recipes).
-        if (station.getLiquidIn() + station.getSolidIn() > 0) {
+        if (station.getLiquidIn() + station.getSolidIn() > 0 && comp.getName() != null) {
             if (comp.isLiquid()) {
                 prod.add(new Mat(comp.getName(), (random.nextInt(UiValues.getMaxStackCraft()) + 1) * 1000));
                 prod.addAll(generateProducts(station, true));
@@ -317,6 +310,8 @@ public class SequenceGenerator {
                 prod.add(new Mat(comp.getName(), random.nextInt(UiValues.getMaxStackCraft()) + 1));
                 prod.addAll(generateProducts(station, false));
             }
+        } else {
+            generateProducts(station, null);
         }
 
         double handSpeed = random.nextDouble() * (UiValues.getHandcraftSpeed()[1] - UiValues.getHandcraftSpeed()[0])
@@ -357,15 +352,25 @@ public class SequenceGenerator {
 
         // Mark the component as craftable and update the list of available but
         // uncraftable components
-        materials.setRandomizableCraftable(comp.getName(), true);
+        if (comp.getName() != null) {
+            materials.setRandomizableCraftable(comp.getName(), true);
+        } else {
+            materials.setRandomizableCraftablePath(comp.getPath(), true);
+        }
         if (comp.isLiquid()) {
             SequenceGenerator.liquidUnlocked = true;
         }
+
+        Console.cheatsheet(comp.getName() + " is made in " + station.getName()); // name will be null for alternate
     }
 
     private static void logAvailability(String title) {
         Console.advLog("\n" + title);
         for (Randomizable r : materials.getAllRandomizables()) {
+            if (r.getName() == null) {
+                continue;
+            }
+
             // Align:
             String name = r.getName();
             int size = name.length();
@@ -474,9 +479,8 @@ public class SequenceGenerator {
             }
             ingredients.add(new Mat(comp.getName(), amount));
         }
-
         for (Mat m : ingredients) {
-            Console.log("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
+            Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
         }
 
         return ingredients;
@@ -588,7 +592,12 @@ public class SequenceGenerator {
             Randomizable r = itemList.get(random.nextInt(itemList.size()));
             itemList.remove(r);
             unlocks.add(r.getPath());
-            materials.setRandomizableAvailable(r.getName(), true);
+            if (r.getName() == null) {
+                materials.setRandomizableAvailablePath(r.getPath(), true);
+            } else {
+                materials.setRandomizableAvailable(r.getName(), true);
+            }
+
         }
 
         return unlocks;
@@ -616,11 +625,18 @@ public class SequenceGenerator {
         // Get slots for the station:
         // Cannot have liquid slots if waste is not 3
         // If waste is 0, the only product is the already added main product
-        int liquidslots = (UiValues.getWaste() == 3) ? station.getLiquidOut() : 0;
-        if (UiValues.getWaste() == 0) {
-            return products;
+        int liquidslots;
+        int solidslots;
+        if (mainliquid != null) {
+            liquidslots = (UiValues.getWaste() == 3) ? station.getLiquidOut() : 0;
+            if (UiValues.getWaste() == 0) {
+                return products;
+            }
+            solidslots = station.getSolidOut();
+        } else {
+            liquidslots = station.getLiquidOut();
+            solidslots = station.getSolidOut();
         }
-        int solidslots = station.getSolidOut();
 
         // Remove the slot of the main product, as it's already used
         // Don't remove slots for alternate recipes, as they don't have main product
@@ -631,8 +647,17 @@ public class SequenceGenerator {
                 solidslots--;
         }
 
+        // Remove the liquid slots if liquids haven't been unlocked (aka, has at least
+        // pipes)
+        if (!liquidUnlocked) {
+            liquidslots = 0;
+        }
+
         // Use random resources between 1 and the max possible for the station
-        int totalresources = getBiasedRandomInt(0, Math.min(0, liquidslots + solidslots), UiValues.getInputBias());
+        int totalresources = getBiasedRandomInt(0, liquidslots + solidslots, UiValues.getInputBias());
+        if(mainliquid == null && totalresources == 0){
+            totalresources++;
+        }
 
         for (int i = 0; i < totalresources; i++) {
             Boolean selectedLiquid;
@@ -649,7 +674,8 @@ public class SequenceGenerator {
                 break; // No more slots available, break the loop to stop the program from crashing
             }
             // Select a random component from the available components (craftable or not)
-            List<Component> availableComponents = materials.getAvailableComponents(selectedLiquid);
+            List<Component> availableComponents = materials.getAllComponents(selectedLiquid);
+
             Component component = availableComponents.get(random.nextInt(availableComponents.size()));
 
             // Add the ingredient to the list and generate the amount randomly
@@ -660,6 +686,16 @@ public class SequenceGenerator {
                 amount = amount * 1000;
             }
             products.add(new Mat(component.getName(), amount));
+
+            if (selectedLiquid) {
+                liquidslots--;
+            } else {
+                solidslots--;
+            }
+        }
+
+        for (Mat m : products) {
+            Console.cheatsheet("Product: " + m.getName() + " | Amount: " + m.getAmount());
         }
 
         return products;

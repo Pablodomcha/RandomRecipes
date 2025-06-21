@@ -120,6 +120,8 @@ Equipment recipes for alternate ammo not found
 
 Missing Vehicle Recipes. Can be handled as structure recipes.
 
+Recipes for alternate should be able to take not unlocked materials.
+
 --------------------------------------------------------------------------------------------------------------
 
 Can't be loaded:
