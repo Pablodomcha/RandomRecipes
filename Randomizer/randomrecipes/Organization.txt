@@ -117,6 +117,14 @@ Recipes for alternate should be able to take not unlocked materials.
 
 Is the station bias working?
 
+Missing alternate ammo for rebar
+
+Cartridgesmart seems to be optional, it's recipe is probably being rerandomized
+
+Sulfur needs it's extracheck
+
+Compacted coal has base recipe? (enriched coal maybe)
+
 --------------------------------------------------------------------------------------------------------------
 Wrong amount (multiplied for solids or not multiplied for liquids) (only as product):
 Elevator part 12
@@ -141,3 +149,195 @@ Items to remove/edit (not found, may mean they don't exist or their Desc name is
 
 Desc_Alternate_Turbofuel
 BP_EquipmentDescriptorHoverPac
+
+
+MAM milestones:
+
+Megafauna:
+Tier 1:
+    Research_ACarapace_0
+    Research_AO_Hatcher
+    Research_AO_Stinger
+    Research_AOrgans_0
+
+Tier 2:
+    Research_AO_DNACapsule
+
+Tier 3:
+    Research_AO_Pre_Rebar (pre rebar)
+    Research_AOrgans_3 (pre expand inv)
+
+Tier 4:
+    Research_ACarapace_2 (rebar gun)
+    Research_ACarapace_3 (expand inventory)
+    Research_AOrganisms_2
+    Research_AOrgans_2
+
+
+Alien Tech:
+Tier 1:
+    Research_Alien_MercerSphere
+    Research_Alien_Somersloop
+    SAM Analysis:
+        1. Research_Alien_SAM
+        2. Research_Alien_ActiveSAM
+        3. Research_Alien_SAMFluctuator
+
+
+Tier 2:
+    Research_Alien_CentralStorage (left)
+    Research_Alien_BoosterBlocker (right)
+
+Tier 3:
+    Research_Alien_ProductionBooster
+    Research_Alien_PowerBooster (above boosterfuel)
+
+Tier 4:
+    Research_Alien_BoosterFuel
+    Depot:
+        Left: Research_Alien_CentralStackExpansion_01 to 04
+        Mid: Research_Alien_CentralInventory
+        Right: Research_Alien_CentralUploadBoost_01 to 04
+
+
+Caterium:
+Tier 1:
+    1. Research_Caterium_0
+    2. Research_Caterium_1
+    3. Research_Caterium_2
+
+
+Tier 2:
+    Central: Research_Caterium_3
+    Research_Caterium_2_1
+    Research_Caterium_3_2
+
+    
+
+Tier 3:
+    Central:
+        1. Research_Caterium_4_2
+        2. Research_Caterium_6_2
+    Left: Research_Caterium_4_1
+    Right: Research_Caterium_5
+    
+
+Tier 4:
+    Up:
+        Research_Caterium_4_1_1
+        Research_Caterium_4_1_2
+        esearch_Caterium_5_1
+        Research_Caterium_6_3
+    Down:
+        Research_Caterium_7_1
+        Research_Caterium_7_2
+
+    
+Mycelia:
+Tier 1:
+    Research_Mycelia_1
+
+Tier 2:
+    Left: Research_Mycelia_2
+    Mid: Research_Mycelia_8
+    Right: Research_Mycelia_4
+
+Tier 3 (left): 
+    Research_Mycelia_2_1
+    Research_Mycelia_3
+    Research_Mycelia_7
+    Research_Mycelia_GasMask
+
+Tier 3 (right):
+    Research_Mycelia_5
+    Research_Mycelia_6
+
+
+Nutrients:
+Tier 1:
+    Research_Nutrients_0
+    Research_Nutrients_1
+    Research_Nutrients_2
+
+Tier 2:
+    Research_Nutrients_5 ?
+
+Tier 3: 
+    Research_Nutrients_4 ?
+
+
+
+Power Slugs:
+Tier 1:
+    Research_PowerSlugs_1
+
+Tier 2:
+    Mid: Research_PowerSlugs_4
+    Research_PowerSlugs_2
+    Research_PowerSlugs_3
+
+Tier 3: 
+    Research_PowerSlugs_5
+
+Tier 4:
+    Research_PowerSlugs_6
+
+
+Quartz:
+Tier 1:
+    Research_Quartz_0
+
+Tier 2:
+    Right: Research_Quartz_1_2
+    Left: Research_Quartz_1_1
+
+Tier 3: 
+    Right:
+        Research_Caterium_3_1 (from caterium folder)
+        Research_Caterium_4_3 (from caterium folder)
+
+    Left:
+        Research_Quartz_2 (with tree below)
+        Research_Quartz_2_1
+        
+
+Tier 4:
+    Research_Quartz_3_1
+    Research_Quartz_3_4
+    Research_Quartz_4
+    Research_Quartz_4_1
+    Research_Quartz_PriorityMerger
+
+
+Sulfur:
+Tier 1:
+    Research_Sulfur_0
+
+Tier 2:
+    Left: Research_Sulfur_1
+    Right: Research_Sulfur_ExperimentalPower (no reward)
+
+Tier 3:
+    Left:
+        Research_Sulfur_5
+        Research_Sulfur_3_1
+    Mid with dependancies: Research_Sulfur_3
+    Right:
+        Research_Sulfur_compactedCoal
+        Research_Sulfur_TurboFuel (unlocks the 2 below)
+            Research_Sulfur_IonizedFuel
+            Research_Sulfur_RocketFuel
+        
+
+
+
+Tier 4:
+    Left: Research_Sulfur_4
+    Mid: Research_Sulfur_4_2
+    Right: Research_Sulfur_4_1
+
+Tier 5:
+    Left: Research_Sulfur_5_1
+    Mid: Research_Sulfur_6
+    Right: Research_Sulfur_5_2
+        Research_Sulfur_5_2_Hidden (make sure it's empty, it's rewards are invisible)
