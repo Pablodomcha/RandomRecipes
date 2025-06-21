@@ -160,6 +160,7 @@ public class SequenceGenerator {
             Console.importantLog("Missing Unlocks (should be playable, but some items will have vanilla values): ");
             for (Randomizable elem : materials.getUncraftableRandomizables()) {
                 Console.log(elem.getName());
+                Console.hiddenLog(elem.getRecipePath());
             }
             Console.importantLog(
                     "These items didn't get randomized properly, they may be missing from the game or have their default recipe."
@@ -327,6 +328,8 @@ public class SequenceGenerator {
             filename = "Recipe_Alternate" + addedItems + ".json";
         }
 
+        Console.test(filename);
+
         recipe = new Recipe(
                 prod, // Products
                 mats, // Ingredients
@@ -335,6 +338,8 @@ public class SequenceGenerator {
                 time, // Time
                 handSpeed // Handcraft speed
         );
+
+        String category = "Category" + (random.nextInt(10) + 1);
 
         // Create Recipe JSON file (RecipeVN if it goes into a machine with variable
         // consumption)
@@ -349,10 +354,10 @@ public class SequenceGenerator {
             double max = (double) addedItems * 740 / SequenceGenerator.nItems;
             int energy = (int) (random.nextDouble() * max + 10);
 
-            CreateJSON.saveRecipeVNAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation,
+            CreateJSON.saveRecipeVNAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation, category,
                     energy);
         } else {
-            CreateJSON.saveRecipeAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation);
+            CreateJSON.saveRecipeAsJson(recipe, comp.getRecipePath(), SequenceGenerator.firstStation, category);
         }
 
         // Mark the component as craftable and update the list of available but
@@ -660,7 +665,7 @@ public class SequenceGenerator {
 
         // Use random resources between 1 and the max possible for the station
         int totalresources = getBiasedRandomInt(0, liquidslots + solidslots, UiValues.getInputBias());
-        if(mainliquid == null && totalresources == 0){
+        if (mainliquid == null && totalresources == 0) {
             totalresources++;
         }
 

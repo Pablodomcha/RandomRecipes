@@ -68,9 +68,14 @@ public class Materials {
         // Raw materials
         this.components.add(new Component("Desc_Water", true, Arrays.asList("Desc_WaterPump", "power")));
         this.components.addAll(generateRawOre()); // They have no path, so no prefix is added.
+
+        // Other materials
         this.components.addAll(addPrefixComp(generateMoreComponents(), "//Game/FactoryGame/Recipes/"));
         this.components.addAll(addPrefixComp(alternateButNotReally(), "//Game/FactoryGame/Recipes/"));
+
+        // Equipment
         this.equip.addAll(addPrefixComp(generateEquipment(), "//Game/FactoryGame/Recipes/"));
+        this.equip.addAll(addPrefixComp(generateEquipmnet2(), "//Game/FactoryGame/"));
 
         // //Game/FactoryGame/Recipes/SpaceElevatorParts/
         this.components.addAll(addPrefixComp(generateElevator(), "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
@@ -83,7 +88,12 @@ public class Materials {
         if (UiValues.alterReci) {
             this.alternate.addAll(addPrefixComp(generateOptional(), "//Game/FactoryGame/Recipes/"));
             this.alternate.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/AlternateRecipes/"));
-            for(Component alt : this.alternate) {
+
+            // Alternate for Turbo Ammo (weird path and only one)
+            List<Component> ammo = new ArrayList<>();
+            ammo.add(generateComponent("Recipe_CartridgeChaos_Packaged", true));
+            this.alternate.addAll(addPrefixComp(ammo, "//Game/FactoryGame/Equipment/Rifle/Ammo/"));
+            for (Component alt : this.alternate) {
                 alt.setName(null);
             }
         }
@@ -476,6 +486,26 @@ public class Materials {
         // Not found recipe: Desc_Rebar_Stunshot, Desc_Rebar_Spreadshot,
         // Desc_Rebar_Explosive, Desc_NobeliskGas, Desc_NobeliskShockwave,
         // Desc_NobeliskCluster, Desc_NobeliskNuke,
+
+        return tempComps;
+    }
+
+    private static List<Component> generateEquipmnet2() {
+        List<Component> tempComps = new ArrayList<>();
+        List<Component> tempNoPrefixComps = new ArrayList<>();
+
+        // Equipment
+        tempNoPrefixComps.add(generateComponent("Desc_CartridgeChaos", "Recipe_CartridgeChaos", 500));
+        tempNoPrefixComps.add(generateComponent("Desc_CartridgeSmart", "Recipe_CartridgeSmart", 500));
+        tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Equipment/Rifle/Ammo/"));
+        tempNoPrefixComps.clear();
+
+        tempNoPrefixComps.add(generateComponent("Desc_NobeliskCluster", "Recipe_NobeliskCluster", 50));
+        tempNoPrefixComps.add(generateComponent("Desc_NobeliskGas", "Recipe_NobeliskGas", 50));
+        tempNoPrefixComps.add(generateComponent("Desc_NobeliskNuke", "Recipe_NobeliskNuke", 50));
+        tempNoPrefixComps.add(generateComponent("Desc_NobeliskShockwave", "Recipe_NobeliskShockwave", 50));
+        tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Equipment/NobeliskDetonator/Ammo/"));
+        tempNoPrefixComps.clear();
 
         return tempComps;
     }

@@ -13,12 +13,14 @@ public class JSONableRecipe {
     private double ManufacturingDuration;
     private double ManualManufacturingMultiplier = 1;
     private String Name = " ";
+    private String OverrideCategory;
 
-    public JSONableRecipe(List<Mat> products, List<Mat> ingredients, List<String> producedIn, double manufacturingDuration, double manualDuration) {
+    public JSONableRecipe(List<Mat> products, List<Mat> ingredients, List<String> producedIn, double manufacturingDuration, double manualDuration, String OverrideCategory) {
         this.Products = products;
         this.Ingredients = ingredients;
         this.ProducedIn = producedIn;
         this.ManufacturingDuration = manufacturingDuration;
         this.ManualManufacturingMultiplier = manualDuration;
+        this.OverrideCategory = OverrideCategory;
     }
 }

@@ -24,7 +24,8 @@ Info:
     15. Milestones are not necessarily linear, tier 1 milestones could need tier 9 materials to unlock. In this case, anything unlocked by that tier 1 milestone won't be needed until it's unlockable.
     16. Limited resources like slugs, hard drives and wood/leaves are only used in alternate recipes to avoid softlocks.
     17. Blueprint maker tier 2 milestone is not randomized. I didn't find the milestone on my first try and decided not to bother.
-    18. Recipe names have been removed to avoid giving up information on main/alternate recipes (you can still see recipes and their products in the library, they just won't have names).
+    18. Recipe names have been removed to avoid giving up information on which are main or alternate recipes (you can still see recipes and their products in the library, they just won't have names).
+    19. Categories are generated randomly (otherwise alternate recipes have their category enforced and would be easy to spot).
 
 -Options (Toggle):
     1. Ore location:
@@ -106,15 +107,7 @@ Info:
 
 TODO:
 
-Equipment is a different object
-
 MAM and store purchases not added yet.
-
-Hazmat filter is equipment?
-
-Fill the alternate list and add it at the end of sequence generator
-
-Handcraft not working
 
 Equipment recipes for alternate ammo not found
 
@@ -122,18 +115,29 @@ Missing Vehicle Recipes. Can be handled as structure recipes.
 
 Recipes for alternate should be able to take not unlocked materials.
 
+Is the station bias working?
+
 --------------------------------------------------------------------------------------------------------------
+Wrong amount (multiplied for solids or not multiplied for liquids) (only as product):
+Elevator part 12
+Nitric acid 
+Water
+Motor
+
+probably being treated as liquid by product generator (and vice versa)
+
+Base recipe still in game:
+Recipe_Alternate_SuperStateComputer
+Unpackage Heavy Oil Residue
+Electrode Circuit Board
+SteelBeam (not alternate)
+Dark Matter Crysttallization
+
+Ammo besides basic
 
 Can't be loaded:
 
 Items to remove/edit (not found, may mean they don't exist or their Desc name is not the same as recipe):
 
 Desc_Alternate_Turbofuel
-Desc_XenoZapper
-Desc_ZipLine
-Desc_XenoBasher
-Desc_TherapeuticInhaler
-Desc_SpaceRifleMk1
 BP_EquipmentDescriptorHoverPac
-Desc_Alternate_AdheredIronPlate
-Desc_Alternate_AlcladCasing

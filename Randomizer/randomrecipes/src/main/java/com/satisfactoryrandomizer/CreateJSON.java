@@ -17,7 +17,7 @@ import com.satisfactoryrandomizer.Storage.JSONables.JSONableStructure;
 
 public class CreateJSON {
 
-    public static void saveRecipeAsJson(Recipe recipe, String recipePath, String firstStation) {
+    public static void saveRecipeAsJson(Recipe recipe, String recipePath, String firstStation, String category) {
 
         // Convert the station to list and add manual if it's from constructor or
         // smelter.
@@ -25,12 +25,12 @@ public class CreateJSON {
         List<String> stations = new ArrayList<>();
         stations.add(recipe.getStation());
 
-        if (recipe.getStation().equals(firstStation.replace("Desc","Build"))) {
+        if (recipe.getStation().equals(firstStation.replace("Desc", "Build"))) {
             stations.add("manual");
         }
 
         JSONableRecipe jsonRecipe = new JSONableRecipe(recipe.getProducts(), recipe.getIngredients(), stations,
-                recipe.getTime(), recipe.getHandcraftSpeed());
+                recipe.getTime(), recipe.getHandcraftSpeed(), category);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonRecipe);
         json = json.replace("\n", "\r\n"); // Make the line breaks CRLF
@@ -59,19 +59,20 @@ public class CreateJSON {
         }
     }
 
-    public static void saveRecipeVNAsJson(Recipe recipe, String recipePath, String firstStation, int energy) {
+    public static void saveRecipeVNAsJson(Recipe recipe, String recipePath, String firstStation, String category,
+            int energy) {
 
         // Convert the station to list and add manual if it's from constructor or
         // smelter.
         List<String> stations = new ArrayList<>();
         stations.add(recipe.getStation());
 
-        if (recipe.getStation().equals(firstStation.replace("Desc","Build"))) {
+        if (recipe.getStation().equals(firstStation.replace("Desc", "Build"))) {
             stations.add("manual");
         }
 
         JSONableRecipeVN jsonVNRecipe = new JSONableRecipeVN(recipe.getProducts(), recipe.getIngredients(), stations,
-                recipe.getTime(), recipe.getHandcraftSpeed(), energy);
+                recipe.getTime(), recipe.getHandcraftSpeed(), category, energy);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(jsonVNRecipe);
         json = json.replace("\n", "\r\n"); // Make the line breaks CRLF
