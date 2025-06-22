@@ -692,12 +692,12 @@ public class SequenceGenerator {
             // Use the UiValues to get the max stack size for the component
             int amount = random.nextInt(UiValues.getMaxProdCraft()) + 1;
 
-            if (selectedLiquid) {
+            if (component.isLiquid()) {
                 amount = amount * 1000;
             }
             products.add(new Mat(component.getName(), amount));
 
-            if (selectedLiquid) {
+            if (component.isLiquid()) {
                 liquidslots--;
             } else {
                 solidslots--;

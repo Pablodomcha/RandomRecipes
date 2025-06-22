@@ -73,7 +73,7 @@ Info:
     4. V
     6. V
     7. 
-    8. 
+    8. V
     9. V
     10. V
 
@@ -105,51 +105,44 @@ Info:
     13. In component sequencer. V
     14. In Material selection. V
 
-TODO:
+Test:
 
-MAM and store purchases not added yet.
+solid outputs being treated as liquid by product generator (and vice versa)
 
-Equipment recipes for alternate ammo not found
+Is healing thingy working?
 
-Missing Vehicle Recipes. Can be handled as structure recipes.
-
-Recipes for alternate should be able to take not unlocked materials.
-
-Is the station bias working?
-
-Missing alternate ammo for rebar
-
-Cartridgesmart seems to be optional, it's recipe is probably being rerandomized
-
-Sulfur needs it's extracheck
+Cartridgesmart seems to be optional?
 
 Compacted coal has base recipe? (enriched coal maybe)
 
---------------------------------------------------------------------------------------------------------------
-Wrong amount (multiplied for solids or not multiplied for liquids) (only as product):
-Elevator part 12
-Nitric acid 
-Water
-Motor
-
-probably being treated as liquid by product generator (and vice versa)
-
-Base recipe still in game:
 Recipe_Alternate_SuperStateComputer
 Unpackage Heavy Oil Residue
 Electrode Circuit Board
 SteelBeam (not alternate)
 Dark Matter Crysttallization
 
-Ammo besides basic
+Desc_Alternate_Turbofuel
+BP_EquipmentDescriptorHoverPac
+
+
+
+TODO:
+
+MAM and store purchases not added yet.
+
+Missing Vehicle Recipes. Can be handled as structure recipes.
+
+Recipes for alternate should be able to take not unlocked materials.
+
+Sulfur needs it's extracheck
+
+--------------------------------------------------------------------------------------------------------------
+
+Base recipe still in game:
 
 Can't be loaded:
 
 Items to remove/edit (not found, may mean they don't exist or their Desc name is not the same as recipe):
-
-Desc_Alternate_Turbofuel
-BP_EquipmentDescriptorHoverPac
-
 
 MAM milestones:
 

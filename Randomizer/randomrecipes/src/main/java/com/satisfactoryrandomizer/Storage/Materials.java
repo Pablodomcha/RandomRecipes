@@ -459,7 +459,7 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Desc_Gunpowder", "Recipe_Gunpowder", false));
         tempNoPrefixComps.add(generateComponent("Desc_GunpowderMK2", "Recipe_GunpowderMK2", false));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHazmatSuit", "Recipe_HazmatSuit", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHoverPac", "Recipe_Hoverpack", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHoverPack", "Recipe_Hoverpack", false));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJetPack", "Recipe_JetPack", false));
         tempNoPrefixComps.add(generateComponent("Desc_Medkit", "Recipe_MedicinalInhaler", false));
         // tempNoPrefixComps.add(generateComponent("","Recipe_MedicinalInhalerAlienOrgans",
@@ -505,6 +505,12 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Desc_NobeliskNuke", "Recipe_NobeliskNuke", 50));
         tempNoPrefixComps.add(generateComponent("Desc_NobeliskShockwave", "Recipe_NobeliskShockwave", 50));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Equipment/NobeliskDetonator/Ammo/"));
+        tempNoPrefixComps.clear();
+
+        tempNoPrefixComps.add(generateComponent("Desc_Rebar_Explosive", "Recipe_Rebar_Explosive", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_Rebar_Spreadshot", "Recipe_Rebar_Spreadshot", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_Rebar_Stunshot", "Recipe_Rebar_Stunshot", 100));
+        tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Equipment/RebarGun/Ammo/"));
         tempNoPrefixComps.clear();
 
         return tempComps;
