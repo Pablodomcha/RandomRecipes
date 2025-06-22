@@ -107,38 +107,28 @@ Info:
 
 Test:
 
-solid outputs being treated as liquid by product generator (and vice versa)
-
-Is healing thingy working?
-
-Cartridgesmart seems to be optional?
-
-Compacted coal has base recipe? (enriched coal maybe)
-
-Recipe_Alternate_SuperStateComputer
-Unpackage Heavy Oil Residue
-Electrode Circuit Board
-SteelBeam (not alternate)
-Dark Matter Crysttallization
-
-Desc_Alternate_Turbofuel
-BP_EquipmentDescriptorHoverPac
-
-
+Put the other 3 recipes for inhaler as optional.
 
 TODO:
+
+Ensure Uranium extrachecks.
 
 MAM and store purchases not added yet.
 
 Missing Vehicle Recipes. Can be handled as structure recipes.
 
-Recipes for alternate should be able to take not unlocked materials.
+Recipes for alternate should be able to take not unlocked materials (to avoid stacking )
 
-Sulfur needs it's extracheck
+Sulfur needs it's extracheck.
+
+Outputs double solid/liquid and shouldn't.
 
 --------------------------------------------------------------------------------------------------------------
 
-Base recipe still in game:
+Missing:
+Compacted coal has base recipe? (enriched coal maybe)
+Cartridgesmart seems to be optional?
+Desc_Alternate_Turbofuel
 
 Can't be loaded:
 

@@ -46,19 +46,6 @@ public class UiValues {
 
     // Could just make them public, but nope.
 
-    /**
-     * Retrieves the current ore location setting.
-     * 
-     * @return 1. Ore location:
-     *         Easy: You don't need ores you can't scan to unlock the ability to
-     *         scan them. Uranium will only be needed if you can have radiation
-     *         protection.
-     *         Medium: Any ore can be part of any recipe. Uranium will only be
-     *         needed if you can have radiation protection.
-     *         Radiation Party: Uranium could be needed for recipes unlocked before
-     *         you can have radiation protection.
-     */
-
     public static int addAll() {
         return 1000 * (int) (UiValues.seed % 100 + UiValues.oreLocation + UiValues.belts + UiValues.electricity
                 + UiValues.waste + UiValues.stationBias + UiValues.inventorySlots +
@@ -95,6 +82,18 @@ public class UiValues {
         Console.hiddenLog("Free Chance: " + UiValues.freeChance);
     }
 
+        /**
+     * Retrieves the current ore location setting.
+     * 
+     * @return 1. Ore location:
+     *         Easy: You don't need ores you can't scan to unlock the ability to
+     *         scan them. Uranium will only be needed if you can have radiation
+     *         protection.
+     *         Medium: Any ore can be part of any recipe. Uranium will only be
+     *         needed if you can have radiation protection.
+     *         Radiation Party: Uranium could be needed for recipes unlocked before
+     *         you can have radiation protection.
+     */
     public static int getOreLocation() {
         return UiValues.oreLocation;
     }

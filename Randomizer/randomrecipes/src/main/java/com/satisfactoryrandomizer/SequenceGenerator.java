@@ -739,7 +739,7 @@ public class SequenceGenerator {
                 return null;
             } else if (loops++ == 100 || craftableComponents.size() <= 0) {
                 Console.log("Looping through the available materials for the " + loops
-                        + "th time, \"Max recipes used\" is too low. The uses of all components will be increased by 1 to procceed");
+                        + "th time, \"Max recipes used\" is too low. The uses of all available components will be increased by 1 to procceed");
                 materials.refillComponents();
                 craftableComponents = materials.getAvailableAndCraftableComponents(liquid);
             }

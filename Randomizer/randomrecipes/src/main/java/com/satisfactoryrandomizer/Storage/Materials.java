@@ -21,6 +21,7 @@ public class Materials {
                                                                               // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
     private int[] phase = {};
+    private static List<String> uraniumReq;
 
     public void prepare(int seed) {
         Random random = new Random(seed);
@@ -29,6 +30,13 @@ public class Materials {
         List<CraftStation> tempStations = new ArrayList<>();
         List<Structure> tempStructures = new ArrayList<>();
         List<EssentialStructure> tempEssentialStructures = new ArrayList<>();
+
+        // Set recquirements for uranium
+        if (UiValues.getOreLocation() == 2) {
+            uraniumReq = Arrays.asList("Desc_HazmatFilter", "Desc_HazmatSuit");
+        } else {
+            uraniumReq = null;
+        }
 
         // Crafting Stations
         // //Game/FactoryGame/Recipes/Buildings/
@@ -284,16 +292,10 @@ public class Materials {
             tempRawOre.add(new Component("Desc_OreBauxite", false, null));
             tempRawOre.add(new Component("Desc_RawQuartz", false, null));
             tempRawOre.add(new Component("Desc_Sulfur", false, null));
+            tempRawOre.add(new Component("Desc_OreUranium", false, uraniumReq));
             tempRawOre.add(new Component("Desc_NitrogenGas", true,
                     Arrays.asList("Desc_FrackingExtractor", "Desc_FrackingSmasher", "power")));
             tempRawOre.add(new Component("Desc_SAM", false, null));
-
-            if (UiValues.getOreLocation() == 1) {
-                tempRawOre.add(new Component("Desc_OreUranium", false,
-                        Arrays.asList("Desc_HazmatFilter", "Desc_HazmatSuit")));
-            } else {
-                tempRawOre.add(new Component("Desc_OreUranium", false, null));
-            }
         }
 
         return tempRawOre;
@@ -312,12 +314,13 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_IronPlateReinforced", false));
         tempNoPrefixComps.add(generateComponent("Recipe_ModularFrame", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Motor", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_PlutoniumCell", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PlutoniumCell", false, uraniumReq));
         tempNoPrefixComps.add(generateComponent("Recipe_PressureConversionCube", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Rotor", false));
         tempNoPrefixComps.add(generateComponent("Recipe_SAMFluctuator", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Stator", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_UraniumCell", false));
+        tempNoPrefixComps.add(
+                generateComponent("Recipe_UraniumCell", false, uraniumReq));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Assembler/"));
         tempNoPrefixComps.clear();
 
@@ -325,7 +328,8 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_CoolingSystem", false));
         tempNoPrefixComps.add(generateComponent("Desc_ModularFrameFused", "Recipe_FusedModularFrame", false));
         tempNoPrefixComps.add(generateComponent("Recipe_NitricAcid", true));
-        tempNoPrefixComps.add(generateComponent("Desc_NonFissibleUranium", "Recipe_NonFissileUranium", false));
+        tempNoPrefixComps
+                .add(generateComponent("Desc_NonFissibleUranium", "Recipe_NonFissileUranium", false, uraniumReq));
         tempNoPrefixComps.add(generateComponent("Recipe_RocketFuel", true));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Blender/"));
         tempNoPrefixComps.clear();
@@ -348,7 +352,7 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_GasTank", false));
         tempNoPrefixComps.add(generateComponent("Recipe_IronPlate", false));
         tempNoPrefixComps.add(generateComponent("Recipe_IronRod", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_NuclearFuelRod", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_NuclearFuelRod", false, uraniumReq));
         tempNoPrefixComps.add(generateComponent("Recipe_QuartzCrystal", false));
         tempNoPrefixComps.add(generateComponent("Desc_HighSpeedWire", "Recipe_Quickwire", false));
         tempNoPrefixComps.add(generateComponent("Desc_IronScrew", "Recipe_Screw", false));
@@ -372,7 +376,7 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_DarkMatter", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Diamond", false));
         tempNoPrefixComps.add(generateComponent("Recipe_FicsoniumFuelRod", false));
-        tempNoPrefixComps.add(generateComponent("Desc_PlutoniumPellet", "Recipe_Plutonium", false));
+        tempNoPrefixComps.add(generateComponent("Desc_PlutoniumPellet", "Recipe_Plutonium", false, uraniumReq));
         tempNoPrefixComps.add(generateComponent("Recipe_SingularityCell", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "HadronCollider/"));
         tempNoPrefixComps.clear();
@@ -385,7 +389,7 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Recipe_HighSpeedConnector", false));
         tempNoPrefixComps.add(generateComponent("Recipe_ModularFrameHeavy", false));
         tempNoPrefixComps.add(generateComponent("Desc_MotorLightweight", "Recipe_MotorTurbo", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_PlutoniumFuelRod", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PlutoniumFuelRod", false, uraniumReq));
         tempNoPrefixComps.add(generateComponent("Desc_ModularFrameLightweight", "Recipe_RadioControlUnit", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Manufacturer/"));
         tempNoPrefixComps.clear();
@@ -449,8 +453,6 @@ public class Materials {
 
         // Equipment
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJumpingStilts", "Recipe_BladeRunners", 1));
-        // tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorStunSpear",
-        // "Recipe_CandyCaneBasher", false));
         tempNoPrefixComps.add(generateComponent("Desc_CartridgeStandard", "Recipe_Cartridge", false));
         tempNoPrefixComps.add(generateComponent("Desc_Chainsaw", "Recipe_Chainsaw", false));
         tempNoPrefixComps.add(generateComponent("Desc_Filter", "Recipe_FilterGasMask", false));
@@ -462,12 +464,6 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHoverPack", "Recipe_Hoverpack", false));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJetPack", "Recipe_JetPack", false));
         tempNoPrefixComps.add(generateComponent("Desc_Medkit", "Recipe_MedicinalInhaler", false));
-        // tempNoPrefixComps.add(generateComponent("","Recipe_MedicinalInhalerAlienOrgans",
-        // false));
-        // tempNoPrefixComps.add(generateComponent("","Recipe_TherapeuticInhaler",
-        // false));
-        // tempNoPrefixComps.add(generateComponent("","Recipe_NutritionalInhaler",
-        // false));
         tempNoPrefixComps.add(generateComponent("Desc_NobeliskExplosive", "Recipe_Nobelisk", false));
         tempNoPrefixComps
                 .add(generateComponent("BP_EquipmentDescriptorNobeliskDetonator", "Recipe_NobeliskDetonator", false));
@@ -593,6 +589,13 @@ public class Materials {
         emptyRecipes.add(generateComponent(null, "Recipe_Sulfur_Iron", false));
         emptyRecipes.add(generateComponent(null, "Recipe_Uranium_Bauxite", false));
         returnValues.addAll(addPrefixComp(emptyRecipes, "Converter/ResourceConversion/"));
+        emptyRecipes.clear();
+
+        // Equipment
+        emptyRecipes.add(generateComponent(null, "Recipe_MedicinalInhalerAlienOrgans", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_TherapeuticInhaler", false));
+        emptyRecipes.add(generateComponent(null, "Recipe_NutritionalInhaler", false));
+        returnValues.addAll(addPrefixComp(emptyRecipes, "Equipment/"));
         emptyRecipes.clear();
 
         return returnValues;
@@ -1130,6 +1133,14 @@ public class Materials {
 
     private static Component generateComponent(String name, String recipe, Boolean liquid) {
         return new Component(name, recipe, false, false, liquid);
+    }
+
+    private static Component generateComponent(String recipe, Boolean liquid, List<String> extraChecks) {
+        return new Component(recipe.replace("Recipe", "Desc"), recipe, false, false, liquid, 50, extraChecks);
+    }
+
+    private static Component generateComponent(String name, String recipe, Boolean liquid, List<String> extraChecks) {
+        return new Component(recipe.replace("Recipe", "Desc"), recipe, false, false, liquid, 50, extraChecks);
     }
 
     private static Component generateComponent(String name, String recipe, int maxstack) {
@@ -1724,7 +1735,9 @@ public class Materials {
      */
     public void refillComponents() {
         for (Component component : this.components) {
-            component.refill();
+            if (component.isCraftable()) {
+                component.refill();
+            }
         }
     }
 
