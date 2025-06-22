@@ -138,6 +138,8 @@ public class Materials {
         tempStructures.clear();
         structures.addAll(addPrefixStruc(generateStructures(), "//Game/FactoryGame/Recipes/Buildings/"));
         structures.addAll(addPrefixStruc(generateMoreStructures(), "//Game/FactoryGame/Recipes/Buildings/"));
+        // Vehicles can be treated as structurtes by this generator
+        structures.addAll(addPrefixStruc(generateVehicles(), "//Game/FactoryGame/Recipes/"));
 
         // Recipes/Elevator
         tempStructures.add(generateStructure("Recipe_Elevator"));
@@ -1117,6 +1119,28 @@ public class Materials {
         return tempReturnStructures;
     }
 
+    private static List<Structure> generateVehicles() {
+        List<Structure> tempStructures = new ArrayList<>();
+        List<Structure> tempReturnStructures = new ArrayList<>();
+
+        tempStructures.add(generateStructure("Recipe_CyberWagon"));
+        tempStructures.add(generateStructure("Recipe_Explorer"));
+        tempStructures.add(generateStructure("Recipe_FactoryCart"));
+        tempStructures.add(generateStructure("Recipe_GoldenCart"));
+        tempStructures.add(generateStructure("Recipe_Tractor"));
+        tempStructures.add(generateStructure("Recipe_Truck"));
+        tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Vehicle/"));
+        tempStructures.clear();
+
+        
+        tempStructures.add(generateStructure("Recipe_FreightWagon"));
+        tempStructures.add(generateStructure("Recipe_Locomotive"));
+        tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Vehicle/Train/"));
+        tempStructures.clear();
+
+        return tempReturnStructures;
+    }
+
     // Generators and prefixers
 
     private static Structure generateStructure(String recipe) {
@@ -1421,7 +1445,13 @@ public class Materials {
     }
 
     public List<Component> getAllComponents(Boolean liquid) {
-        return this.components;
+        List<Component> result = new ArrayList<>();
+        for (Component component : this.components) {
+            if (component.isLiquid().equals(liquid)) {
+                result.add(component);
+            }
+        }
+        return result;
     }
 
     public List<Milestone> getAvailableMilestones() {

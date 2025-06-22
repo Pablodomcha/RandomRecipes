@@ -297,7 +297,13 @@ public class SequenceGenerator {
             return;
         }
 
-        List<Mat> mats = generateIngredientsComp(station);
+        // Generate ingredients for alternate or base recipe.
+        Boolean alternate = false;
+        if (comp.getName() == null) {
+            alternate = true;
+        }
+
+        List<Mat> mats = generateIngredientsComp(station, alternate);
         List<Mat> prod = new ArrayList<>();
 
         // Add the main product multiplying the value range by 1000 for liquids.
@@ -430,7 +436,7 @@ public class SequenceGenerator {
      * @param isStructure Whether the station is a structure or not
      * @return A list of ingredients with their respective amounts
      */
-    private static List<Mat> generateIngredientsComp(CraftStation station) {
+    private static List<Mat> generateIngredientsComp(CraftStation station, Boolean alternate) {
         List<Mat> ingredients = new ArrayList<>();
 
         // If it's free, we don't need no ingredients.
@@ -464,7 +470,14 @@ public class SequenceGenerator {
                 }
             }
             // Select a random component from the usable components
-            List<Component> craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
+            // The first attempt in alternate will use all ingredients (available or not),
+            // from there, it will roll only craftable
+            List<Component> craftableComponents;
+            if (alternate) {
+                craftableComponents = materials.getAllComponents(selectedLiquid);
+            } else {
+                craftableComponents = materials.getAllComponents(selectedLiquid);
+            }
 
             Component comp = ensureUnused(ingredients, craftableComponents, selectedLiquid);
 

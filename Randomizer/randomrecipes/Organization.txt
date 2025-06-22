@@ -109,19 +109,16 @@ Test:
 
 Put the other 3 recipes for inhaler as optional.
 
-TODO:
+Vehicle Recipes.
 
-Ensure Uranium extrachecks.
+Outputs double solid/liquid and shouldn't.
+
+
+TODO:
 
 MAM and store purchases not added yet.
 
-Missing Vehicle Recipes. Can be handled as structure recipes.
-
-Recipes for alternate should be able to take not unlocked materials (to avoid stacking )
-
 Sulfur needs it's extracheck.
-
-Outputs double solid/liquid and shouldn't.
 
 --------------------------------------------------------------------------------------------------------------
 
