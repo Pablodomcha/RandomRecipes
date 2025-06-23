@@ -84,6 +84,12 @@ public class Randomizable {
         this.extraCheck.remove(extraCheck);
     }
 
+    // Used to delete all extrachecks for those that are about scanning (since
+    // there's 2 ways to get the scan).
+    public void emptyExtraCheck() {
+        this.extraCheck.clear();
+    }
+
     public List<String> getCheckAlso() {
         return this.checkAlso;
     }

@@ -14,7 +14,8 @@ public class Materials {
 
     private final List<Component> components = new ArrayList<>(); // Components
     private final List<Component> alternate = new ArrayList<>(); // Alternate components
-    private final List<Component> equip = new ArrayList<>(); // Alternate components
+    private final List<Component> limited = new ArrayList<>(); // limited ingredients
+    private final List<Component> equip = new ArrayList<>(); // Equipment (can be made, but not used as material)
     private List<CraftStation> stations = new ArrayList<>(); // Crafting Stations
     private List<Structure> structures = new ArrayList<>(); // Generic structures that don't affect the logic
     private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by
@@ -278,15 +279,15 @@ public class Materials {
             tempRawOre.add(new Component("Desc_Coal", false, Arrays.asList("Milestone_3-1")));
             tempRawOre.add(new Component("Desc_LiquidOil", true,
                     Arrays.asList("Milestone_5-2", "Desc_OilPump", "power")));
-            tempRawOre.add(new Component("Desc_OreGold", false, Arrays.asList("Milestone_5-5")));
+            tempRawOre.add(new Component("Desc_OreGold", false, Arrays.asList("Milestone_5-5", "Research_Caterium_0")));
             tempRawOre.add(new Component("Desc_OreBauxite", false, Arrays.asList("Milestone_7-1")));
-            tempRawOre.add(new Component("Desc_RawQuartz", false, Arrays.asList("Milestone_7-1")));
-            tempRawOre.add(new Component("Desc_Sulfur", false, Arrays.asList("Milestone_7-5")));
+            tempRawOre.add(new Component("Desc_RawQuartz", false, Arrays.asList("Milestone_7-1", "Research_Quartz_0")));
+            tempRawOre.add(new Component("Desc_Sulfur", false, Arrays.asList("Milestone_7-5", "Research_Sulfur_0")));
             tempRawOre.add(new Component("Desc_OreUranium", false,
                     Arrays.asList("Milestone_8-2", "Desc_HazmatFilter", "Desc_HazmatSuit")));
             tempRawOre.add(new Component("Desc_NitrogenGas", true,
                     Arrays.asList("Milestone_8-3", "Desc_FrackingExtractor", "Desc_FrackingSmasher", "power")));
-            tempRawOre.add(new Component("Desc_SAM", false, Arrays.asList("Milestone_9-1")));
+            tempRawOre.add(new Component("Desc_SAM", false, Arrays.asList("Milestone_9-1", "Research_Alien_SAM")));
         } else {
             tempRawOre.add(new Component("Desc_OreIron", false, null));
             tempRawOre.add(new Component("Desc_OreCopper", false, null));
@@ -903,9 +904,11 @@ public class Materials {
                 .add(generateMamMilestone("Research_Alien_SAMFluctuator", Arrays.asList("Research_Alien_ActiveSAM")));
         // 2
         tempNoPrefix.add(generateMamMilestone("Research_Alien_CentralStorage",
-                Arrays.asList("Research_Alien_SAMFluctuator", "Research_Alien_MercerSphere", "Research_Alien_Somersloop")));
+                Arrays.asList("Research_Alien_SAMFluctuator", "Research_Alien_MercerSphere",
+                        "Research_Alien_Somersloop")));
         tempNoPrefix.add(generateMamMilestone("Research_Alien_BoosterBlocker",
-                Arrays.asList("Research_Alien_SAMFluctuator", "Research_Alien_MercerSphere", "Research_Alien_Somersloop")));
+                Arrays.asList("Research_Alien_SAMFluctuator", "Research_Alien_MercerSphere",
+                        "Research_Alien_Somersloop")));
         // 3
         tempNoPrefix.add(generateMamMilestone("Research_Alien_ProductionBooster",
                 Arrays.asList("Research_Alien_BoosterBlocker")));
@@ -1769,6 +1772,7 @@ public class Materials {
         result.addAll(this.structures);
         result.addAll(this.equip);
         result.addAll(this.alternate);
+        result.addAll(this.limited);
         return result;
     }
 
@@ -2047,7 +2051,12 @@ public class Materials {
             Boolean done = false;
             for (Component c : this.components) {
                 if (c.getName().equals(where)) {
-                    c.removeExtraCheck(nameToRemove);
+                    if (where.equals("Desc_OreGold") || where.equals("Desc_RawQuartz") || where.equals("Desc_Sulfur") || where.equals("Desc_SAM")) {
+                        // Remove both extrachecks in these 4, as either one fulfills the condition
+                        c.emptyExtraCheck();
+                    } else {
+                        c.removeExtraCheck(nameToRemove);
+                    }
                     done = true;
                 }
             }

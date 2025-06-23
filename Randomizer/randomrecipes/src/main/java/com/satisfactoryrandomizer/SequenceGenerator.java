@@ -176,10 +176,11 @@ public class SequenceGenerator {
         List<Mat> mats = generateIngredients(type);
         List<String> checkAlso = new ArrayList<>();
 
-        if (!mamDone) {
-            // Increase the chance of the milestone having the MAM as fixed unlock:
-            SequenceGenerator.mamChance += 2;
+        // Increase the chance of the milestone having the MAM as fixed unlock
+        // (increased independently as both MAM and Store use it)
+        SequenceGenerator.mamChance += 2;
 
+        if (!mamDone) {
             // Add MAM as fixed unlock if the random number is below the chance, ensuring
             // it's added at all
             if (SequenceGenerator.mamChance > random.nextInt(100)) {
@@ -748,7 +749,8 @@ public class SequenceGenerator {
      * @param liquid              Whether the component should be a liquid or not
      * @return A component that is not already in the list
      */
-    private static Component ensureUnused(List<Mat> list, List<Component> craftableComponents, Boolean liquid, Boolean alternate) {
+    private static Component ensureUnused(List<Mat> list, List<Component> craftableComponents, Boolean liquid,
+            Boolean alternate) {
 
         Component component = new Component("placeholder in ensureUnused in SequenceGenerator", null, false, false,
                 false);
@@ -785,7 +787,8 @@ public class SequenceGenerator {
             materials.useComponent(component.getName());
         } else {
             Console.log(
-                    "For some reason this non alternate recipe is trying to use an unavailable component: " + component.getName());
+                    "For some reason this non alternate recipe is trying to use an unavailable component: "
+                            + component.getName());
         }
 
         return component;

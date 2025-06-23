@@ -122,6 +122,12 @@ Tier 2:
 Tier 3: 
     Research_Nutrients_4  ?
 
+MAM
+
+Check if hard drives unlock alternate recipes properly
+
+Sulfur needs it's extracheck.
+
 
 TODO:
 
@@ -129,11 +135,8 @@ Limited mats not done. Make a method to check if they are limited, if they are,
 set available and craftable only if they appear as product in alternate. Otherwise,
 they are only returned for getAllMaterials.
 
-MAM and store purchases not added yet.
+Store purchases not added yet. Will need to force it like mam. Can use the same chance.
 
-Sulfur needs it's extracheck.
-
-Check if hard drives unlock alternate recipes properly
 
 --------------------------------------------------------------------------------------------------------------
 
