@@ -20,6 +20,7 @@ public class Materials {
     private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by
                                                                               // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
+    private List<Milestone> mamResearch = new ArrayList<>(); // Milestones
     private int[] phase = {};
     private static List<String> uraniumReq;
 
@@ -89,8 +90,11 @@ public class Materials {
         this.components.addAll(addPrefixComp(generateElevator(), "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
 
         // Milestones
-
+        // HUB
         this.milestones.addAll(generateMilestones());
+
+        // MAM
+        this.milestones.addAll(addPrefixMile(generateMamMilestones(), "//Game/FactoryGame/Schematics/"));
 
         // Alternate Recipes
         if (UiValues.alterReci) {
@@ -175,10 +179,9 @@ public class Materials {
 
     // Data creators
 
-    public void generateLimitedMats() {
+    private static void generateLimitedMats() {
         // Materials without associated recipe and can't be crafted.
-        // They will be added at the end for alternate recipes.
-        this.components.add(new Component("Desc_Wood", null, true, false, false));
+        // this.components.add(new Component("Desc_Wood", null, true, false, false));
     }
 
     private static List<EssentialStructure> generateEssentialBuildings() {
@@ -871,9 +874,199 @@ public class Materials {
         List<Milestone> tempReturn = new ArrayList<>();
         List<Milestone> tempNoPrefix = new ArrayList<>();
 
-        // AlienOrganisms_RS
-        // tempMilestones.add(new Milestone("Tutorial_1", true, false,
-        // "Schematic_Tutorial1", null, 0));
+        // Megafauna
+        tempNoPrefix.add(generateMamMilestone("Research_AO_Carapace", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_AO_Hatcher", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_AO_Stinger", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_AOrgans_0", Arrays.asList("Desc_Mam")));
+        // 2
+        tempNoPrefix.add(generateMamMilestone("Research_AO_DNACapsule", Arrays.asList("Research_AO_Carapace",
+                "Research_AO_Hatcher", "Research_AO_Stinger", "Research_AOrgans_0")));
+        // 3
+        tempNoPrefix.add(generateMamMilestone("Research_AO_Pre_Rebar", Arrays.asList("Research_AO_DNACapsule")));
+        tempNoPrefix.add(generateMamMilestone("Research_AOrgans_3", Arrays.asList("Research_AO_DNACapsule")));
+        tempNoPrefix.add(generateMamMilestone("Research_AOrganisms_2", Arrays.asList("Research_AO_DNACapsule")));
+        tempNoPrefix.add(generateMamMilestone("Research_AOrgans_2", Arrays.asList("Research_AO_DNACapsule")));
+        // 4
+        tempNoPrefix.add(generateMamMilestone("Research_ACarapace_2", Arrays.asList("Research_AO_Pre_Rebar")));
+        tempNoPrefix.add(generateMamMilestone("Research_ACarapace_3", Arrays.asList("Research_AOrgans_3")));
+
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "AlienOrganisms_RS/"));
+        tempNoPrefix.clear();
+
+        // Alien tech
+        tempNoPrefix.add(generateMamMilestone("Research_Alien_MercerSphere", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Alien_Somersloop", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Alien_SAM", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Alien_ActiveSAM", Arrays.asList("Research_Alien_SAM")));
+        tempNoPrefix
+                .add(generateMamMilestone("Research_Alien_SAMFluctuator", Arrays.asList("Research_Alien_ActiveSAM")));
+        // 2
+        tempNoPrefix.add(generateMamMilestone("Research_Alien_CentralStorage",
+                Arrays.asList("Research_Alien_SAMFluctuator", "Research_Alien_MercerSphere", "Research_Alien_Somersloop")));
+        tempNoPrefix.add(generateMamMilestone("Research_Alien_BoosterBlocker",
+                Arrays.asList("Research_Alien_SAMFluctuator", "Research_Alien_MercerSphere", "Research_Alien_Somersloop")));
+        // 3
+        tempNoPrefix.add(generateMamMilestone("Research_Alien_ProductionBooster",
+                Arrays.asList("Research_Alien_BoosterBlocker")));
+        tempNoPrefix.add(
+                generateMamMilestone("Research_Alien_PowerBooster", Arrays.asList("Research_Alien_BoosterBlocker")));
+        // 4
+        tempNoPrefix
+                .add(generateMamMilestone("Research_Alien_BoosterFuel", Arrays.asList("Research_Alien_PowerBooster")));
+
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "AlienTech_RS/"));
+        tempNoPrefix.clear();
+
+        // Caterium
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_0", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_1", Arrays.asList("Research_Caterium_0")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_2", Arrays.asList("Research_Caterium_1")));
+        // 2
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_2_1", Arrays.asList("Research_Caterium_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_3_2", Arrays.asList("Research_Caterium_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_3", Arrays.asList("Research_Caterium_2")));
+        // 3
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_4_1", Arrays.asList("Research_Caterium_3")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_5", Arrays.asList("Research_Caterium_3")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_4_2", Arrays.asList("Research_Caterium_3")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_6_2", Arrays.asList("Research_Caterium_4_2")));
+        // 4
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_4_1_1",
+                Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_4_1_2",
+                Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
+        tempNoPrefix.add(generateMamMilestone("esearch_Caterium_5_1",
+                Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_6_3",
+                Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_7_1",
+                Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_7_2",
+                Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
+
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "Caterium_RS/"));
+        tempNoPrefix.clear();
+
+        // Mycelia
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_1", Arrays.asList("Desc_Mam")));
+        // 2
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_2", Arrays.asList("Research_Mycelia_1")));
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_8", Arrays.asList("Research_Mycelia_1")));
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_4", Arrays.asList("Research_Mycelia_1")));
+        // 3 L
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_2_1", Arrays.asList("Research_Mycelia_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_3", Arrays.asList("Research_Mycelia_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_7", Arrays.asList("Research_Mycelia_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_GasMask", Arrays.asList("Research_Mycelia_2")));
+        // 3 R
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_5", Arrays.asList("Research_Mycelia_4")));
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_6", Arrays.asList("Research_Mycelia_4")));
+
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "Mycelia_RS/"));
+        tempNoPrefix.clear();
+
+        // Nutrients
+        tempNoPrefix.add(generateMamMilestone("Research_Nutrients_0", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Nutrients_1", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Nutrients_2", Arrays.asList("Desc_Mam")));
+        // 2
+        tempNoPrefix.add(generateMamMilestone("Research_Nutrients_5",
+                Arrays.asList("Research_Nutrients_0", "Research_Nutrients_1", "Research_Nutrients_2")));
+        // 3
+        tempNoPrefix.add(generateMamMilestone("Research_Nutrients_4", Arrays.asList("Research_Nutrients_5")));
+
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "Nutrients_RS/"));
+        tempNoPrefix.clear();
+
+        // Power Slugs
+        tempNoPrefix.add(generateMamMilestone("Research_PowerSlugs_1", Arrays.asList("Desc_Mam")));
+        // 2
+        tempNoPrefix.add(generateMamMilestone("Research_PowerSlugs_2", Arrays.asList("Research_PowerSlugs_1")));
+        tempNoPrefix.add(generateMamMilestone("Research_PowerSlugs_3", Arrays.asList("Research_PowerSlugs_1")));
+        tempNoPrefix.add(generateMamMilestone("Research_PowerSlugs_4", Arrays.asList("Research_PowerSlugs_1")));
+        // 3
+        tempNoPrefix.add(generateMamMilestone("Research_PowerSlugs_5", Arrays.asList("Research_PowerSlugs_4")));
+        // 4
+        tempNoPrefix.add(generateMamMilestone("Research_PowerSlugs_6", Arrays.asList("Research_PowerSlugs_5")));
+
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "PowerSlugs_RS/"));
+        tempNoPrefix.clear();
+
+        // Quartz
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_0", Arrays.asList("Desc_Mam")));
+        // 2
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_1_1", Arrays.asList("Research_Quartz_0")));
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_1_2", Arrays.asList("Research_Quartz_0")));
+        // 3
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_2_1", Arrays.asList("Research_Quartz_1_1")));
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_2", Arrays.asList("Research_Quartz_1_1")));
+        // 4
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_3_1", Arrays.asList("Research_Quartz_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_3_4", Arrays.asList("Research_Quartz_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_4", Arrays.asList("Research_Quartz_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_4_1", Arrays.asList("Research_Quartz_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_PriorityMerger", Arrays.asList("Research_Quartz_2")));
+
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "Quartz_RS/"));
+        tempNoPrefix.clear();
+        // 3 from caterium folder
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_3_1", Arrays.asList("Research_Quartz_1_2")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_4_3", Arrays.asList("Research_Quartz_1_2")));
+
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "Caterium_RS/"));
+        tempNoPrefix.clear();
+
+        // Sulfur
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_0", Arrays.asList("Desc_Mam")));
+        // 2
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_1", Arrays.asList("Research_Sulfur_0")));
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_ExperimentalPower", Arrays.asList("Research_Sulfur_0")));
+        // 3
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_5", Arrays.asList("Research_Sulfur_1")));
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_3_1", Arrays.asList("Research_Sulfur_1")));
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_3", Arrays.asList("Research_Sulfur_1")));
+
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_compactedCoal",
+                Arrays.asList("Research_Sulfur_ExperimentalPower")));
+        tempNoPrefix.add(
+                generateMamMilestone("Research_Sulfur_TurboFuel", Arrays.asList("Research_Sulfur_ExperimentalPower")));
+        tempNoPrefix
+                .add(generateMamMilestone("Research_Sulfur_IonizedFuel", Arrays.asList("Research_Sulfur_TurboFuel")));
+        tempNoPrefix
+                .add(generateMamMilestone("Research_Sulfur_RocketFuel", Arrays.asList("Research_Sulfur_TurboFuel")));
+        // 4
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_4", Arrays.asList("Research_Sulfur_3")));
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_4_2", Arrays.asList("Research_Sulfur_3")));
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_4_1", Arrays.asList("Research_Sulfur_3")));
+        // 5
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_5_1", Arrays.asList("Research_Sulfur_4")));
+        tempNoPrefix.add(
+                generateMamMilestone("Research_Sulfur_6", Arrays.asList("Research_Sulfur_4", "Research_Sulfur_4_1")));
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_5_2", Arrays.asList("Research_Sulfur_4_1")));
+        // The hidden one goes in SequenceGenerator
+
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "Sulfur_RS/"));
+        tempNoPrefix.clear();
+
+        return tempReturn;
+    }
+
+    private List<Milestone> generateDepotMilestones() {
+        // Only randomize the materials, can ignore requirements.
+        List<Milestone> tempReturn = new ArrayList<>();
+        List<Milestone> tempNoPrefix = new ArrayList<>();
+
+        String name1;
+        String name2;
+        for (int i = 1; i < 4; i++) {
+            name1 = "Research_Alien_CentralStackExpansion_0" + i;
+            name2 = "Research_Alien_CentralUploadBoost_0" + i;
+            tempNoPrefix.add(generateMamMilestone(name1, null));
+            tempNoPrefix.add(generateMamMilestone(name2, null));
+        }
+        tempNoPrefix.add(generateMamMilestone("Research_Alien_CentralInventory", null));
+        tempReturn.addAll(addPrefixMile(tempNoPrefix, "AlienTech_RS/"));
 
         return tempReturn;
     }
@@ -1132,7 +1325,6 @@ public class Materials {
         tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Vehicle/"));
         tempStructures.clear();
 
-        
         tempStructures.add(generateStructure("Recipe_FreightWagon"));
         tempStructures.add(generateStructure("Recipe_Locomotive"));
         tempReturnStructures.addAll(addPrefixStruc(tempStructures, "Vehicle/Train/"));
@@ -1169,6 +1361,12 @@ public class Materials {
 
     private static Component generateComponent(String name, String recipe, int maxstack) {
         return new Component(name, recipe, false, false, false, maxstack, null);
+    }
+
+    private static Milestone generateMamMilestone(String recipe, List<String> Reqs) {
+        return new Milestone(recipe, true, false, recipe, Reqs, 0);
+        // Name doesn't matter for these, phase is 0 since they don't depend on elevator
+        // phase.
     }
 
     private static List<Structure> generateMkN(String recipe, int min, int max) {
@@ -1386,6 +1584,11 @@ public class Materials {
     public List<Structure> getPoles() {
         List<Structure> result = new ArrayList<>();
         for (Structure structure : this.structures) {
+            if (structure.getName().contains("Desc_PowerPole")) {
+                result.add(structure);
+            }
+        }
+        for (EssentialStructure structure : this.essentialStructures) {
             if (structure.getName().contains("Desc_PowerPole")) {
                 result.add(structure);
             }
@@ -1920,6 +2123,7 @@ public class Materials {
                 continue;
 
             Console.log("Could not remove extra check, Randomizable not found: " + where);
+            Console.log("This is normal for \"power\", \"pole\", \"pipe\" and \"cable\".");
         }
     }
 

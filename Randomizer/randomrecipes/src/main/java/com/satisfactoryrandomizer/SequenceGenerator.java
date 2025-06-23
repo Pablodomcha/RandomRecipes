@@ -22,6 +22,8 @@ public class SequenceGenerator {
     private static String lastObtainedStation = null;
     private static String firstStation = null;
     private static int nItems = 0;
+    private static int mamChance = 0;
+    private static Boolean mamDone = false;
 
     public static void generateSequence() throws Exception {
         // Log the selected values
@@ -160,7 +162,6 @@ public class SequenceGenerator {
             Console.importantLog("Missing Unlocks (should be playable, but some items will have vanilla values): ");
             for (Randomizable elem : materials.getUncraftableRandomizables()) {
                 Console.log(elem.getName());
-                Console.hiddenLog(elem.getRecipePath());
             }
             Console.importantLog(
                     "These items didn't get randomized properly, they may be missing from the game or have their default recipe."
@@ -172,16 +173,27 @@ public class SequenceGenerator {
     }
 
     private static void generateMilestone(Milestone milestone, String type) {
-
         List<Mat> mats = generateIngredients(type);
         List<String> checkAlso = new ArrayList<>();
+
+        if (!mamDone) {
+            // Increase the chance of the milestone having the MAM as fixed unlock:
+            SequenceGenerator.mamChance += 2;
+
+            // Add MAM as fixed unlock if the random number is below the chance, ensuring
+            // it's added at all
+            if (SequenceGenerator.mamChance > random.nextInt(100)) {
+                milestone.addFixedUnlock("Desc_Mam");
+                mamDone = true;
+            }
+        }
 
         for (Object mile : milestone.getCheckAlso()) {
             checkAlso.add((String) mile);
         }
 
-        // Force Tutorials to have at least some of the to ensure they are
-        // craftable by the time they are needed for Tutorial_6
+        // Force Tutorials to have at least some of the tutorial requirements to ensure
+        // they are craftable by the time they are needed for Tutorial_6
         if (milestone.getName().contains("Tutorial_")) {
             Milestone tut6 = materials.getMilestoneByName("Tutorial_6");
 
@@ -334,8 +346,6 @@ public class SequenceGenerator {
             filename = "Recipe_Alternate" + addedItems + ".json";
         }
 
-        Console.test(filename);
-
         recipe = new Recipe(
                 prod, // Products
                 mats, // Ingredients
@@ -381,6 +391,7 @@ public class SequenceGenerator {
     }
 
     private static void logAvailability(String title) {
+        int cont = 0;
         Console.advLog("\n" + title);
         for (Randomizable r : materials.getAllRandomizables()) {
             if (r.getName() == null) {
@@ -476,10 +487,10 @@ public class SequenceGenerator {
             if (alternate) {
                 craftableComponents = materials.getAllComponents(selectedLiquid);
             } else {
-                craftableComponents = materials.getAllComponents(selectedLiquid);
+                craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
             }
 
-            Component comp = ensureUnused(ingredients, craftableComponents, selectedLiquid);
+            Component comp = ensureUnused(ingredients, craftableComponents, selectedLiquid, alternate);
 
             // Remove the used slot
             if (selectedLiquid) {
@@ -535,7 +546,7 @@ public class SequenceGenerator {
             // Select a random component from the usable components
             List<Component> craftableComponents = materials.getAvailableAndCraftableComponents(false);
 
-            Component comp = ensureUnused(ingredients, craftableComponents, false);
+            Component comp = ensureUnused(ingredients, craftableComponents, false, false);
 
             if (comp == null) {
                 return ingredients;
@@ -591,7 +602,7 @@ public class SequenceGenerator {
                     generateStructure((EssentialStructure) unlock, "structure");
                     unlocks.add(unlock.getPath());
                 } else if (unlock instanceof Structure) {
-                    generateStructure((EssentialStructure) unlock, "structure");
+                    generateStructure((Structure) unlock, "structure");
                     unlocks.add(unlock.getPath());
                 } else {
                     Console.log(unlock + " is not one of the allowed categories.");
@@ -737,7 +748,7 @@ public class SequenceGenerator {
      * @param liquid              Whether the component should be a liquid or not
      * @return A component that is not already in the list
      */
-    private static Component ensureUnused(List<Mat> list, List<Component> craftableComponents, Boolean liquid) {
+    private static Component ensureUnused(List<Mat> list, List<Component> craftableComponents, Boolean liquid, Boolean alternate) {
 
         Component component = new Component("placeholder in ensureUnused in SequenceGenerator", null, false, false,
                 false);
@@ -770,11 +781,11 @@ public class SequenceGenerator {
             }
         }
 
-        if (component.isAvailable()) {
+        if (component.isAvailable() || alternate) {
             materials.useComponent(component.getName());
         } else {
             Console.log(
-                    "For some reason this recipe is trying to use an unavailable component: " + component.getName());
+                    "For some reason this non alternate recipe is trying to use an unavailable component: " + component.getName());
         }
 
         return component;

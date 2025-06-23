@@ -26,6 +26,7 @@ Info:
     17. Blueprint maker tier 2 milestone is not randomized. I didn't find the milestone on my first try and decided not to bother.
     18. Recipe names have been removed to avoid giving up information on which are main or alternate recipes (you can still see recipes and their products in the library, they just won't have names).
     19. Categories are generated randomly (otherwise alternate recipes have their category enforced and would be easy to spot).
+    20. If you can't get infinite of something, it's not required to beat the game.
 
 -Options (Toggle):
     1. Ore location:
@@ -107,18 +108,32 @@ Info:
 
 Test:
 
+How to remove inventory slots from rewards
+
 Put the other 3 recipes for inhaler as optional.
 
 Vehicle Recipes.
 
 Outputs double solid/liquid and shouldn't.
 
+Tier 2:
+    Research_Nutrients_5  ?
+
+Tier 3: 
+    Research_Nutrients_4  ?
+
 
 TODO:
+
+Limited mats not done. Make a method to check if they are limited, if they are,
+set available and craftable only if they appear as product in alternate. Otherwise,
+they are only returned for getAllMaterials.
 
 MAM and store purchases not added yet.
 
 Sulfur needs it's extracheck.
+
+Check if hard drives unlock alternate recipes properly
 
 --------------------------------------------------------------------------------------------------------------
 
@@ -146,12 +161,12 @@ Tier 2:
 Tier 3:
     Research_AO_Pre_Rebar (pre rebar)
     Research_AOrgans_3 (pre expand inv)
+    Research_AOrganisms_2
+    Research_AOrgans_2
 
 Tier 4:
     Research_ACarapace_2 (rebar gun)
     Research_ACarapace_3 (expand inventory)
-    Research_AOrganisms_2
-    Research_AOrgans_2
 
 
 Alien Tech:
@@ -240,10 +255,10 @@ Tier 1:
     Research_Nutrients_2
 
 Tier 2:
-    Research_Nutrients_5 ?
+    Research_Nutrients_5  ?
 
 Tier 3: 
-    Research_Nutrients_4 ?
+    Research_Nutrients_4  ?
 
 
 
@@ -295,7 +310,7 @@ Tier 1:
 
 Tier 2:
     Left: Research_Sulfur_1
-    Right: Research_Sulfur_ExperimentalPower (no reward)
+    Right: Research_Sulfur_ExperimentalPower
 
 Tier 3:
     Left:
@@ -308,9 +323,6 @@ Tier 3:
             Research_Sulfur_IonizedFuel
             Research_Sulfur_RocketFuel
         
-
-
-
 Tier 4:
     Left: Research_Sulfur_4
     Mid: Research_Sulfur_4_2
