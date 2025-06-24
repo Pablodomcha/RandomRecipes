@@ -12,7 +12,6 @@ public class JSONableRecipe {
     private List<String> ProducedIn;
     private double ManufacturingDuration;
     private double ManualManufacturingMultiplier = 1;
-    private String Name = " ";
     private String OverrideCategory;
 
     public JSONableRecipe(List<Mat> products, List<Mat> ingredients, List<String> producedIn, double manufacturingDuration, double manualDuration, String OverrideCategory) {

@@ -14,6 +14,7 @@ public class Materials {
 
     private final List<Component> components = new ArrayList<>(); // Components
     private final List<Component> alternate = new ArrayList<>(); // Alternate components
+    private final List<Component> HD = new ArrayList<>(); // Hard Drive recipes (not added to milestones)
     private final List<Component> limited = new ArrayList<>(); // limited ingredients
     private final List<Component> animal = new ArrayList<>(); // limited ingredients
     private final List<Component> equip = new ArrayList<>(); // Equipment (can be made, but not used as material)
@@ -22,7 +23,7 @@ public class Materials {
     private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by
                                                                               // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
-    private List<Milestone> mamResearch = new ArrayList<>(); // Milestones
+    private List<Milestone> depotUpgrades = new ArrayList<>(); // Milestones
     private int[] phase = {};
     private static List<String> uraniumReq;
 
@@ -103,19 +104,22 @@ public class Materials {
 
         // MAM
         this.milestones.addAll(addPrefixMile(generateMamMilestones(), "//Game/FactoryGame/Schematics/Research/"));
+        this.depotUpgrades.addAll(addPrefixMile(generateDepotMilestones(), "//Game/FactoryGame/Schematics/Research/"));
 
         // Alternate Recipes
-        if (UiValues.alterReci) {
-            this.alternate.addAll(addPrefixComp(generateOptional(), "//Game/FactoryGame/Recipes/"));
-            this.alternate.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/AlternateRecipes/"));
+        this.alternate.addAll(addPrefixComp(generateOptional(), "//Game/FactoryGame/Recipes/"));
+        this.HD.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/AlternateRecipes/"));
 
-            // Alternate for Turbo Ammo (weird path and only one)
-            List<Component> ammo = new ArrayList<>();
-            ammo.add(generateComponent("Recipe_CartridgeChaos_Packaged", true));
-            this.alternate.addAll(addPrefixComp(ammo, "//Game/FactoryGame/Equipment/Rifle/Ammo/"));
-            for (Component alt : this.alternate) {
-                alt.setName(null);
-            }
+        // Alternate for Turbo Ammo (weird path and only one)
+        List<Component> ammo = new ArrayList<>();
+        ammo.add(generateComponent("Recipe_CartridgeChaos_Packaged", false));
+        this.alternate.addAll(addPrefixComp(ammo, "//Game/FactoryGame/Equipment/Rifle/Ammo/"));
+        for (Component alt : this.alternate) {
+            alt.setName(null);
+        }
+        for (Component hd : this.HD) {
+            hd.setName(null);
+            hd.setAvailable(true);
         }
 
         // EssentialStructures
@@ -524,9 +528,9 @@ public class Materials {
         List<Component> tempComps = new ArrayList<>();
         List<Component> tempNoPrefixComps = new ArrayList<>();
 
-        // Equipment
+        // Ammo
         tempNoPrefixComps.add(generateComponent("Desc_CartridgeChaos", "Recipe_CartridgeChaos", 500));
-        tempNoPrefixComps.add(generateComponent("Desc_CartridgeSmart", "Recipe_CartridgeSmart", 500));
+        tempNoPrefixComps.add(generateComponent("Desc_CartridgeSmartProjectile", "Recipe_CartridgeSmart", 500));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Equipment/Rifle/Ammo/"));
         tempNoPrefixComps.clear();
 
@@ -551,6 +555,7 @@ public class Materials {
         List<Component> returnvalue = new ArrayList<>();
 
         emptyRecipes.add(generateComponent("Desc_LiquidTurboFuel", "Recipe_Alternate_Turbofuel", true));
+        emptyRecipes.add(generateComponent("Desc_CompactedCoal", "Recipe_Alternate_EnrichedCoal", false));
         returnvalue.addAll(addPrefixComp(emptyRecipes, "AlternateRecipes/Parts/"));
         emptyRecipes.clear();
 
@@ -745,7 +750,6 @@ public class Materials {
         emptyRecipes.add(generateComponent("Recipe_Alternate_CrystalOscillator", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_ElectromagneticControlRod_1", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_EncasedIndustrialBeam", false));
-        emptyRecipes.add(generateComponent("Recipe_Alternate_EnrichedCoal", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_Gunpowder_1", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_HeatSink_1", false));
         emptyRecipes.add(generateComponent("Recipe_Alternate_HighSpeedConnector", false));
@@ -906,12 +910,12 @@ public class Materials {
         List<Milestone> tempNoPrefix = new ArrayList<>();
 
         // Megafauna
-        tempNoPrefix.add(generateMamMilestone("Research_AO_Carapace", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_ACarapace_0", Arrays.asList("Desc_Mam")));
         tempNoPrefix.add(generateMamMilestone("Research_AO_Hatcher", Arrays.asList("Desc_Mam")));
         tempNoPrefix.add(generateMamMilestone("Research_AO_Stinger", Arrays.asList("Desc_Mam")));
         tempNoPrefix.add(generateMamMilestone("Research_AOrgans_0", Arrays.asList("Desc_Mam")));
         // 2
-        tempNoPrefix.add(generateMamMilestone("Research_AO_DNACapsule", Arrays.asList("Research_AO_Carapace",
+        tempNoPrefix.add(generateMamMilestone("Research_AO_DNACapsule", Arrays.asList("Research_ACarapace_0",
                 "Research_AO_Hatcher", "Research_AO_Stinger", "Research_AOrgans_0")));
         // 3
         tempNoPrefix.add(generateMamMilestone("Research_AO_Pre_Rebar", Arrays.asList("Research_AO_DNACapsule")));
@@ -969,7 +973,7 @@ public class Materials {
                 Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
         tempNoPrefix.add(generateMamMilestone("Research_Caterium_4_1_2",
                 Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
-        tempNoPrefix.add(generateMamMilestone("esearch_Caterium_5_1",
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_5_1",
                 Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
         tempNoPrefix.add(generateMamMilestone("Research_Caterium_6_3",
                 Arrays.asList("Research_Caterium_4_1", "Research_Caterium_5")));
@@ -1007,7 +1011,7 @@ public class Materials {
         tempNoPrefix.add(generateMamMilestone("Research_Nutrients_3",
                 Arrays.asList("Research_Nutrients_0", "Research_Nutrients_1", "Research_Nutrients_2")));
         // 3
-        tempNoPrefix.add(generateMamMilestone("Research_Nutrients_4", Arrays.asList("Research_Nutrients_5")));
+        tempNoPrefix.add(generateMamMilestone("Research_Nutrients_4", Arrays.asList("Research_Nutrients_3")));
 
         tempReturn.addAll(addPrefixMile(tempNoPrefix, "Nutrients_RS/"));
         tempNoPrefix.clear();
@@ -1757,12 +1761,28 @@ public class Materials {
         return 5;
     }
 
-    public List<Component> getAnimal() {
-        return this.animal;
+    public List<Component> getAvailableAnimal() {
+        List<Component> result = new ArrayList<>();
+        for (Component ani : this.animal) {
+            if (ani.isAvailable()) {
+                result.add(ani);
+            }
+        }
+        return result;
     }
 
-    public List<Component> getLimited() {
-        return this.limited;
+    public List<Component> getAvailableLimited() {
+        List<Component> result = new ArrayList<>();
+        for (Component lim : this.limited) {
+            if (lim.isAvailable()) {
+                result.add(lim);
+            }
+        }
+        return result;
+    }
+
+    public List<Component> getHD() {
+        return this.HD;
     }
 
     public void setPhase() {
@@ -1810,11 +1830,16 @@ public class Materials {
         result.addAll(this.structures);
         result.addAll(this.equip);
         result.addAll(this.alternate);
+        result.addAll(this.HD);
         return result;
     }
 
     public List<Milestone> getAllMilestones() {
         return this.milestones;
+    }
+
+    public List<Milestone> getDepotMilestones() {
+        return this.depotUpgrades;
     }
 
     public List<Randomizable> getUnavailableRandomizables() {
@@ -1999,6 +2024,19 @@ public class Materials {
                 return component.use();
             }
         }
+        for (Component component : animal) {
+            if (component.getName().equals(name)) {
+                Console.hiddenLog("Using animal part: " + name);
+                return component.use();
+            }
+        }
+        for (Component component : limited) {
+            if (component.getName().equals(name)) {
+                Console.hiddenLog("Using limited item: " + name);
+                return component.use();
+            }
+        }
+
         Console.log("Could not use component, component not found: " + name);
         return 0;
     }

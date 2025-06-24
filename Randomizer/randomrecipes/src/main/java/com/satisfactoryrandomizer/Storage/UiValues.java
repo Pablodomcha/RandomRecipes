@@ -13,7 +13,6 @@ public class UiValues {
     static int electricity = 0;
     static int waste = 3;
     static int stationBias = 3;
-    static Boolean alterReci = true;
     static int forceLongGameBias = 0;
 
     static Boolean advLog = false;
@@ -25,7 +24,7 @@ public class UiValues {
     static int maxStackStruct = 2;
     static int maxItemStruct = 2;
     static int maxStackMile = 20;
-    static int maxItemMile = 20;
+    static int maxItemMile = 4;
 
     // The elevator isn't randomized, but no harm in keeping this in case it is in
     // the future.
@@ -37,7 +36,7 @@ public class UiValues {
     static double[] handcraftSpeed = { 0.5, 1.0 };
 
     static int inputBias = 50; // 0 = min unputs, 100 = max inputs
-    static int maxRecipesUsed = 100; // In how many recipes can a component be used
+    static int maxRecipesUsed = 4; // In how many recipes can a component be useds
     static int freeChance = 0; // Frequency wich a free component is given
 
     // Could just make them public, but nope.
@@ -59,7 +58,6 @@ public class UiValues {
         Console.hiddenLog("Electricity: " + UiValues.electricity);
         Console.hiddenLog("Waste: " + UiValues.waste);
         Console.hiddenLog("Station Bias: " + UiValues.stationBias);
-        Console.hiddenLog("Alternate Recipes: " + UiValues.alterReci);
         Console.hiddenLog("Max Stack Craft: " + UiValues.maxStackCraft);
         Console.hiddenLog("Max Product Craft: " + UiValues.maxProdCraft);
         Console.hiddenLog("Max Stack Struct: " + UiValues.maxStackStruct);
@@ -185,27 +183,9 @@ public class UiValues {
     }
 
     /**
-     * Retrieves the current alternate recipes setting.
-     * 
-     * @return 8. Alternate Recipes:
-     *         Nope: Alternate recipes removed from the game (still, you can get
-     *         some materials as byproduct appart from their main recipe depending
-     *         on Waste setting).
-     *         Randomized: Alternate recipes have both random ingredients and
-     *         products. They may create alternative paths to beating the game.
-     */
-    public static Boolean getalterRecipes() {
-        return UiValues.alterReci;
-    }
-
-    public static void setalterRecipes(Boolean i) {
-        UiValues.alterReci = i;
-    }
-
-    /**
      * Retrieves the setting for the long game bias.
      * 
-     * @return 9. The force long game bias value:
+     * @return 7. The force long game bias value:
      *         Higher values increase the likelihood of needing more milestones.
      */
 
@@ -221,7 +201,7 @@ public class UiValues {
      * Retrieves the advanced logging setting. Logs many things helpful for
      * troubleshooting, but is way slower. Use only for debugging.
      * 
-     * @return 10. Advanced Logging.
+     * @return 8. Advanced Logging.
      */
     public static Boolean getAdvLog() {
         return UiValues.advLog;

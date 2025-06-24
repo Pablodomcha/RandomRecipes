@@ -5,6 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -160,5 +166,24 @@ public class CreateJSON {
         new File("ContentLib/SchematicPatches").mkdirs();
         new File("ContentLib/Schematics").mkdirs();
         new File("ContentLib/VisualKits").mkdirs();
+    }
+
+    public static void deleteFiles() throws IOException {
+        Path path = Paths.get("ContentLib/RecipePatches");
+
+            Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+            Console.hiddenLog("RecipePatches deleted successfully");
     }
 }
