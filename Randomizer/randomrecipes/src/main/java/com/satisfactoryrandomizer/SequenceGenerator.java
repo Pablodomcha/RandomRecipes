@@ -771,7 +771,7 @@ public class SequenceGenerator {
             }
 
             component = craftableComponents.get(random.nextInt(craftableComponents.size()));
-
+            Console.test("Component name: " + component.getName() + " Component recipe: " + component.getRecipePath());
             Boolean alreadyExists = false;
             for (Mat ing : list) {
                 if (ing.getName().equals(component.getName())) {

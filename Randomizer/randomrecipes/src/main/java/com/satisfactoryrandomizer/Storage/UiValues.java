@@ -18,10 +18,6 @@ public class UiValues {
 
     static Boolean advLog = false;
 
-    // Inventory Slots Weirdo
-    static int inventorySlots = 0; // 0 = fixed, 1 = random
-    static int[] inventoryRange = { 1, 3 };
-
     // Numeric values here
     static long seed = 0;
     static int maxStackCraft = 2;
@@ -48,7 +44,7 @@ public class UiValues {
 
     public static int addAll() {
         return 1000 * (int) (UiValues.seed % 100 + UiValues.oreLocation + UiValues.belts + UiValues.electricity
-                + UiValues.waste + UiValues.stationBias + UiValues.inventorySlots +
+                + UiValues.waste + UiValues.stationBias +
                 UiValues.maxStackCraft + UiValues.maxProdCraft + UiValues.maxStackStruct + UiValues.maxItemStruct
                 + UiValues.maxStackMile + UiValues.maxItemMile + UiValues.maxStackEle + UiValues.maxItemEle +
                 UiValues.maxTimeMile + UiValues.maxTimeCraft + UiValues.handcraftSpeed[1] + UiValues.inputBias
@@ -64,8 +60,6 @@ public class UiValues {
         Console.hiddenLog("Waste: " + UiValues.waste);
         Console.hiddenLog("Station Bias: " + UiValues.stationBias);
         Console.hiddenLog("Alternate Recipes: " + UiValues.alterReci);
-        Console.hiddenLog("Inventory Slots: " + UiValues.inventorySlots);
-        Console.hiddenLog("Inventory Range: " + UiValues.inventoryRange[0] + " - " + UiValues.inventoryRange[1]);
         Console.hiddenLog("Max Stack Craft: " + UiValues.maxStackCraft);
         Console.hiddenLog("Max Product Craft: " + UiValues.maxProdCraft);
         Console.hiddenLog("Max Stack Struct: " + UiValues.maxStackStruct);
@@ -82,7 +76,7 @@ public class UiValues {
         Console.hiddenLog("Free Chance: " + UiValues.freeChance);
     }
 
-        /**
+    /**
      * Retrieves the current ore location setting.
      * 
      * @return 1. Ore location:
@@ -188,44 +182,6 @@ public class UiValues {
 
     public static void setStationBias(int stationBias) {
         UiValues.stationBias = stationBias;
-    }
-
-    /**
-     * Retrieves the current inventory slots setting.
-     * 
-     * @return 7. Inventory slots: (The number of upgrades that give slots is not
-     *         randomized, only the amount of slots they give and the milestones/MAM
-     *         research they appear in).
-     *         Fixed: The amount of slots is fixed, uses Max value (with this option
-     *         Min values is ignored). MAM researches that give these give double.
-     *         Random: The amount of slots is random between the values provided.
-     *         MAM researches double the randomized value (yes, this means MAM
-     *         always gives an even number of slots).
-     *         Use getInvenotryRange() to get the range.
-     *         Max: Number (min 1).
-     *         Min: Number (min 1).
-     */
-    public static int getInventorySlots() {
-        return UiValues.inventorySlots;
-    }
-
-    public static void setInventorySlots(int inventorySlots) {
-        UiValues.inventorySlots = inventorySlots;
-    }
-
-    /**
-     * Retrieves the current inventory slots range.
-     * 
-     * @return 7. Inventory slots: a 2-element array, the first element is the min
-     *         and the second is the
-     *         max value.
-     */
-    public static int[] getInventoryRange() {
-        return UiValues.inventoryRange;
-    }
-
-    public static void setInventoryRange(int[] inventoryRange) {
-        UiValues.inventoryRange = inventoryRange;
     }
 
     /**

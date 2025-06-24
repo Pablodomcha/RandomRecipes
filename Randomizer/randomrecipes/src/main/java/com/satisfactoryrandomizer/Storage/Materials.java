@@ -522,7 +522,7 @@ public class Materials {
         List<Component> emptyRecipes = new ArrayList<>();
         List<Component> returnvalue = new ArrayList<>();
 
-        emptyRecipes.add(generateComponent("Recipe_Alternate_Turbofuel", true));
+        emptyRecipes.add(generateComponent("Desc_LiquidTurboFuel","Recipe_Alternate_Turbofuel", true));
         returnvalue.addAll(addPrefixComp(emptyRecipes, "AlternateRecipes/Parts/"));
         emptyRecipes.clear();
 
@@ -828,6 +828,8 @@ public class Materials {
                 .add(new Milestone("Milestone_6-3", true, false, "Schematic_6-3", phase2, 3));
         tempMilestones
                 .add(new Milestone("Milestone_6-5", true, false, "Schematic_6-5", phase2, 3));
+        tempMilestones
+                .add(new Milestone("Milestone_6-6", true, false, "Schematic_6-6", phase2, 3));
         tempMilestones
                 .add(new Milestone("Milestone_6-7", true, false, "Schematic_6-7", phase2, 3));
         tempMilestones
@@ -1359,7 +1361,7 @@ public class Materials {
     }
 
     private static Component generateComponent(String name, String recipe, Boolean liquid, List<String> extraChecks) {
-        return new Component(recipe.replace("Recipe", "Desc"), recipe, false, false, liquid, 50, extraChecks);
+        return new Component(name, recipe, false, false, liquid, 50, extraChecks);
     }
 
     private static Component generateComponent(String name, String recipe, int maxstack) {

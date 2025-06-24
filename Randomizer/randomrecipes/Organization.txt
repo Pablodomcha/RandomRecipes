@@ -11,7 +11,7 @@ Info:
     2. Craft unlocked != Craft Possible.
     3. Production buildings may not be able to reach 100% efficiency on certain recipes.
     4. Excited Photonic Matter may not be free. Blame Ficsit.
-    5. Scannable resources and basic game essentials are not moved. I didn't know how to do it and I dont' get paid enough for that (or paid at all tbh).
+    5. Scannable resources and basic game essentials are not moved. I tried it and the game just crashed. I don't get paid enough to figure it out (or paid at all tbh).
     6. MAM researches are treated as normal milestones.
     7. All materials are treated the same, so you could end up with the screw being as expensive as a vanilla plutonium fuel rod and vice versa.
     8. If for whatever reason introducing the same seed and settings create different paths for different players, you can work arround it by having one player create the files and send them to the others. This should be reported as a bug regardless.
@@ -23,10 +23,7 @@ Info:
     14. Space elevator stages untouched (Changing them would be a pain and the path to get to it is already random anyway).
     15. Milestones are not necessarily linear, tier 1 milestones could need tier 9 materials to unlock. In this case, anything unlocked by that tier 1 milestone won't be needed until it's unlockable.
     16. Limited resources like slugs, hard drives and wood/leaves are only used in alternate recipes to avoid softlocks.
-    17. Blueprint maker tier 2 milestone is not randomized. I didn't find the milestone on my first try and decided not to bother.
-    18. Recipe names have been removed to avoid giving up information on which are main or alternate recipes (you can still see recipes and their products in the library, they just won't have names).
-    19. Categories are generated randomly (otherwise alternate recipes have their category enforced and would be easy to spot).
-    20. If you can't get infinite of something, it's not required to beat the game.
+    17. If you can't get infinite of something, it's not required to beat the game.
 
 -Options (Toggle):
     1. Ore location:
@@ -53,11 +50,6 @@ Info:
         Slight bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning slightly on newer unlocked stations.
         Medium Bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning on newer unlocked stations.
         Heavy Bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning heavily on newer unlocked stations.
-    7. Inventory slots: (The number of upgrades that give slots is not randomized, only the amount of slots they give and the milestones/MAM research they appear in).
-        Fixed: The amount of slots is fixed, uses Max value (with this option Min values is ignored).
-        Random: The amount of slots is random between the values provided.
-            Max: Number (min 1).
-            Min: Number (min 1).
     8. Alternate Recipes:
         Nope: Alternate recipes removed from the game (still, you can get some materials as byproduct appart from their main recipe depending on Waste setting).
         Randomized: Alternate recipes have both random ingredients and products. They may create alternative paths to beating the game.
@@ -73,7 +65,7 @@ Info:
     3. V
     4. V
     6. V
-    7. 
+    7. -
     8. V
     9. V
     10. V
@@ -108,26 +100,11 @@ Info:
 
 Test:
 
-How to remove inventory slots from rewards
-
-Put the other 3 recipes for inhaler as optional.
-
-Vehicle Recipes.
-
-Outputs double solid/liquid and shouldn't.
-
 Tier 2:
     Research_Nutrients_5  ?
 
 Tier 3: 
     Research_Nutrients_4  ?
-
-MAM
-
-Check if hard drives unlock alternate recipes properly
-
-Sulfur needs it's extracheck.
-
 
 TODO:
 
@@ -135,7 +112,11 @@ Limited mats not done. Make a method to check if they are limited, if they are,
 set available and craftable only if they appear as product in alternate. Otherwise,
 they are only returned for getAllMaterials.
 
+Milestones should be able to utilize animal parts.
+
 Store purchases not added yet. Will need to force it like mam. Can use the same chance.
+
+MAM milestones path is wrong
 
 
 --------------------------------------------------------------------------------------------------------------
@@ -144,12 +125,6 @@ Missing:
 Compacted coal has base recipe? (enriched coal maybe)
 Cartridgesmart seems to be optional?
 Desc_Alternate_Turbofuel
-
-Can't be loaded:
-
-Items to remove/edit (not found, may mean they don't exist or their Desc name is not the same as recipe):
-
-MAM milestones:
 
 Megafauna:
 Tier 1:
