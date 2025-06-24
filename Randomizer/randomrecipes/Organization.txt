@@ -100,11 +100,7 @@ Info:
 
 Test:
 
-Tier 2:
-    Research_Nutrients_5  ?
-
-Tier 3: 
-    Research_Nutrients_4  ?
+MAM milestones path is wrong
 
 TODO:
 
@@ -116,8 +112,7 @@ Milestones should be able to utilize animal parts.
 
 Store purchases not added yet. Will need to force it like mam. Can use the same chance.
 
-MAM milestones path is wrong
-
+Hard drives work, undelete names, as alternate are obvious.
 
 --------------------------------------------------------------------------------------------------------------
 
@@ -233,10 +228,10 @@ Tier 1:
     Research_Nutrients_2
 
 Tier 2:
-    Research_Nutrients_5  ?
+    Research_Nutrients_3
 
 Tier 3: 
-    Research_Nutrients_4  ?
+    Research_Nutrients_4
 
 
 

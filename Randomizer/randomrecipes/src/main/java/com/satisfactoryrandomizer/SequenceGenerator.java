@@ -487,6 +487,10 @@ public class SequenceGenerator {
             List<Component> craftableComponents;
             if (alternate) {
                 craftableComponents = materials.getAllComponents(selectedLiquid);
+                if (!selectedLiquid) {
+                    craftableComponents.addAll(materials.getAnimal());
+                    craftableComponents.addAll(materials.getLimited());
+                }
             } else {
                 craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
             }
@@ -546,6 +550,13 @@ public class SequenceGenerator {
 
             // Select a random component from the usable components
             List<Component> craftableComponents = materials.getAvailableAndCraftableComponents(false);
+
+            // Add animal parts for milestones (twice, makes it more likely to happen)
+            // (but not for those among the first 100 recipes)
+            if (type.equals("milestone") && materials.getCraftableRandomizables().size() > 100) {
+                craftableComponents.addAll(materials.getAnimal());
+                craftableComponents.addAll(materials.getAnimal());
+            }
 
             Component comp = ensureUnused(ingredients, craftableComponents, false, false);
 

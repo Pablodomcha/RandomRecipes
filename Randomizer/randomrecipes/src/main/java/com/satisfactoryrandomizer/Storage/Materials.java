@@ -15,6 +15,7 @@ public class Materials {
     private final List<Component> components = new ArrayList<>(); // Components
     private final List<Component> alternate = new ArrayList<>(); // Alternate components
     private final List<Component> limited = new ArrayList<>(); // limited ingredients
+    private final List<Component> animal = new ArrayList<>(); // limited ingredients
     private final List<Component> equip = new ArrayList<>(); // Equipment (can be made, but not used as material)
     private List<CraftStation> stations = new ArrayList<>(); // Crafting Stations
     private List<Structure> structures = new ArrayList<>(); // Generic structures that don't affect the logic
@@ -90,12 +91,18 @@ public class Materials {
         // //Game/FactoryGame/Recipes/SpaceElevatorParts/
         this.components.addAll(addPrefixComp(generateElevator(), "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
 
+        // Animal Parts (no recipe, no need to prefix path)
+        this.animal.addAll(generateAnimalParts());
+
+        // Limited Resources (No recipe, no need to prefix path)
+        this.limited.addAll(generateLimitedMats());
+
         // Milestones
         // HUB
         this.milestones.addAll(generateMilestones());
 
         // MAM
-        this.milestones.addAll(addPrefixMile(generateMamMilestones(), "//Game/FactoryGame/Schematics/"));
+        this.milestones.addAll(addPrefixMile(generateMamMilestones(), "//Game/FactoryGame/Schematics/Research/"));
 
         // Alternate Recipes
         if (UiValues.alterReci) {
@@ -180,9 +187,30 @@ public class Materials {
 
     // Data creators
 
-    private static void generateLimitedMats() {
-        // Materials without associated recipe and can't be crafted.
-        // this.components.add(new Component("Desc_Wood", null, true, false, false));
+    private static List<Component> generateLimitedMats() {
+        List<Component> tempComps = new ArrayList<>();
+
+        tempComps.add(new Component("Desc_Wood", null, true, true, false));
+        tempComps.add(new Component("Desc_Leaves", null, true, true, false));
+        tempComps.add(new Component("Desc_Crystal", null, true, true, false));
+        tempComps.add(new Component("Desc_Crystal_mk2", null, true, true, false));
+        tempComps.add(new Component("Desc_Crystal_mk3", null, true, true, false));
+        tempComps.add(new Component("Desc_WAT1", null, true, true, false));
+        tempComps.add(new Component("Desc_WAT2", null, true, true, false));
+        tempComps.add(new Component("Desc_Mycelia", null, true, true, false));
+
+        return tempComps;
+    }
+
+    private static List<Component> generateAnimalParts() {
+        List<Component> tempComps = new ArrayList<>();
+
+        tempComps.add(new Component("Desc_HatcherParts", null, true, true, false));
+        tempComps.add(new Component("Desc_HogParts", null, true, true, false));
+        tempComps.add(new Component("Desc_SpitterParts", null, true, true, false));
+        tempComps.add(new Component("Desc_StingerParts", null, true, true, false));
+
+        return tempComps;
     }
 
     private static List<EssentialStructure> generateEssentialBuildings() {
@@ -522,7 +550,7 @@ public class Materials {
         List<Component> emptyRecipes = new ArrayList<>();
         List<Component> returnvalue = new ArrayList<>();
 
-        emptyRecipes.add(generateComponent("Desc_LiquidTurboFuel","Recipe_Alternate_Turbofuel", true));
+        emptyRecipes.add(generateComponent("Desc_LiquidTurboFuel", "Recipe_Alternate_Turbofuel", true));
         returnvalue.addAll(addPrefixComp(emptyRecipes, "AlternateRecipes/Parts/"));
         emptyRecipes.clear();
 
@@ -976,7 +1004,7 @@ public class Materials {
         tempNoPrefix.add(generateMamMilestone("Research_Nutrients_1", Arrays.asList("Desc_Mam")));
         tempNoPrefix.add(generateMamMilestone("Research_Nutrients_2", Arrays.asList("Desc_Mam")));
         // 2
-        tempNoPrefix.add(generateMamMilestone("Research_Nutrients_5",
+        tempNoPrefix.add(generateMamMilestone("Research_Nutrients_3",
                 Arrays.asList("Research_Nutrients_0", "Research_Nutrients_1", "Research_Nutrients_2")));
         // 3
         tempNoPrefix.add(generateMamMilestone("Research_Nutrients_4", Arrays.asList("Research_Nutrients_5")));
@@ -1729,6 +1757,14 @@ public class Materials {
         return 5;
     }
 
+    public List<Component> getAnimal() {
+        return this.animal;
+    }
+
+    public List<Component> getLimited() {
+        return this.limited;
+    }
+
     public void setPhase() {
         int currentPhase = this.getPhase();
         if (currentPhase == 5) {
@@ -1774,7 +1810,6 @@ public class Materials {
         result.addAll(this.structures);
         result.addAll(this.equip);
         result.addAll(this.alternate);
-        result.addAll(this.limited);
         return result;
     }
 
@@ -2053,7 +2088,8 @@ public class Materials {
             Boolean done = false;
             for (Component c : this.components) {
                 if (c.getName().equals(where)) {
-                    if (where.equals("Desc_OreGold") || where.equals("Desc_RawQuartz") || where.equals("Desc_Sulfur") || where.equals("Desc_SAM")) {
+                    if (where.equals("Desc_OreGold") || where.equals("Desc_RawQuartz") || where.equals("Desc_Sulfur")
+                            || where.equals("Desc_SAM")) {
                         // Remove both extrachecks in these 4, as either one fulfills the condition
                         c.emptyExtraCheck();
                     } else {
