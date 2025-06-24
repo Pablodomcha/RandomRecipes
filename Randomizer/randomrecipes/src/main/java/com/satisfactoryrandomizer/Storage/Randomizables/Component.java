@@ -71,4 +71,8 @@ public class Component extends Randomizable {
     public Boolean isAvailable() {
         return super.isAvailable() && this.remainingUses > 0;
     }
+
+    public Boolean isAvailableIgnoreUses(){
+        return super.isAvailable();
+    }
 }

@@ -24,6 +24,7 @@ public class SequenceGenerator {
     private static int nItems = 0;
     private static int mamChance = 0;
     private static Boolean mamDone = false;
+    private static List<Randomizable> forcedCraftables = new ArrayList<>();
 
     public static void generateSequence() throws Exception {
         // Log the selected values
@@ -40,11 +41,6 @@ public class SequenceGenerator {
 
         // Set the number of items for percentage related things
         SequenceGenerator.nItems = materials.getAllRandomizables().size();
-
-        logAvailability("Status at start:");
-
-        // Generate the extraChecks
-        materials.fillExtraChecks();
 
         // Generate a random seed if not provided and set it to the random generator
         if (SequenceGenerator.seed == 0) {
@@ -64,11 +60,35 @@ public class SequenceGenerator {
                 .getName();
         Console.log("First station: " + SequenceGenerator.firstStation);
         SequenceGenerator.lastObtainedStation = SequenceGenerator.firstStation;
-        materials.setStructureAvailable(SequenceGenerator.firstStation, true);
         materials.doExtraChecks("power", Arrays.asList(SequenceGenerator.firstStation));
         materials.doExtraChecks("cable", Arrays.asList(SequenceGenerator.firstStation));
         materials.doExtraChecks("pole", Arrays.asList(SequenceGenerator.firstStation));
-        generateStructure(materials.getStationByName(SequenceGenerator.firstStation), "structure");
+        materials.getMilestoneByName("Tutorial_6").addExtraCheck(SequenceGenerator.firstStation);
+
+        // Add all extrachecks of Tutorial_6 to forcedunlocks, since they all need to be
+        // craftable as soon as they're unlocked.
+        for (String s : materials.getMilestoneByName("Tutorial_6").getExtraCheck()) {
+            setForceCraftable(materials.getRandomizableByName(s));
+        }
+
+        // Generate the extraChecks after they have been set
+        materials.fillExtraChecks();
+
+        // Spread Tutorial_6 extrachecks among the other tutorials.
+        for (String s : materials.getMilestoneByName("Tutorial_6").getExtraCheck()) {
+            if (s.contains("Tutorial_")) {
+                continue;
+            }
+            int n = random.nextInt(5) + 1;
+            String milestone = "Tutorial_" + n;
+            materials.getMilestoneByName(milestone).addFixedUnlock(s);
+        }
+
+        String st = "Tutorial_";
+        for (int i = 1; i <= 6; i++) {
+            String str = st + i;
+            Console.hiddenLog("Fixed unlocks for " + str + ": " + materials.getMilestoneByName(str).getFixedUnlocks());
+        }
 
         // Spread the Randomizables evenly across the milestones
         int milestonesAvailable = materials.getAllMilestones().size();
@@ -90,6 +110,23 @@ public class SequenceGenerator {
             Console.log("Craftable from the start: " + r.getName());
         }
 
+        // Add elevator parts as fixedunlocks of milestones
+        for (int i = 1; i <= 5; i++) {
+            List<Component> elevatorParts = materials.getElevatorPartsInPhase(i);
+            List<String> milestones = materials.getMilestonesInPhase(i);
+            while (!elevatorParts.isEmpty()) {
+                String mile = milestones.get(random.nextInt(milestones.size()));
+                Milestone milestone = materials.getMilestoneByName(mile);
+                Component elevatorPart = elevatorParts.get(random.nextInt(elevatorParts.size()));
+                milestone.addFixedUnlock(elevatorPart.getName());
+                Console.hiddenLog("Added " + milestone.getFixedUnlocks().get(0) + " to " + milestone.getName());
+                elevatorParts.remove(elevatorPart);
+                milestones.remove(mile);
+            }
+        }
+
+        logAvailability("Status at start:");
+
         // Main loop, runs until there's nothing left to randomize
         int cap = 10000;
         int iteration = 0;
@@ -103,17 +140,10 @@ public class SequenceGenerator {
             Console.log("Creating one of the remaining " + size + " available items. Done "
                     + materials.getCraftableRandomizables().size() + "/" + SequenceGenerator.nItems + " items.");
 
+            // If there are items that need to be made craftable, give them priority
+            randomizable = forceCraftable(randomizable);
+
             if (randomizable instanceof Component) {
-                if (randomizable instanceof ElevatorPart) {
-                    if (((ElevatorPart) randomizable).addWhen() > materials.getPhase()) {
-                        Console.hiddenLog("Avoided " + randomizable.getName() + " in phase " + materials.getPhase()
-                                + " since addWhen is " + ((ElevatorPart) randomizable).addWhen()
-                                + " and material phase is " + materials.getPhase());
-                        continue;
-                    } else {
-                        materials.setPhase();
-                    }
-                }
                 generateComp((Component) randomizable, materials.getCraftableRandomizables().size(), "component");
             } else if (randomizable instanceof CraftStation) {
                 generateStructure((CraftStation) randomizable, "structure");
@@ -129,7 +159,7 @@ public class SequenceGenerator {
                 }
 
                 if (materials.getAllMilestones().size() - materials.getCraftableMilestones().size() <= 1) {
-                    ((Milestone) randomizable).setnRecipes(2 * ((Milestone) randomizable).getnRecipes() + 10);
+                    ((Milestone) randomizable).setnRecipes(2 * (((Milestone) randomizable).getnRecipes() + 10));
                     Console.log("Increasing milestone " + randomizable.getName() + " recipes to "
                             + ((Milestone) randomizable).getnRecipes() + " to ensure everything is craftable.");
                 }
@@ -150,7 +180,16 @@ public class SequenceGenerator {
             // Update the list (the item is set craftable by the methods above)
             randomizables.clear();
             randomizables = materials.getAvailableButUncraftableRandomizables();
+
+            if (randomizables.size() <= 0) {
+                randomizables.removeAll(materials.getHD());
+            }
+
+            if ((randomizable instanceof Milestone)) {
+                logAvailability("Status after unlock generation:");
+            }
         }
+        // End of main loop
 
         Console.log("Remaining " + randomizables.size() + " items. Done "
                 + materials.getCraftableRandomizables().size() + "/" + SequenceGenerator.nItems + " items.");
@@ -234,8 +273,6 @@ public class SequenceGenerator {
             milestone.addFixedUnlock(firstStation);
         }
 
-        logAvailability("Status before unlock generation:");
-
         List<String> unlocks;
         if (type.equals("depot")) {
             unlocks = generateUnlocks(milestone.getnRecipes(), milestone.getFixedUnlocks(),
@@ -255,12 +292,10 @@ public class SequenceGenerator {
         // Create Recipe JSON file
         CreateJSON.saveMilestoneAsJson(recipe, milestone.getRecipePath());
 
-        Console.cheatsheet(milestone.getName() + " can be made");
+        Console.cheatsheet(milestone.getName() + " can be made.");
 
         // Mark the component as craftable
         materials.setMilestoneCraftable(milestone.getName(), true);
-
-        logAvailability("Status after creating milestone: " + milestone.getName());
     }
 
     private static void generateStructure(Randomizable structure, String type) {
@@ -286,7 +321,7 @@ public class SequenceGenerator {
         // Create Recipe JSON file
         CreateJSON.saveStructureAsJson(recipe, structure.getRecipePath());
 
-        Console.cheatsheet(structure.getName() + " can be made");
+        Console.cheatsheet(structure.getName() + " can be made.");
 
         // Mark the component as craftable
         materials.setRandomizableCraftable(structure.getName(), true);
@@ -310,12 +345,17 @@ public class SequenceGenerator {
         int count = UiValues.getStationBias();
 
         // Check if there's even a last obtained station before checking it's name.
-        while (!station.getName().equals(SequenceGenerator.lastObtainedStation) && count-- > 0) {
+        while (!station.getName().equals(SequenceGenerator.lastObtainedStation)
+                && !station.getName().equals(firstStation) && count-- > 0) {
             station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
         }
         // Ensure it has output for the liquid component.
-        while (station.getLiquidOut() < 1 && comp.isLiquid() && count++ < 100) {
-            station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
+        if (comp.isLiquid() && !station.getName().equals(firstStation)) {
+            while (station.getLiquidOut() < 1 && count++ < 100) {
+                station = materials.getRandomAvailableAndCraftableStation(random.nextInt());
+            }
+        } else if (comp.isLiquid()) {
+            count = 100;
         }
 
         // If no station with liquid output is available for liquid creation, return
@@ -407,7 +447,6 @@ public class SequenceGenerator {
     }
 
     private static void logAvailability(String title) {
-        int cont = 0;
         Console.advLog("\n" + title);
         for (Randomizable r : materials.getAllRandomizables()) {
             if (r.getName() == null) {
@@ -441,6 +480,14 @@ public class SequenceGenerator {
                 log += " | checkAlso: " + r.getCheckAlso();
             }
             Console.advLog(log);
+        }
+        for (Randomizable r : forcedCraftables) {
+            String name = r.getName();
+            int size = name.length();
+            while (size++ < 50) {
+                name = name + " ";
+            }
+            Console.advLog("Randomizable to be forced: " + name + " | Availability: " + r.isAvailable());
         }
         Console.advLog("\n");
     }
@@ -496,6 +543,7 @@ public class SequenceGenerator {
                             "No more slots available for ingredients. This shouldn't happen.");
                 }
             }
+
             // Select a random component from the usable components
             // The first attempt in alternate will use all ingredients (available or not),
             // from there, it will roll only craftable
@@ -607,36 +655,24 @@ public class SequenceGenerator {
     private static List<String> generateUnlocks(int numberOfUnlocks, List<String> fixedUnlocks, int phase,
             Boolean depot) {
         List<String> unlocks = new ArrayList<>();
-        List<String> fixedlocks = new ArrayList<>();
 
         // Add extra unlocks if it's not null
         if (fixedUnlocks != null) {
-            fixedlocks.addAll(fixedUnlocks);
 
             // Removing the tutorials (they may be in fixed unlocks and can't be generated
             // here) and changing from the name to the recipe (it's what the milestone uses)
-            List<Randomizable> fixUnl = new ArrayList<>();
-            for (String s : fixedUnlocks) {
-                fixUnl.add(materials.getRandomizableByName(s));
-            }
-            fixUnl.removeIf(s -> s.getName().contains("Tutorial_"));
-            Collections.shuffle(fixUnl);
+            List<String> fixUnl = fixedUnlocks;
+            fixUnl.removeIf(s -> s.contains("Tutorial_"));
+            List<Randomizable> fixUnlock = new ArrayList<>();
 
-            for (Randomizable unlock : fixUnl) {
-                Console.hiddenLog("Forcing unlock: " + unlock);
+            for (String s : fixUnl) {
+                fixUnlock.add(materials.getRandomizableByName(s));
+            }
+
+            for (Randomizable unlock : fixUnlock) {
                 materials.setRandomizableAvailable(unlock.getName(), true);
-                if (unlock instanceof EssentialStructure) {
-                    generateStructure((EssentialStructure) unlock, "structure");
-                    unlocks.add(unlock.getPath());
-                } else if (unlock instanceof Structure) {
-                    generateStructure((Structure) unlock, "structure");
-                    unlocks.add(unlock.getPath());
-                } else if (unlock instanceof CraftStation) {
-                    generateStructure((CraftStation) unlock, "structure");
-                    unlocks.add(unlock.getPath());
-                } else {
-                    Console.log(unlock + " is not one of the allowed categories.");
-                }
+                unlocks.add(unlock.getPath());
+
                 if (!unlock.getCheckAlso().isEmpty())
                     materials.doExtraChecks(unlock.getName(), unlock.getCheckAlso());
             }
@@ -800,6 +836,9 @@ public class SequenceGenerator {
                         + "th time, \"Max recipes used\" is too low. The uses of all available components will be increased by 1 to procceed");
                 materials.refillComponents();
                 craftableComponents = materials.getAvailableAndCraftableComponents(liquid);
+                if (craftableComponents.size() < list.size()) {
+                    Console.hiddenLog("All available materials used, can't add more.");
+                }
             }
 
             component = craftableComponents.get(random.nextInt(craftableComponents.size()));
@@ -852,4 +891,35 @@ public class SequenceGenerator {
             SequenceGenerator.seed = random.nextLong();
         }
     }
+
+    /**
+     * Adds a randomizable to the list of forced craftables.
+     * These randomizables will be made craftable ASAP.
+     * 
+     * @param randomizables The randomizable to add to the list.
+     */
+    private static void setForceCraftable(Randomizable randomizable) {
+        SequenceGenerator.forcedCraftables.add(randomizable);
+        Console.hiddenLog(randomizable.getName() + " added to the list of forced craftables.");
+    }
+
+    /**
+     * Ensures that important randomizables are set craftable ASAP.
+     *
+     * @param randomizable The randomizable currently selected.
+     * @return A randomizable item that needs to be craftable ASAP, or the original
+     *         if none needs it.
+     */
+
+    private static Randomizable forceCraftable(Randomizable randomizable) {
+        for (Randomizable r : SequenceGenerator.forcedCraftables) {
+            if (r.isAvailable()) {
+                SequenceGenerator.forcedCraftables.remove(r);
+                Console.hiddenLog(r.getName() + " forced to be craftable.");
+                return r;
+            }
+        }
+        return randomizable;
+    }
+
 }

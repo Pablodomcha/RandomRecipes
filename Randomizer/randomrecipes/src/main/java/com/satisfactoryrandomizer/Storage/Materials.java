@@ -18,6 +18,7 @@ public class Materials {
     private final List<Component> limited = new ArrayList<>(); // limited ingredients
     private final List<Component> animal = new ArrayList<>(); // limited ingredients
     private final List<Component> equip = new ArrayList<>(); // Equipment (can be made, but not used as material)
+    private final List<Component> elevator = new ArrayList<>(); // Elevator parts
     private List<CraftStation> stations = new ArrayList<>(); // Crafting Stations
     private List<Structure> structures = new ArrayList<>(); // Generic structures that don't affect the logic
     private List<EssentialStructure> essentialStructures = new ArrayList<>(); // Structures that need to be checked by
@@ -25,7 +26,7 @@ public class Materials {
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
     private List<Milestone> depotUpgrades = new ArrayList<>(); // Milestones
     private int[] phase = {};
-    private static List<String> uraniumReq;
+    private List<String> uraniumReq;
 
     public void prepare(int seed) {
         Random random = new Random(seed);
@@ -37,7 +38,7 @@ public class Materials {
 
         // Set recquirements for uranium
         if (UiValues.getOreLocation() == 2) {
-            uraniumReq = Arrays.asList("Desc_HazmatFilter", "Desc_HazmatSuit");
+            uraniumReq = Arrays.asList("Desc_HazmatFilter", "BP_EquipmentDescriptorHazmatSuit");
         } else {
             uraniumReq = null;
         }
@@ -90,7 +91,7 @@ public class Materials {
         this.equip.addAll(addPrefixComp(generateEquipmnet2(), "//Game/FactoryGame/"));
 
         // //Game/FactoryGame/Recipes/SpaceElevatorParts/
-        this.components.addAll(addPrefixComp(generateElevator(), "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
+        this.elevator.addAll(addPrefixComp(generateElevator(), "//Game/FactoryGame/Recipes/SpaceElevatorParts/"));
 
         // Animal Parts (no recipe, no need to prefix path)
         this.animal.addAll(generateAnimalParts());
@@ -107,8 +108,8 @@ public class Materials {
         this.depotUpgrades.addAll(addPrefixMile(generateDepotMilestones(), "//Game/FactoryGame/Schematics/Research/"));
 
         // Alternate Recipes
-        this.alternate.addAll(addPrefixComp(generateOptional(), "//Game/FactoryGame/Recipes/"));
-        this.HD.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/AlternateRecipes/"));
+        this.alternate.addAll(addPrefixComp(generateAlternate(), "//Game/FactoryGame/Recipes/"));
+        this.HD.addAll(addPrefixComp(generateHD(), "//Game/FactoryGame/Recipes/AlternateRecipes/"));
 
         // Alternate for Turbo Ammo (weird path and only one)
         List<Component> ammo = new ArrayList<>();
@@ -300,7 +301,7 @@ public class Materials {
 
     }
 
-    private static List<Component> generateRawOre() {
+    private List<Component> generateRawOre() {
 
         List<Component> tempRawOre = new ArrayList<>();
 
@@ -339,7 +340,7 @@ public class Materials {
         return tempRawOre;
     }
 
-    private static List<Component> generateMoreComponents() {
+    private List<Component> generateMoreComponents() {
         List<Component> tempComps = new ArrayList<>();
         List<Component> tempNoPrefixComps = new ArrayList<>();
 
@@ -485,7 +486,7 @@ public class Materials {
         return tempComps;
     }
 
-    private static List<Component> generateEquipment() {
+    private List<Component> generateEquipment() {
         List<Component> tempComps = new ArrayList<>();
         List<Component> tempNoPrefixComps = new ArrayList<>();
 
@@ -524,7 +525,7 @@ public class Materials {
         return tempComps;
     }
 
-    private static List<Component> generateEquipmnet2() {
+    private List<Component> generateEquipmnet2() {
         List<Component> tempComps = new ArrayList<>();
         List<Component> tempNoPrefixComps = new ArrayList<>();
 
@@ -550,7 +551,7 @@ public class Materials {
         return tempComps;
     }
 
-    private static List<Component> alternateButNotReally() {
+    private List<Component> alternateButNotReally() {
         List<Component> emptyRecipes = new ArrayList<>();
         List<Component> returnvalue = new ArrayList<>();
 
@@ -563,7 +564,7 @@ public class Materials {
 
     }
 
-    private static List<Component> generateOptional() {
+    private List<Component> generateAlternate() {
         List<Component> emptyRecipes = new ArrayList<>();
         List<Component> returnValues = new ArrayList<>();
 
@@ -640,7 +641,7 @@ public class Materials {
         return returnValues;
     }
 
-    private static List<Component> generateAlternate() {
+    private List<Component> generateHD() {
         List<Component> emptyRecipes = new ArrayList<>();
         List<Component> returnValues = new ArrayList<>();
 
@@ -828,7 +829,7 @@ public class Materials {
                 .add(new Milestone("Milestone_2-5", true, false, "Schematic_2-5", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
                 .add(new Milestone("Milestone_3-1", true, false, "Schematic_3-1", phase1, 2));
-        tempMilestones // This one and the one avove are right despite not looking like it
+        tempMilestones // This one and the one above are right despite not looking like it
                 .add(new Milestone("Milestone_3-2", true, false, "Schematic_3-2", Arrays.asList("Tutorial_6"), 1));
         tempMilestones
                 .add(new Milestone("Milestone_3-3", true, false, "Schematic_3-3", phase1, 2));
@@ -1108,7 +1109,7 @@ public class Materials {
         return tempReturn;
     }
 
-    private static List<Structure> generateStructures() {
+    private List<Structure> generateStructures() {
         List<Structure> tempStructures = new ArrayList<>();
         tempStructures.add(new Structure("Desc_Mam", false, false, "Recipe_Mam", Arrays.asList("power")));
         tempStructures.add(generateStructure("Recipe_ResourceSink", Arrays.asList("power")));
@@ -1198,7 +1199,7 @@ public class Materials {
         return tempStructures;
     }
 
-    private static List<Structure> generateMoreStructures() {
+    private List<Structure> generateMoreStructures() {
         List<Structure> tempStructures = new ArrayList<>();
         List<Structure> tempReturnStructures = new ArrayList<>();
 
@@ -1349,7 +1350,7 @@ public class Materials {
         return tempReturnStructures;
     }
 
-    private static List<Structure> generateVehicles() {
+    private List<Structure> generateVehicles() {
         List<Structure> tempStructures = new ArrayList<>();
         List<Structure> tempReturnStructures = new ArrayList<>();
 
@@ -1419,32 +1420,31 @@ public class Materials {
     private static List<Component> generateElevator() {
         List<Component> temComps = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
-            String recipe = "Recipe_SpaceElevatorPart_1";
+            String recipe = "Recipe_SpaceElevatorPart_";
             int phase;
 
             if (i == 0) {
-                phase = 0;
+                phase = 1;
                 temComps.add(
-                        new ElevatorPart(recipe.replace("Recipe", "Desc").replace("1", (String.valueOf(i + 1))),
-                                recipe.replace("1", (String.valueOf(i + 1))), true, false, false, 50,
-                                Arrays.asList("Tutorial_6"), phase));
+                        new ElevatorPart(recipe.replace("Recipe", "Desc") + (i + 1),
+                                recipe + (i + 1), false, false, false, 50, null, phase));
                 continue; // To avoid creating it twice
             } else if (i < 3) {
-                phase = 1;
-            } else if (i < 5) {
                 phase = 2;
-            } else if (i < 9) {
+            } else if (i < 5) {
                 phase = 3;
-            } else if (i < 12) {
+            } else if (i < 9) {
                 phase = 4;
+            } else if (i < 12) {
+                phase = 5;
             } else {
                 Console.hiddenLog("Couldn't assign requirements for: " + recipe);
                 return temComps;
             }
 
             temComps.add(
-                    new ElevatorPart(recipe.replace("Recipe", "Desc").replace("1", (String.valueOf(i + 1))),
-                            recipe.replace("1", (String.valueOf(i + 1))), true, false, false, 50, null, phase));
+                    new ElevatorPart(recipe.replace("Recipe", "Desc") + (i + 1),
+                            recipe + (i + 1), false, false, false, 50, null, phase));
 
         }
         return temComps;
@@ -1530,9 +1530,26 @@ public class Materials {
                 return eq;
             }
         }
+        for (Component ele : elevator) {
+            if (ele.getName().equals(name)) {
+                Console.hiddenLog("Found equipment instead of component: " + name);
+                return ele;
+            }
+        }
 
         Console.log("Component not found: " + name);
         return null;
+    }
+
+    public Component getElevatorPartByName(String name) {
+        for (Component component : this.elevator) {
+            if (component.getName().equals(name)) {
+                return component;
+            }
+        }
+        Console.log("ElevatorPart not found: " + name);
+        return null;
+
     }
 
     public Component getComponentByPath(String path) {
@@ -1569,7 +1586,7 @@ public class Materials {
         List<Randomizable> randomizables = this.getAllRandomizables();
         for (Randomizable randomizable : randomizables) {
             if (randomizable.getName() == null) {
-                return null;
+                continue;
             } else if (randomizable.getName().equals(name)) {
                 return randomizable;
             }
@@ -1651,6 +1668,11 @@ public class Materials {
                 result.add(component);
             }
         }
+        for (Component component : this.elevator) {
+            if (component.isAvailable() && component.isCraftable() && component.isLiquid().equals(liquid)) {
+                result.add(component);
+            }
+        }
         return result;
     }
 
@@ -1714,7 +1736,7 @@ public class Materials {
         return result;
     }
 
-    public List<String> getMilestonesPhase(int phase) {
+    public List<String> getMilestonesInPhase(int phase) {
         List<String> result = new ArrayList<>();
         for (Milestone milestone : this.milestones) {
             if (milestone.getPhase() == phase) {
@@ -1724,29 +1746,29 @@ public class Materials {
         return result;
     }
 
-    public List<Component> getElevatorPhase() {
+    public List<Component> getElevatorPartsInPhase(int phase) {
         List<Component> result = new ArrayList<>();
-        for (Component part : this.components) {
-            if (part instanceof ElevatorPart) {
-                if (((ElevatorPart) part).addWhen() == this.getPhase()) {
-                    result.add(part);
-                }
+        for (Component part : this.elevator) {
+            if (((ElevatorPart) part).addWhen() == phase) {
+                result.add(part);
             }
         }
         return result;
 
     }
 
-    public Component getRandomElevatorPhase(int phase, int seed) {
+    public Component getRandomUncraftableElevatorPart(int phase, int seed) {
         List<Component> result = new ArrayList<>();
-        for (Component part : this.components) {
-            if (part instanceof ElevatorPart) {
-                if (((ElevatorPart) part).addWhen() == phase) {
-                    if (part.isCraftable() == false) {
-                        result.add(part);
-                    }
+        for (Component part : this.elevator) {
+            if (((ElevatorPart) part).addWhen() == phase) {
+                if (part.isCraftable() == false) {
+                    result.add(part);
                 }
             }
+        }
+        if (result.isEmpty()) {
+            Console.hiddenLog("No uncraftable elevator parts found for phase " + phase);
+            return null;
         }
         Random random = new Random(seed);
         return result.get(random.nextInt(result.size()));
@@ -1755,7 +1777,7 @@ public class Materials {
     public int getPhase() {
         for (int i = 0; i < this.phase.length; i++) {
             if (this.phase[i] > 0) {
-                return i;
+                return i + 1;
             }
         }
         return 5;
@@ -1831,11 +1853,20 @@ public class Materials {
         result.addAll(this.equip);
         result.addAll(this.alternate);
         result.addAll(this.HD);
+        result.addAll(this.elevator);
         return result;
     }
 
     public List<Milestone> getAllMilestones() {
         return this.milestones;
+    }
+
+    public List<CraftStation> getAllStations() {
+        return this.stations;
+    }
+
+    public List<Component> getAllElevatorParts() {
+        return this.elevator;
     }
 
     public List<Milestone> getDepotMilestones() {
@@ -1904,6 +1935,12 @@ public class Materials {
             if (randomizable.isAvailable() && !randomizable.isCraftable()) {
                 result.add(randomizable);
             }
+            if(randomizable instanceof Component) {
+                Component c =(Component) randomizable;
+                if (c.isAvailableIgnoreUses() && !c.isCraftable()) {
+                    result.add(c);
+                }
+            }
         }
         return result;
     }
@@ -1931,7 +1968,7 @@ public class Materials {
     }
 
     public Boolean setRandomizableCraftable(String name, Boolean craftable) {
-        for (Randomizable rand : this.getAvailableButUncraftableRandomizables()) {
+        for (Randomizable rand : this.getUncraftableRandomizables()) {
             if (rand.getName() == null) {
                 continue;
             } else if (rand.getName().equals(name)) {
@@ -1944,7 +1981,7 @@ public class Materials {
     }
 
     public Boolean setRandomizableCraftablePath(String path, Boolean craftable) {
-        for (Randomizable rand : this.getAvailableButUncraftableRandomizables()) {
+        for (Randomizable rand : this.getUncraftableRandomizables()) {
             if (rand.getPath().equals(path)) {
                 rand.setCraftable(craftable);
                 return true;
@@ -2031,6 +2068,12 @@ public class Materials {
             }
         }
         for (Component component : limited) {
+            if (component.getName().equals(name)) {
+                Console.hiddenLog("Using limited item: " + name);
+                return component.use();
+            }
+        }
+        for (Component component : elevator) {
             if (component.getName().equals(name)) {
                 Console.hiddenLog("Using limited item: " + name);
                 return component.use();
