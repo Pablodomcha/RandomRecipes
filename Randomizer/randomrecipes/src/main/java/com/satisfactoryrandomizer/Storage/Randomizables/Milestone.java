@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Milestone extends Randomizable {
 
-    private int nRecipes;
+    private int nRecipes = 0;
     private List<String> fixedUnlocks = new ArrayList<>();
     private int phase;
     // Recipepath is a shcematic path, but W/e

@@ -181,8 +181,11 @@ public class SequenceGenerator {
             randomizables.clear();
             randomizables = materials.getAvailableButUncraftableRandomizables();
 
+            // Add recipes without conditions
+            randomizables.removeAll(materials.getHD());
             if (randomizables.size() <= 0) {
-                randomizables.removeAll(materials.getHD());
+                randomizables.addAll(materials.getUncraftableHD());
+                randomizables.addAll(materials.getUncraftableDepotMilestones());
             }
 
             if ((randomizable instanceof Milestone)) {
@@ -204,7 +207,11 @@ public class SequenceGenerator {
         if (!materials.getUncraftableRandomizables().isEmpty()) {
             Console.importantLog("Missing Unlocks (should be playable, but some items will have vanilla values): ");
             for (Randomizable elem : materials.getUncraftableRandomizables()) {
-                Console.log(elem.getName());
+                if (elem.getName() != null) {
+                    Console.log(elem.getName());
+                } else{
+                    Console.log(elem.getPath());
+                }
             }
             Console.importantLog(
                     "These items didn't get randomized properly, they may be missing from the game or have their default recipe."

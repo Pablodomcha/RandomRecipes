@@ -1593,6 +1593,7 @@ public class Materials {
         }
         Console.log("Randomizable not found: " + name);
         return null;
+
     }
 
     public EssentialStructure getEssentialStructureByName(String name) {
@@ -1807,6 +1808,16 @@ public class Materials {
         return this.HD;
     }
 
+    public List<Component> getUncraftableHD(){
+        List<Component> result = new ArrayList<>();
+        for (Component hd : this.HD) {
+            if (hd.isCraftable() == false) {
+                result.add(hd);
+            }
+        }
+        return result;
+    }
+
     public void setPhase() {
         int currentPhase = this.getPhase();
         if (currentPhase == 5) {
@@ -1869,8 +1880,24 @@ public class Materials {
         return this.elevator;
     }
 
-    public List<Milestone> getDepotMilestones() {
-        return this.depotUpgrades;
+    public List<Milestone> getUncraftableDepotMilestones() {
+        List<Milestone> result = new ArrayList<>();
+        for (Milestone milestone : this.depotUpgrades) {
+            if (!milestone.isCraftable()) {
+                result.add(milestone);
+            }
+        }
+        return result;
+    }
+
+    public Milestone getDepotMilestoneByName(String name) {
+        for (Milestone milestone : this.depotUpgrades) {
+            if (milestone.getName().equals(name)) {
+                return milestone;
+            }
+        }
+        Console.hiddenLog("Depot milestone " + name + " not found.");
+        return null;
     }
 
     public List<Randomizable> getUnavailableRandomizables() {
@@ -1932,15 +1959,15 @@ public class Materials {
     public List<Randomizable> getAvailableButUncraftableRandomizables() {
         List<Randomizable> result = new ArrayList<>();
         for (Randomizable randomizable : this.getAllRandomizables()) {
-            if (randomizable.isAvailable() && !randomizable.isCraftable()) {
-                result.add(randomizable);
-            }
-            if(randomizable instanceof Component) {
-                Component c =(Component) randomizable;
+            if (randomizable instanceof Component) {
+                Component c = (Component) randomizable;
                 if (c.isAvailableIgnoreUses() && !c.isCraftable()) {
                     result.add(c);
                 }
+            } else if (randomizable.isAvailable() && !randomizable.isCraftable()) {
+                result.add(randomizable);
             }
+
         }
         return result;
     }
@@ -2045,6 +2072,10 @@ public class Materials {
                 milestone.setCraftable(craftable);
                 return;
             }
+        }
+        if (getDepotMilestoneByName(name) != null) {
+            getDepotMilestoneByName(name).setCraftable(craftable);
+            return;
         }
         Console.log("Could not set Craftable, Milestone not found: " + name);
     }
