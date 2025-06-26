@@ -1,11 +1,3 @@
-Recipe_Biomass_Wood is used for Heavy Oil
-
--Categories:
-    3. MAM Research
-    3.1. Progressive MAM (ie: Depot Upgrades) positions are not randomized, but their costs are.**
-
-**Hard to ensure they are in order.
-
 Info:
     1. Handcrafts: The first unlockable crafting station will have it's recipes able to be made by hand. Recipes with liquids may appear for handcrafting, but you obviously can't make them.
     2. Craft unlocked != Craft Possible.
