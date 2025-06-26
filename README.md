@@ -4,7 +4,7 @@ A simple recipe randomizer created in Java to create the JSON files that Content
 
 Why Java? I had VSCode set up to use Java from my last project and it was as good a choice as any for such a simple task.
 
-##Info:
+## Info:
 
     1. Handcrafts: The first unlockable crafting station will have it's recipes able to be made by hand. Recipes with liquids may appear for handcrafting, but you obviously can't make them.
 
