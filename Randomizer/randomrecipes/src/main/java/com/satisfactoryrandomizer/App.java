@@ -1,5 +1,7 @@
 package com.satisfactoryrandomizer;
 
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -12,21 +14,38 @@ public final class App {
 
     public static void main(String[] args) {
 
-        CreateJSON.createDirectories();
-        try {
-            SequenceGenerator.generateSequence();
-        } catch (Exception e) {
-            Console.importantLog("There was an exception:");
-            Console.log(e.getMessage());
-            Console.importantLog("Most of these are rare and happen in a small number of seeds, so try another seed.");
+        Console.init(Ui.getLogArea());
+        Ui ui = new Ui();
+        ui.getFrame().setVisible(true); // Show the UI
 
-            Console.hiddenLog("Stack Trace:");
-            Console.hiddenLog(getStackTrace(e));
+        while (true) {
+            try {
+                CreateJSON.createDirectories();
+                SequenceGenerator.reset();
+
+                while (!ui.getStart()) { // Wait for the UI to close
+                    Thread.sleep(100); // Sleep for 100ms to avoid busy-waiting
+                }
+                ui.saveValues();
+
+                SequenceGenerator.generateSequence();
+
+            } catch (Exception e) {
+                Console.importantLog("There was an exception:");
+                Console.log(e.getMessage());
+                Console.importantLog(
+                        "Most of these are rare and happen in a small number of seeds, so try another seed.");
+                Console.hiddenLog("Stack Trace:");
+                Console.hiddenLog(getStackTrace(e));
+            }
+
+            // Tests.test();
+
+            Console.saveLogs();
+
+            ui.randomizationDone();
         }
 
-        // Tests.test();
-
-        Console.saveLogs();
     }
 
     private static String getStackTrace(Throwable e) {

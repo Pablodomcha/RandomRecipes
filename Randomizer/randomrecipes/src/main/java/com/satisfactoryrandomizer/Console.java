@@ -3,6 +3,8 @@ package com.satisfactoryrandomizer;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.JTextArea;
+
 import com.satisfactoryrandomizer.Storage.UiValues;
 
 public class Console {
@@ -10,20 +12,25 @@ public class Console {
     static String log = "";
     static String cheatsheet = "";
     static Boolean testPrinted = false;
+    private static JTextArea logArea;
+
+    public static void init(JTextArea logArea) {
+        Console.logArea = logArea;
+    }
 
     public static void hiddenLog(String message) {
-        String temp = message;
-        Console.log += temp + "\n";
+        Console.log += message + "\n";
     }
 
     public static void log(String message) {
-        String temp = message;
-        System.out.println(temp);
-        Console.log += temp + "\n";
+        System.err.println(message);
+        Console.log += message + "\n";
+        logArea.append(message + "\n");
+        Ui.scroll();
     }
 
-    public static void advLog( String message){
-        if(UiValues.getAdvLog()){
+    public static void advLog(String message) {
+        if (UiValues.getAdvLog()) {
             Console.hiddenLog(message);
         }
     }
@@ -41,9 +48,8 @@ public class Console {
 
     public static void test(String message) {
 
-        String temp = message;
-        System.out.println(temp);
-        Console.log += temp + "\n";
+        System.err.println(message);
+        Console.log += message + "\n";
 
         if (!Console.testPrinted) {
             String testMessage = "------------------------------------------------------------------------------------------------------------------------------------------------------\n"
@@ -64,6 +70,10 @@ public class Console {
             writer = new FileWriter("Randomizer_Cheatsheet.txt");
             writer.write(Console.cheatsheet);
             writer.close();
+
+            log = "";
+            cheatsheet = "";
+
         } catch (IOException e) {
             System.err.println("Error writing JSON file: " + e.getMessage());
         }

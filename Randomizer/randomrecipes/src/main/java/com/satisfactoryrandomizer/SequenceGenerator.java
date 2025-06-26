@@ -26,6 +26,19 @@ public class SequenceGenerator {
     private static Boolean mamDone = false;
     private static List<Randomizable> forcedCraftables = new ArrayList<>();
 
+    // Delete all static values
+    public static void reset() {
+        seed = UiValues.getSeed();
+        random = new Random();
+        liquidUnlocked = false;
+        lastObtainedStation = null;
+        firstStation = null;
+        nItems = 0;
+        mamChance = 0;
+        mamDone = false;
+        forcedCraftables = new ArrayList<>();
+    }
+
     public static void generateSequence() throws Exception {
         // Log the selected values
         Console.hiddenLog("\nSelected values:");
@@ -209,7 +222,7 @@ public class SequenceGenerator {
             for (Randomizable elem : materials.getUncraftableRandomizables()) {
                 if (elem.getName() != null) {
                     Console.log(elem.getName());
-                } else{
+                } else {
                     Console.log(elem.getPath());
                 }
             }
@@ -218,7 +231,7 @@ public class SequenceGenerator {
                             + "\nEither way, as long as none of these are Space Elevator parts, the game is completable without them.");
         }
 
-        Console.importantLog("Checksum = " + random.nextInt(UiValues.addAll())
+        Console.importantLog("Used Seed: " + UiValues.getSeed() + "Checksum = " + random.nextInt(UiValues.addAll())
                 + " | If you're playing multiplayer and you are all randomizing separately, this should be the same for all players.");
     }
 

@@ -215,7 +215,7 @@ public class UiValues {
         return UiValues.seed;
     }
 
-    public static void setSeed(int seed) {
+    public static void setSeed(long seed) {
         UiValues.seed = seed;
     }
 
@@ -379,7 +379,7 @@ public class UiValues {
     }
 
     /**
-     * Maximum number of recipes that can use a materials. The randomizer will
+     * Maximum number of recipes that can use a material. The randomizer will
      * increase this value if it can't complete a randomization.
      * 
      * @return 13. Max recipes used.

@@ -192,7 +192,7 @@ public class Materials {
 
     // Data creators
 
-    private static List<Component> generateLimitedMats() {
+    private List<Component> generateLimitedMats() {
         List<Component> tempComps = new ArrayList<>();
 
         tempComps.add(new Component("Desc_Wood", null, true, true, false));
@@ -207,7 +207,7 @@ public class Materials {
         return tempComps;
     }
 
-    private static List<Component> generateAnimalParts() {
+    private List<Component> generateAnimalParts() {
         List<Component> tempComps = new ArrayList<>();
 
         tempComps.add(new Component("Desc_HatcherParts", null, true, true, false));
@@ -218,7 +218,7 @@ public class Materials {
         return tempComps;
     }
 
-    private static List<EssentialStructure> generateEssentialBuildings() {
+    private List<EssentialStructure> generateEssentialBuildings() {
 
         List<EssentialStructure> tempStructures = new ArrayList<>();
 
@@ -1373,41 +1373,41 @@ public class Materials {
 
     // Generators and prefixers
 
-    private static Structure generateStructure(String recipe) {
+    private Structure generateStructure(String recipe) {
         return new Structure(recipe.replace("Recipe", "Desc"), false, false, recipe, false);
     }
 
-    private static Structure generateStructure(String recipe, List<String> extraChecks) {
+    private Structure generateStructure(String recipe, List<String> extraChecks) {
         return new Structure(recipe.replace("Recipe", "Desc"), false, false, recipe, extraChecks);
     }
 
-    private static Component generateComponent(String recipe, Boolean liquid) {
+    private Component generateComponent(String recipe, Boolean liquid) {
         return new Component(recipe.replace("Recipe", "Desc"), recipe, false, false, liquid);
     }
 
-    private static Component generateComponent(String name, String recipe, Boolean liquid) {
+    private Component generateComponent(String name, String recipe, Boolean liquid) {
         return new Component(name, recipe, false, false, liquid);
     }
 
-    private static Component generateComponent(String recipe, Boolean liquid, List<String> extraChecks) {
+    private Component generateComponent(String recipe, Boolean liquid, List<String> extraChecks) {
         return new Component(recipe.replace("Recipe", "Desc"), recipe, false, false, liquid, 50, extraChecks);
     }
 
-    private static Component generateComponent(String name, String recipe, Boolean liquid, List<String> extraChecks) {
+    private Component generateComponent(String name, String recipe, Boolean liquid, List<String> extraChecks) {
         return new Component(name, recipe, false, false, liquid, 50, extraChecks);
     }
 
-    private static Component generateComponent(String name, String recipe, int maxstack) {
+    private Component generateComponent(String name, String recipe, int maxstack) {
         return new Component(name, recipe, false, false, false, maxstack, null);
     }
 
-    private static Milestone generateMamMilestone(String recipe, List<String> Reqs) {
+    private Milestone generateMamMilestone(String recipe, List<String> Reqs) {
         return new Milestone(recipe, true, false, recipe, Reqs, 0);
         // Name doesn't matter for these, phase is 0 since they don't depend on elevator
         // phase.
     }
 
-    private static List<Structure> generateMkN(String recipe, int min, int max) {
+    private List<Structure> generateMkN(String recipe, int min, int max) {
         List<Structure> tempStructures = new ArrayList<>();
         for (int i = min; i <= max; i++) {
             tempStructures.add(
@@ -1417,7 +1417,7 @@ public class Materials {
         return tempStructures;
     }
 
-    private static List<Component> generateElevator() {
+    private List<Component> generateElevator() {
         List<Component> temComps = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             String recipe = "Recipe_SpaceElevatorPart_";
@@ -1450,7 +1450,7 @@ public class Materials {
         return temComps;
     }
 
-    private static List<Structure> addPrefixStruc(List<Structure> list, String prefix) {
+    private List<Structure> addPrefixStruc(List<Structure> list, String prefix) {
         List<Structure> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -1464,7 +1464,7 @@ public class Materials {
 
     }
 
-    private static List<Component> addPrefixComp(List<Component> list, String prefix) {
+    private List<Component> addPrefixComp(List<Component> list, String prefix) {
         List<Component> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -1477,7 +1477,7 @@ public class Materials {
         return prefixedList;
     }
 
-    private static List<Milestone> addPrefixMile(List<Milestone> list, String prefix) {
+    private List<Milestone> addPrefixMile(List<Milestone> list, String prefix) {
         List<Milestone> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -1490,7 +1490,7 @@ public class Materials {
         return prefixedList;
     }
 
-    private static List<CraftStation> addPrefixStat(List<CraftStation> list, String prefixRecipe) {
+    private List<CraftStation> addPrefixStat(List<CraftStation> list, String prefixRecipe) {
         List<CraftStation> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
@@ -1503,7 +1503,7 @@ public class Materials {
         return prefixedList;
     }
 
-    private static List<EssentialStructure> addPrefixEssStr(List<EssentialStructure> list, String prefixRecipe) {
+    private List<EssentialStructure> addPrefixEssStr(List<EssentialStructure> list, String prefixRecipe) {
         List<EssentialStructure> prefixedList = new ArrayList<>(list);
 
         for (int i = 0; i < prefixedList.size(); i++) {
