@@ -110,7 +110,7 @@ public class SequenceGenerator {
 
         for (Milestone mile : materials.getAllMilestones()) {
             int nUnlocksMilestone = (nDistributableRandomizables - distributed) / milestonesAvailable;
-            int distributing = (nUnlocksMilestone + random.nextInt(2));
+            int distributing = (nUnlocksMilestone - 1 + random.nextInt(3));
             mile.setnRecipes(distributing);
             Console.hiddenLog("Recipes in " + mile.getName() + ": " + mile.getnRecipes());
             distributed += distributing;
