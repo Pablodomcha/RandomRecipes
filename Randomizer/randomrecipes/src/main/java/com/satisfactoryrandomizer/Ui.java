@@ -1,6 +1,8 @@
 package com.satisfactoryrandomizer;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import com.satisfactoryrandomizer.Storage.UiValues;
 
@@ -99,7 +101,7 @@ public class Ui {
                 JPanel panelOre = new JPanel();
                 panelOre.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Ore Location:");
+                label = new JLabel("Ore location:");
                 label.setToolTipText("Select the location of the ore");
                 panelOre.add(label);
                 String[] oreLocations = { "Located", "Unlocated", "Radiation Party" };
@@ -138,7 +140,7 @@ public class Ui {
                 label = new JLabel("Waste:");
                 label.setToolTipText("Select the waste");
                 panelWaste.add(label);
-                String[] wasteOptions = { "Easy", "Medium", "Hard", "No U"};
+                String[] wasteOptions = { "Easy", "Medium", "Hard", "No U" };
                 wasteComboBox = new JComboBox<>(wasteOptions);
                 panelWaste.add(wasteComboBox);
                 panel.add(panelWaste, getBagColumn());
@@ -147,7 +149,7 @@ public class Ui {
                 JPanel panelStationBias = new JPanel();
                 panelStationBias.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Station Bias:");
+                label = new JLabel("Station bias:");
                 label.setToolTipText("Select the station bias");
                 panelStationBias.add(label);
                 String[] stationBiasOptions = { "None", "Slight bias", "Medium Bias", "Heavy Bias" };
@@ -159,7 +161,7 @@ public class Ui {
                 JPanel panelForceLongGameBias = new JPanel();
                 panelForceLongGameBias.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Force Long Game Bias:");
+                label = new JLabel("Force long game bias:");
                 label.setToolTipText("Select the force long game bias");
                 panelForceLongGameBias.add(label);
                 String[] forceLongGameBiasOptions = { "None", "Slight", "Medium", "Heavy" };
@@ -167,11 +169,11 @@ public class Ui {
                 panelForceLongGameBias.add(forceLongGameBiasComboBox);
                 panel.add(panelForceLongGameBias, getBagColumn());
 
-                while(position < columns){
+                while (position < columns) {
                         panel.add(new JPanel(), getBagColumn());
                 }
 
-                for(int i = 0; i < columns; i++){
+                for (int i = 0; i < columns; i++) {
                         GridBagConstraints gbcLocal = getBagColumn();
                         gbcLocal.insets = new Insets(0, 0, 10, 0);
                         gbcLocal.anchor = GridBagConstraints.CENTER;
@@ -184,7 +186,7 @@ public class Ui {
                 JPanel panelMaxStackCraft = new JPanel();
                 panelMaxStackCraft.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max Stack Craft:");
+                label = new JLabel("Max amount of each material for crafting:");
                 label.setToolTipText("");
                 panelMaxStackCraft.add(label);
                 maxStackCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 50, 1));
@@ -195,7 +197,7 @@ public class Ui {
                 JPanel panelMaxProdCraft = new JPanel();
                 panelMaxProdCraft.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max Prod Craft:");
+                label = new JLabel("Max amount produced per craft:");
                 label.setToolTipText("");
                 panelMaxProdCraft.add(label);
                 maxProdCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 50, 1));
@@ -206,7 +208,7 @@ public class Ui {
                 JPanel panelMaxStackStruct = new JPanel();
                 panelMaxStackStruct.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max Stack Struct:");
+                label = new JLabel("Max amount of each material for building:");
                 label.setToolTipText("");
                 panelMaxStackStruct.add(label);
                 maxStackStructSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 1000, 1));
@@ -217,7 +219,7 @@ public class Ui {
                 JPanel panelMaxItemStruct = new JPanel();
                 panelMaxItemStruct.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max Item Struct:");
+                label = new JLabel("Max number of different items for building:");
                 label.setToolTipText("");
                 panelMaxItemStruct.add(label);
                 maxItemStructSpinner = new JSpinner(new SpinnerNumberModel(4, 1, 20, 1));
@@ -228,7 +230,7 @@ public class Ui {
                 JPanel panelMaxStackMile = new JPanel();
                 panelMaxStackMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max Stack Mile:");
+                label = new JLabel("Max amount of each material for milestones:");
                 label.setToolTipText("");
                 panelMaxStackMile.add(label);
                 maxStackMileSpinner = new JSpinner(new SpinnerNumberModel(500, 1, 100000, 1));
@@ -239,7 +241,7 @@ public class Ui {
                 JPanel panelMaxItemMile = new JPanel();
                 panelMaxItemMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max Item Mile:");
+                label = new JLabel("Max number of different items for milestones:");
                 label.setToolTipText("");
                 panelMaxItemMile.add(label);
                 maxItemMileSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 20, 1));
@@ -250,7 +252,7 @@ public class Ui {
                 JPanel panelMaxTimeMile = new JPanel();
                 panelMaxTimeMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max Time Mile:");
+                label = new JLabel("Max time needed for milestones:");
                 label.setToolTipText("");
                 panelMaxTimeMile.add(label);
                 maxTimeMileSpinner = new JSpinner(new SpinnerNumberModel(1000, 1, 100000, 1));
@@ -261,7 +263,7 @@ public class Ui {
                 JPanel panelMaxTimeCraft = new JPanel();
                 panelMaxTimeCraft.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max Time Craft:");
+                label = new JLabel("Max time needed for crafting:");
                 label.setToolTipText("");
                 panelMaxTimeCraft.add(label);
                 maxTimeCraftSpinner = new JSpinner(new SpinnerNumberModel(60, 1, 1000, 1));
@@ -269,32 +271,46 @@ public class Ui {
                 panel.add(panelMaxTimeCraft, getBagColumn());
 
                 // Min Handcraft Speed
-                JPanel panelHandcraftSpeedMin = new JPanel();
-                panelHandcraftSpeedMin.setLayout(new FlowLayout(FlowLayout.LEFT));
+                JPanel panelHandcraftSpeed = new JPanel();
+                panelHandcraftSpeed.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Min Handcraft Speed:");
+                label = new JLabel("Handcrafting speed:");
                 label.setToolTipText("");
-                panelHandcraftSpeedMin.add(label);
+                panelHandcraftSpeed.add(label);
                 handcraftSpeedSpinnerMin = new JSpinner(new SpinnerNumberModel(0.5, 0.1, 100, 0.1));
-                panelHandcraftSpeedMin.add(handcraftSpeedSpinnerMin);
-                panel.add(panelHandcraftSpeedMin, getBagColumn());
+                panelHandcraftSpeed.add(handcraftSpeedSpinnerMin);
 
-                // Max Handcraft Speed
-                JPanel panelHandcraftSpeedMax = new JPanel();
-                panelHandcraftSpeedMax.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-                label = new JLabel("Max Handcraft Speed:");
+                label = new JLabel("-");
                 label.setToolTipText("");
-                panelHandcraftSpeedMax.add(label);
+                panelHandcraftSpeed.add(label);
                 handcraftSpeedSpinnerMax = new JSpinner(new SpinnerNumberModel(1, 0.1, 50, 0.1));
-                panelHandcraftSpeedMax.add(handcraftSpeedSpinnerMax);
-                panel.add(panelHandcraftSpeedMax, getBagColumn());
+                panelHandcraftSpeed.add(handcraftSpeedSpinnerMax);
+
+                // Ensure min is lower than max
+                ChangeListener listener = new ChangeListener() {
+                        @Override
+                        public void stateChanged(ChangeEvent e) {
+                                double min = (double) handcraftSpeedSpinnerMin.getValue();
+                                double max = (double) handcraftSpeedSpinnerMax.getValue();
+                                if (min >= max) {
+                                        if (e.getSource() == handcraftSpeedSpinnerMin) {
+                                                handcraftSpeedSpinnerMax.setValue(min);
+                                        } else {
+                                                handcraftSpeedSpinnerMin.setValue(max);
+                                        }
+                                }
+                        }
+                };
+                handcraftSpeedSpinnerMin.addChangeListener(listener);
+                handcraftSpeedSpinnerMax.addChangeListener(listener);
+
+                panel.add(panelHandcraftSpeed, getBagColumn());
 
                 // Input Bias
                 JPanel panelInputBias = new JPanel();
                 panelInputBias.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Input Bias:");
+                label = new JLabel("Number of different items for crafting bias:");
                 label.setToolTipText("");
                 panelInputBias.add(label);
                 inputBiasSpinner = new JSpinner(new SpinnerNumberModel(50, 0, 100, 1));
@@ -305,7 +321,7 @@ public class Ui {
                 JPanel panelMaxRecipesUsed = new JPanel();
                 panelMaxRecipesUsed.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max Recipes Used:");
+                label = new JLabel("Max number of different recipes to use each material:");
                 label.setToolTipText("");
                 panelMaxRecipesUsed.add(label);
                 maxRecipesUsedSpinner = new JSpinner(new SpinnerNumberModel(20, 1, 10000, 1));
@@ -316,7 +332,7 @@ public class Ui {
                 JPanel panelFreeChance = new JPanel();
                 panelFreeChance.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Free Chance:");
+                label = new JLabel("Free chance:");
                 label.setToolTipText("");
                 panelFreeChance.add(label);
                 freeChanceSpinner = new JSpinner(new SpinnerNumberModel(10, 0, 100, 1));
@@ -327,7 +343,7 @@ public class Ui {
 
                 JPanel panelAdvLog = new JPanel();
                 panelAdvLog.setLayout(new FlowLayout(FlowLayout.LEFT));
-                label = new JLabel("Advanced Logging:");
+                label = new JLabel("Advanced logging:");
                 label.setToolTipText("");
                 panelAdvLog.add(label);
                 advLogCheckBox = new JCheckBox();
@@ -380,7 +396,7 @@ public class Ui {
                 startRandomization = false;
         }
 
-        public static void scroll(){
+        public static void scroll() {
                 logArea.setCaretPosition(logArea.getDocument().getLength());
         }
 
@@ -401,7 +417,8 @@ public class Ui {
                 UiValues.setMaxItemMile((int) maxItemMileSpinner.getValue());
                 UiValues.setMaxTimeMile((int) maxTimeMileSpinner.getValue());
                 UiValues.setMaxTimeCraft((int) maxTimeCraftSpinner.getValue());
-                UiValues.setHandcraftSpeed(new double[] {(double) handcraftSpeedSpinnerMin.getValue(), (double) handcraftSpeedSpinnerMax.getValue()});
+                UiValues.setHandcraftSpeed(new double[] { (double) handcraftSpeedSpinnerMin.getValue(),
+                                (double) handcraftSpeedSpinnerMax.getValue() });
                 UiValues.setInputBias((int) inputBiasSpinner.getValue());
                 UiValues.setMaxRecipesUsed((int) maxRecipesUsedSpinner.getValue());
                 UiValues.setFreeChance((int) freeChanceSpinner.getValue());

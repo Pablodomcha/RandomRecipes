@@ -99,8 +99,6 @@ Test:
 
 TODO:
 
-Fill the values for dropdowns
-
 Rename Textboxes
 
 Fill tooltips
