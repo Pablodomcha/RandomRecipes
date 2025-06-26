@@ -5,6 +5,7 @@ A simple recipe randomizer created in Java to create the JSON files that Content
 Why Java? I had VSCode set up to use Java from my last project and it was as good a choice as any for such a simple task.
 
 ## Info:
+    0. Hove over the options to see more info about them.
 
     1. Handcrafts: The first unlockable crafting station will have it's recipes able to be made by hand. Recipes with liquids may appear for handcrafting, but you obviously can't make them.
 
@@ -44,4 +45,4 @@ Why Java? I had VSCode set up to use Java from my last project and it was as goo
 
     19. Awesome shop recipes can be obtained through MAM research or milestones, but they can still be bought there. None of them are essential anyway.
 
-    20. The defaul values are around what you'd need to get vanilla-like values, but they don't guarantee a good randomization.
+    20. The default values are around what you'd need to get vanilla-looking values, but they don't guarantee a good randomization.

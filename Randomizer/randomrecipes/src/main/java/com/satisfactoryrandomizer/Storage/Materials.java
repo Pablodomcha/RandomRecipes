@@ -2104,12 +2104,6 @@ public class Materials {
                 return component.use();
             }
         }
-        for (Component component : elevator) {
-            if (component.getName().equals(name)) {
-                Console.hiddenLog("Using limited item: " + name);
-                return component.use();
-            }
-        }
 
         Console.log("Could not use component, component not found: " + name);
         return 0;

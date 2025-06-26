@@ -9,6 +9,9 @@ import com.satisfactoryrandomizer.Storage.UiValues;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.prefs.Preferences;
 
 public class Ui {
         private JFrame frame;
@@ -41,8 +44,12 @@ public class Ui {
 
         private Boolean startRandomization = false;
 
+        Preferences prefs = Preferences.userNodeForPackage(getClass());
+        private Map<String, JComponent> fields = new HashMap<>(); // Changed to JComponent
+
         public Ui() {
                 createUI();
+                loadPreferences();
         }
 
         private void createUI() {
@@ -51,6 +58,13 @@ public class Ui {
                 frame.setLayout(new BorderLayout());
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setResizable(false);
+
+                // Tooltip management
+                ToolTipManager.sharedInstance().setInitialDelay(0); // show tooltip immediately
+                ToolTipManager.sharedInstance().setReshowDelay(0); // show tooltip again immediately if mouse moves away
+                                                                   // and comes back
+                ToolTipManager.sharedInstance().setDismissDelay(Integer.MAX_VALUE); // don't dismiss tooltip while mouse
+                                                                                    // is hovering
 
                 JPanel panel = new JPanel();
                 panel.setLayout(new GridBagLayout());
@@ -156,7 +170,7 @@ public class Ui {
                                                 + "<p>Medium: Recipes can have solid outputs other than the desired, but the Awesome sink recipe will be available early and will have a simple recipe.</p>"
                                                 + "<p>Hard: Recipes can have solid outputs other than the desired and the Awesome sink may not be available or have really hard crafting recipe.</p>"
                                                 + "<p>No U: Recipes can have solid/liquid outputs other than the desired and the sink may not be available or have really hard crafting recipe. You may need many deposits (if they're even available) and manual flushing.</p>"
-                                                +       
+                                                +
                                                 " <p> (The \"desired\" output is the one for which the recipe is generated, even if you like more the other output)</p></html>");
                 panelWaste.add(label);
                 String[] wasteOptions = { "Easy", "Medium", "Hard", "No U" };
@@ -204,7 +218,7 @@ public class Ui {
                         GridBagConstraints gbcLocal = getBagColumn();
                         gbcLocal.insets = new Insets(0, 0, 10, 0);
                         gbcLocal.anchor = GridBagConstraints.CENTER;
-                        panel.add(new JLabel(""), gbcLocal);
+                        panel.add(new JLabel(" "), gbcLocal);
                 }
 
                 // Numeric Value Fields
@@ -214,7 +228,8 @@ public class Ui {
                 panelMaxStackCraft.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max amount of each material for crafting:");
-                label.setToolTipText("Maximum number of each component needed for a craft. Over 50 will generate recipes that cannot be made");
+                label.setToolTipText(
+                                "Maximum number of each component needed for a craft. Over 50 will generate recipes that cannot be made");
                 panelMaxStackCraft.add(label);
                 maxStackCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 50, 1));
                 panelMaxStackCraft.add(maxStackCraftSpinner);
@@ -225,7 +240,8 @@ public class Ui {
                 panelMaxProdCraft.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max amount produced per craft:");
-                label.setToolTipText("Maximum number of each component produced by a craft. Over 50 will generate recipes that cannot be made.");
+                label.setToolTipText(
+                                "Maximum number of each component produced by a craft. Over 50 will generate recipes that cannot be made.");
                 panelMaxProdCraft.add(label);
                 maxProdCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 50, 1));
                 panelMaxProdCraft.add(maxProdCraftSpinner);
@@ -236,7 +252,8 @@ public class Ui {
                 panelMaxStackStruct.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max amount of each material for building:");
-                label.setToolTipText("Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).");
+                label.setToolTipText(
+                                "Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).");
                 panelMaxStackStruct.add(label);
                 maxStackStructSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 1000, 1));
                 panelMaxStackStruct.add(maxStackStructSpinner);
@@ -247,7 +264,8 @@ public class Ui {
                 panelMaxItemStruct.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max number of different items for building:");
-                label.setToolTipText("Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).");
+                label.setToolTipText(
+                                "Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).");
                 panelMaxItemStruct.add(label);
                 maxItemStructSpinner = new JSpinner(new SpinnerNumberModel(4, 1, 20, 1));
                 panelMaxItemStruct.add(maxItemStructSpinner);
@@ -258,7 +276,8 @@ public class Ui {
                 panelMaxStackMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max amount of each material for milestones:");
-                label.setToolTipText("Maximum number of each component needed to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.");
+                label.setToolTipText(
+                                "Maximum number of each component needed to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.");
                 panelMaxStackMile.add(label);
                 maxStackMileSpinner = new JSpinner(new SpinnerNumberModel(500, 1, 100000, 1));
                 panelMaxStackMile.add(maxStackMileSpinner);
@@ -280,7 +299,8 @@ public class Ui {
                 panelMaxTimeMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max time needed for milestones:");
-                label.setToolTipText("Maximum time to research a new milestone after completing one or time to complete a MAM research in seconds.");
+                label.setToolTipText(
+                                "Maximum time to research a new milestone after completing one or time to complete a MAM research in seconds.");
                 panelMaxTimeMile.add(label);
                 maxTimeMileSpinner = new JSpinner(new SpinnerNumberModel(1000, 1, 100000, 1));
                 panelMaxTimeMile.add(maxTimeMileSpinner);
@@ -291,7 +311,7 @@ public class Ui {
                 panelMaxTimeCraft.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max time needed for crafting:");
-                label.setToolTipText("aximum time needed for a craft in seconds. If you put 1000, don't blame me.");
+                label.setToolTipText("Maximum time needed for a craft in seconds. If you put 1000, don't blame me.");
                 panelMaxTimeCraft.add(label);
                 maxTimeCraftSpinner = new JSpinner(new SpinnerNumberModel(60, 1, 1000, 1));
                 panelMaxTimeCraft.add(maxTimeCraftSpinner);
@@ -302,7 +322,8 @@ public class Ui {
                 panelHandcraftSpeed.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Handcrafting speed:");
-                label.setToolTipText("Multiplier for handcrafting speed. Lower is faster (the base game value is usually between 0.5 and 1 depending on recipe).");
+                label.setToolTipText(
+                                "Multiplier for handcrafting speed. Lower is faster (the base game value is usually between 0.5 and 1 depending on recipe).");
                 panelHandcraftSpeed.add(label);
                 handcraftSpeedSpinnerMin = new JSpinner(new SpinnerNumberModel(0.5, 0.1, 100, 0.1));
                 panelHandcraftSpeed.add(handcraftSpeedSpinnerMin);
@@ -338,7 +359,8 @@ public class Ui {
                 panelInputBias.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Number of different items for crafting bias:");
-                label.setToolTipText("Higher numbers mean that the randomizer will try to use more different ingredients per recipe/milestone. 100 means always will use all slots, 0 means all recipes use 1 input/output slot, 50 means there's no bias. If waste is in easy, this only affects ingredients.");
+                label.setToolTipText(
+                                "Higher numbers mean that the randomizer will try to use more different ingredients per recipe/milestone. 100 means always will use all slots, 0 means all recipes use 1 input/output slot, 50 means there's no bias. If waste is in easy, this only affects ingredients.");
                 panelInputBias.add(label);
                 inputBiasSpinner = new JSpinner(new SpinnerNumberModel(50, 0, 100, 1));
                 panelInputBias.add(inputBiasSpinner);
@@ -349,7 +371,8 @@ public class Ui {
                 panelMaxRecipesUsed.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max number of different recipes to use each material:");
-                label.setToolTipText("Maximum number of recipes that can use a materials. The randomizer will increase this value if it can't complete a randomization. Lower values increase component diversity.");
+                label.setToolTipText(
+                                "Maximum number of recipes that can use a material. The randomizer will increase this value if it can't complete a randomization. Lower values increase component diversity.");
                 panelMaxRecipesUsed.add(label);
                 maxRecipesUsedSpinner = new JSpinner(new SpinnerNumberModel(20, 1, 10000, 1));
                 panelMaxRecipesUsed.add(maxRecipesUsedSpinner);
@@ -360,7 +383,8 @@ public class Ui {
                 panelFreeChance.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Free chance:");
-                label.setToolTipText("Chance for a randomizable to be free, like Excited Photonic Matter, except that one may no longer be free. This affects Structures and milestones too.");
+                label.setToolTipText(
+                                "Chance for a randomizable to be free, like Excited Photonic Matter, except that one may no longer be free. This affects Structures and milestones too.");
                 panelFreeChance.add(label);
                 freeChanceSpinner = new JSpinner(new SpinnerNumberModel(10, 0, 100, 1));
                 panelFreeChance.add(freeChanceSpinner);
@@ -410,6 +434,30 @@ public class Ui {
                 // Add the panel to the frame and generate the size of the frame
                 frame.add(panel);
                 frame.pack();
+
+                // Populate fields for storing values - Store JComponent references
+                fields.put("seedField", seedField);
+                fields.put("oreLocationComboBox", oreLocationComboBox);
+                fields.put("beltsComboBox", beltsComboBox);
+                fields.put("electricityComboBox", electricityComboBox);
+                fields.put("wasteComboBox", wasteComboBox);
+                fields.put("stationBiasComboBox", stationBiasComboBox);
+                fields.put("forceLongGameBiasComboBox", forceLongGameBiasComboBox);
+                fields.put("advLogCheckBox", advLogCheckBox);
+                fields.put("maxStackCraftSpinner", maxStackCraftSpinner);
+                fields.put("maxProdCraftSpinner", maxProdCraftSpinner);
+                fields.put("maxStackStructSpinner", maxStackStructSpinner);
+                fields.put("maxItemStructSpinner", maxItemStructSpinner);
+                fields.put("maxStackMileSpinner", maxStackMileSpinner);
+                fields.put("maxItemMileSpinner", maxItemMileSpinner);
+                fields.put("maxTimeMileSpinner", maxTimeMileSpinner);
+                fields.put("maxTimeCraftSpinner", maxTimeCraftSpinner);
+                fields.put("handcraftSpeedSpinnerMin", handcraftSpeedSpinnerMin);
+                fields.put("handcraftSpeedSpinnerMax", handcraftSpeedSpinnerMax);
+                fields.put("inputBiasSpinner", inputBiasSpinner);
+                fields.put("maxRecipesUsedSpinner", maxRecipesUsedSpinner);
+                fields.put("freeChanceSpinner", freeChanceSpinner);
+
         }
 
         public JFrame getFrame() {
@@ -428,7 +476,7 @@ public class Ui {
                 logArea.setCaretPosition(logArea.getDocument().getLength());
         }
 
-        public void saveValues() {
+        public void saveValues() throws Exception {
                 UiValues.setSeed(seedField.getText().isEmpty() ? 0 : Long.parseLong(seedField.getText()));
                 UiValues.setOreLocation(oreLocationComboBox.getSelectedIndex());
                 UiValues.setBelts(beltsComboBox.getSelectedIndex());
@@ -453,6 +501,8 @@ public class Ui {
 
                 UiValues.setAdvLog(advLogCheckBox.isSelected());
 
+                savePreferences();
+
         }
 
         public static JTextArea getLogArea() {
@@ -468,6 +518,69 @@ public class Ui {
                 }
                 ans.gridx = position++;
                 return ans;
+        }
+
+        private void loadPreferences() {
+                Console.log("Loading preferences:"); //
+
+                // For JTextField, use the default from the component itself if no preference is
+                // found
+                String seedText = prefs.get("seedField", seedField.getText());
+                seedField.setText(seedText);
+
+                // No need to log other individual components here, the loop below handles them
+                for (Map.Entry<String, JComponent> entry : fields.entrySet()) { // Iterate JComponent references
+                        String key = entry.getKey();
+                        JComponent component = entry.getValue();
+
+                        if (component instanceof JTextField) {
+                                // For JTextField, retrieve and set text directly. The default text is already
+                                // set during UI creation.
+                                String text = prefs.get(key, ((JTextField) component).getText());
+                                ((JTextField) component).setText(text);
+                        } else if (component instanceof JComboBox) {
+                                int selectedIndex = prefs.getInt(key, ((JComboBox) component).getSelectedIndex());
+                                ((JComboBox) component).setSelectedIndex(selectedIndex);
+                        } else if (component instanceof JCheckBox) {
+                                boolean isSelected = prefs.getBoolean(key, ((JCheckBox) component).isSelected());
+                                ((JCheckBox) component).setSelected(isSelected);
+                        } else if (component instanceof JSpinner) {
+                                JSpinner spinner = (JSpinner) component;
+                                // Determine the type of the spinner model's value
+                                Object spinnerValue = spinner.getValue();
+                                if (spinnerValue instanceof Integer) {
+                                        spinner.setValue(prefs.getInt(key, (int) spinnerValue));
+                                } else if (spinnerValue instanceof Double) {
+                                        spinner.setValue(prefs.getDouble(key, (double) spinnerValue));
+                                }
+                                // No need to update the 'fields' map here, it holds the components
+                        }
+                }
+        }
+
+        public void savePreferences() throws Exception {
+                Console.log("Saving values:"); //
+                // Iterating over 'fields' (which now correctly stores JComponent references)
+                for (Map.Entry<String, JComponent> entry : fields.entrySet()) {
+                        String key = entry.getKey();
+                        JComponent component = entry.getValue();
+
+                        if (component instanceof JTextField) {
+                                prefs.put(key, ((JTextField) component).getText());
+                        } else if (component instanceof JComboBox) {
+                                prefs.putInt(key, ((JComboBox) component).getSelectedIndex());
+                        } else if (component instanceof JCheckBox) {
+                                prefs.putBoolean(key, ((JCheckBox) component).isSelected());
+                        } else if (component instanceof JSpinner) {
+                                Object spinnerValue = ((JSpinner) component).getValue();
+                                if (spinnerValue instanceof Integer) {
+                                        prefs.putInt(key, (int) spinnerValue);
+                                } else if (spinnerValue instanceof Double) {
+                                        prefs.putDouble(key, (double) spinnerValue);
+                                }
+                        }
+                }
+                prefs.flush();
         }
 
 }

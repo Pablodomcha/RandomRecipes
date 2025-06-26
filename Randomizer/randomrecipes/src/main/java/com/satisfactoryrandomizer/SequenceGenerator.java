@@ -25,6 +25,7 @@ public class SequenceGenerator {
     private static int mamChance = 0;
     private static Boolean mamDone = false;
     private static List<Randomizable> forcedCraftables = new ArrayList<>();
+    private static Boolean tutorial = true;
 
     // Delete all static values
     public static void reset() {
@@ -172,7 +173,8 @@ public class SequenceGenerator {
                     break;
                 }
 
-                if (!finishedProgression && materials.getAllMilestones().size() - materials.getCraftableMilestones().size() <= 1) {
+                if (!finishedProgression
+                        && materials.getAllMilestones().size() - materials.getCraftableMilestones().size() <= 1) {
                     ((Milestone) randomizable).setnRecipes(2 * (((Milestone) randomizable).getnRecipes() + 10));
                     Console.log("Increasing milestone " + randomizable.getName() + " recipes to "
                             + ((Milestone) randomizable).getnRecipes() + " to ensure everything is craftable.");
@@ -241,7 +243,10 @@ public class SequenceGenerator {
         List<Mat> mats;
         if (type.equals("depot")) {
             mats = generateIngredients("milestone");
-        } else {
+        } else if(milestone.getName().contains("Tutorial_")) {
+            mats = generateIngredients("tutorial");
+        } 
+        else {
             mats = generateIngredients(type);
         }
         List<String> checkAlso = new ArrayList<>();
@@ -465,7 +470,11 @@ public class SequenceGenerator {
             SequenceGenerator.liquidUnlocked = true;
         }
 
-        Console.cheatsheet(comp.getName() + " is made in " + station.getName()); // name will be null for alternate
+        if (comp.getName() != null) {
+            Console.cheatsheet(comp.getName() + " is made in " + station.getName()); // name will be null for alternate
+        } else {
+            Console.cheatsheet(comp.getPath() + " is made in " + station.getName());
+        }
     }
 
     private static void logAvailability(String title) {
@@ -638,7 +647,7 @@ public class SequenceGenerator {
 
             // Add animal parts for milestones (but not for those among the first 100
             // recipes)
-            if (type.equals("milestone") && materials.getCraftableRandomizables().size() > 100) {
+            if (type.equals("milestone") && materials.getCraftableRandomizables().size() > 300) {
                 craftableComponents.addAll(materials.getAvailableAnimal());
             }
 
@@ -653,6 +662,8 @@ public class SequenceGenerator {
             int amount;
             if (type.equals("structure")) {
                 amount = random.nextInt(UiValues.getMaxStackStruct()) + 1;
+            } else if (type.equals("tutorial")) { // Make tutorials use few materials.
+                amount = random.nextInt(UiValues.getMaxStackMile() / 10) + 1;
             } else if (type.equals("milestone")) {
                 amount = random.nextInt(UiValues.getMaxStackMile()) + 1;
             } else if (type.equals("cheap")) {
@@ -663,6 +674,10 @@ public class SequenceGenerator {
             }
 
             ingredients.add(new Mat(comp.getName(), amount));
+
+            for (Mat m : ingredients) {
+                Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
+            }
         }
         return ingredients;
     }
@@ -720,6 +735,8 @@ public class SequenceGenerator {
             } else {
                 materials.setRandomizableAvailable(r.getName(), true);
             }
+
+            Console.hiddenLog(r.getName() + " unlocked.");
 
         }
 
