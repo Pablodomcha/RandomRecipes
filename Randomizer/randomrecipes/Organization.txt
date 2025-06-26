@@ -93,12 +93,9 @@ Limit high values for tutorial.
 
 TODO:
 
-
 Could not use component, component not found: Desc_SpaceElevatorPart_5
 
 Weight for distributions.
-
-Save settings for reuse.
 
 Increase height for log (need to see more in it).
 

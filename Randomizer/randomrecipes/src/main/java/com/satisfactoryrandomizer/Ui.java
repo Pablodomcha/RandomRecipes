@@ -37,7 +37,7 @@ public class Ui {
         private JSpinner maxRecipesUsedSpinner;
         private JSpinner freeChanceSpinner;
 
-        private static JTextArea logArea = new JTextArea(10, 60);
+        private static JTextArea logArea = new JTextArea(15, 60);
 
         private int position = 0;
         private int columns = 2;
@@ -49,7 +49,6 @@ public class Ui {
 
         public Ui() {
                 createUI();
-                loadPreferences();
         }
 
         private void createUI() {
@@ -411,6 +410,25 @@ public class Ui {
                                 startRandomization = true;
                         }
                 });
+                saveButton.setToolTipText(
+                                "<html><p>Generate the randomization.</p> <p>You know? That which this thing is all about to begin with.</p></html>");
+                JButton loadLastButton = new JButton("Load Last Values");
+                buttonPanel.add(saveButton);
+                panel.add(buttonPanel, gbcFullRight);
+                loadLastButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                                int result = JOptionPane.showConfirmDialog(frame,
+                                                "Are you sure you want to load your last randomization's settings?",
+                                                "Confirm", JOptionPane.YES_NO_OPTION);
+                                if (result == JOptionPane.YES_OPTION) {
+                                        loadPreferences();
+                                }
+                        }
+                });
+                loadLastButton.setToolTipText("Load your last randomization's settings.");
+
+                buttonPanel.add(loadLastButton);
                 buttonPanel.add(saveButton);
                 panel.add(buttonPanel, gbcFullRight);
 
