@@ -102,7 +102,7 @@ public class Ui {
                 label = new JLabel("Ore Location:");
                 label.setToolTipText("Select the location of the ore");
                 panelOre.add(label);
-                String[] oreLocations = { "Location 1", "Location 2", "Location 3" };
+                String[] oreLocations = { "Located", "Unlocated", "Radiation Party" };
                 oreLocationComboBox = new JComboBox<>(oreLocations);
                 panelOre.add(oreLocationComboBox);
                 panel.add(panelOre, getBagColumn());
@@ -114,7 +114,7 @@ public class Ui {
                 label = new JLabel("Belts:");
                 label.setToolTipText("Select the belt");
                 panelBelts.add(label);
-                String[] beltOptions = { "Belt 1", "Belt 2", "Belt 3" };
+                String[] beltOptions = { "Easy", "Medium", "Hard", "Mr Transport Wagon" };
                 beltsComboBox = new JComboBox<>(beltOptions);
                 panelBelts.add(beltsComboBox);
                 panel.add(panelBelts, getBagColumn());
@@ -126,7 +126,7 @@ public class Ui {
                 label = new JLabel("Electricity:");
                 label.setToolTipText("Select the electricity");
                 panelElectricity.add(label);
-                String[] electricityOptions = { "Electricity 1", "Electricity 2", "Electricity 3" };
+                String[] electricityOptions = { "Easy", "Medium", "Hub Burners Carry", "Happy Handcrafting" };
                 electricityComboBox = new JComboBox<>(electricityOptions);
                 panelElectricity.add(electricityComboBox);
                 panel.add(panelElectricity, getBagColumn());
@@ -138,7 +138,7 @@ public class Ui {
                 label = new JLabel("Waste:");
                 label.setToolTipText("Select the waste");
                 panelWaste.add(label);
-                String[] wasteOptions = { "Waste 1", "Waste 2", "Waste 3" };
+                String[] wasteOptions = { "Easy", "Medium", "Hard", "No U"};
                 wasteComboBox = new JComboBox<>(wasteOptions);
                 panelWaste.add(wasteComboBox);
                 panel.add(panelWaste, getBagColumn());
@@ -150,7 +150,7 @@ public class Ui {
                 label = new JLabel("Station Bias:");
                 label.setToolTipText("Select the station bias");
                 panelStationBias.add(label);
-                String[] stationBiasOptions = { "Bias 1", "Bias 2", "Bias 3" };
+                String[] stationBiasOptions = { "None", "Slight bias", "Medium Bias", "Heavy Bias" };
                 stationBiasComboBox = new JComboBox<>(stationBiasOptions);
                 panelStationBias.add(stationBiasComboBox);
                 panel.add(panelStationBias, getBagColumn());
@@ -162,7 +162,7 @@ public class Ui {
                 label = new JLabel("Force Long Game Bias:");
                 label.setToolTipText("Select the force long game bias");
                 panelForceLongGameBias.add(label);
-                String[] forceLongGameBiasOptions = { "Bias 1", "Bias 2", "Bias 3" };
+                String[] forceLongGameBiasOptions = { "None", "Slight", "Medium", "Heavy" };
                 forceLongGameBiasComboBox = new JComboBox<>(forceLongGameBiasOptions);
                 panelForceLongGameBias.add(forceLongGameBiasComboBox);
                 panel.add(panelForceLongGameBias, getBagColumn());

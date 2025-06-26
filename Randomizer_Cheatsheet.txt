@@ -1,0 +1,1461 @@
+
+Items in order of generation (only ensured way to reach a material is to have all the previous):
+Ingredient: Desc_FluidCanister | Amount: 3
+Ingredient: Desc_PackagedRocketFuel | Amount: 5
+Ingredient: Desc_ModularFrameHeavy | Amount: 1
+Product: Desc_Crystal_mk3 | Amount: 5
+null is made in Desc_ManufacturerMk1
+Tutorial_1 can be made.
+Desc_PowerLine can be made.
+Desc_Catwalk_Straight can be made.
+Desc_HyperTubeJunction can be made.
+Tutorial_2 can be made.
+Desc_ConveyorAttachmentMergerLift can be made.
+Desc_ConveyorAttachmentSplitterLift can be made.
+Desc_GeneratorBiomass_Automated can be made.
+Ingredient: Desc_OreIron | Amount: 2
+Ingredient: Desc_OreCopper | Amount: 10
+Desc_NonFissibleUranium is made in Desc_ManufacturerMk1
+Desc_StandaloneWidgetSign_Medium can be made.
+Desc_Wall_Conveyor_8x4_01 can be made.
+Desc_Foundation_Frame_01 can be made.
+Tutorial_3 can be made.
+Desc_ConveyorPole can be made.
+Desc_PowerPoleMk1 can be made.
+Desc_UJellyLandingPad can be made.
+Ingredient: Desc_NonFissibleUranium | Amount: 3
+Ingredient: Desc_Stone | Amount: 7
+Desc_AlienPowerFuel is made in Desc_ManufacturerMk1
+Ingredient: Desc_NonFissibleUranium | Amount: 7
+Ingredient: Desc_Stone | Amount: 6
+Ingredient: Desc_OreIron | Amount: 3
+Ingredient: Desc_AlienPowerFuel | Amount: 1
+Desc_CrystalShard is made in Desc_ManufacturerMk1
+Tutorial_4 can be made.
+Tutorial_5 can be made.
+Desc_ConveyorBeltMk1 can be made.
+Desc_SpaceElevator can be made.
+Ingredient: Desc_NonFissibleUranium | Amount: 3
+Ingredient: Desc_OreIron | Amount: 3
+Ingredient: Desc_CrystalShard | Amount: 8
+Desc_SpaceElevatorPart_4 is made in Desc_ManufacturerMk1
+Desc_Locomotive can be made.
+Ingredient: Desc_Stone | Amount: 9
+Ingredient: Desc_OreIron | Amount: 7
+Ingredient: Desc_CrystalShard | Amount: 8
+Desc_RebarGunProjectile is made in Desc_ManufacturerMk1
+Tutorial_6 can be made.
+Desc_ManufacturerMk1 can be made.
+Milestone_2-1 can be made.
+Milestone_1-1 can be made.
+Research_PowerSlugs_1 can be made.
+Research_Sulfur_0 can be made.
+Milestone_2-5 can be made.
+Milestone_2-3 can be made.
+Ingredient: Desc_CrystalShard | Amount: 3
+Ingredient: Desc_AlienPowerFuel | Amount: 9
+Desc_NuclearFuelRod is made in Desc_ManufacturerMk1
+Desc_PipeStorageTank can be made.
+Desc_PowerSwitch can be made.
+Ingredient: Desc_Diamond | Amount: 9
+Ingredient: Desc_SAMIngot | Amount: 5
+Ingredient: Desc_Motor | Amount: 3
+Product: Desc_RawQuartz | Amount: 10
+null is made in Desc_ManufacturerMk1
+Research_Nutrients_2 can be made.
+Desc_Truck can be made.
+Desc_Roof_Orange_InCorner_03 can be made.
+Desc_HadronCollider can be made.
+Research_AOrgans_0 can be made.
+Desc_ConveyorMonitor can be made.
+Ingredient: Desc_NuclearFuelRod | Amount: 8
+Ingredient: Desc_OreIron | Amount: 3
+Ingredient: Desc_Stone | Amount: 9
+Ingredient: Desc_OreCopper | Amount: 5
+Desc_AlienDNACapsule is made in Desc_ManufacturerMk1
+Desc_ConveyorPoleWall can be made.
+Research_Quartz_0 can be made.
+Desc_Explorer can be made.
+Ingredient: Desc_NonFissibleUranium | Amount: 9
+Ingredient: Desc_AlienPowerFuel | Amount: 5
+Desc_ModularFrame is made in Desc_HadronCollider
+Research_AO_Stinger can be made.
+Research_Nutrients_0 can be made.
+Ingredient: Desc_Stone | Amount: 10
+Desc_CopperIngot is made in Desc_ManufacturerMk1
+Research_Sulfur_1 can be made.
+Ingredient: Desc_CrystalShard | Amount: 9
+Ingredient: Desc_ModularFrame | Amount: 4
+Desc_Silica is made in Desc_HadronCollider
+Desc_Mam can be made.
+Research_PowerSlugs_3 can be made.
+Research_Sulfur_3_1 can be made.
+Research_Nutrients_1 can be made.
+Desc_Roof_Metal_InCorner_03 can be made.
+Ingredient: Desc_TemporalProcessor | Amount: 5
+Ingredient: Desc_OreBauxite | Amount: 9
+Product: Desc_Crystal_mk3 | Amount: 3
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_CoolingSystem | Amount: 10
+Ingredient: Desc_CopperSheet | Amount: 2
+Product: Desc_HighSpeedConnector | Amount: 7
+null is made in Desc_HadronCollider
+Desc_ConveyorBeltMk2 can be made.
+Desc_SignPole_Medium can be made.
+Desc_Roof_Window_InCorner_02 can be made.
+Desc_Ramp_8x2_01 can be made.
+Research_Quartz_1_2 can be made.
+Desc_SteelWall_Tris_8x2 can be made.
+Research_Quartz_1_1 can be made.
+Research_Caterium_4_3 can be made.
+Ingredient: Desc_PressureConversionCube | Amount: 10
+Ingredient: Desc_CircuitBoardHighSpeed | Amount: 1
+Ingredient: Desc_SAM | Amount: 1
+Ingredient: Desc_TurboFuel | Amount: 4
+Product: Desc_UraniumCell | Amount: 8
+null is made in Desc_ManufacturerMk1
+Research_PowerSlugs_2 can be made.
+Ingredient: Desc_NonFissibleUranium | Amount: 8
+Ingredient: Desc_RawQuartz | Amount: 4
+Ingredient: Desc_ModularFrame | Amount: 5
+BP_ItemDescriptorPortableMiner is made in Desc_HadronCollider
+Ingredient: Desc_RawQuartz | Amount: 2
+Ingredient: Desc_NonFissibleUranium | Amount: 7
+Ingredient: Desc_Sulfur | Amount: 4
+Desc_Rebar_Explosive is made in Desc_ManufacturerMk1
+Ingredient: Desc_RawQuartz | Amount: 6
+Desc_TurboFuel is made in Desc_HadronCollider
+Desc_PipeSupport can be made.
+Ingredient: Desc_NuclearFuelRod | Amount: 8
+Desc_PackagedWater is made in Desc_ManufacturerMk1
+Desc_AssemblerMk1 can be made.
+Ingredient: Desc_AluminumPlate | Amount: 1
+Ingredient: Desc_Plastic | Amount: 4
+Ingredient: Desc_PackagedOilResidue | Amount: 10
+Ingredient: Desc_SteelPlateReinforced | Amount: 10
+Product: Desc_HighSpeedWire | Amount: 6
+null is made in Desc_ManufacturerMk1
+Desc_Wall_Conveyor_8x4_03_Steel can be made.
+Research_PowerSlugs_4 can be made.
+Ingredient: Desc_NuclearFuelRod | Amount: 10
+BP_EquipmentDescriptorJumpingStilts is made in Desc_HadronCollider
+Research_PowerSlugs_5 can be made.
+Desc_ConveyorLiftMk6 can be made.
+Research_Caterium_3_1 can be made.
+Desc_Roof_Window_04 can be made.
+Desc_Roof_Metal_InCorner_02 can be made.
+Desc_FreightWagon can be made.
+Ingredient: Desc_CopperIngot | Amount: 7
+Desc_CoolingSystem is made in Desc_AssemblerMk1
+Research_ACarapace_0 can be made.
+Desc_Roof_Tar_03 can be made.
+Desc_RampDouble can be made.
+Desc_CyberWagon can be made.
+Desc_Catwalk_Ramp can be made.
+Ingredient: Desc_TurboFuel | Amount: 5
+Ingredient: Desc_SpaceElevatorPart_4 | Amount: 9
+Ingredient: Desc_NuclearFuelRod | Amount: 9
+Ingredient: Desc_Sulfur | Amount: 10
+Desc_PackagedBiofuel is made in Desc_ManufacturerMk1
+Research_Caterium_0 can be made.
+Desc_ChainLinkFence can be made.
+Research_Quartz_2_1 can be made.
+Desc_ConveyorBeltMk5 can be made.
+Ingredient: Desc_ModularFrame | Amount: 5
+Desc_SingularityCell is made in Desc_ManufacturerMk1
+Milestone_3-2 can be made.
+Ingredient: Desc_RawQuartz | Amount: 9
+Ingredient: Desc_NuclearFuelRod | Amount: 5
+Ingredient: Desc_Stone | Amount: 4
+Ingredient: Desc_Sulfur | Amount: 8
+Desc_CartridgeSmartProjectile is made in Desc_ManufacturerMk1
+Desc_StandaloneWidgetSign_Square_Tiny can be made.
+Desc_Ramp_Diagonal_8x2_02 can be made.
+Desc_PillarMiddle_Concrete can be made.
+Desc_SteelWall_FlipTris_8x1 can be made.
+Desc_RampInverted_8x1_Corner_01 can be made.
+Desc_Flat_Frame_01 can be made.
+Desc_Ladder can be made.
+Desc_QuarterPipe can be made.
+Ingredient: Desc_PackagedBiofuel | Amount: 3
+Ingredient: Desc_AlienDNACapsule | Amount: 1
+Ingredient: Desc_TurboFuel | Amount: 7
+Desc_AluminumPlate is made in Desc_HadronCollider
+Ingredient: Desc_Sulfur | Amount: 8
+Ingredient: Desc_RawQuartz | Amount: 4
+Desc_Motor is made in Desc_HadronCollider
+Desc_GeneratorGeoThermal can be made.
+Desc_ConveyorBeltMk3 can be made.
+Desc_Roof_A_03 can be made.
+Research_Caterium_1 can be made.
+Research_Sulfur_5 can be made.
+Desc_GeneratorFuel can be made.
+Ingredient: Desc_PackagedBiofuel | Amount: 9
+Desc_GunpowderMK2 is made in Desc_AssemblerMk1
+Desc_PowerPoleWallDoubleMk3 can be made.
+Desc_Ramp_Diagonal_8x1_02 can be made.
+Desc_WaterPump can be made.
+Research_Nutrients_3 can be made.
+Ingredient: Desc_Diamond | Amount: 8
+Ingredient: Desc_GoldIngot | Amount: 3
+Ingredient: Desc_WAT1 | Amount: 3
+Ingredient: Desc_CopperSheet | Amount: 3
+Product: Desc_OreCopper | Amount: 7
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_PackagedAlumina | Amount: 8
+Ingredient: Desc_SteelIngot | Amount: 1
+Product: Desc_Sulfur | Amount: 2
+null is made in Desc_AssemblerMk1
+Desc_QuarterPipeCorner_02 can be made.
+Ingredient: Desc_SpaceElevatorPart_4 | Amount: 5
+Ingredient: Desc_Sulfur | Amount: 8
+Desc_CircuitBoard is made in Desc_HadronCollider
+Desc_Wall_Window_8x4_01 can be made.
+Desc_PowerTowerPlatform can be made.
+Ingredient: Desc_RawQuartz | Amount: 6
+Desc_Plastic is made in Desc_AssemblerMk1
+Desc_Blender can be made.
+Desc_SteelWall_8x1 can be made.
+Ingredient: Desc_TimeCrystal | Amount: 10
+Ingredient: Desc_HighSpeedWire | Amount: 9
+Ingredient: Desc_CoolingSystem | Amount: 6
+Ingredient: Desc_CircuitBoard | Amount: 6
+Product: Desc_CrystalShard | Amount: 7
+null is made in Desc_ManufacturerMk1
+Milestone_1-3 can be made.
+Research_Alien_MercerSphere can be made.
+Ingredient: Desc_PackagedBiofuel | Amount: 8
+Ingredient: Desc_Computer | Amount: 8
+Product: Desc_SpitterParts | Amount: 7
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_TurboFuel | Amount: 10
+Ingredient: Desc_OreGold | Amount: 10
+Desc_GasTank is made in Desc_HadronCollider
+Desc_StorageContainerMk1 can be made.
+Desc_StorageContainerMk2 can be made.
+Research_PowerSlugs_6 can be made.
+Ingredient: Desc_PackagedAlumina | Amount: 5
+Product: Desc_CircuitBoard | Amount: 1
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_Plastic | Amount: 7
+Desc_SteelPipe is made in Desc_AssemblerMk1
+Desc_PipelinePumpMK2 can be made.
+Desc_QuarterPipeCorner_03 can be made.
+Research_Quartz_2 can be made.
+Ingredient: Desc_TurboFuel | Amount: 10
+BP_EquipmentDescriptorStunSpear is made in Desc_ManufacturerMk1
+Ingredient: Desc_Plastic | Amount: 4
+Ingredient: Desc_TurboFuel | Amount: 7
+Ingredient: Desc_SingularityCell | Amount: 10
+Desc_Battery is made in Desc_ManufacturerMk1
+Ingredient: Desc_ModularFrame | Amount: 3
+Ingredient: Desc_CircuitBoard | Amount: 3
+Desc_Wire is made in Desc_HadronCollider
+Ingredient: Desc_Plastic | Amount: 7
+Ingredient: Desc_SteelPipe | Amount: 2
+Desc_AluminumIngot is made in Desc_AssemblerMk1
+Ingredient: Desc_AluminumIngot | Amount: 3
+BP_EquipmentDescriptorObjectScanner is made in Desc_AssemblerMk1
+Ingredient: Desc_AluminumPlate | Amount: 2
+Ingredient: Desc_SteelPipe | Amount: 9
+Ingredient: Desc_Wire | Amount: 3
+Ingredient: Desc_Silica | Amount: 4
+Desc_PackagedOilResidue is made in Desc_ManufacturerMk1
+Ingredient: Desc_TurboFuel | Amount: 10
+Ingredient: Desc_PackagedOilResidue | Amount: 10
+Ingredient: Desc_AluminumIngot | Amount: 2
+Desc_ModularFrameLightweight is made in Desc_ManufacturerMk1
+Ingredient: Desc_IronRod | Amount: 7
+Ingredient: Desc_OreGold | Amount: 8
+Ingredient: Desc_SteelIngot | Amount: 5
+Product: Desc_Leaves | Amount: 7
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_OreGold | Amount: 2
+Ingredient: Desc_PackagedWater | Amount: 4
+Desc_SpaceElevatorPart_6 is made in Desc_HadronCollider
+Research_Alien_SAM can be made.
+Ingredient: Desc_CopperIngot | Amount: 2
+Ingredient: Desc_Motor | Amount: 2
+Ingredient: Desc_RawQuartz | Amount: 7
+Ingredient: Desc_SpaceElevatorPart_4 | Amount: 4
+Desc_SpaceElevatorPart_11 is made in Desc_Blender
+Ingredient: Desc_Motor | Amount: 7
+Desc_SteelIngot is made in Desc_Blender
+Desc_ConveyorBeltMk6 can be made.
+Research_Sulfur_ExperimentalPower can be made.
+Research_Sulfur_compactedCoal can be made.
+Ingredient: Desc_Mycelia | Amount: 5
+Ingredient: Desc_Cement | Amount: 2
+Ingredient: Desc_AluminumPlateReinforced | Amount: 7
+Ingredient: Desc_Sulfur | Amount: 9
+Product: Desc_AluminumPlate | Amount: 3
+null is made in Desc_Blender
+Ingredient: Desc_AluminumPlate | Amount: 2
+Ingredient: Desc_PackagedOilResidue | Amount: 8
+Desc_FicsiteMesh is made in Desc_AssemblerMk1
+Desc_Barrier_Tall_01 can be made.
+Ingredient: Desc_PackagedOilResidue | Amount: 6
+Desc_SpaceElevatorPart_2 is made in Desc_HadronCollider
+Desc_Wall_Orange_8x4_Corner_02 can be made.
+Ingredient: Desc_PlutoniumCell | Amount: 7
+Ingredient: Desc_PackagedBiofuel | Amount: 1
+Ingredient: Desc_Plastic | Amount: 8
+Product: Desc_NonFissibleUranium | Amount: 2
+null is made in Desc_ManufacturerMk1
+Research_Quartz_4_1 can be made.
+Ingredient: Desc_Cable | Amount: 2
+Ingredient: Desc_Ficsonium | Amount: 8
+Product: Desc_OreIron | Amount: 7
+null is made in Desc_Blender
+Desc_Foundation_8x2_01 can be made.
+Desc_HyperPoleStackable can be made.
+Desc_RampInverted_8x2_Corner_01 can be made.
+Ingredient: Desc_AluminumPlate | Amount: 9
+Ingredient: Desc_SteelPipe | Amount: 2
+Ingredient: Desc_CircuitBoard | Amount: 2
+Desc_Parachute is made in Desc_Blender
+Desc_Elevator can be made.
+Research_AO_Hatcher can be made.
+Research_AO_DNACapsule can be made.
+Desc_StandaloneWidgetSign_Huge can be made.
+Ingredient: Desc_CopperIngot | Amount: 9
+Ingredient: Desc_CircuitBoardHighSpeed | Amount: 8
+Ingredient: Desc_IronRod | Amount: 8
+Product: Desc_StingerParts | Amount: 8
+null is made in Desc_ManufacturerMk1
+Desc_PortalSatellite can be made.
+Research_Quartz_PriorityMerger can be made.
+Ingredient: Desc_FicsiteMesh | Amount: 10
+Ingredient: Desc_PackagedOilResidue | Amount: 1
+Ingredient: Desc_AluminumPlate | Amount: 10
+Desc_SpikedRebar is made in Desc_HadronCollider
+Desc_PillarMiddle can be made.
+Desc_Roof_Metal_OutCorner_02 can be made.
+Desc_RampInverted_8x1_Corner_02 can be made.
+Research_Sulfur_TurboFuel can be made.
+Research_Alien_ActiveSAM can be made.
+Research_Alien_Somersloop can be made.
+Research_AOrgans_3 can be made.
+Ingredient: Desc_Wire | Amount: 6
+Ingredient: Desc_ModularFrameLightweight | Amount: 5
+Ingredient: Desc_Silica | Amount: 10
+Desc_NobeliskExplosive is made in Desc_Blender
+Ingredient: Desc_PackagedWater | Amount: 9
+Ingredient: Desc_Stone | Amount: 5
+Ingredient: Desc_Plastic | Amount: 5
+Ingredient: Desc_PackagedOilResidue | Amount: 9
+Desc_SpaceElevatorPart_9 is made in Desc_ManufacturerMk1
+Research_AO_Pre_Rebar can be made.
+Milestone_2-2 can be made.
+Ingredient: Desc_CoolingSystem | Amount: 5
+Ingredient: Desc_Wire | Amount: 5
+Desc_QuantumOscillator is made in Desc_HadronCollider
+Ingredient: Desc_SteelPipe | Amount: 1
+Ingredient: Desc_Plastic | Amount: 7
+Desc_SAMIngot is made in Desc_AssemblerMk1
+Desc_ConveyorBeltMk4 can be made.
+Ingredient: Desc_CoolingSystem | Amount: 9
+Ingredient: Desc_GasTank | Amount: 1
+Desc_AluminumPlateReinforced is made in Desc_ManufacturerMk1
+Desc_Roof_Orange_InCorner_02 can be made.
+Ingredient: Desc_PackagedWater | Amount: 9
+Ingredient: Desc_SingularityCell | Amount: 6
+Desc_PackagedNitrogenGas is made in Desc_AssemblerMk1
+Desc_ConstructorMk1 can be made.
+Desc_SteelWall_8x4 can be made.
+Desc_Portal can be made.
+Ingredient: Desc_SteelPipe | Amount: 4
+Desc_Ficsonium is made in Desc_HadronCollider
+Research_Quartz_3_4 can be made.
+Ingredient: Desc_AluminumPlate | Amount: 5
+Desc_IronPlateReinforced is made in Desc_Blender
+Research_AOrganisms_2 can be made.
+Research_Nutrients_4 can be made.
+Desc_ConveyorAttachmentSplitterProgrammableLift can be made.
+Desc_Roof_Tar_OutCorner_02 can be made.
+Desc_RailroadTrackIntegrated can be made.
+Ingredient: Desc_AluminumIngot | Amount: 9
+Desc_GoldIngot is made in Desc_ConstructorMk1
+Desc_PowerPoleWallMk2 can be made.
+Desc_HyperTubeWallHole can be made.
+Ingredient: Desc_AluminumIngot | Amount: 1
+Ingredient: Desc_GasTank | Amount: 1
+Ingredient: Desc_SteelIngot | Amount: 7
+Desc_CircuitBoardHighSpeed is made in Desc_HadronCollider
+Ingredient: Desc_PackagedWater | Amount: 3
+BP_EqDescZipLine is made in Desc_ManufacturerMk1
+Ingredient: Desc_PackagedWater | Amount: 3
+Desc_QuartzCrystal is made in Desc_ConstructorMk1
+Ingredient: Desc_Battery | Amount: 8
+Product: Desc_AlienPowerFuel | Amount: 2
+null is made in Desc_HadronCollider
+Desc_HyperTubeWallSupport can be made.
+Research_Sulfur_3 can be made.
+Research_Sulfur_4_1 can be made.
+Desc_BlueprintDesigner can be made.
+Research_Caterium_2 can be made.
+Desc_Barrier_Corner can be made.
+Desc_Walkway_Ramp can be made.
+Research_Sulfur_IonizedFuel can be made.
+Ingredient: Desc_RawQuartz | Amount: 6
+Ingredient: Desc_FicsiteMesh | Amount: 6
+Desc_SteelPlate is made in Desc_AssemblerMk1
+Ingredient: Desc_SingularityCell | Amount: 2
+Ingredient: Desc_Cement | Amount: 3
+Ingredient: Desc_GasTank | Amount: 3
+Ingredient: Desc_Silica | Amount: 7
+Product: Desc_StingerParts | Amount: 2
+null is made in Desc_Blender
+Research_Caterium_3 can be made.
+Research_Sulfur_RocketFuel can be made.
+Ingredient: Desc_RawQuartz | Amount: 9
+Desc_AluminumScrap is made in Desc_ConstructorMk1
+Research_Mycelia_1 can be made.
+Research_Sulfur_5_2 can be made.
+Research_Alien_SAMFluctuator can be made.
+Desc_Roof_Window_OutCorner_01 can be made.
+Desc_GeneratorNuclear can be made.
+Research_Mycelia_2 can be made.
+Research_Caterium_2_1 can be made.
+Desc_Wall_Orange_FlipTris_8x8 can be made.
+Desc_Roof_Window_01 can be made.
+Ingredient: Desc_SpaceElevatorPart_9 | Amount: 3
+Ingredient: Desc_ModularFrameLightweight | Amount: 8
+Ingredient: Desc_AluminumIngot | Amount: 9
+Ingredient: Desc_AluminumPlate | Amount: 4
+Desc_PackagedOil is made in Desc_ManufacturerMk1
+Ingredient: Desc_Crystal | Amount: 4
+Ingredient: Desc_AluminumCasing | Amount: 6
+Ingredient: Desc_PlutoniumPellet | Amount: 10
+Ingredient: Desc_CrystalShard | Amount: 9
+Product: Desc_PackagedNitrogenGas | Amount: 8
+null is made in Desc_Blender
+Desc_Packager can be made.
+Research_Quartz_4 can be made.
+Ingredient: Desc_SpaceElevatorPart_2 | Amount: 10
+Ingredient: Desc_AluminumPlateReinforced | Amount: 5
+Desc_PlutoniumFuelRod is made in Desc_Packager
+Desc_Wall_Orange_Tris_8x4 can be made.
+Desc_ConveyorLiftMk2 can be made.
+Research_Mycelia_7 can be made.
+Milestone_1-2 can be made.
+Desc_SteelWall_FlipTris_8x8 can be made.
+Desc_Ramp_8x4_Inverted_01 can be made.
+Desc_Walkway_T can be made.
+Desc_Roof_Tar_01 can be made.
+Ingredient: Desc_GoldIngot | Amount: 6
+Ingredient: Desc_SAM | Amount: 9
+Ingredient: Desc_Motor | Amount: 4
+BP_EquipmentDescriptorNobeliskDetonator is made in Desc_HadronCollider
+Milestone_4-4 can be made.
+Desc_Wall_Door_8x4_03 can be made.
+Desc_Catwalk_Stairs can be made.
+Ingredient: Desc_CircuitBoardHighSpeed | Amount: 1
+Desc_IronPlate is made in Desc_HadronCollider
+Ingredient: Desc_Crystal_mk2 | Amount: 5
+Ingredient: Desc_HatcherParts | Amount: 5
+Ingredient: Desc_HighSpeedConnector | Amount: 1
+Product: Desc_PlutoniumFuelRod | Amount: 6
+null is made in Desc_Blender
+Desc_Roof_Tar_OutCorner_03 can be made.
+Milestone_4-3 can be made.
+Research_Caterium_4_1 can be made.
+Milestone_3-1 can be made.
+Ingredient: Desc_IronPlateReinforced | Amount: 9
+Ingredient: Desc_PackagedNitrogenGas | Amount: 7
+Ingredient: Desc_AluminumIngot | Amount: 5
+Desc_FicsiteIngot is made in Desc_HadronCollider
+Desc_StandaloneWidgetSign_Portrait can be made.
+Ingredient: Desc_PackagedOilResidue | Amount: 5
+Desc_PetroleumCoke is made in Desc_HadronCollider
+Desc_Roof_Window_OutCorner_03 can be made.
+Desc_Catwalk_T can be made.
+Desc_SteelWall_FlipTris_8x4 can be made.
+Desc_Walkway_Straight can be made.
+Desc_Roof_Tar_InCorner_03 can be made.
+Desc_PriorityPowerSwitch can be made.
+Desc_PillarMiddle_Frame can be made.
+Research_Mycelia_2_1 can be made.
+Ingredient: Desc_Plastic | Amount: 5
+Ingredient: Desc_QuartzCrystal | Amount: 1
+Desc_MotorLightweight is made in Desc_AssemblerMk1
+Desc_Roof_Orange_04 can be made.
+Ingredient: Desc_SpaceElevatorPart_9 | Amount: 4
+Ingredient: Desc_SteelPipe | Amount: 3
+Ingredient: Desc_AluminumPlate | Amount: 6
+Ingredient: Desc_PackagedNitrogenGas | Amount: 8
+Desc_Diamond is made in Desc_ManufacturerMk1
+Desc_Wall_Orange_8x8_Corner_02 can be made.
+Desc_Wall_Conveyor_8x4_04 can be made.
+Desc_Wall_Orange_Angular_8x8 can be made.
+Desc_Valve can be made.
+Desc_Wall_Window_Thin_8x4_01 can be made.
+Desc_SignPole_Large can be made.
+Ingredient: Desc_AluminumPlateReinforced | Amount: 8
+Ingredient: Desc_AluminumPlate | Amount: 9
+Ingredient: Desc_ModularFrameLightweight | Amount: 8
+Desc_Computer is made in Desc_ManufacturerMk1
+Ingredient: Desc_PackagedNitrogenGas | Amount: 7
+Ingredient: Desc_CircuitBoardHighSpeed | Amount: 4
+Ingredient: Desc_PetroleumCoke | Amount: 5
+Desc_CopperDust is made in Desc_Blender
+Desc_Roof_Tar_04 can be made.
+Desc_Wall_Window_8x4_05 can be made.
+Milestone_3-4 can be made.
+Ingredient: Desc_NonFissibleUranium | Amount: 7
+Product: Desc_Crystal_mk3 | Amount: 5
+null is made in Desc_ConstructorMk1
+Research_Alien_BoosterBlocker can be made.
+Ingredient: Desc_TimeCrystal | Amount: 10
+Product: Desc_Cable | Amount: 4
+null is made in Desc_ConstructorMk1
+Research_Sulfur_4 can be made.
+Desc_FloodlightWall can be made.
+Research_Quartz_3_1 can be made.
+Ingredient: Desc_IronRod | Amount: 10
+Product: Desc_PackagedIonizedFuel | Amount: 8
+null is made in Desc_ManufacturerMk1
+Research_Sulfur_4_2 can be made.
+Research_Alien_CentralStorage can be made.
+Ingredient: Desc_CopperDust | Amount: 3
+Ingredient: Desc_Motor | Amount: 9
+Ingredient: Desc_SteelPlate | Amount: 10
+Desc_PlutoniumPellet is made in Desc_HadronCollider
+Desc_OilRefinery can be made.
+Desc_StandaloneWidgetSign_Square can be made.
+Ingredient: Desc_SAM | Amount: 5
+Desc_Chainsaw is made in Desc_Blender
+Research_Caterium_5 can be made.
+Ingredient: Desc_Wire | Amount: 2
+Ingredient: Desc_PackagedOilResidue | Amount: 8
+Ingredient: Desc_PackagedWater | Amount: 3
+Desc_Filter is made in Desc_HadronCollider
+Milestone_4-2 can be made.
+Desc_Wall_Window_Thin_8x4_02 can be made.
+Ingredient: Desc_AluminumIngot | Amount: 4
+BP_EquipmentDescriptorShockShank is made in Desc_ManufacturerMk1
+Desc_Walkway_Turn can be made.
+Milestone_6-6 can be made.
+Ingredient: Desc_Battery | Amount: 7
+Desc_SAMFluctuator is made in Desc_OilRefinery
+Desc_GeneratorCoal can be made.
+Ingredient: Desc_PackagedOilResidue | Amount: 6
+Ingredient: Desc_CircuitBoardHighSpeed | Amount: 3
+Desc_PressureConversionCube is made in Desc_HadronCollider
+Desc_PowerStorageMk1 can be made.
+Desc_Roof_Orange_01 can be made.
+Desc_FactoryCart can be made.
+Research_Caterium_4_1_1 can be made.
+Research_Caterium_7_2 can be made.
+Ingredient: Desc_PackagedIonizedFuel | Amount: 9
+Product: Desc_MotorLightweight | Amount: 2
+null is made in Desc_AssemblerMk1
+Research_Caterium_7_1 can be made.
+Ingredient: Desc_Coal | Amount: 4
+Desc_NobeliskNuke is made in Desc_Packager
+Desc_MinerMk3 can be made.
+Ingredient: Desc_SteelPlate | Amount: 1
+Desc_Medkit is made in Desc_Packager
+Desc_SteelWall_Tris_8x1 can be made.
+Ingredient: Desc_CoolingSystem | Amount: 3
+Ingredient: Desc_CopperDust | Amount: 7
+Desc_SpaceElevatorPart_5 is made in Desc_Packager
+Desc_PipeSupportStackable can be made.
+Research_Sulfur_6 can be made.
+Milestone_3-3 can be made.
+Ingredient: Desc_SingularityCell | Amount: 2
+Ingredient: Desc_PressureConversionCube | Amount: 2
+Ingredient: Desc_IronPlate | Amount: 8
+Desc_SpaceElevatorPart_3 is made in Desc_HadronCollider
+Desc_Wall_Orange_FlipTris_8x2 can be made.
+Ingredient: Desc_SpaceElevatorPart_6 | Amount: 5
+Desc_PackagedSulfuricAcid is made in Desc_Packager
+Desc_Roof_A_04 can be made.
+Desc_TruckStation can be made.
+Desc_SignPole_Small can be made.
+Desc_RampInverted_8x2_01 can be made.
+Desc_Tractor can be made.
+Milestone_6-3 can be made.
+Ingredient: Desc_SpaceElevatorPart_6 | Amount: 9
+Ingredient: Desc_CoolingSystem | Amount: 1
+Desc_SpaceElevatorPart_12 is made in Desc_AssemblerMk1
+Desc_Fence_01 can be made.
+Research_Caterium_4_1_2 can be made.
+Milestone_6-1 can be made.
+Ingredient: Desc_MotorLightweight | Amount: 3
+Desc_GenericBiomass is made in Desc_HadronCollider
+Desc_PowerPoleWallMk3 can be made.
+Ingredient: Desc_SpaceElevatorPart_9 | Amount: 3
+Desc_NobeliskShockwave is made in Desc_AssemblerMk1
+Research_Caterium_5_1 can be made.
+Research_Mycelia_4 can be made.
+Milestone_7-4 can be made.
+Research_Mycelia_GasMask can be made.
+Ingredient: Desc_Cable | Amount: 10
+Ingredient: Desc_ModularFrameLightweight | Amount: 6
+Ingredient: Desc_Leaves | Amount: 4
+Ingredient: Desc_Wire | Amount: 9
+Product: Desc_Stone | Amount: 10
+null is made in Desc_Blender
+Desc_GoldenCart can be made.
+Ingredient: Desc_SpaceElevatorPart_11 | Amount: 7
+Ingredient: Desc_AluminumIngot | Amount: 6
+Desc_AluminumCasing is made in Desc_HadronCollider
+Research_ACarapace_2 can be made.
+Ingredient: Desc_Ficsonium | Amount: 9
+Ingredient: Desc_CopperDust | Amount: 8
+Desc_Rubber is made in Desc_OilRefinery
+Desc_Roof_Tar_02 can be made.
+Ingredient: Desc_ModularFrameHeavy | Amount: 4
+Product: Desc_Cement | Amount: 4
+null is made in Desc_HadronCollider
+Research_Caterium_3_2 can be made.
+Milestone_5-1 can be made.
+Ingredient: Desc_GoldIngot | Amount: 5
+Desc_ModularFrameHeavy is made in Desc_HadronCollider
+Milestone_6-5 can be made.
+Milestone_5-5 can be made.
+Desc_Ramp_8x1_01 can be made.
+Desc_Wall_Orange_Tris_8x1 can be made.
+Ingredient: Desc_SAMIngot | Amount: 5
+Ingredient: Desc_MotorLightweight | Amount: 6
+Desc_TemporalProcessor is made in Desc_ManufacturerMk1
+Ingredient: Desc_CircuitBoardHighSpeed | Amount: 4
+Desc_IronIngot is made in Desc_AssemblerMk1
+Desc_ConveyorLiftMk1 can be made.
+Milestone_7-1 can be made.
+Desc_OilPump can be made.
+Desc_RailroadTrack can be made.
+Desc_DroneStation can be made.
+Ingredient: Desc_Computer | Amount: 5
+Desc_SpaceElevatorPart_8 is made in Desc_ConstructorMk1
+Desc_StandaloneWidgetSign_Small can be made.
+Desc_CentralStorage can be made.
+Ingredient: Desc_SAMFluctuator | Amount: 9
+Ingredient: Desc_Rubber | Amount: 10
+Ingredient: Desc_ModularFrameHeavy | Amount: 7
+Ingredient: Desc_GenericBiomass | Amount: 10
+Product: Desc_SteelPlate | Amount: 7
+null is made in Desc_Blender
+Desc_Wall_Gate_8x4_01 can be made.
+Desc_Wall_Window_8x4_03_Steel can be made.
+Ingredient: Desc_PlutoniumPellet | Amount: 10
+Desc_HighSpeedWire is made in Desc_Packager
+Desc_Stairs_Left_01 can be made.
+Ingredient: Desc_SteelIngot | Amount: 4
+Desc_Biofuel is made in Desc_Packager
+Desc_SmelterMk1 can be made.
+Research_AOrgans_2 can be made.
+Milestone_8-1 can be made.
+Desc_Wall_Window_8x4_06 can be made.
+Milestone_8-5 can be made.
+Desc_PipeSupportWallHole can be made.
+Milestone_5-2 can be made.
+Ingredient: Desc_Diamond | Amount: 10
+Ingredient: Desc_IronPlate | Amount: 6
+Desc_HazmatFilter is made in Desc_AssemblerMk1
+Ingredient: Desc_Crystal | Amount: 2
+Product: Desc_CopperSheet | Amount: 4
+null is made in Desc_ConstructorMk1
+Desc_PowerPoleWall can be made.
+Milestone_5-4 can be made.
+Desc_FoundationGlass_01 can be made.
+Desc_PowerPoleMk3 can be made.
+Milestone_8-3 can be made.
+Ingredient: Desc_SingularityCell | Amount: 1
+Desc_Cable is made in Desc_ConstructorMk1
+Desc_RampDouble_8x1 can be made.
+Research_Alien_PowerBooster can be made.
+Desc_LookoutTower can be made.
+Desc_Roof_Metal_InCorner_01 can be made.
+Ingredient: Desc_SpaceElevatorPart_9 | Amount: 2
+Desc_Stator is made in Desc_SmelterMk1
+Desc_RampInverted_8x1 can be made.
+Ingredient: Desc_QuartzCrystal | Amount: 3
+Ingredient: Desc_IronIngot | Amount: 4
+Desc_Rebar_Stunshot is made in Desc_Packager
+Ingredient: Desc_SteelPlate | Amount: 1
+Product: Desc_AlienPowerFuel | Amount: 8
+null is made in Desc_OilRefinery
+Desc_Barrier_Low_01 can be made.
+Ingredient: Desc_AluminumCasing | Amount: 5
+Desc_CartridgeChaos is made in Desc_HadronCollider
+Desc_Wall_Door_8x4_01 can be made.
+Ingredient: Desc_AluminumIngot | Amount: 4
+Ingredient: Desc_Stator | Amount: 1
+Desc_CrystalOscillator is made in Desc_OilRefinery
+Desc_Wall_Orange_Angular_8x4 can be made.
+Desc_Wall_Window_8x4_02 can be made.
+Ingredient: Desc_ComputerSuper | Amount: 9
+Product: Desc_PetroleumCoke | Amount: 6
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_ModularFrameLightweight | Amount: 5
+Desc_PackagedIonizedFuel is made in Desc_ConstructorMk1
+Desc_Roof_A_01 can be made.
+Desc_Wall_Conveyor_8x4_04_Steel can be made.
+Desc_ConveyorAttachmentSplitterSmartLift can be made.
+Ingredient: Desc_AluminumPlate | Amount: 10
+Ingredient: Desc_GoldIngot | Amount: 6
+Ingredient: Desc_SpaceElevatorPart_3 | Amount: 3
+Ingredient: Desc_OreGold | Amount: 10
+Desc_Rebar_Spreadshot is made in Desc_ManufacturerMk1
+Research_Sulfur_5_1 can be made.
+Desc_StandaloneWidgetSign_SmallWide can be made.
+Desc_ResourceSink can be made.
+Desc_SteelWall_Tris_8x8 can be made.
+Ingredient: Desc_SingularityCell | Amount: 3
+Desc_SteelPlateReinforced is made in Desc_ConstructorMk1
+Desc_WorkBench can be made.
+Desc_ResourceSinkShop can be made.
+Ingredient: Desc_SpaceElevatorPart_8 | Amount: 5
+Ingredient: Desc_FicsiteIngot | Amount: 1
+Desc_SpaceElevatorPart_10 is made in Desc_Packager
+Ingredient: Desc_SingularityCell | Amount: 7
+Desc_NobeliskCluster is made in Desc_SmelterMk1
+Research_ACarapace_3 can be made.
+Desc_PipeSupportWall can be made.
+Desc_ConveyorLiftMk4 can be made.
+Desc_CeilingLight can be made.
+Desc_QuarterPipeCorner_01 can be made.
+Ingredient: Desc_PackagedIonizedFuel | Amount: 2
+Ingredient: Desc_SteelPipe | Amount: 7
+Product: Desc_PlutoniumCell | Amount: 8
+null is made in Desc_AssemblerMk1
+Desc_DroneTransport can be made.
+Desc_BlueprintDesigner_Mk3 can be made.
+Ingredient: Desc_SpaceElevatorPart_12 | Amount: 2
+Desc_PackagedAlumina is made in Desc_ConstructorMk1
+Desc_WallSet_Steel_Angular_8x4 can be made.
+Desc_Roof_Orange_OutCorner_02 can be made.
+Desc_Wall_Conveyor_8x4_02_Steel can be made.
+Ingredient: Desc_IronPlateReinforced | Amount: 9
+Ingredient: Desc_SpaceElevatorPart_10 | Amount: 3
+BP_EquipmentDescriptorGasmask is made in Desc_HadronCollider
+Desc_Foundation_8x1_01 can be made.
+Ingredient: Desc_PackagedAlumina | Amount: 3
+Desc_ElectromagneticControlRod is made in Desc_AssemblerMk1
+Milestone_6-2 can be made.
+Ingredient: Desc_PackagedIonizedFuel | Amount: 5
+Ingredient: Desc_AluminumIngot | Amount: 10
+Ingredient: Desc_SAMIngot | Amount: 3
+Ingredient: Desc_OreGold | Amount: 2
+Desc_ModularFrameFused is made in Desc_ManufacturerMk1
+Ingredient: Desc_SpaceElevatorPart_8 | Amount: 5
+Desc_FicsoniumFuelRod is made in Desc_SmelterMk1
+Ingredient: Desc_DarkMatter | Amount: 10
+Product: Desc_Silica | Amount: 1
+null is made in Desc_SmelterMk1
+Desc_QuarterPipe_02 can be made.
+Ingredient: Desc_PackagedSulfuricAcid | Amount: 3
+Ingredient: Desc_SpaceElevatorPart_2 | Amount: 8
+Ingredient: Desc_SpaceElevatorPart_3 | Amount: 3
+Ingredient: Desc_QuantumOscillator | Amount: 9
+Desc_NobeliskGas is made in Desc_Blender
+Research_Mycelia_5 can be made.
+Desc_Pipeline can be made.
+Desc_FrackingSmasher can be made.
+Desc_SignPole_Huge can be made.
+Desc_Converter can be made.
+Desc_PowerTower can be made.
+Desc_Catwalk_Turn can be made.
+Ingredient: Desc_IronPlateReinforced | Amount: 7
+Ingredient: Desc_GoldIngot | Amount: 8
+Desc_SpaceElevatorPart_7 is made in Desc_ManufacturerMk1
+Research_Mycelia_6 can be made.
+Ingredient: Desc_Biofuel | Amount: 3
+Ingredient: Desc_Stator | Amount: 10
+Desc_CopperSheet is made in Desc_HadronCollider
+Ingredient: Desc_Wood | Amount: 7
+Product: Desc_FicsiteMesh | Amount: 10
+null is made in Desc_OilRefinery
+Desc_Ramp_Frame_Inverted_01 can be made.
+Ingredient: Desc_MotorLightweight | Amount: 10
+Ingredient: Desc_Battery | Amount: 3
+Product: Desc_SAMIngot | Amount: 4
+Desc_SulfuricAcid is made in Desc_OilRefinery
+Desc_Walkway_Cross can be made.
+Desc_Ramp_Diagonal_8x1_01 can be made.
+Desc_SignPole_Portrait can be made.
+Ingredient: Desc_LiquidTurboFuel | Amount: 5000
+Product: Desc_AluminumIngot | Amount: 3
+Product: Desc_Water | Amount: 6000
+null is made in Desc_OilRefinery
+Ingredient: Desc_ElectromagneticControlRod | Amount: 6
+Ingredient: Desc_Water | Amount: 8000
+Desc_LiquidTurboFuel is made in Desc_OilRefinery
+Ingredient: Desc_SAMIngot | Amount: 7
+Product: Desc_OreCopper | Amount: 9
+Desc_RocketFuel is made in Desc_Converter
+Desc_Workshop can be made.
+Milestone_7-3 can be made.
+Desc_JumpPad can be made.
+Ingredient: Desc_LiquidOil | Amount: 9000
+Ingredient: Desc_SulfuricAcid | Amount: 9000
+Product: Desc_FicsiteMesh | Amount: 9
+Desc_AluminaSolution is made in Desc_Blender
+Ingredient: Desc_Stator | Amount: 2
+Desc_UraniumCell is made in Desc_AssemblerMk1
+Research_Caterium_4_2 can be made.
+Desc_Roof_Window_InCorner_03 can be made.
+Desc_Wall_Orange_FlipTris_8x4 can be made.
+Desc_Catwalk_Cross can be made.
+Desc_MinerMk1 can be made.
+Desc_RampInverted_8x2_Corner_02 can be made.
+Desc_Wall_Orange_Tris_8x8 can be made.
+Ingredient: Desc_Cable | Amount: 1
+Ingredient: Desc_RocketFuel | Amount: 1000
+Product: Desc_AluminumPlateReinforced | Amount: 3
+Desc_IonizedFuel is made in Desc_OilRefinery
+Desc_StandaloneWidgetSign_Square_Small can be made.
+Milestone_9-2 can be made.
+Desc_Wall_Orange_8x1 can be made.
+Milestone_9-3 can be made.
+Desc_Roof_Tar_InCorner_01 can be made.
+Ingredient: Desc_SpaceElevatorPart_5 | Amount: 8
+Ingredient: Desc_GenericBiomass | Amount: 7
+Ingredient: Desc_MotorLightweight | Amount: 5
+Desc_CartridgeStandard is made in Desc_ManufacturerMk1
+Desc_Roof_Tar_OutCorner_01 can be made.
+Milestone_7-2 can be made.
+Ingredient: Desc_Biofuel | Amount: 5
+Desc_HighSpeedConnector is made in Desc_SmelterMk1
+Desc_StandaloneWidgetSign_Large can be made.
+Ingredient: Desc_PressureConversionCube | Amount: 2
+Ingredient: Desc_LiquidOil | Amount: 9000
+Ingredient: Desc_GenericBiomass | Amount: 8
+Desc_ComputerSuper is made in Desc_HadronCollider
+Desc_PillarBase can be made.
+Desc_FrackingExtractor can be made.
+Ingredient: Desc_FicsiteIngot | Amount: 6
+Desc_Fabric is made in Desc_Packager
+Research_Mycelia_8 can be made.
+Milestone_9-4 can be made.
+Desc_FoundryMk1 can be made.
+Desc_Roof_Window_OutCorner_02 can be made.
+Desc_Wall_Window_8x4_07 can be made.
+Ingredient: Desc_Coal | Amount: 5
+Desc_QuantumEnergy is made in Desc_Converter
+Ingredient: Desc_Stator | Amount: 1
+Product: Desc_PackagedNitrogenGas | Amount: 9
+null is made in Desc_AssemblerMk1
+Desc_QuantumEncoder can be made.
+Research_Caterium_6_3 can be made.
+Desc_Wall_Conveyor_8x4_01_Steel can be made.
+Ingredient: Desc_PlutoniumPellet | Amount: 7
+Ingredient: Desc_SpaceElevatorPart_12 | Amount: 1
+Ingredient: Desc_SAM | Amount: 5
+Ingredient: Desc_PackagedIonizedFuel | Amount: 1
+Desc_Rotor is made in Desc_ManufacturerMk1
+Desc_Ramp_Diagonal_8x2_01 can be made.
+Desc_StandaloneWidgetSign_SmallVeryWide can be made.
+Desc_Wall_Orange_Tris_8x2 can be made.
+Desc_RadarTower can be made.
+Ingredient: Desc_Fabric | Amount: 2
+Ingredient: Desc_LiquidTurboFuel | Amount: 2000
+Ingredient: Desc_CrystalOscillator | Amount: 8
+Ingredient: Desc_CircuitBoardHighSpeed | Amount: 9
+Product: Desc_IronScrew | Amount: 1
+Desc_HeavyOilResidue is made in Desc_QuantumEncoder
+Desc_ConveyorLiftMk3 can be made.
+Ingredient: Desc_Rotor | Amount: 6
+Ingredient: Desc_PackagedIonizedFuel | Amount: 4
+Desc_CompactedCoal is made in Desc_ManufacturerMk1
+Desc_Roof_Window_InCorner_01 can be made.
+Ingredient: Desc_PressureConversionCube | Amount: 1
+Ingredient: Desc_Coal | Amount: 2
+Ingredient: Desc_GoldIngot | Amount: 8
+Product: Desc_PackagedOilResidue | Amount: 6
+Desc_DarkEnergy is made in Desc_QuantumEncoder
+Ingredient: Desc_PressureConversionCube | Amount: 4
+Desc_TimeCrystal is made in Desc_ConstructorMk1
+Desc_Roof_A_02 can be made.
+Ingredient: Desc_QuantumEnergy | Amount: 6000
+Ingredient: Desc_Wood | Amount: 6
+Ingredient: Desc_SAMIngot | Amount: 2
+Product: Desc_Crystal_mk2 | Amount: 7
+null is made in Desc_Blender
+Ingredient: Desc_Diamond | Amount: 9
+Product: Desc_MotorLightweight | Amount: 3
+Desc_LiquidBiofuel is made in Desc_Blender
+Milestone_9-5 can be made.
+Desc_Concrete_Barrier_01 can be made.
+Ingredient: Desc_HeavyOilResidue | Amount: 10000
+Ingredient: Desc_CircuitBoard | Amount: 1
+Ingredient: Desc_Stator | Amount: 3
+Product: Desc_Biofuel | Amount: 7
+Desc_LiquidFuel is made in Desc_Blender
+Desc_IndustrialTank can be made.
+Ingredient: Desc_Battery | Amount: 5
+Ingredient: Desc_QuartzCrystal | Amount: 2
+Product: Desc_QuartzCrystal | Amount: 10
+Desc_NitricAcid is made in Desc_Converter
+Ingredient: Desc_PackagedIonizedFuel | Amount: 5
+Desc_SpaceElevatorPart_1 is made in Desc_AssemblerMk1
+Ingredient: Desc_QuantumEnergy | Amount: 8000
+Ingredient: Desc_StingerParts | Amount: 10
+Product: Desc_Computer | Amount: 2
+null is made in Desc_HadronCollider
+Desc_Ramp_Diagonal_8x4_02 can be made.
+Desc_SteelWall_FlipTris_8x2 can be made.
+Ingredient: Desc_HeavyOilResidue | Amount: 10000
+Product: Desc_SpitterParts | Amount: 7
+null is made in Desc_HadronCollider
+Desc_PipelineMK2 can be made.
+Desc_Wall_Conveyor_8x4_02 can be made.
+Ingredient: Desc_RocketFuel | Amount: 9000
+Ingredient: Desc_Cable | Amount: 10
+Desc_Gunpowder is made in Desc_Blender
+Desc_PipeHyperSupport can be made.
+Desc_Wall_Window_8x4_04 can be made.
+Desc_HyperTubeTJunction can be made.
+Desc_Wall_Orange_8x8_Corner_01 can be made.
+Milestone_8-4 can be made.
+Research_Alien_ProductionBooster can be made.
+Milestone_9-1 can be made.
+Desc_Roof_Orange_02 can be made.
+Desc_Wall_Window_8x4_03 can be made.
+Desc_PipelinePump can be made.
+Desc_ConveyorLiftMk5 can be made.
+Ingredient: Desc_HogParts | Amount: 3
+Ingredient: Desc_Cement | Amount: 10
+Product: Desc_FicsoniumFuelRod | Amount: 10
+null is made in Desc_AssemblerMk1
+Desc_Ramp_Frame_01 can be made.
+Desc_TarpFence can be made.
+Desc_Roof_Window_03 can be made.
+Research_Mycelia_3 can be made.
+Desc_Wall_Orange_FlipTris_8x1 can be made.
+Desc_Roof_Tar_InCorner_02 can be made.
+Research_Caterium_6_2 can be made.
+Milestone_4-5 can be made.
+Ingredient: Desc_PackagedBiofuel | Amount: 5
+Product: Desc_LiquidBiofuel | Amount: 5000
+Product: Desc_Stator | Amount: 10
+null is made in Desc_OilRefinery
+Ingredient: Desc_RocketFuel | Amount: 8000
+Ingredient: Desc_Cable | Amount: 4
+Ingredient: Desc_FicsiteIngot | Amount: 8
+Ingredient: Desc_ModularFrameLightweight | Amount: 9
+Desc_PlutoniumCell is made in Desc_QuantumEncoder
+Desc_Roof_Window_02 can be made.
+Ingredient: Desc_Crystal_mk2 | Amount: 5
+Product: Desc_ComputerSuper | Amount: 1
+null is made in Desc_FoundryMk1
+Desc_Roof_Orange_OutCorner_01 can be made.
+Desc_ConveyorAttachmentMergerPriorityLift can be made.
+Ingredient: Desc_TemporalProcessor | Amount: 9
+Desc_FluidCanister is made in Desc_Converter
+Desc_Railing_01 can be made.
+Desc_PillarTop can be made.
+Desc_Wall_8x4_01 can be made.
+Desc_FloodlightPole can be made.
+Desc_Wall_Frame_01 can be made.
+Research_Alien_BoosterFuel can be made.
+Ingredient: Desc_AlienPowerFuel | Amount: 7
+Product: Desc_Leaves | Amount: 1
+null is made in Desc_ManufacturerMk1
+Desc_AlienPowerBuilding can be made.
+Desc_PowerPoleMk2 can be made.
+Desc_Wall_Door_8x4_01_Steel can be made.
+Milestone_6-7 can be made.
+Desc_Stairs_Right_01 can be made.
+Ingredient: Desc_QuartzCrystal | Amount: 10
+Ingredient: Desc_NitrogenGas | Amount: 5000
+Product: Desc_SteelIngot | Amount: 10
+null is made in Desc_Packager
+Desc_Foundation_8x4_01 can be made.
+Desc_RampInverted_8x4_Corner_02 can be made.
+Desc_PowerPoleWallDouble can be made.
+Ingredient: Desc_NitrogenGas | Amount: 3000
+Desc_Fuel is made in Desc_QuantumEncoder
+Ingredient: Desc_DarkEnergy | Amount: 3000
+Ingredient: Desc_CircuitBoardHighSpeed | Amount: 6
+Desc_PackagedNitricAcid is made in Desc_Packager
+Ingredient: Desc_HeavyOilResidue | Amount: 1000
+Product: Desc_CircuitBoard | Amount: 4
+Product: Desc_Crystal_mk3 | Amount: 3
+null is made in Desc_Packager
+Desc_MinerMk2 can be made.
+Desc_Ramp_8x8x8 can be made.
+Ingredient: Desc_GenericBiomass | Amount: 7
+BP_EquipmentDescriptorHoverPack is made in Desc_Converter
+Ingredient: Desc_OreBauxite | Amount: 9
+Ingredient: Desc_Diamond | Amount: 5
+BP_EquipmentDescriptorJetPack is made in Desc_QuantumEncoder
+Desc_ElevatorFloorStop can be made.
+Desc_Ramp_Diagonal_8x4_01 can be made.
+Desc_RampInverted_8x4_Corner_01 can be made.
+Desc_Ramp_8x4_01 can be made.
+Ingredient: Desc_PackagedNitricAcid | Amount: 9
+Ingredient: Desc_FicsiteMesh | Amount: 2
+Ingredient: Desc_RocketFuel | Amount: 10000
+Product: Desc_AluminumScrap | Amount: 1
+Product: Desc_SpitterParts | Amount: 2
+null is made in Desc_Blender
+Desc_Roof_Metal_OutCorner_03 can be made.
+Ingredient: Desc_Cable | Amount: 5
+Desc_PackagedRocketFuel is made in Desc_SmelterMk1
+Ingredient: Desc_FluidCanister | Amount: 5
+Desc_Cement is made in Desc_QuantumEncoder
+Desc_Roof_Orange_03 can be made.
+Milestone_4-1 can be made.
+Desc_WallSet_Steel_Angular_8x8 can be made.
+Desc_ConveyorCeilingAttachment can be made.
+Desc_QuarterPipeCorner_04 can be made.
+Ingredient: Desc_SpaceElevatorPart_3 | Amount: 4
+Desc_IronScrew is made in Desc_Packager
+Desc_Wall_Door_8x4_03_Steel can be made.
+Ingredient: Desc_Diamond | Amount: 10
+Ingredient: Desc_AluminaSolution | Amount: 1000
+Ingredient: Desc_Cement | Amount: 6
+BP_EquipmentDescriptorHazmatSuit is made in Desc_Blender
+Desc_ConveyorPoleStackable can be made.
+Ingredient: Desc_LiquidFuel | Amount: 9000
+Ingredient: Desc_Stator | Amount: 7
+Ingredient: Desc_FicsoniumFuelRod | Amount: 5
+Desc_DarkMatter is made in Desc_QuantumEncoder
+Milestone_8-2 can be made.
+Ingredient: Desc_PetroleumCoke | Amount: 5
+BP_EquipmentDescriptorRifle is made in Desc_OilRefinery
+Ingredient: Desc_OreGold | Amount: 3
+Ingredient: Desc_HighSpeedWire | Amount: 3
+Ingredient: Desc_IronRod | Amount: 10
+Ingredient: Desc_CoolingSystem | Amount: 10
+Product: Desc_PackagedOil | Amount: 10
+null is made in Desc_ManufacturerMk1
+Desc_Roof_Orange_OutCorner_03 can be made.
+Milestone_7-5 can be made.
+Ingredient: Desc_DarkEnergy | Amount: 4000
+Ingredient: Desc_QuantumOscillator | Amount: 8
+Ingredient: Desc_IronPlate | Amount: 9
+Product: Desc_Crystal_mk2 | Amount: 2
+Product: Desc_HogParts | Amount: 10
+null is made in Desc_Blender
+Desc_Wall_Orange_8x4_Corner_01 can be made.
+Ingredient: Desc_SulfuricAcid | Amount: 8000
+Ingredient: Desc_HighSpeedConnector | Amount: 6
+Ingredient: Desc_Wire | Amount: 6
+Ingredient: Desc_Computer | Amount: 1
+Product: Desc_OreUranium | Amount: 9
+null is made in Desc_QuantumEncoder
+Desc_Roof_Metal_OutCorner_01 can be made.
+Desc_SteelWall_Tris_8x4 can be made.
+Desc_PowerPoleWallDoubleMk2 can be made.
+Desc_Roof_Orange_InCorner_01 can be made.
+Ingredient: Desc_Battery | Amount: 10
+Desc_IronRod is made in Desc_Converter
+Desc_Wall_Conveyor_8x4_03 can be made.
+Ingredient: Desc_IronRod | Amount: 7
+Ingredient: Desc_Ficsonium | Amount: 3
+Product: Desc_Diamond | Amount: 9
+null is made in Desc_FoundryMk1
+Ingredient: Desc_PackagedNitricAcid | Amount: 7
+Ingredient: Desc_SulfuricAcid | Amount: 8000
+Product: Desc_CopperIngot | Amount: 2
+null is made in Desc_OilRefinery
+Ingredient: Desc_OreCopper | Amount: 6
+Ingredient: Desc_IronScrew | Amount: 10
+Product: Desc_Rubber | Amount: 9
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_ComputerSuper | Amount: 4
+Product: Desc_IronPlateReinforced | Amount: 6
+null is made in Desc_FoundryMk1
+Ingredient: Desc_Leaves | Amount: 8
+Product: Desc_StingerParts | Amount: 6
+null is made in Desc_FoundryMk1
+Ingredient: Desc_ElectromagneticControlRod | Amount: 2
+Product: Desc_ComputerSuper | Amount: 5
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_StingerParts | Amount: 8
+Product: Desc_TemporalProcessor | Amount: 3
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_LiquidBiofuel | Amount: 4000
+Ingredient: Desc_ElectromagneticControlRod | Amount: 9
+Ingredient: Desc_PackagedRocketFuel | Amount: 4
+Product: Desc_PackagedOil | Amount: 1
+null is made in Desc_QuantumEncoder
+Ingredient: Desc_Silica | Amount: 9
+Product: Desc_MotorLightweight | Amount: 7
+null is made in Desc_AssemblerMk1
+Research_Alien_CentralStackExpansion_03 can be made.
+Ingredient: Desc_ElectromagneticControlRod | Amount: 3
+Product: Desc_ModularFrame | Amount: 5
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_PackagedOilResidue | Amount: 2
+Ingredient: Desc_ModularFrame | Amount: 6
+Product: Desc_LiquidBiofuel | Amount: 4000
+Product: Desc_PressureConversionCube | Amount: 10
+null is made in Desc_Converter
+Ingredient: Desc_SpitterParts | Amount: 7
+Product: Desc_Wood | Amount: 9
+null is made in Desc_SmelterMk1
+Ingredient: Desc_HogParts | Amount: 1
+Product: Desc_QuantumEnergy | Amount: 3000
+null is made in Desc_Converter
+Ingredient: Desc_IronRod | Amount: 9
+Product: Desc_CopperIngot | Amount: 8
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_FicsiteMesh | Amount: 10
+Product: Desc_FicsoniumFuelRod | Amount: 3
+null is made in Desc_OilRefinery
+Ingredient: Desc_PressureConversionCube | Amount: 7
+Ingredient: Desc_Coal | Amount: 10
+Product: Desc_AluminaSolution | Amount: 4000
+null is made in Desc_Blender
+Ingredient: Desc_Rubber | Amount: 8
+Ingredient: Desc_TimeCrystal | Amount: 4
+Product: Desc_Crystal_mk2 | Amount: 1
+Product: Desc_Leaves | Amount: 3
+null is made in Desc_Converter
+Ingredient: Desc_ComputerSuper | Amount: 9
+Ingredient: Desc_Diamond | Amount: 3
+Product: Desc_Motor | Amount: 10
+null is made in Desc_FoundryMk1
+Ingredient: Desc_SteelPlate | Amount: 10
+Ingredient: Desc_Diamond | Amount: 10
+Product: Desc_OreBauxite | Amount: 5
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_SteelPlateReinforced | Amount: 5
+Product: Desc_Crystal_mk2 | Amount: 10
+null is made in Desc_OilRefinery
+Ingredient: Desc_TurboFuel | Amount: 3
+Ingredient: Desc_FicsiteMesh | Amount: 6
+Product: Desc_LiquidBiofuel | Amount: 4000
+null is made in Desc_Converter
+Ingredient: Desc_Ficsonium | Amount: 8
+Product: Desc_PetroleumCoke | Amount: 8
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_PackagedRocketFuel | Amount: 5
+Product: Desc_Battery | Amount: 7
+null is made in Desc_Packager
+Ingredient: Desc_Cement | Amount: 1
+Product: Desc_Rubber | Amount: 2
+null is made in Desc_SmelterMk1
+Research_Alien_CentralInventory can be made.
+Ingredient: Desc_Sulfur | Amount: 2
+Ingredient: Desc_DarkEnergy | Amount: 5000
+Product: Desc_Biofuel | Amount: 6
+null is made in Desc_Packager
+Ingredient: Desc_LiquidOil | Amount: 3000
+Product: Desc_ModularFrameFused | Amount: 10
+null is made in Desc_HadronCollider
+Ingredient: Desc_DarkEnergy | Amount: 5000
+Ingredient: Desc_Stone | Amount: 9
+Product: Desc_SpitterParts | Amount: 3
+null is made in Desc_Packager
+Ingredient: Desc_AluminumCasing | Amount: 5
+Ingredient: Desc_HighSpeedConnector | Amount: 1
+Ingredient: Desc_OreUranium | Amount: 2
+Product: Desc_SteelPlateReinforced | Amount: 9
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_PlutoniumFuelRod | Amount: 3
+Product: Desc_HogParts | Amount: 5
+null is made in Desc_FoundryMk1
+Ingredient: Desc_NonFissibleUranium | Amount: 4
+Product: Desc_TimeCrystal | Amount: 6
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_OreCopper | Amount: 9
+Ingredient: Desc_CrystalOscillator | Amount: 5
+Product: Desc_ModularFrameLightweight | Amount: 4
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_Crystal | Amount: 2
+Ingredient: Desc_GenericBiomass | Amount: 1
+Product: Desc_HatcherParts | Amount: 1
+null is made in Desc_FoundryMk1
+Ingredient: Desc_MotorLightweight | Amount: 3
+Product: Desc_HogParts | Amount: 4
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_PetroleumCoke | Amount: 9
+Ingredient: Desc_Mycelia | Amount: 8
+Ingredient: Desc_AluminumCasing | Amount: 3
+Product: Desc_AlienPowerFuel | Amount: 8
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_Ficsonium | Amount: 6
+Product: Desc_CompactedCoal | Amount: 8
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_LiquidOil | Amount: 10000
+Product: Desc_GasTank | Amount: 9
+null is made in Desc_OilRefinery
+Ingredient: Desc_PackagedOil | Amount: 5
+Product: Desc_PackagedNitricAcid | Amount: 5
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_OreIron | Amount: 7
+Ingredient: Desc_CircuitBoard | Amount: 3
+Ingredient: Desc_SulfuricAcid | Amount: 6000
+Product: Desc_LiquidBiofuel | Amount: 7000
+null is made in Desc_Blender
+Ingredient: Desc_SteelIngot | Amount: 2
+Product: Desc_AluminumPlate | Amount: 7
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_ComputerSuper | Amount: 9
+Product: Desc_SpitterParts | Amount: 2
+null is made in Desc_SmelterMk1
+Ingredient: Desc_PlutoniumCell | Amount: 1
+Ingredient: Desc_CircuitBoard | Amount: 6
+Ingredient: Desc_FicsiteIngot | Amount: 4
+Product: Desc_Ficsonium | Amount: 7
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_AlienDNACapsule | Amount: 6
+Ingredient: Desc_AluminumScrap | Amount: 5
+Product: Desc_HeavyOilResidue | Amount: 6000
+Product: Desc_Crystal | Amount: 9
+null is made in Desc_QuantumEncoder
+Ingredient: Desc_QuartzCrystal | Amount: 4
+Product: Desc_Fabric | Amount: 3
+null is made in Desc_FoundryMk1
+Ingredient: Desc_SteelPipe | Amount: 4
+Ingredient: Desc_AluminumPlateReinforced | Amount: 7
+Product: Desc_Motor | Amount: 10
+Product: Desc_LiquidTurboFuel | Amount: 3000
+null is made in Desc_Converter
+Ingredient: Desc_NitricAcid | Amount: 9000
+Ingredient: Desc_PackagedNitricAcid | Amount: 8
+Ingredient: Desc_QuartzCrystal | Amount: 5
+Product: Desc_PlutoniumCell | Amount: 5
+null is made in Desc_Blender
+Ingredient: Desc_HeavyOilResidue | Amount: 10000
+Product: Desc_PressureConversionCube | Amount: 4
+null is made in Desc_HadronCollider
+Research_Alien_CentralUploadBoost_01 can be made.
+Ingredient: Desc_SingularityCell | Amount: 6
+Product: Desc_SpitterParts | Amount: 10
+null is made in Desc_Packager
+Ingredient: Desc_Water | Amount: 5000
+Ingredient: Desc_Silica | Amount: 6
+Product: Desc_SpitterParts | Amount: 5
+null is made in Desc_OilRefinery
+Ingredient: Desc_GasTank | Amount: 1
+Ingredient: Desc_LiquidBiofuel | Amount: 7000
+Product: Desc_WAT1 | Amount: 5
+Product: Desc_NitrogenGas | Amount: 8000
+null is made in Desc_OilRefinery
+Ingredient: Desc_PlutoniumPellet | Amount: 7
+Product: Desc_StingerParts | Amount: 8
+null is made in Desc_AssemblerMk1
+Research_Alien_CentralStackExpansion_02 can be made.
+Ingredient: Desc_SteelPipe | Amount: 5
+Ingredient: Desc_RocketFuel | Amount: 5000
+Ingredient: Desc_HighSpeedWire | Amount: 5
+Product: Desc_PackagedNitrogenGas | Amount: 2
+Product: Desc_Wood | Amount: 7
+null is made in Desc_QuantumEncoder
+Ingredient: Desc_ElectromagneticControlRod | Amount: 10
+Ingredient: Desc_QuantumEnergy | Amount: 6000
+Ingredient: Desc_SteelPipe | Amount: 4
+Product: Desc_AluminaSolution | Amount: 4000
+Product: Desc_PackagedIonizedFuel | Amount: 10
+null is made in Desc_QuantumEncoder
+Ingredient: Desc_PressureConversionCube | Amount: 8
+Ingredient: Desc_SingularityCell | Amount: 1
+Product: Desc_HogParts | Amount: 4
+Product: Desc_WAT1 | Amount: 3
+null is made in Desc_Blender
+Ingredient: Desc_PackagedAlumina | Amount: 10
+Ingredient: Desc_StingerParts | Amount: 7
+Product: Desc_PlutoniumCell | Amount: 1
+null is made in Desc_HadronCollider
+Ingredient: Desc_OreCopper | Amount: 4
+Product: Desc_Water | Amount: 7000
+Product: Desc_Rotor | Amount: 5
+null is made in Desc_Converter
+Ingredient: Desc_DarkEnergy | Amount: 10000
+Ingredient: Desc_SAMIngot | Amount: 8
+Product: Desc_PackagedRocketFuel | Amount: 7
+null is made in Desc_Blender
+Ingredient: Desc_FicsiteMesh | Amount: 9
+Product: Desc_ModularFrameLightweight | Amount: 6
+null is made in Desc_SmelterMk1
+Ingredient: Desc_Stone | Amount: 2
+Ingredient: Desc_HatcherParts | Amount: 9
+Product: Desc_PackagedIonizedFuel | Amount: 1
+null is made in Desc_AssemblerMk1
+Research_Alien_CentralStackExpansion_01 can be made.
+Ingredient: Desc_LiquidOil | Amount: 5000
+Product: Desc_Plastic | Amount: 9
+null is made in Desc_HadronCollider
+Ingredient: Desc_AluminumCasing | Amount: 5
+Product: Desc_NuclearFuelRod | Amount: 3
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_NitrogenGas | Amount: 4000
+Ingredient: Desc_AlienDNACapsule | Amount: 7
+Product: Desc_Crystal | Amount: 1
+null is made in Desc_Packager
+Ingredient: Desc_ModularFrameFused | Amount: 9
+Product: Desc_PackagedOilResidue | Amount: 5
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_WAT1 | Amount: 4
+Ingredient: Desc_SteelPlateReinforced | Amount: 3
+Product: Desc_AlienDNACapsule | Amount: 2
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_Water | Amount: 9000
+Ingredient: Desc_ModularFrameLightweight | Amount: 1
+Product: Desc_SulfuricAcid | Amount: 1000
+null is made in Desc_Packager
+Ingredient: Desc_Diamond | Amount: 6
+Product: Desc_ModularFrameLightweight | Amount: 8
+null is made in Desc_SmelterMk1
+Ingredient: Desc_Crystal | Amount: 8
+Ingredient: Desc_DarkEnergy | Amount: 5000
+Product: Desc_PackagedWater | Amount: 2
+Product: Desc_LiquidTurboFuel | Amount: 5000
+null is made in Desc_OilRefinery
+Ingredient: Desc_FicsoniumFuelRod | Amount: 7
+Product: Desc_OreCopper | Amount: 7
+null is made in Desc_SmelterMk1
+Ingredient: Desc_Fabric | Amount: 7
+Product: Desc_PackagedNitrogenGas | Amount: 8
+null is made in Desc_Packager
+Ingredient: Desc_CompactedCoal | Amount: 10
+Ingredient: Desc_OreIron | Amount: 10
+Product: Desc_PackagedNitrogenGas | Amount: 9
+Product: Desc_StingerParts | Amount: 4
+null is made in Desc_Converter
+Ingredient: Desc_Battery | Amount: 8
+Ingredient: Desc_NitrogenGas | Amount: 5000
+Product: Desc_LiquidFuel | Amount: 2000
+null is made in Desc_Packager
+Ingredient: Desc_NitricAcid | Amount: 5000
+Product: Desc_ModularFrameFused | Amount: 3
+null is made in Desc_Packager
+Ingredient: Desc_Rubber | Amount: 5
+Product: Desc_AlienDNACapsule | Amount: 7
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_Rotor | Amount: 4
+Ingredient: Desc_AlienDNACapsule | Amount: 3
+Product: Desc_Fabric | Amount: 5
+null is made in Desc_Blender
+Ingredient: Desc_QuantumEnergy | Amount: 2000
+Ingredient: Desc_IronPlate | Amount: 5
+Product: Desc_Silica | Amount: 9
+null is made in Desc_HadronCollider
+Ingredient: Desc_Water | Amount: 6000
+Ingredient: Desc_Stone | Amount: 2
+Product: Desc_Crystal | Amount: 7
+null is made in Desc_QuantumEncoder
+Ingredient: Desc_GenericBiomass | Amount: 4
+Ingredient: Desc_Mycelia | Amount: 3
+Product: Desc_HogParts | Amount: 9
+null is made in Desc_HadronCollider
+Ingredient: Desc_Motor | Amount: 2
+Product: Desc_Sulfur | Amount: 5
+Product: Desc_LiquidBiofuel | Amount: 10000
+null is made in Desc_Packager
+Ingredient: Desc_LiquidOil | Amount: 1000
+Ingredient: Desc_AluminaSolution | Amount: 1000
+Product: Desc_GoldIngot | Amount: 4
+null is made in Desc_Blender
+Ingredient: Desc_FicsiteIngot | Amount: 5
+Ingredient: Desc_CoolingSystem | Amount: 4
+Product: Desc_StingerParts | Amount: 2
+null is made in Desc_FoundryMk1
+Ingredient: Desc_ModularFrameLightweight | Amount: 9
+Product: Desc_IronPlateReinforced | Amount: 9
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_ModularFrameHeavy | Amount: 2
+Product: Desc_ModularFrameLightweight | Amount: 6
+null is made in Desc_SmelterMk1
+Ingredient: Desc_Motor | Amount: 1
+Ingredient: Desc_PackagedOilResidue | Amount: 10
+Product: Desc_OreBauxite | Amount: 4
+null is made in Desc_FoundryMk1
+Ingredient: Desc_RocketFuel | Amount: 1000
+Ingredient: Desc_Rotor | Amount: 10
+Product: Desc_Leaves | Amount: 5
+Product: Desc_LiquidFuel | Amount: 3000
+null is made in Desc_Packager
+Ingredient: Desc_PlutoniumFuelRod | Amount: 6
+Product: Desc_PackagedIonizedFuel | Amount: 7
+null is made in Desc_OilRefinery
+Ingredient: Desc_PetroleumCoke | Amount: 5
+Ingredient: Desc_Rotor | Amount: 8
+Ingredient: Desc_Biofuel | Amount: 5
+Product: Desc_ComputerSuper | Amount: 1
+null is made in Desc_ManufacturerMk1
+Research_Alien_CentralUploadBoost_02 can be made.
+Ingredient: Desc_CoolingSystem | Amount: 1
+Product: Desc_CoolingSystem | Amount: 10
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_QuantumEnergy | Amount: 3000
+Ingredient: Desc_Silica | Amount: 8
+Product: Desc_PackagedWater | Amount: 3
+null is made in Desc_Packager
+Ingredient: Desc_Battery | Amount: 1
+Product: Desc_Fabric | Amount: 2
+null is made in Desc_FoundryMk1
+Ingredient: Desc_TimeCrystal | Amount: 7
+Product: Desc_Rubber | Amount: 2
+null is made in Desc_SmelterMk1
+Ingredient: Desc_TemporalProcessor | Amount: 1
+Product: Desc_QuartzCrystal | Amount: 5
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_PackagedOilResidue | Amount: 5
+Product: Desc_Stator | Amount: 2
+null is made in Desc_SmelterMk1
+Ingredient: Desc_PackagedSulfuricAcid | Amount: 2
+Product: Desc_Wood | Amount: 8
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_MotorLightweight | Amount: 4
+Product: Desc_HogParts | Amount: 9
+null is made in Desc_Converter
+Ingredient: Desc_WAT2 | Amount: 4
+Ingredient: Desc_AluminumPlateReinforced | Amount: 5
+Product: Desc_PackagedBiofuel | Amount: 9
+null is made in Desc_FoundryMk1
+Ingredient: Desc_ModularFrameLightweight | Amount: 4
+Ingredient: Desc_PackagedBiofuel | Amount: 3
+Product: Desc_PackagedOilResidue | Amount: 10
+null is made in Desc_FoundryMk1
+Ingredient: Desc_SAM | Amount: 3
+Product: Desc_Computer | Amount: 2
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_AluminumCasing | Amount: 9
+Product: Desc_CopperDust | Amount: 2
+null is made in Desc_ConstructorMk1
+Ingredient: Desc_NitrogenGas | Amount: 6000
+Ingredient: Desc_NitricAcid | Amount: 5000
+Ingredient: Desc_AluminumCasing | Amount: 7
+Ingredient: Desc_PackagedSulfuricAcid | Amount: 10
+Product: Desc_WAT2 | Amount: 3
+null is made in Desc_Blender
+Ingredient: Desc_MotorLightweight | Amount: 10
+Ingredient: Desc_NitricAcid | Amount: 6000
+Product: Desc_SingularityCell | Amount: 7
+null is made in Desc_OilRefinery
+Research_Alien_CentralUploadBoost_03 can be made.
+Ingredient: Desc_SteelIngot | Amount: 1
+Product: Desc_Coal | Amount: 7
+null is made in Desc_FoundryMk1
+Ingredient: Desc_PackagedAlumina | Amount: 10
+Ingredient: Desc_NitricAcid | Amount: 4000
+Ingredient: Desc_PackagedIonizedFuel | Amount: 7
+Product: Desc_AluminumCasing | Amount: 1
+null is made in Desc_HadronCollider
+Ingredient: Desc_PackagedNitricAcid | Amount: 6
+Ingredient: Desc_PackagedAlumina | Amount: 7
+Ingredient: Desc_CopperIngot | Amount: 7
+Ingredient: Desc_Mycelia | Amount: 6
+Product: Desc_MotorLightweight | Amount: 9
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_QuartzCrystal | Amount: 8
+Ingredient: Desc_MotorLightweight | Amount: 1
+Product: Desc_TurboFuel | Amount: 4
+null is made in Desc_Converter
+Ingredient: Desc_Stator | Amount: 3
+Ingredient: Desc_PackagedSulfuricAcid | Amount: 1
+Product: Desc_WAT1 | Amount: 1
+null is made in Desc_AssemblerMk1
+Ingredient: Desc_NitricAcid | Amount: 7000
+Product: Desc_Leaves | Amount: 6
+Product: Desc_Leaves | Amount: 6
+null is made in Desc_Packager
+Ingredient: Desc_FicsiteMesh | Amount: 3
+Ingredient: Desc_SAM | Amount: 8
+Ingredient: Desc_Stator | Amount: 2
+Product: Desc_TimeCrystal | Amount: 3
+null is made in Desc_ManufacturerMk1
+Ingredient: Desc_OreIron | Amount: 4
+Product: Desc_Fuel | Amount: 8
+null is made in Desc_SmelterMk1
+Ingredient: Desc_GasTank | Amount: 5
+Product: Desc_HighSpeedConnector | Amount: 8
+null is made in Desc_AssemblerMk1

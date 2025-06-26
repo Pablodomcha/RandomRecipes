@@ -233,8 +233,8 @@ public class SequenceGenerator {
                             + "\nEither way, as long as none of these are Space Elevator parts, the game is completable without them.");
         }
 
-        Console.importantLog("Used Seed: " + UiValues.getSeed() + "Checksum = " + random.nextInt(UiValues.addAll())
-                + " | If you're playing multiplayer and you are all randomizing separately, this should be the same for all players.");
+        Console.importantLog("Used Seed: " + SequenceGenerator.seed + " Checksum = " + random.nextInt(UiValues.addAll())
+                + " | If you're playing multiplayer and you are all randomizing separately, these should be the same for all players.");
     }
 
     private static void generateMilestone(Milestone milestone, String type) {
