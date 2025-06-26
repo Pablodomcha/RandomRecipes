@@ -37,7 +37,7 @@ public class Ui {
         private static JTextArea logArea = new JTextArea(10, 60);
 
         private int position = 0;
-        private int columns = 3;
+        private int columns = 2;
 
         private Boolean startRandomization = false;
 
@@ -102,7 +102,12 @@ public class Ui {
                 panelOre.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Ore location:");
-                label.setToolTipText("Select the location of the ore");
+                label.setToolTipText(
+                                "<html><p>Located: You don't need ores you can't scan to unlock the ability to scan them. Uranium will only be needed for progression if you can have radiation protection. A lot of things will come from iron (for better or worse).</p>"
+                                                +
+                                                "<p>Unlocated: Any ore can be part of any recipe. Uranium will only be needed for progression if you can have radiation protection.</p>"
+                                                +
+                                                "<p>Radiation Party: Uranium could be needed for progression before having radiation protection.</p></html>");
                 panelOre.add(label);
                 String[] oreLocations = { "Located", "Unlocated", "Radiation Party" };
                 oreLocationComboBox = new JComboBox<>(oreLocations);
@@ -114,7 +119,11 @@ public class Ui {
                 panelBelts.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Belts:");
-                label.setToolTipText("Select the belt");
+                label.setToolTipText(
+                                "<html><p>Easy: Tier 1 belts, splitters and mergers use small amounts of early materials and are unlocked in the tutorial.</p>"
+                                                + "<p>Medium: Tier 1 belts use small amounts of early materials and are unlocked in the tutorial. Other belts and poles can use anything.</p>"
+                                                + "<p>Hard: Guarantees access to tier 1 belts in the tutorial. Their recipes may be expensive.</p>"
+                                                + "<p>Mr Transport Wagon: Completely random, you could end up with no access to belts for part/most of your playthrough.</p></html>");
                 panelBelts.add(label);
                 String[] beltOptions = { "Easy", "Medium", "Hard", "Mr Transport Wagon" };
                 beltsComboBox = new JComboBox<>(beltOptions);
@@ -126,7 +135,11 @@ public class Ui {
                 panelElectricity.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Electricity:");
-                label.setToolTipText("Select the electricity");
+                label.setToolTipText(
+                                "<html><p>Easy: Basic electric poles, powerlines and biomass burners use early materials only and are unlocked in the tutorial. Basic electric poles and powerlines also use small amounts of them.</p>"
+                                                + "<p>Medium: Basic electric poles, powerlines and biomass burners use early materials only and are unlocked in the tutorial. They may be expensive.</p>"
+                                                + "<p>Hub Burners Carry: Basic electric poles and powerlines are unlocked early. They may be expensive. You're not guaranteed a powersource.</p>"
+                                                + "<p>Happy Handcrafting: Completely random.</p></html>");
                 panelElectricity.add(label);
                 String[] electricityOptions = { "Easy", "Medium", "Hub Burners Carry", "Happy Handcrafting" };
                 electricityComboBox = new JComboBox<>(electricityOptions);
@@ -138,7 +151,13 @@ public class Ui {
                 panelWaste.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Waste:");
-                label.setToolTipText("Select the waste");
+                label.setToolTipText(
+                                "<html><p>Easy: Recipes only have 1 output, so you don't need to handle a second resource you may not need.</p>"
+                                                + "<p>Medium: Recipes can have solid outputs other than the desired, but the Awesome sink recipe will be available early and will have a simple recipe.</p>"
+                                                + "<p>Hard: Recipes can have solid outputs other than the desired and the Awesome sink may not be available or have really hard crafting recipe.</p>"
+                                                + "<p>No U: Recipes can have solid/liquid outputs other than the desired and the sink may not be available or have really hard crafting recipe. You may need many deposits (if they're even available) and manual flushing.</p>"
+                                                +       
+                                                " <p> (The \"desired\" output is the one for which the recipe is generated, even if you like more the other output)</p></html>");
                 panelWaste.add(label);
                 String[] wasteOptions = { "Easy", "Medium", "Hard", "No U" };
                 wasteComboBox = new JComboBox<>(wasteOptions);
@@ -150,7 +169,11 @@ public class Ui {
                 panelStationBias.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Station bias:");
-                label.setToolTipText("Select the station bias");
+                label.setToolTipText(
+                                "<html><p>None: The stations are selected completely random, this makes the earlier unlocked stations have way more recipes than the later ones.</p>"
+                                                + "<p>Slight bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning slightly on newer unlocked stations.</p>"
+                                                + "<p>Medium Bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning on newer unlocked stations.</p>"
+                                                + "<p>Heavy Bias: Increases the chance of using stations unlocked later for later recipes, increaseing (hopefully) station variability leaning heavily on newer unlocked stations.</p></html>");
                 panelStationBias.add(label);
                 String[] stationBiasOptions = { "None", "Slight bias", "Medium Bias", "Heavy Bias" };
                 stationBiasComboBox = new JComboBox<>(stationBiasOptions);
@@ -162,7 +185,11 @@ public class Ui {
                 panelForceLongGameBias.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Force long game bias:");
-                label.setToolTipText("Select the force long game bias");
+                label.setToolTipText(
+                                "<html><p>None: Milestones are randomized entirely.</p>"
+                                                + "<p>Slight: Tries to make the game longer by trying to put milestones later in the logic.</p>"
+                                                + "<p>Medium: Tries to make the game longer by trying (harder than slight) to put milestones later in the logic.</p>"
+                                                + "<p>Heavy: Tries to make the game longer by trying (harder than medium) to put milestones later in the logic.</p></html>");
                 panelForceLongGameBias.add(label);
                 String[] forceLongGameBiasOptions = { "None", "Slight", "Medium", "Heavy" };
                 forceLongGameBiasComboBox = new JComboBox<>(forceLongGameBiasOptions);
@@ -177,7 +204,7 @@ public class Ui {
                         GridBagConstraints gbcLocal = getBagColumn();
                         gbcLocal.insets = new Insets(0, 0, 10, 0);
                         gbcLocal.anchor = GridBagConstraints.CENTER;
-                        panel.add(new JLabel("___________________________________"), gbcLocal);
+                        panel.add(new JLabel(""), gbcLocal);
                 }
 
                 // Numeric Value Fields
@@ -187,7 +214,7 @@ public class Ui {
                 panelMaxStackCraft.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max amount of each material for crafting:");
-                label.setToolTipText("");
+                label.setToolTipText("Maximum number of each component needed for a craft. Over 50 will generate recipes that cannot be made");
                 panelMaxStackCraft.add(label);
                 maxStackCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 50, 1));
                 panelMaxStackCraft.add(maxStackCraftSpinner);
@@ -198,7 +225,7 @@ public class Ui {
                 panelMaxProdCraft.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max amount produced per craft:");
-                label.setToolTipText("");
+                label.setToolTipText("Maximum number of each component produced by a craft. Over 50 will generate recipes that cannot be made.");
                 panelMaxProdCraft.add(label);
                 maxProdCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 50, 1));
                 panelMaxProdCraft.add(maxProdCraftSpinner);
@@ -209,7 +236,7 @@ public class Ui {
                 panelMaxStackStruct.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max amount of each material for building:");
-                label.setToolTipText("");
+                label.setToolTipText("Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).");
                 panelMaxStackStruct.add(label);
                 maxStackStructSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 1000, 1));
                 panelMaxStackStruct.add(maxStackStructSpinner);
@@ -220,7 +247,7 @@ public class Ui {
                 panelMaxItemStruct.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max number of different items for building:");
-                label.setToolTipText("");
+                label.setToolTipText("Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).");
                 panelMaxItemStruct.add(label);
                 maxItemStructSpinner = new JSpinner(new SpinnerNumberModel(4, 1, 20, 1));
                 panelMaxItemStruct.add(maxItemStructSpinner);
@@ -231,7 +258,7 @@ public class Ui {
                 panelMaxStackMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max amount of each material for milestones:");
-                label.setToolTipText("");
+                label.setToolTipText("Maximum number of each component needed to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.");
                 panelMaxStackMile.add(label);
                 maxStackMileSpinner = new JSpinner(new SpinnerNumberModel(500, 1, 100000, 1));
                 panelMaxStackMile.add(maxStackMileSpinner);
@@ -242,7 +269,7 @@ public class Ui {
                 panelMaxItemMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max number of different items for milestones:");
-                label.setToolTipText("");
+                label.setToolTipText("Maximum number of different items to complete a milestone.");
                 panelMaxItemMile.add(label);
                 maxItemMileSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 20, 1));
                 panelMaxItemMile.add(maxItemMileSpinner);
@@ -253,7 +280,7 @@ public class Ui {
                 panelMaxTimeMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max time needed for milestones:");
-                label.setToolTipText("");
+                label.setToolTipText("Maximum time to research a new milestone after completing one or time to complete a MAM research in seconds.");
                 panelMaxTimeMile.add(label);
                 maxTimeMileSpinner = new JSpinner(new SpinnerNumberModel(1000, 1, 100000, 1));
                 panelMaxTimeMile.add(maxTimeMileSpinner);
@@ -264,7 +291,7 @@ public class Ui {
                 panelMaxTimeCraft.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max time needed for crafting:");
-                label.setToolTipText("");
+                label.setToolTipText("aximum time needed for a craft in seconds. If you put 1000, don't blame me.");
                 panelMaxTimeCraft.add(label);
                 maxTimeCraftSpinner = new JSpinner(new SpinnerNumberModel(60, 1, 1000, 1));
                 panelMaxTimeCraft.add(maxTimeCraftSpinner);
@@ -275,7 +302,7 @@ public class Ui {
                 panelHandcraftSpeed.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Handcrafting speed:");
-                label.setToolTipText("");
+                label.setToolTipText("Multiplier for handcrafting speed. Lower is faster (the base game value is usually between 0.5 and 1 depending on recipe).");
                 panelHandcraftSpeed.add(label);
                 handcraftSpeedSpinnerMin = new JSpinner(new SpinnerNumberModel(0.5, 0.1, 100, 0.1));
                 panelHandcraftSpeed.add(handcraftSpeedSpinnerMin);
@@ -311,7 +338,7 @@ public class Ui {
                 panelInputBias.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Number of different items for crafting bias:");
-                label.setToolTipText("");
+                label.setToolTipText("Higher numbers mean that the randomizer will try to use more different ingredients per recipe/milestone. 100 means always will use all slots, 0 means all recipes use 1 input/output slot, 50 means there's no bias. If waste is in easy, this only affects ingredients.");
                 panelInputBias.add(label);
                 inputBiasSpinner = new JSpinner(new SpinnerNumberModel(50, 0, 100, 1));
                 panelInputBias.add(inputBiasSpinner);
@@ -322,7 +349,7 @@ public class Ui {
                 panelMaxRecipesUsed.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Max number of different recipes to use each material:");
-                label.setToolTipText("");
+                label.setToolTipText("Maximum number of recipes that can use a materials. The randomizer will increase this value if it can't complete a randomization. Lower values increase component diversity.");
                 panelMaxRecipesUsed.add(label);
                 maxRecipesUsedSpinner = new JSpinner(new SpinnerNumberModel(20, 1, 10000, 1));
                 panelMaxRecipesUsed.add(maxRecipesUsedSpinner);
@@ -333,7 +360,7 @@ public class Ui {
                 panelFreeChance.setLayout(new FlowLayout(FlowLayout.LEFT));
 
                 label = new JLabel("Free chance:");
-                label.setToolTipText("");
+                label.setToolTipText("Chance for a randomizable to be free, like Excited Photonic Matter, except that one may no longer be free. This affects Structures and milestones too.");
                 panelFreeChance.add(label);
                 freeChanceSpinner = new JSpinner(new SpinnerNumberModel(10, 0, 100, 1));
                 panelFreeChance.add(freeChanceSpinner);
@@ -344,7 +371,8 @@ public class Ui {
                 JPanel panelAdvLog = new JPanel();
                 panelAdvLog.setLayout(new FlowLayout(FlowLayout.LEFT));
                 label = new JLabel("Advanced logging:");
-                label.setToolTipText("");
+                label.setToolTipText(
+                                "Logs many things helpful for troubleshooting, but is way slower. Use only for debugging.");
                 panelAdvLog.add(label);
                 advLogCheckBox = new JCheckBox();
                 panelAdvLog.add(advLogCheckBox);

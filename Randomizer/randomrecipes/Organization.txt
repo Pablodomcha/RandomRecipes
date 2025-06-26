@@ -69,17 +69,17 @@ Info:
 
 -Options (Insert Value): Don't put the Max Stack or Max items to 0, for free recipes use the specific option.
     0. Seed.
-    1. Max stack per craft: Maximum number of each component needed for a craft. Over 50 will generate recipes that cannot be made (the code actually caps it at 50 though).
-    2. Max produced per craft: Maximum number of each component produced by a craft. Over 50 will generate recipes that cannot be made (the code actually caps it at 50 though).
+    1. Max stack per craft: Maximum number of each component needed for a craft. Over 50 will generate recipes that cannot be made.
+    2. Max produced per craft: Maximum number of each component produced by a craft. Over 50 will generate recipes that cannot be made.
     3. Max stack per structure: Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).
     4. Max items per structure: Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).
     5. Max stack per milestone: Maximum number of each component needed to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.
     6. Max items per milestone: Maximum number of different items to complete a milestone.
     7. Max time per milestone: Maximum time to research a new milestone after completing one or time to complete a MAM research in seconds.
-    10. Max time to craft: Maximum time needed for a craft in seconds. If you put 10000, don't blame me.
+    10. Max time to craft: Maximum time needed for a craft in seconds. If you put 1000, don't blame me.
     11. Handcrafting speed min,max: Multiplier for handcrafting speed. Lower is faster (the base game value is usually between 0.5 and 1 depending on recipe).
     12. Input bias: Higher numbers mean that the randomizer will try to use more different ingredients per recipe/milestone. 100 means always will use all slots, 0 means all recipes use 1 input/output slot, 50 means there's no bias. If waste is in easy, this only affects ingredients.
-    13. Max recipes used: Maximum number of recipes that can use a materials. The randomizer will increase this value if it can't complete a randomization. Lower values ensure component diversity.
+    13. Max recipes used: Maximum number of recipes that can use a materials. The randomizer will increase this value if it can't complete a randomization. Lower values increase component diversity.
     14. Free Chance: Chance for a randomizable to be free, like Excited Photonic Matter, except that one may no longer be free. This affects Structures and milestones too.
 
     1. In component sequencer. V
@@ -99,7 +99,7 @@ Test:
 
 TODO:
 
-Rename Textboxes
+Paragraphs for tooltips
 
 Fill tooltips
 
