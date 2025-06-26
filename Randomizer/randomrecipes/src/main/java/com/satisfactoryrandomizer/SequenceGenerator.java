@@ -143,6 +143,7 @@ public class SequenceGenerator {
         // Main loop, runs until there's nothing left to randomize
         int cap = 10000;
         int iteration = 0;
+        Boolean finishedProgression = false;
         while (!randomizables.isEmpty() && ++iteration < cap) {
 
             // Pick a random item to randomize
@@ -171,7 +172,7 @@ public class SequenceGenerator {
                     break;
                 }
 
-                if (materials.getAllMilestones().size() - materials.getCraftableMilestones().size() <= 1) {
+                if (!finishedProgression && materials.getAllMilestones().size() - materials.getCraftableMilestones().size() <= 1) {
                     ((Milestone) randomizable).setnRecipes(2 * (((Milestone) randomizable).getnRecipes() + 10));
                     Console.log("Increasing milestone " + randomizable.getName() + " recipes to "
                             + ((Milestone) randomizable).getnRecipes() + " to ensure everything is craftable.");
@@ -197,6 +198,7 @@ public class SequenceGenerator {
             // Add recipes without conditions
             randomizables.removeAll(materials.getHD());
             if (randomizables.size() <= 0) {
+                finishedProgression = true;
                 randomizables.addAll(materials.getUncraftableHD());
                 randomizables.addAll(materials.getUncraftableDepotMilestones());
             }
