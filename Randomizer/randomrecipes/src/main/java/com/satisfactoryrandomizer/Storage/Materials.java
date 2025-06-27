@@ -25,6 +25,8 @@ public class Materials {
                                                                               // the logic
     private List<Milestone> milestones = new ArrayList<>(); // Milestones
     private List<Milestone> depotUpgrades = new ArrayList<>(); // Milestones
+    private List<Randomizable> fixedRandomizables = new ArrayList<>();
+
     private int[] phase = {};
     private List<String> uraniumReq;
 
@@ -131,20 +133,22 @@ public class Materials {
         tempEssentialStructures.clear();
 
         // Add the required structures to the milestones and the rest to non-essential.
+        Console.log("\nExtrachecks added to Tutorial_6:");
         for (EssentialStructure structure : this.essentialStructures) {
             if (structure.addWhen() == 0) {
-                Console.hiddenLog(structure.getName() + " added to Tutorial_6 as extraCheck.");
+                Console.hiddenLog("    " + structure.getName() + " added to Tutorial_6 as extraCheck.");
                 getMilestoneByName("Tutorial_6").addExtraCheck(structure.getName());
             } else if (structure.addWhen() < 5) {
                 String name = "Milestone_" + (2 * structure.addWhen() - random.nextInt(2)) + "-1";
                 getMilestoneByName(name).addExtraCheck(structure.getName());
-                Console.log(structure.getName() + " added to " + name + ".");
+                Console.hiddenLog("    " + structure.getName() + " added to " + name + ".");
             } else { // Can be added whenever, so it's actually not essential
                 structures.add(structure);
-                Console.log(structure.getName() + " moved to non-essential structures.");
+                Console.hiddenLog("    " + structure.getName() + " moved to non-essential structures.");
             }
         }
         this.essentialStructures.removeAll(this.structures);
+        Console.hiddenLog("");
 
         // Structures
         tempStructures.add(new Structure("Desc_GeneratorCoal", false, false, "Recipe_GeneratorCoal", true));
@@ -905,8 +909,9 @@ public class Materials {
 
         tempReturn.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Progression/"));
 
+        Console.hiddenLog("\nMilestones:");
         for (Milestone milestone : tempMilestones) {
-            Console.hiddenLog(milestone.getName() + " is in phase " + milestone.getPhase());
+            Console.hiddenLog("    " + milestone.getName() + " is in phase " + milestone.getPhase());
         }
         Console.hiddenLog("Yes, 3-2 is correctly in phase 1 (at least as of patch 1.1).");
 
@@ -964,7 +969,7 @@ public class Materials {
         tempNoPrefix.clear();
 
         // Caterium
-        tempNoPrefix.add(generateMamMilestone("Research_Caterium_0", Arrays.asList("Desc_Mam","Milestone_5-5")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_0", Arrays.asList("Desc_Mam", "Milestone_5-5")));
         tempNoPrefix.add(generateMamMilestone("Research_Caterium_1", Arrays.asList("Research_Caterium_0")));
         tempNoPrefix.add(generateMamMilestone("Research_Caterium_2", Arrays.asList("Research_Caterium_1")));
         // 2
@@ -1420,10 +1425,6 @@ public class Materials {
 
             if (i == 0) {
                 phase = 1;
-                temComps.add(
-                        new ElevatorPart(recipe.replace("Recipe", "Desc") + (i + 1),
-                                recipe + (i + 1), false, false, false, 50, null, phase));
-                continue; // To avoid creating it twice
             } else if (i < 3) {
                 phase = 2;
             } else if (i < 5) {
@@ -1438,8 +1439,8 @@ public class Materials {
             }
 
             temComps.add(
-                    new ElevatorPart(recipe.replace("Recipe", "Desc") + (i + 1),
-                            recipe + (i + 1), false, false, false, 50, null, phase));
+                    new ElevatorPart(recipe.replace("Recipe", "Desc") + (i + 1), recipe + (i + 1), false, false, false,
+                            50, null, phase));
 
         }
         return temComps;
@@ -1454,7 +1455,6 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
             }
         }
-        Console.hiddenLog("Prefixed List with " + prefix);
         return prefixedList;
 
     }
@@ -1468,7 +1468,6 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
             }
         }
-        Console.hiddenLog("Prefixed List with " + prefix);
         return prefixedList;
     }
 
@@ -1481,7 +1480,6 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefix + c.getRecipePath());
             }
         }
-        Console.hiddenLog("Prefixed List with " + prefix);
         return prefixedList;
     }
 
@@ -1494,7 +1492,6 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefixRecipe + c.getRecipePath());
             }
         }
-        Console.hiddenLog("Prefixed CraftStation List with " + prefixRecipe);
         return prefixedList;
     }
 
@@ -1507,7 +1504,6 @@ public class Materials {
                 prefixedList.get(i).setRecipePath(prefixRecipe + c.getRecipePath());
             }
         }
-        Console.hiddenLog("Prefixed EssentialStructure List with " + prefixRecipe);
         return prefixedList;
     }
 
@@ -1521,13 +1517,11 @@ public class Materials {
         }
         for (Component eq : equip) {
             if (eq.getName().equals(name)) {
-                Console.hiddenLog("Found equipment instead of component: " + name);
                 return eq;
             }
         }
         for (Component ele : elevator) {
             if (ele.getName().equals(name)) {
-                Console.hiddenLog("Found equipment instead of component: " + name);
                 return ele;
             }
         }
@@ -1609,7 +1603,6 @@ public class Materials {
         }
         for (EssentialStructure structure : this.essentialStructures) {
             if (structure.getName().equals(name)) {
-                Console.hiddenLog("Found Essential Structure instead of Structure: " + name);
                 return structure;
             }
         }
@@ -1732,11 +1725,11 @@ public class Materials {
         return result;
     }
 
-    public List<String> getMilestonesInPhase(int phase) {
-        List<String> result = new ArrayList<>();
+    public List<Milestone> getMilestonesInPhase(int phase) {
+        List<Milestone> result = new ArrayList<>();
         for (Milestone milestone : this.milestones) {
             if (milestone.getPhase() == phase) {
-                result.add(milestone.getName());
+                result.add(milestone);
             }
         }
         return result;
@@ -1914,10 +1907,12 @@ public class Materials {
     public List<Randomizable> getUnavailableAndUncraftableRandomizables() {
         List<Randomizable> result = new ArrayList<>();
         for (Randomizable randomizable : this.getAllRandomizables()) {
-            if (!randomizable.isAvailable() && !randomizable.isCraftable()) {
+            if (!randomizable.isAvailable() && !randomizable.isCraftable() && !this.isFixedRandomizable(randomizable)) {
                 result.add(randomizable);
             }
         }
+        result.removeAll(this.HD);
+        result.removeAll(this.milestones);
         return result;
     }
 
@@ -2069,6 +2064,23 @@ public class Materials {
         Console.log("Could not set Craftable, Milestone not found: " + name);
     }
 
+    public void setfixedRandomizable(Randomizable r) {
+        this.fixedRandomizables.add(r);
+    }
+
+    public Boolean isFixedRandomizable(Randomizable r) {
+        for (Randomizable rand : this.fixedRandomizables) {
+            if (rand.getName().equals(r.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Randomizable> getfixedRandomizables() {
+        return this.fixedRandomizables;
+    }
+
     /**
      * Use one of the material, reducing the amount of remaining uses by 1.
      * 
@@ -2119,15 +2131,22 @@ public class Materials {
     public int getAllNonMilestonedRandomizables() {
         int result = 0;
         for (Randomizable r : this.getAllRandomizables()) {
-            if (!(r instanceof Milestone) && !r.trueAvailable()) {
+            if ((!(r instanceof Milestone) && !(r instanceof ElevatorPart) && !this.isFixedRandomizable(r)
+                    && !r.trueAvailable())) {
                 result++;
             }
         }
+        // Remove tutorial 6 extrachecks (they will be forced)
+        for (int i = 0; i < getMilestoneByName("Tutorial_6").getExtraCheck().size(); i++) {
+            result--;
+        }
+        result++;
         return result;
     }
 
     public void fillExtraChecks() throws Exception {
 
+        Console.hiddenLog("\nFilling extra checks:");
         // Get the randomizables enabled by this randomizable
 
         List<Randomizable> randomizables = this.getAllRandomizables();
@@ -2143,10 +2162,13 @@ public class Materials {
         }
 
         for (Randomizable r : randomizables) {
+            if (r.getExtraCheck().isEmpty()) {
+                continue;
+            }
             Console.hiddenLog("Adding extra checks for " + r.getName() + " : " + r.getExtraCheck());
             for (String extra : r.getExtraCheck()) {
                 if (extra != null) {
-                    Console.hiddenLog("Adding extra check for " + r.getName() + " : " + extra);
+                    Console.hiddenLog("    Adding extra check for " + r.getName() + " : " + extra);
 
                     if (extra.equals("power")) {
                         for (Structure gen : getGenerators()) {
@@ -2184,7 +2206,7 @@ public class Materials {
 
     public void doExtraChecks(String nameToRemove, List<String> whereToRemove) {
 
-        Console.hiddenLog("nametoremove: " + nameToRemove + " wheretoremove: " + whereToRemove);
+        Console.hiddenLog("        nametoremove: " + nameToRemove + " wheretoremove: " + whereToRemove);
         for (String where : whereToRemove) {
             Boolean done = false;
             for (Component c : this.components) {

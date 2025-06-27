@@ -2,8 +2,10 @@ package com.satisfactoryrandomizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import com.satisfactoryrandomizer.Storage.Data.Mat;
 import com.satisfactoryrandomizer.Storage.Data.MilestoneSchematic;
@@ -41,7 +43,7 @@ public class SequenceGenerator {
         // Log the selected values
         Console.hiddenLog("\nSelected values:");
         UiValues.logAll();
-        Console.hiddenLog("\n");
+        Console.hiddenLog("");
 
         // Delete RecipePatches folder before starting to avoid having extra alternates
         CreateJSON.deleteFiles();
@@ -73,12 +75,10 @@ public class SequenceGenerator {
         // Generate a random seed if not provided and set it to the random generator
         if (SequenceGenerator.seed == 0) {
             generateSeed();
-            Console.log("Generating seed because it wasn't provided.");
+            Console.log("\nGenerating seed because it wasn't provided.");
         }
-        Console.log("Using seed: " + SequenceGenerator.seed);
+        Console.importantLog("Using seed: " + SequenceGenerator.seed);
         SequenceGenerator.random = new Random(SequenceGenerator.seed);
-        Console.cheatsheet(
-                "\nItems in order of generation (ingredients precede the recipe):");
 
         // Create the starting array of items
         List<Randomizable> randomizables = materials.getAvailableButUncraftableRandomizables();
@@ -86,13 +86,14 @@ public class SequenceGenerator {
         // Set a random Crafting Station as the first one
         SequenceGenerator.firstStation = materials.getStations().get(random.nextInt(materials.getGenerators().size()))
                 .getName();
-        Console.log("First station: " + SequenceGenerator.firstStation);
+        Console.log("\nFirst station: " + SequenceGenerator.firstStation);
         SequenceGenerator.lastObtainedStation = SequenceGenerator.firstStation;
         materials.doExtraChecks("power", Arrays.asList(SequenceGenerator.firstStation));
         materials.doExtraChecks("cable", Arrays.asList(SequenceGenerator.firstStation));
         materials.doExtraChecks("pole", Arrays.asList(SequenceGenerator.firstStation));
         materials.doExtraChecks("Tutorial_6", Arrays.asList(SequenceGenerator.firstStation));
         materials.getMilestoneByName("Tutorial_6").addExtraCheck(SequenceGenerator.firstStation);
+        Console.hiddenLog("");
 
         // Add all extrachecks of Tutorial_6 to forcedunlocks, since they all need to be
         // craftable as soon as they're unlocked.
@@ -103,6 +104,9 @@ public class SequenceGenerator {
         // Generate the extraChecks after they have been set
         materials.fillExtraChecks();
 
+        // Fixed Unlocks
+        Console.hiddenLog("\nDoing fixed unlocks:");
+
         // Spread Tutorial_6 extrachecks among the other tutorials.
         for (String s : materials.getMilestoneByName("Tutorial_6").getExtraCheck()) {
             if (s.contains("Tutorial_")) {
@@ -112,11 +116,47 @@ public class SequenceGenerator {
             String milestone = "Tutorial_" + n;
             materials.getMilestoneByName(milestone).addFixedUnlock(s);
         }
-
         String st = "Tutorial_";
         for (int i = 1; i <= 6; i++) {
             String str = st + i;
             Console.hiddenLog("Fixed unlocks for " + str + ": " + materials.getMilestoneByName(str).getFixedUnlocks());
+        }
+
+        // Take extrachecks for milestones and add them as fixedunlocks to previous
+        // milestones
+        for (int i = 1; i <= 5; i++) {
+            List<Milestone> milestonesChecks = materials.getMilestonesInPhase(i + 1);
+            List<Milestone> milestones = materials.getMilestonesInPhase(i);
+            Set<Randomizable> items = new HashSet<>();
+
+            for (Milestone m : milestonesChecks) {
+                for (String s : m.getExtraCheck()) {
+                    Randomizable item = materials.getRandomizableByName(s);
+                    if (item != null || !(item instanceof Milestone)) {
+                        items.add(item);
+                    }
+                }
+            }
+
+            if (milestonesChecks.isEmpty()) {
+                Console.hiddenLog("No milestones in phase " + (i + 1) + " (expected for phase 6)" +
+                        "\nAdding elevator parts for that phase instead.");
+                for (Component e : materials.getElevatorPartsInPhase(i)) {
+                    items.add(e);
+                }
+            }
+
+            for (Randomizable item : items) {
+                Milestone milestone = milestones.get(random.nextInt(milestones.size()));
+                milestone.addFixedUnlock(item.getName());
+                Console.hiddenLog("Added " + item.getName() + " to " + milestone.getName());
+                materials.setfixedRandomizable(item);
+                setForceCraftable(item);
+                if (milestones.size() > items.size()) {
+                    milestones.remove(milestone);
+                }
+            }
+
         }
 
         // Spread the Randomizables evenly across the milestones
@@ -124,39 +164,23 @@ public class SequenceGenerator {
         int nDistributableRandomizables = materials.getAllNonMilestonedRandomizables();
         int distributed = 0;
 
+        Console.hiddenLog("\nSetting up randomizables per milestone:");
         for (Milestone mile : materials.getAllMilestones()) {
             int nUnlocksMilestone = (nDistributableRandomizables - distributed) / milestonesAvailable;
             int distributing = (nUnlocksMilestone - 1 + random.nextInt(3));
             mile.setnRecipes(distributing);
-            Console.hiddenLog("Recipes in " + mile.getName() + ": " + mile.getnRecipes());
+            Console.hiddenLog("    Recipes in " + mile.getName() + ": " + mile.getnRecipes());
             distributed += distributing;
             milestonesAvailable--;
         }
+
         Console.log("Distributed " + (nDistributableRandomizables) + " randomizables across "
                 + materials.getAllMilestones().size() + " milestones.");
-
-        for (Randomizable r : materials.getCraftableRandomizables()) {
-            Console.log("Craftable from the start: " + r.getName());
-        }
-
-        // Add elevator parts as fixedunlocks of milestones
-        for (int i = 1; i <= 5; i++) {
-            List<Component> elevatorParts = materials.getElevatorPartsInPhase(i);
-            List<String> milestones = materials.getMilestonesInPhase(i);
-            while (!elevatorParts.isEmpty()) {
-                String mile = milestones.get(random.nextInt(milestones.size()));
-                Milestone milestone = materials.getMilestoneByName(mile);
-                Component elevatorPart = elevatorParts.get(random.nextInt(elevatorParts.size()));
-                milestone.addFixedUnlock(elevatorPart.getName());
-                Console.hiddenLog("Added " + milestone.getFixedUnlocks().get(0) + " to " + milestone.getName());
-                elevatorParts.remove(elevatorPart);
-                milestones.remove(mile);
-            }
-        }
 
         logAvailability("Status at start:");
 
         // Main loop, runs until there's nothing left to randomize
+        Console.cheatsheet("\nItems in order of generation (ingredients precede the recipe):");
         int cap = 3000;
         int iteration = 0;
         Boolean finishedProgression = false;
@@ -550,7 +574,7 @@ public class SequenceGenerator {
             }
             Console.advLog("Randomizable to be forced: " + name + " | Availability: " + r.isAvailable());
         }
-        Console.advLog("\n");
+        Console.advLog("");
     }
 
     /**
@@ -743,9 +767,6 @@ public class SequenceGenerator {
 
         // Make a list with all possible randomizables
         List<Randomizable> itemList = materials.getUnavailableAndUncraftableRandomizables();
-        itemList.removeAll(materials.getAllMilestones());
-        itemList.removeAll(materials.getHD());
-        itemList.removeAll(materials.getAllElevatorParts());
 
         // Add unlocks
         for (int i = 0; i < numberOfUnlocks; i++) {
@@ -763,7 +784,7 @@ public class SequenceGenerator {
                 materials.setRandomizableAvailable(r.getName(), true);
             }
 
-            Console.hiddenLog(r.getName() + " unlocked.");
+            Console.hiddenLog("    Unlocked: " + r.getName());
 
         }
 
