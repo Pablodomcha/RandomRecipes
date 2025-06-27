@@ -1,18 +1,6 @@
-Test:
+---Test:
 
-Limit high values for tutorial.
-
-TODO:
-
-Could not use component, component not found: Desc_SpaceElevatorPart_5
-
-Weight for distributions.
-
-Remove nonexistent rewards.
-
-Milestone Logistigc Mk3 from Tier4 not randomized.
-
-Space elevator parts shouldn't be able to be selected randomly, only forcibly assigned to a milestone.
+---TODO:
 
 --------------------------------------------------------------------------------------------------------------
 

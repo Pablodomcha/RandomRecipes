@@ -810,7 +810,8 @@ public class Materials {
         tempMilestones
                 .add(new Milestone("Tutorial_5", true, false, "Schematic_Tutorial4", Arrays.asList("Tutorial_4"), 0));
         tempMilestones
-                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5", Arrays.asList("Tutorial_5", "Desc_MinerMk1"), 0));
+                .add(new Milestone("Tutorial_6", true, false, "Schematic_Tutorial5",
+                        Arrays.asList("Tutorial_5", "Desc_MinerMk1"), 0));
 
         tempReturn.addAll(addPrefixMile(tempMilestones, "//Game/FactoryGame/Schematics/Tutorial/"));
         tempMilestones.clear();
@@ -851,6 +852,8 @@ public class Materials {
                 .add(new Milestone("Milestone_5-1", true, false, "Schematic_5-1", phase2, 3));
         tempMilestones
                 .add(new Milestone("Milestone_5-2", true, false, "Schematic_5-2", phase2, 3));
+        tempMilestones
+                .add(new Milestone("Milestone_5-3", true, false, "Schematic_5-3", phase2, 3));
         tempMilestones
                 .add(new Milestone("Milestone_5-4", true, false, "Schematic_5-4", phase2, 3));
         tempMilestones
@@ -989,7 +992,8 @@ public class Materials {
         tempNoPrefix.clear();
 
         // Mycelia
-        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_1", Arrays.asList("Desc_Mam", "Desc_Chainsaw", "Desc_Biofuel")));
+        tempNoPrefix.add(
+                generateMamMilestone("Research_Mycelia_1", Arrays.asList("Desc_Mam", "Desc_Chainsaw", "Desc_Biofuel")));
         // 2
         tempNoPrefix.add(generateMamMilestone("Research_Mycelia_2", Arrays.asList("Research_Mycelia_1")));
         tempNoPrefix.add(generateMamMilestone("Research_Mycelia_8", Arrays.asList("Research_Mycelia_1")));
@@ -1099,7 +1103,7 @@ public class Materials {
 
         String name1;
         String name2;
-        for (int i = 1; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             name1 = "Research_Alien_CentralStackExpansion_0" + i;
             name2 = "Research_Alien_CentralUploadBoost_0" + i;
             tempNoPrefix.add(generateMamMilestone(name1, null));
@@ -1787,13 +1791,7 @@ public class Materials {
     }
 
     public List<Component> getAvailableAnimal() {
-        List<Component> result = new ArrayList<>();
-        for (Component ani : this.animal) {
-            if (ani.isAvailable()) {
-                result.add(ani);
-            }
-        }
-        return result;
+        return this.animal;
     }
 
     public List<Component> getAvailableLimited() {
@@ -1810,7 +1808,7 @@ public class Materials {
         return this.HD;
     }
 
-    public List<Component> getUncraftableHD(){
+    public List<Component> getUncraftableHD() {
         List<Component> result = new ArrayList<>();
         for (Component hd : this.HD) {
             if (hd.isCraftable() == false) {

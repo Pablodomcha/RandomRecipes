@@ -692,6 +692,12 @@ public class SequenceGenerator {
             } else if (type.equals("tutorial")) { // Make tutorials use few materials.
                 amount = random.nextInt(UiValues.getMaxStackMile() / 10) + 1;
             } else if (type.equals("milestone")) {
+                int max = UiValues.getMaxStackMile();
+                for (Component c : materials.getAvailableAnimal()) {
+                    if (c.equals(comp)) {
+                        max = (int) Math.sqrt(max); // reduce the amount of animal parts
+                    }
+                }
                 amount = random.nextInt(UiValues.getMaxStackMile()) + 1;
             } else if (type.equals("cheap")) {
                 amount = random.nextInt(2) + 1;
