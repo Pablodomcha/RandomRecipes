@@ -23,19 +23,25 @@ public class Console {
     }
 
     public static void log(String message) {
-        System.err.println(message);
-        Console.log += message + "\n";
-        String[] words = message.split("\\s+");
-        StringBuilder line = new StringBuilder();
-        for (String word : words) {
-            if (line.length() + word.length() + 1 > 100) {
-                logArea.append(line.toString() + "\n");
-                line.setLength(0);
+        if (message == null) {
+            System.err.println("Null message: " + message);
+            Console.log += "Null message" + "\n";
+        } else {
+            System.err.println(message);
+
+            Console.log += message + "\n";
+            String[] words = message.split("\\s+");
+            StringBuilder line = new StringBuilder();
+            for (String word : words) {
+                if (line.length() + word.length() + 1 > 100) {
+                    logArea.append(line.toString() + "\n");
+                    line.setLength(0);
+                }
+                line.append(word).append(" ");
             }
-            line.append(word).append(" ");
+            logArea.append(line.toString().trim() + "\n");
+            Ui.scroll();
         }
-        logArea.append(line.toString().trim() + "\n");
-        Ui.scroll();
     }
 
     public static void advLog(String message) {
@@ -46,7 +52,8 @@ public class Console {
 
     public static void importantLog(String message) {
         log("------------------------------------------------------------------------------------------------------------------------------------------------------");
-        log(message + " ------------------------------------------------------------------------------------------------------------------------------------------------------");
+        log(message
+                + " ------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
     public static void cheatsheet(String message) {

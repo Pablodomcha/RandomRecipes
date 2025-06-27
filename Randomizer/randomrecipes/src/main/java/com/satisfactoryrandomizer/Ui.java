@@ -22,6 +22,7 @@ public class Ui {
         private JComboBox<String> stationBiasComboBox;
         private JComboBox<String> forceLongGameBiasComboBox;
         private JCheckBox advLogCheckBox;
+        private JCheckBox startWithMiner;
         private JTextField seedField;
         private JSpinner maxStackCraftSpinner;
         private JSpinner maxProdCraftSpinner;
@@ -391,6 +392,19 @@ public class Ui {
 
                 // Checkboxes
 
+                // Starting Miner
+                JPanel panelStartMiner = new JPanel();
+                panelStartMiner.setLayout(new FlowLayout(FlowLayout.LEFT));
+                label = new JLabel("Starting Miner:");
+                label.setToolTipText(
+                                "Mining by hand tends to be really boring early game. This adds the portable miner as starting recipe.");
+                panelStartMiner.add(label);
+                startWithMiner = new JCheckBox();
+                startWithMiner.setSelected(true);
+                panelStartMiner.add(startWithMiner);
+                panel.add(panelStartMiner, getBagColumn());
+
+                // Advanced Logging
                 JPanel panelAdvLog = new JPanel();
                 panelAdvLog.setLayout(new FlowLayout(FlowLayout.LEFT));
                 label = new JLabel("Advanced logging:");
@@ -399,7 +413,7 @@ public class Ui {
                 panelAdvLog.add(label);
                 advLogCheckBox = new JCheckBox();
                 panelAdvLog.add(advLogCheckBox);
-                panel.add(panelAdvLog, gbcFull);
+                panel.add(panelAdvLog, getBagColumn());
 
                 // Add buttons
                 JPanel buttonPanel = new JPanel();
@@ -462,6 +476,7 @@ public class Ui {
                 fields.put("stationBiasComboBox", stationBiasComboBox);
                 fields.put("forceLongGameBiasComboBox", forceLongGameBiasComboBox);
                 fields.put("advLogCheckBox", advLogCheckBox);
+                fields.put("startWithMiner", startWithMiner);
                 fields.put("maxStackCraftSpinner", maxStackCraftSpinner);
                 fields.put("maxProdCraftSpinner", maxProdCraftSpinner);
                 fields.put("maxStackStructSpinner", maxStackStructSpinner);
@@ -517,6 +532,7 @@ public class Ui {
                 UiValues.setMaxRecipesUsed((int) maxRecipesUsedSpinner.getValue());
                 UiValues.setFreeChance((int) freeChanceSpinner.getValue());
 
+                UiValues.setStartWithMiner(startWithMiner.isSelected());
                 UiValues.setAdvLog(advLogCheckBox.isSelected());
 
                 savePreferences();
@@ -539,7 +555,7 @@ public class Ui {
         }
 
         private void loadPreferences() {
-                Console.log("Loading preferences:"); //
+                Console.log("Loading preferences..."); //
 
                 // For JTextField, use the default from the component itself if no preference is
                 // found
@@ -577,7 +593,7 @@ public class Ui {
         }
 
         public void savePreferences() throws Exception {
-                Console.log("Saving values:"); //
+                Console.log("Saving values..."); //
                 // Iterating over 'fields' (which now correctly stores JComponent references)
                 for (Map.Entry<String, JComponent> entry : fields.entrySet()) {
                         String key = entry.getKey();

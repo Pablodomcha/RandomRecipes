@@ -1,5 +1,6 @@
 package com.satisfactoryrandomizer;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Collections;
 import com.satisfactoryrandomizer.Storage.Data.Mat;
 import com.satisfactoryrandomizer.Storage.Data.MilestoneSchematic;
 import com.satisfactoryrandomizer.Storage.Data.Recipe;
+import com.satisfactoryrandomizer.Storage.JSONables.JSONableStartRecipes;
 import com.satisfactoryrandomizer.Storage.Materials;
 import com.satisfactoryrandomizer.Storage.Randomizables.*;
 import com.satisfactoryrandomizer.Storage.UiValues;
@@ -52,6 +54,23 @@ public class SequenceGenerator {
         // Create the materials variable to store all materials / structures
         SequenceGenerator.materials = new Materials();
         materials.prepare(random.nextInt(1000000000));
+
+        // Set the starting recipes
+        List<String> startRecipes = new ArrayList<>(); // Desc_IronIngot
+
+        startRecipes.addAll(Arrays.asList("Desc_IronIngot", "Desc_IronRod", "Desc_IronPlate"));
+        for (String s : startRecipes) {
+            setForceCraftable(materials.getRandomizableByName(s));
+            materials.getRandomizableByName(s).setAvailable(true);
+
+        }
+
+        if (UiValues.getStartWithMiner()) {
+            startRecipes.add("BP_ItemDescriptorPortableMiner");
+            setForceCraftable(materials.getRandomizableByName("BP_ItemDescriptorPortableMiner"));
+            materials.getRandomizableByName("BP_ItemDescriptorPortableMiner").setAvailable(true);
+        }
+        CreateJSON.saveStartingRecipes(startRecipes);
 
         // Set the number of items for percentage related things
         SequenceGenerator.nItems = materials.getAllRandomizables().size();
@@ -168,9 +187,16 @@ public class SequenceGenerator {
                 Boolean skipMilestone = false;
                 for (int i = 0; i < UiValues.getForceLongGameBias(); i++) {
                     skipMilestone = random.nextBoolean();
+                    Console.test("skip milestone: " + skipMilestone);
+                    if (skipMilestone || size > 1) {
+                        break;
+                    }
                 }
                 if (skipMilestone) {
-                    break;
+                    Console.test("milestone skipped");
+                    continue;
+                } else {
+                    Console.test("milestone not skipped");
                 }
 
                 if (!finishedProgression
@@ -243,10 +269,9 @@ public class SequenceGenerator {
         List<Mat> mats;
         if (type.equals("depot")) {
             mats = generateIngredients("milestone");
-        } else if(milestone.getName().contains("Tutorial_")) {
+        } else if (milestone.getName().contains("Tutorial_")) {
             mats = generateIngredients("tutorial");
-        } 
-        else {
+        } else {
             mats = generateIngredients(type);
         }
         List<String> checkAlso = new ArrayList<>();
@@ -631,7 +656,7 @@ public class SequenceGenerator {
         int totalresources;
         if (type.equals("structure")) {
             totalresources = getBiasedRandomInt(1, UiValues.getMaxItemStruct(), UiValues.getInputBias());
-        } else if (type.equals("milestone")) {
+        } else if (type.equals("milestone") || type.equals("tutorial")) {
             totalresources = getBiasedRandomInt(1, UiValues.getMaxItemMile(), UiValues.getInputBias());
         } else if (type.equals("cheap")) {
             totalresources = 1;

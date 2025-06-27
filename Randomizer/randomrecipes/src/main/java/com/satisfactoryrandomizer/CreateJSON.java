@@ -19,6 +19,7 @@ import com.satisfactoryrandomizer.Storage.Data.Recipe;
 import com.satisfactoryrandomizer.Storage.JSONables.JSONableMilestone;
 import com.satisfactoryrandomizer.Storage.JSONables.JSONableRecipe;
 import com.satisfactoryrandomizer.Storage.JSONables.JSONableRecipeVN;
+import com.satisfactoryrandomizer.Storage.JSONables.JSONableStartRecipes;
 import com.satisfactoryrandomizer.Storage.JSONables.JSONableStructure;
 
 public class CreateJSON {
@@ -140,11 +141,35 @@ public class CreateJSON {
         json = json.replace("\n", "\r\n"); // Make the breaks CRLF
         json = recipePath + "\r\n" + json;
 
+        Console.test("milestonegetfilename:     " + milestone.getFilename());
+
         // Create the directory and file if they don't exist.
         File file = new File(milestone.getFilename());
         file.getParentFile().mkdirs();
 
         try (FileWriter writer = new FileWriter(milestone.getFilename())) {
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            Console.log("Error writing JSON file: " + e.getMessage());
+        }
+    }
+
+    public static void saveStartingRecipes(List<String> recipes) {
+
+        // Convert the station to list and add manual if it's from constructor or
+        // smelter.
+        JSONableStartRecipes jsonRecipe = new JSONableStartRecipes(recipes);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(jsonRecipe);
+        json = json.replace("\n", "\r\n"); // Make the breaks CRLF
+        json = "//Game/FactoryGame/Schematics/Schematic_StartingRecipes.Schematic_StartingRecipes_C" + "\r\n" + json;
+
+        // Create the directory and file if they don't exist.
+        File file = new File("ContentLib/SchematicPatches/Schematic_StartingRecipes.json");
+        file.getParentFile().mkdirs();
+
+        try (FileWriter writer = new FileWriter("ContentLib/SchematicPatches/Schematic_StartingRecipes.json")) {
             writer.write(json);
             writer.close();
         } catch (IOException e) {
@@ -171,19 +196,19 @@ public class CreateJSON {
     public static void deleteFiles() throws IOException {
         Path path = Paths.get("ContentLib/RecipePatches");
 
-            Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
-                @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    Files.delete(file);
-                    return FileVisitResult.CONTINUE;
-                }
+        Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                Files.delete(file);
+                return FileVisitResult.CONTINUE;
+            }
 
-                @Override
-                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                    Files.delete(dir);
-                    return FileVisitResult.CONTINUE;
-                }
-            });
-            Console.hiddenLog("RecipePatches deleted successfully");
+            @Override
+            public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                Files.delete(dir);
+                return FileVisitResult.CONTINUE;
+            }
+        });
+        Console.hiddenLog("RecipePatches deleted successfully");
     }
 }

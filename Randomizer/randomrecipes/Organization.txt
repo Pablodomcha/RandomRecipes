@@ -97,15 +97,9 @@ Could not use component, component not found: Desc_SpaceElevatorPart_5
 
 Weight for distributions.
 
-Increase height for log (need to see more in it).
-
-Force long game bias setting makes the program not work.
-
-Ensure mining drill tutorial.
-
 Make portable miner game start.
 
-Balt, belt pole and constructor appear duplicate in tutorial when enabled to be there by logic.
+Belt, belt pole and constructor appear duplicate in tutorial when enabled to be there by logic.
 
 Add nuclear waste to limited materials.
 

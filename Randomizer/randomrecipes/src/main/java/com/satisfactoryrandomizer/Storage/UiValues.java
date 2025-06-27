@@ -16,6 +16,7 @@ public class UiValues {
     static int forceLongGameBias = 0;
 
     static Boolean advLog = false;
+    static Boolean startWithMiner = false;
 
     // Numeric values here
     static long seed = 0;
@@ -404,5 +405,18 @@ public class UiValues {
 
     public static void setFreeChance(int waste) {
         UiValues.waste = waste;
+    }
+
+    /**
+     * Retrieves the flag for starting the game with the portable miner.
+     * 
+     * @return Whether the game should start with the portable miner or not.
+     */
+    public static Boolean getStartWithMiner() {
+        return UiValues.startWithMiner;
+    }
+
+    public static void setStartWithMiner(Boolean startWithMiner) {
+        UiValues.startWithMiner = startWithMiner;
     }
 }
