@@ -506,6 +506,10 @@ public class SequenceGenerator {
     }
 
     private static void logAvailability(String title) {
+        if(!UiValues.getAdvLog()){
+            return;
+        }
+
         Console.advLog("\n" + title);
         for (Randomizable r : materials.getAllRandomizables()) {
             if (r.getName() == null) {
