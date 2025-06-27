@@ -684,9 +684,6 @@ public class SequenceGenerator {
                 return ingredients;
             }
 
-            
-                Console.test("MaxStackMile: " + UiValues.getMaxStackMile());
-
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
             int amount;
