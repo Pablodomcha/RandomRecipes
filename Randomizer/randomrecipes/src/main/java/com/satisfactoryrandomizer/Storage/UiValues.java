@@ -44,11 +44,11 @@ public class UiValues {
 
     public static int addAll() {
         return 1000 * (int) (UiValues.seed % 100 + UiValues.oreLocation + UiValues.belts + UiValues.electricity
-                + UiValues.waste + UiValues.stationBias +
-                UiValues.maxStackCraft + UiValues.maxProdCraft + UiValues.maxStackStruct + UiValues.maxItemStruct
-                + UiValues.maxStackMile + UiValues.maxItemMile + UiValues.maxStackEle + UiValues.maxItemEle +
-                UiValues.maxTimeMile + UiValues.maxTimeCraft + UiValues.handcraftSpeed[1] + UiValues.inputBias
-                + UiValues.maxRecipesUsed + UiValues.freeChance);
+                + UiValues.waste + UiValues.stationBias + UiValues.maxStackCraft + UiValues.maxProdCraft
+                + UiValues.maxStackStruct + UiValues.maxItemStruct + UiValues.maxStackMile + UiValues.maxItemMile
+                + UiValues.maxStackEle + UiValues.maxItemEle + UiValues.maxTimeMile + UiValues.maxTimeCraft
+                + UiValues.handcraftSpeed[1] + UiValues.handcraftSpeed[0] + UiValues.inputBias + UiValues.maxRecipesUsed
+                + UiValues.freeChance + UiValues.forceLongGameBias + (UiValues.startWithMiner ? 1 : 0));
     }
 
     public static void logAll() {
