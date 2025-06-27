@@ -989,7 +989,7 @@ public class Materials {
         tempNoPrefix.clear();
 
         // Mycelia
-        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_1", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Mycelia_1", Arrays.asList("Desc_Mam", "Desc_Chainsaw", "Desc_Biofuel")));
         // 2
         tempNoPrefix.add(generateMamMilestone("Research_Mycelia_2", Arrays.asList("Research_Mycelia_1")));
         tempNoPrefix.add(generateMamMilestone("Research_Mycelia_8", Arrays.asList("Research_Mycelia_1")));

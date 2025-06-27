@@ -97,15 +97,11 @@ Could not use component, component not found: Desc_SpaceElevatorPart_5
 
 Weight for distributions.
 
-Belt, belt pole and constructor appear duplicate in tutorial when enabled to be there by logic.
-
 Add nuclear waste to limited materials.
 
 Remove nonexistent rewards.
 
 Logistics Mk3 unchanged.
-
-Need Chainsaw and Biofuel for mycelia tree in MAM.
 
 Milestone Logistigc Mk3 from Tier4 not randomized.
 

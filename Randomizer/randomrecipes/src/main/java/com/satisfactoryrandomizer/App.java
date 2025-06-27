@@ -1,7 +1,5 @@
 package com.satisfactoryrandomizer;
 
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 

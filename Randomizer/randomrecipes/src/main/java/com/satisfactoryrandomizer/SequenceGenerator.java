@@ -1,17 +1,13 @@
 package com.satisfactoryrandomizer;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import java.util.Collections;
-
 import com.satisfactoryrandomizer.Storage.Data.Mat;
 import com.satisfactoryrandomizer.Storage.Data.MilestoneSchematic;
 import com.satisfactoryrandomizer.Storage.Data.Recipe;
-import com.satisfactoryrandomizer.Storage.JSONables.JSONableStartRecipes;
 import com.satisfactoryrandomizer.Storage.Materials;
 import com.satisfactoryrandomizer.Storage.Randomizables.*;
 import com.satisfactoryrandomizer.Storage.UiValues;
@@ -27,7 +23,6 @@ public class SequenceGenerator {
     private static int mamChance = 0;
     private static Boolean mamDone = false;
     private static List<Randomizable> forcedCraftables = new ArrayList<>();
-    private static Boolean tutorial = true;
 
     // Delete all static values
     public static void reset() {
