@@ -316,10 +316,10 @@ public class Materials {
             tempRawOre.add(new Component("Desc_Coal", false, Arrays.asList("Milestone_3-1")));
             tempRawOre.add(new Component("Desc_LiquidOil", true,
                     Arrays.asList("Milestone_5-2", "Desc_OilPump", "power")));
-            tempRawOre.add(new Component("Desc_OreGold", false, Arrays.asList("Milestone_5-5", "Research_Caterium_0")));
+            tempRawOre.add(new Component("Desc_OreGold", false, Arrays.asList("Milestone_5-5")));
             tempRawOre.add(new Component("Desc_OreBauxite", false, Arrays.asList("Milestone_7-1")));
-            tempRawOre.add(new Component("Desc_RawQuartz", false, Arrays.asList("Milestone_7-1", "Research_Quartz_0")));
-            tempRawOre.add(new Component("Desc_Sulfur", false, Arrays.asList("Milestone_7-5", "Research_Sulfur_0")));
+            tempRawOre.add(new Component("Desc_RawQuartz", false, Arrays.asList("Milestone_7-1")));
+            tempRawOre.add(new Component("Desc_Sulfur", false, Arrays.asList("Milestone_7-5")));
             rawUraniumReq.add("Milestone_8-2");
             tempRawOre.add(new Component("Desc_OreUranium", false, rawUraniumReq));
             tempRawOre.add(new Component("Desc_NitrogenGas", true,
@@ -964,7 +964,7 @@ public class Materials {
         tempNoPrefix.clear();
 
         // Caterium
-        tempNoPrefix.add(generateMamMilestone("Research_Caterium_0", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Caterium_0", Arrays.asList("Desc_Mam","Milestone_5-5")));
         tempNoPrefix.add(generateMamMilestone("Research_Caterium_1", Arrays.asList("Research_Caterium_0")));
         tempNoPrefix.add(generateMamMilestone("Research_Caterium_2", Arrays.asList("Research_Caterium_1")));
         // 2
@@ -1040,7 +1040,7 @@ public class Materials {
         tempNoPrefix.clear();
 
         // Quartz
-        tempNoPrefix.add(generateMamMilestone("Research_Quartz_0", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Quartz_0", Arrays.asList("Desc_Mam", "Milestone_7-1")));
         // 2
         tempNoPrefix.add(generateMamMilestone("Research_Quartz_1_1", Arrays.asList("Research_Quartz_0")));
         tempNoPrefix.add(generateMamMilestone("Research_Quartz_1_2", Arrays.asList("Research_Quartz_0")));
@@ -1064,7 +1064,7 @@ public class Materials {
         tempNoPrefix.clear();
 
         // Sulfur
-        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_0", Arrays.asList("Desc_Mam")));
+        tempNoPrefix.add(generateMamMilestone("Research_Sulfur_0", Arrays.asList("Desc_Mam", "Milestone_7-5")));
         // 2
         tempNoPrefix.add(generateMamMilestone("Research_Sulfur_1", Arrays.asList("Research_Sulfur_0")));
         tempNoPrefix.add(generateMamMilestone("Research_Sulfur_ExperimentalPower", Arrays.asList("Research_Sulfur_0")));
@@ -2189,8 +2189,7 @@ public class Materials {
             Boolean done = false;
             for (Component c : this.components) {
                 if (c.getName().equals(where)) {
-                    if (where.equals("Desc_OreGold") || where.equals("Desc_RawQuartz") || where.equals("Desc_Sulfur")
-                            || where.equals("Desc_SAM")) {
+                    if (where.equals("Desc_SAM")) {
                         // Remove both extrachecks in these 4, as either one fulfills the condition
                         c.emptyExtraCheck();
                     } else {
