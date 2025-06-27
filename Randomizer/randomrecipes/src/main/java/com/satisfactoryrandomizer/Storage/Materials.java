@@ -2106,6 +2106,12 @@ public class Materials {
                 return component.use();
             }
         }
+        for (Component elevatorPart : elevator) {
+            if (elevatorPart.getName().equals(name)) {
+                Console.hiddenLog("Using elevator part: " + name);
+                return elevatorPart.use();
+            }
+        }
 
         Console.log("Could not use component, component not found: " + name);
         return 0;

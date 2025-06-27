@@ -141,8 +141,6 @@ public class CreateJSON {
         json = json.replace("\n", "\r\n"); // Make the breaks CRLF
         json = recipePath + "\r\n" + json;
 
-        Console.test("milestonegetfilename:     " + milestone.getFilename());
-
         // Create the directory and file if they don't exist.
         File file = new File(milestone.getFilename());
         file.getParentFile().mkdirs();
