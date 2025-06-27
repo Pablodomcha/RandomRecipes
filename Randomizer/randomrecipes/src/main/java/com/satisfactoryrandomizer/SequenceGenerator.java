@@ -266,7 +266,7 @@ public class SequenceGenerator {
         List<String> checkAlso = new ArrayList<>();
 
         for (Mat m : mats) {
-            Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
+            Console.cheatsheet("    Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
         }
 
         // Increase the chance of the milestone having the MAM as fixed unlock
@@ -350,7 +350,7 @@ public class SequenceGenerator {
         List<Mat> mats = generateIngredients(type);
 
         for (Mat m : mats) {
-            Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
+            Console.cheatsheet("    Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
         }
 
         Recipe recipe = new Recipe(
@@ -418,7 +418,7 @@ public class SequenceGenerator {
         List<Mat> mats = generateIngredientsComp(station, alternate);
 
         for (Mat m : mats) {
-            Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
+            Console.cheatsheet("    Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
         }
 
         List<Mat> prod = new ArrayList<>();
@@ -637,9 +637,6 @@ public class SequenceGenerator {
                 amount = amount * 1000;
             }
             ingredients.add(new Mat(comp.getName(), amount));
-        }
-        for (Mat m : ingredients) {
-            Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
         }
 
         return ingredients;

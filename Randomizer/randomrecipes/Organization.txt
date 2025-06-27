@@ -97,15 +97,13 @@ Could not use component, component not found: Desc_SpaceElevatorPart_5
 
 Weight for distributions.
 
-Add nuclear waste to limited materials.
-
 Remove nonexistent rewards.
 
 Logistics Mk3 unchanged.
 
 Milestone Logistigc Mk3 from Tier4 not randomized.
 
-Space elevator parts having their checkalso removed when available instead of craftable.
+Space elevator shouldn't be able to be selected randomly, only forcibly assigned to a milestone.
 
 --------------------------------------------------------------------------------------------------------------
 
