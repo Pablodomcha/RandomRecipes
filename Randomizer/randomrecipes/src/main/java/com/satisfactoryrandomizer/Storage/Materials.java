@@ -37,7 +37,7 @@ public class Materials {
         List<EssentialStructure> tempEssentialStructures = new ArrayList<>();
 
         // Set recquirements for uranium
-        if (UiValues.getOreLocation() == 2) {
+        if (UiValues.getOreLocation() != 2) {
             uraniumReq = Arrays.asList("Desc_HazmatFilter", "BP_EquipmentDescriptorHazmatSuit");
         } else {
             uraniumReq = null;
@@ -306,6 +306,8 @@ public class Materials {
     private List<Component> generateRawOre() {
 
         List<Component> tempRawOre = new ArrayList<>();
+        List<String> rawUraniumReq = new ArrayList<>();
+        rawUraniumReq.addAll(uraniumReq);
 
         if (UiValues.getOreLocation() == 0) {
             tempRawOre.add(new Component("Desc_OreIron", false, null));
@@ -318,8 +320,8 @@ public class Materials {
             tempRawOre.add(new Component("Desc_OreBauxite", false, Arrays.asList("Milestone_7-1")));
             tempRawOre.add(new Component("Desc_RawQuartz", false, Arrays.asList("Milestone_7-1", "Research_Quartz_0")));
             tempRawOre.add(new Component("Desc_Sulfur", false, Arrays.asList("Milestone_7-5", "Research_Sulfur_0")));
-            tempRawOre.add(new Component("Desc_OreUranium", false,
-                    Arrays.asList("Milestone_8-2", "Desc_HazmatFilter", "Desc_HazmatSuit")));
+            rawUraniumReq.add("Milestone_8-2");
+            tempRawOre.add(new Component("Desc_OreUranium", false, rawUraniumReq));
             tempRawOre.add(new Component("Desc_NitrogenGas", true,
                     Arrays.asList("Milestone_8-3", "Desc_FrackingExtractor", "Desc_FrackingSmasher", "power")));
             tempRawOre.add(new Component("Desc_SAM", false, Arrays.asList("Milestone_9-1", "Research_Alien_SAM")));
@@ -333,7 +335,7 @@ public class Materials {
             tempRawOre.add(new Component("Desc_OreBauxite", false, null));
             tempRawOre.add(new Component("Desc_RawQuartz", false, null));
             tempRawOre.add(new Component("Desc_Sulfur", false, null));
-            tempRawOre.add(new Component("Desc_OreUranium", false, uraniumReq));
+            tempRawOre.add(new Component("Desc_OreUranium", false, rawUraniumReq));
             tempRawOre.add(new Component("Desc_NitrogenGas", true,
                     Arrays.asList("Desc_FrackingExtractor", "Desc_FrackingSmasher", "power")));
             tempRawOre.add(new Component("Desc_SAM", false, null));

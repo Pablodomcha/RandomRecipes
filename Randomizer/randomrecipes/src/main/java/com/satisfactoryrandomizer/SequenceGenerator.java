@@ -439,7 +439,7 @@ public class SequenceGenerator {
         }
 
         for (Mat m : prod) {
-            Console.cheatsheet("Product: " + m.getName() + " | Amount: " + m.getAmount());
+            Console.cheatsheet("    Product: " + m.getName() + " | Amount: " + m.getAmount());
         }
 
         double handSpeed = random.nextDouble() * (UiValues.getHandcraftSpeed()[1] - UiValues.getHandcraftSpeed()[0])
