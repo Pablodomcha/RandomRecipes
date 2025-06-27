@@ -96,6 +96,7 @@ public class SequenceGenerator {
         materials.doExtraChecks("power", Arrays.asList(SequenceGenerator.firstStation));
         materials.doExtraChecks("cable", Arrays.asList(SequenceGenerator.firstStation));
         materials.doExtraChecks("pole", Arrays.asList(SequenceGenerator.firstStation));
+        materials.doExtraChecks("Tutorial_6", Arrays.asList(SequenceGenerator.firstStation));
         materials.getMilestoneByName("Tutorial_6").addExtraCheck(SequenceGenerator.firstStation);
 
         // Add all extrachecks of Tutorial_6 to forcedunlocks, since they all need to be
@@ -161,7 +162,7 @@ public class SequenceGenerator {
         logAvailability("Status at start:");
 
         // Main loop, runs until there's nothing left to randomize
-        int cap = 10000;
+        int cap = 3000;
         int iteration = 0;
         Boolean finishedProgression = false;
         while (!randomizables.isEmpty() && ++iteration < cap) {
@@ -187,16 +188,9 @@ public class SequenceGenerator {
                 Boolean skipMilestone = false;
                 for (int i = 0; i < UiValues.getForceLongGameBias(); i++) {
                     skipMilestone = random.nextBoolean();
-                    Console.test("skip milestone: " + skipMilestone);
                     if (skipMilestone || size > 1) {
                         break;
                     }
-                }
-                if (skipMilestone) {
-                    Console.test("milestone skipped");
-                    continue;
-                } else {
-                    Console.test("milestone not skipped");
                 }
 
                 if (!finishedProgression
@@ -276,6 +270,10 @@ public class SequenceGenerator {
         }
         List<String> checkAlso = new ArrayList<>();
 
+        for (Mat m : mats) {
+            Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
+        }
+
         // Increase the chance of the milestone having the MAM as fixed unlock
         // (increased independently as both MAM and Store use it)
         SequenceGenerator.mamChance += 2;
@@ -320,11 +318,6 @@ public class SequenceGenerator {
 
         }
 
-        // Add the first crafting station in Tutorial_6 if it wasn't added earlier
-        if (milestone.getName().equals("Tutorial_6")) {
-            milestone.addFixedUnlock(firstStation);
-        }
-
         List<String> unlocks;
         if (type.equals("depot")) {
             unlocks = generateUnlocks(milestone.getnRecipes(), milestone.getFixedUnlocks(),
@@ -360,6 +353,10 @@ public class SequenceGenerator {
         }
 
         List<Mat> mats = generateIngredients(type);
+
+        for (Mat m : mats) {
+            Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
+        }
 
         Recipe recipe = new Recipe(
                 mats, // Doesn't apply
@@ -424,6 +421,11 @@ public class SequenceGenerator {
         }
 
         List<Mat> mats = generateIngredientsComp(station, alternate);
+
+        for (Mat m : mats) {
+            Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
+        }
+
         List<Mat> prod = new ArrayList<>();
 
         // Add the main product multiplying the value range by 1000 for liquids.
@@ -439,6 +441,10 @@ public class SequenceGenerator {
             }
         } else {
             prod.addAll(generateProducts(station, null));
+        }
+
+        for (Mat m : prod) {
+            Console.cheatsheet("Product: " + m.getName() + " | Amount: " + m.getAmount());
         }
 
         double handSpeed = random.nextDouble() * (UiValues.getHandcraftSpeed()[1] - UiValues.getHandcraftSpeed()[0])
@@ -699,10 +705,6 @@ public class SequenceGenerator {
             }
 
             ingredients.add(new Mat(comp.getName(), amount));
-
-            for (Mat m : ingredients) {
-                Console.cheatsheet("Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
-            }
         }
         return ingredients;
     }
@@ -734,9 +736,6 @@ public class SequenceGenerator {
             for (Randomizable unlock : fixUnlock) {
                 materials.setRandomizableAvailable(unlock.getName(), true);
                 unlocks.add(unlock.getPath());
-
-                if (!unlock.getCheckAlso().isEmpty())
-                    materials.doExtraChecks(unlock.getName(), unlock.getCheckAlso());
             }
         }
 
@@ -860,11 +859,6 @@ public class SequenceGenerator {
                 solidslots--;
             }
         }
-
-        for (Mat m : products) {
-            Console.cheatsheet("Product: " + m.getName() + " | Amount: " + m.getAmount());
-        }
-
         return products;
     }
 

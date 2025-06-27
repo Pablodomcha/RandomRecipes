@@ -97,8 +97,6 @@ Could not use component, component not found: Desc_SpaceElevatorPart_5
 
 Weight for distributions.
 
-Make portable miner game start.
-
 Belt, belt pole and constructor appear duplicate in tutorial when enabled to be there by logic.
 
 Add nuclear waste to limited materials.

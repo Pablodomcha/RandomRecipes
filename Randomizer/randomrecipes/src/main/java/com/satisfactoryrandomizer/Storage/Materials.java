@@ -133,7 +133,7 @@ public class Materials {
         // Add the required structures to the milestones and the rest to non-essential.
         for (EssentialStructure structure : this.essentialStructures) {
             if (structure.addWhen() == 0) {
-                Console.hiddenLog(structure.getName() + " added to Tutorial_6.");
+                Console.hiddenLog(structure.getName() + " added to Tutorial_6 as extraCheck.");
                 getMilestoneByName("Tutorial_6").addExtraCheck(structure.getName());
             } else if (structure.addWhen() < 5) {
                 String name = "Milestone_" + (2 * structure.addWhen() - random.nextInt(2)) + "-1";
@@ -203,6 +203,8 @@ public class Materials {
         tempComps.add(new Component("Desc_WAT1", null, true, true, false));
         tempComps.add(new Component("Desc_WAT2", null, true, true, false));
         tempComps.add(new Component("Desc_Mycelia", null, true, true, false));
+        tempComps.add(new Component("Desc_NuclearWaste", null, true, true, false));
+        tempComps.add(new Component("Desc_PlutoniumWaste", null, true, true, false));
 
         return tempComps;
     }
