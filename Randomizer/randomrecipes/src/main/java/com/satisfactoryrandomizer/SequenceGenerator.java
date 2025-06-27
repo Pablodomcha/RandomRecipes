@@ -684,13 +684,16 @@ public class SequenceGenerator {
                 return ingredients;
             }
 
+            
+                Console.test("MaxStackMile: " + UiValues.getMaxStackMile());
+
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
             int amount;
             if (type.equals("structure")) {
                 amount = random.nextInt(UiValues.getMaxStackStruct()) + 1;
             } else if (type.equals("tutorial")) { // Make tutorials use few materials.
-                amount = random.nextInt(UiValues.getMaxStackMile() / 10) + 1;
+                amount = random.nextInt((UiValues.getMaxStackMile() / 10) + 1) + 1;
             } else if (type.equals("milestone")) {
                 int max = UiValues.getMaxStackMile();
                 for (Component c : materials.getAvailableAnimal()) {
