@@ -1174,11 +1174,6 @@ public class Materials {
         tempStructures.add(generateStructure("Recipe_RadarTower"));
         tempStructures.add(generateStructure("Recipe_RailroadTrack"));
         tempStructures.add(generateStructure("Recipe_RailroadTrackIntegrated"));
-        tempStructures.add(generateStructure("Recipe_SignPole_Huge"));
-        tempStructures.add(generateStructure("Recipe_SignPole_Large"));
-        tempStructures.add(generateStructure("Recipe_SignPole_Medium"));
-        tempStructures.add(generateStructure("Recipe_SignPole_Portrait"));
-        tempStructures.add(generateStructure("Recipe_SignPole_Small"));
         tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Huge"));
         tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Large"));
         tempStructures.add(generateStructure("Recipe_StandaloneWidgetSign_Medium"));
@@ -1315,14 +1310,6 @@ public class Materials {
         tempStructures.add(generateStructure("Recipe_SteelWall_Tris_8x4"));
         tempStructures.add(generateStructure("Recipe_SteelWall_Tris_8x8"));
         tempStructures.add(generateStructure("Recipe_Wall_8x4_01"));
-        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_01"));
-        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_01_Steel"));
-        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_02"));
-        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_02_Steel"));
-        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_03"));
-        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_03_Steel"));
-        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_04"));
-        tempStructures.add(generateStructure("Recipe_Wall_Conveyor_8x4_04_Steel"));
         tempStructures.add(generateStructure("Recipe_Wall_Door_8x4_01"));
         tempStructures.add(generateStructure("Recipe_Wall_Door_8x4_01_Steel"));
         tempStructures.add(generateStructure("Recipe_Wall_Door_8x4_03"));

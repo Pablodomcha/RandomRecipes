@@ -2,6 +2,13 @@
 
 ---TODO:
 
+Equipment craft crafts more than 1
+some recipes seem to be using low outputs.
+Same for caterium
+Same for quartz
+Same for sulfur
+Desc_PlutoniumCell is before hazmat
+
 --------------------------------------------------------------------------------------------------------------
 
 Missing:
