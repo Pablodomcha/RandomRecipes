@@ -218,7 +218,7 @@ public class SequenceGenerator {
                     Console.log("Increasing milestone " + randomizable.getName() + " recipes to "
                             + ((Milestone) randomizable).getnRecipes() + " to ensure everything is craftable.");
                 }
-                generateMilestone((Milestone) randomizable, "milestone");
+                generateMilestone((Milestone) randomizable, materials.getCraftableRandomizables().size(), "milestone");
             } else if (randomizable instanceof Structure) {
                 generateStructure((Structure) randomizable, "structure");
             } else {
@@ -278,14 +278,14 @@ public class SequenceGenerator {
                 + " | If you're playing multiplayer and you are all randomizing separately, these should be the same for all players.");
     }
 
-    private static void generateMilestone(Milestone milestone, String type) {
+    private static void generateMilestone(Milestone milestone, int addedItems, String type) {
         List<Mat> mats;
         if (type.equals("depot")) {
-            mats = generateIngredients("milestone");
+            mats = generateIngredients("milestone", addedItems);
         } else if (milestone.getName().contains("Tutorial_")) {
-            mats = generateIngredients("tutorial");
+            mats = generateIngredients("tutorial", addedItems);
         } else {
-            mats = generateIngredients(type);
+            mats = generateIngredients(type, addedItems);
         }
         List<String> checkAlso = new ArrayList<>();
 
@@ -371,7 +371,7 @@ public class SequenceGenerator {
             }
         }
 
-        List<Mat> mats = generateIngredients(type);
+        List<Mat> mats = generateIngredients(type, 0);
 
         for (Mat m : mats) {
             Console.cheatsheet("    Ingredient: " + m.getName() + " | Amount: " + m.getAmount());
@@ -670,7 +670,7 @@ public class SequenceGenerator {
         return ingredients;
     }
 
-    private static List<Mat> generateIngredients(String type) {
+    private static List<Mat> generateIngredients(String type, int addedItems) {
         List<Mat> ingredients = new ArrayList<>();
 
         // If it's free, we don't need no ingredients.
@@ -716,13 +716,14 @@ public class SequenceGenerator {
             } else if (type.equals("tutorial")) { // Make tutorials use few materials.
                 amount = random.nextInt((UiValues.getMaxStackMile() / 10) + 1) + 1;
             } else if (type.equals("milestone")) {
+                int bias = addedItems * 100 / SequenceGenerator.nItems;
                 int max = UiValues.getMaxStackMile();
                 for (Component c : materials.getAvailableAnimal()) {
                     if (c.equals(comp)) {
                         max = (int) Math.sqrt(max); // reduce the amount of animal parts
                     }
                 }
-                amount = random.nextInt(UiValues.getMaxStackMile()) + 1;
+                amount = getBiasedRandomInt(1, max , UiValues.getProgressiveBias() ? bias : 50);
             } else if (type.equals("cheap")) {
                 amount = random.nextInt(2) + 1;
             } else {
@@ -872,9 +873,9 @@ public class SequenceGenerator {
 
             Component component = availableComponents.get(random.nextInt(availableComponents.size()));
 
-            // Add the ingredient to the list and generate the amount randomly
-            // Use the UiValues to get the max stack size for the component
-            int amount = random.nextInt(UiValues.getMaxProdCraft()) + 1;
+            // Add the ingredient to the list and generate the amount randomly.
+            // Use the UiValues to get the max stack size for the component.
+            int amount = random.nextInt(Math.min(component.getStack(), UiValues.getMaxStackCraft())) + 1;
 
             if (component.isLiquid()) {
                 amount = amount * 1000;
@@ -962,11 +963,11 @@ public class SequenceGenerator {
         // Map bias 0..50 to favor min, 50..100 to favor max
         if (bias < 50) {
             // Skew towards min
-            double power = 1 + (49.0 - bias) / 49.0 * 9.0; // power: 10 at bias=0, 1 at bias=50
+            double power = 1 + (49.0 - bias) / 49.0 * 2.0; // power: 10 at bias=0, 1 at bias=50
             r = Math.pow(r, power);
         } else {
             // Skew towards max
-            double power = 1 + (bias - 51.0) / 49.0 * 9.0; // power: 1 at bias=50, 10 at bias=100
+            double power = 1 + (bias - 51.0) / 49.0 * 2.0; // power: 1 at bias=50, 10 at bias=100
             r = 1 - Math.pow(1 - r, power);
         }
         return min + (int) ((max - min + 1) * r);

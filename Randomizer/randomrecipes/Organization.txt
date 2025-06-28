@@ -2,9 +2,6 @@
 
 ---TODO:
 
-Equipment craft crafts more than 1
-some recipes seem to be using low outputs.
-
 --------------------------------------------------------------------------------------------------------------
 
 Missing:

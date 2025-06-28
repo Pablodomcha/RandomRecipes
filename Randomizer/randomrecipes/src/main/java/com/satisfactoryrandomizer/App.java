@@ -12,6 +12,8 @@ public final class App {
 
     public static void main(String[] args) {
 
+        // Tests.test();
+
         Console.init(Ui.getLogArea());
         Ui ui = new Ui();
         ui.getFrame().setVisible(true); // Show the UI
@@ -36,8 +38,6 @@ public final class App {
                 Console.hiddenLog("Stack Trace:");
                 Console.hiddenLog(getStackTrace(e));
             }
-
-            // Tests.test();
 
             Console.saveLogs();
 

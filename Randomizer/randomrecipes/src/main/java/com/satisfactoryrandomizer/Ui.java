@@ -23,6 +23,7 @@ public class Ui {
         private JComboBox<String> forceLongGameBiasComboBox;
         private JCheckBox advLogCheckBox;
         private JCheckBox startWithMiner;
+        private JCheckBox progressiveBias;
         private JTextField seedField;
         private JSpinner maxStackCraftSpinner;
         private JSpinner maxProdCraftSpinner;
@@ -229,9 +230,9 @@ public class Ui {
 
                 label = new JLabel("Max amount of each material for crafting:");
                 label.setToolTipText(
-                                "Maximum number of each component needed for a craft. Over 50 will generate recipes that cannot be made");
+                                "Maximum number of each component needed for a craft. Each material max will cap at it's stack size.");
                 panelMaxStackCraft.add(label);
-                maxStackCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 50, 1));
+                maxStackCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 500, 1));
                 panelMaxStackCraft.add(maxStackCraftSpinner);
                 panel.add(panelMaxStackCraft, getBagColumn());
 
@@ -241,9 +242,9 @@ public class Ui {
 
                 label = new JLabel("Max amount produced per craft:");
                 label.setToolTipText(
-                                "Maximum number of each component produced by a craft. Over 50 will generate recipes that cannot be made.");
+                                "Maximum number of each component produced by a craft.  Each material max will cap at it's stack size.");
                 panelMaxProdCraft.add(label);
-                maxProdCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 50, 1));
+                maxProdCraftSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 500, 1));
                 panelMaxProdCraft.add(maxProdCraftSpinner);
                 panel.add(panelMaxProdCraft, getBagColumn());
 
@@ -404,6 +405,18 @@ public class Ui {
                 panelStartMiner.add(startWithMiner);
                 panel.add(panelStartMiner, getBagColumn());
 
+                // Progressive Bias
+                JPanel panelProgressiveBias = new JPanel();
+                panelProgressiveBias.setLayout(new FlowLayout(FlowLayout.LEFT));
+                label = new JLabel("Progressive bias:");
+                label.setToolTipText(
+                                "Makes the amount of materials used for milestones increase progressively, making it so that early milestones tend to take less materials and later ones to take more.");
+                panelProgressiveBias.add(label);
+                progressiveBias = new JCheckBox();
+                progressiveBias.setSelected(true);
+                panelProgressiveBias.add(progressiveBias);
+                panel.add(panelProgressiveBias, getBagColumn());
+
                 // Advanced Logging
                 JPanel panelAdvLog = new JPanel();
                 panelAdvLog.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -475,8 +488,9 @@ public class Ui {
                 fields.put("wasteComboBox", wasteComboBox);
                 fields.put("stationBiasComboBox", stationBiasComboBox);
                 fields.put("forceLongGameBiasComboBox", forceLongGameBiasComboBox);
-                fields.put("advLogCheckBox", advLogCheckBox);
                 fields.put("startWithMiner", startWithMiner);
+                fields.put("progressiveBias", progressiveBias);
+                fields.put("advLogCheckBox", advLogCheckBox);
                 fields.put("maxStackCraftSpinner", maxStackCraftSpinner);
                 fields.put("maxProdCraftSpinner", maxProdCraftSpinner);
                 fields.put("maxStackStructSpinner", maxStackStructSpinner);
@@ -533,6 +547,7 @@ public class Ui {
                 UiValues.setFreeChance((int) freeChanceSpinner.getValue());
 
                 UiValues.setStartWithMiner(startWithMiner.isSelected());
+                UiValues.setProgressiveBias(progressiveBias.isSelected());
                 UiValues.setAdvLog(advLogCheckBox.isSelected());
 
                 savePreferences();

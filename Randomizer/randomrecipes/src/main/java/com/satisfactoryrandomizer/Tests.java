@@ -17,35 +17,20 @@ public class Tests {
     // does.
     public static void test() {
 
-        /*
-         * for (CraftStation station : materials.getCraftStations()) {
-         * Console.log("Generating Structure for " + station.getName());
-         * generateStructure(station);
-         * }
-         */
+        for (int bias = 1; bias <= 100; bias += 5) {
+            double r = 0.5; // uniform [0,1)
+            // Map bias 0..50 to favor min, 50..100 to favor max
+            if (bias < 50) {
+                // Skew towards min
+                double power = 1 + (49.0 - bias) / 49.0 * 2; // power: 10 at bias=0, 1 at bias=50
+                r = Math.pow(r, power);
+            } else {
+                // Skew towards max
+                double power = 1 + (bias - 51.0) / 49.0 * 2; // power: 1 at bias=50, 10 at bias=100
+                r = 1 - Math.pow(1 - r, power);
+            }
+
+            System.out.println("Bias: " + bias + " r: " +  String.valueOf(r));
+        }
     }
-
-    private static void generateStructure(CraftStation station) {
-        // Needed variables. Prod will always only have the station, but has to be a
-        // string regardless.
-        List<Mat> mats = new ArrayList<>();
-        List<Mat> prod = new ArrayList<>();
-
-        // Only produces one of the structure
-        prod.add(new Mat(station.getName(), 1));
-        mats.add(new Mat("Desc_OreIron", random.nextInt(100) + 1));
-
-        Recipe recipe = new Recipe(
-                prod, // Products
-                mats, // Ingredients
-                "Recipe_" + station.getName() + ".json", // Filename
-                "", // Doesn't apply
-                1, // Doesn't apply
-                1.0 // Doesn't apply
-        );
-
-        // Create Recipe JSON file
-        CreateJSON.saveStructureAsJson(recipe, station.getRecipePath());
-    }
-
 }

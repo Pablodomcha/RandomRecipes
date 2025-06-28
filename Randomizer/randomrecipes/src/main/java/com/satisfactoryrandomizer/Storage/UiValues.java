@@ -17,6 +17,7 @@ public class UiValues {
 
     static Boolean advLog = false;
     static Boolean startWithMiner = false;
+    static Boolean progressiveBias = false;
 
     // Numeric values here
     static long seed = 0;
@@ -48,17 +49,21 @@ public class UiValues {
                 + UiValues.maxStackStruct + UiValues.maxItemStruct + UiValues.maxStackMile + UiValues.maxItemMile
                 + UiValues.maxStackEle + UiValues.maxItemEle + UiValues.maxTimeMile + UiValues.maxTimeCraft
                 + UiValues.handcraftSpeed[1] + UiValues.handcraftSpeed[0] + UiValues.inputBias + UiValues.maxRecipesUsed
-                + UiValues.freeChance + UiValues.forceLongGameBias + (UiValues.startWithMiner ? 1 : 0));
+                + UiValues.freeChance + UiValues.forceLongGameBias + (UiValues.startWithMiner ? 1 : 0)
+                + (UiValues.progressiveBias ? 1 : 0));
     }
 
     public static void logAll() {
         Console.hiddenLog("Advanced Logging: " + UiValues.advLog);
         Console.hiddenLog("Seed: " + UiValues.seed);
+        Console.hiddenLog("Start with miner: " + UiValues.startWithMiner);
+        Console.hiddenLog("Progressive Bias: " + UiValues.progressiveBias);
         Console.hiddenLog("Ore Location: " + UiValues.oreLocation);
         Console.hiddenLog("Belts: " + UiValues.belts);
         Console.hiddenLog("Electricity: " + UiValues.electricity);
         Console.hiddenLog("Waste: " + UiValues.waste);
         Console.hiddenLog("Station Bias: " + UiValues.stationBias);
+        Console.hiddenLog("Force Long Game: " + UiValues.forceLongGameBias);
         Console.hiddenLog("Max Stack Craft: " + UiValues.maxStackCraft);
         Console.hiddenLog("Max Product Craft: " + UiValues.maxProdCraft);
         Console.hiddenLog("Max Stack Struct: " + UiValues.maxStackStruct);
@@ -146,7 +151,8 @@ public class UiValues {
      *         Hard: Recipes can have solid outputs other than the desired and the
      *         Awesome sink may not be available or have really hard crafting
      *         recipe.
-     *         Liquids too: Recipes can have solid/liquid outputs other than the desired
+     *         Liquids too: Recipes can have solid/liquid outputs other than the
+     *         desired
      *         and the sink may not be available or have really hard crafting
      *         recipe. Packaging to get rid of liquids may or may not be easy, you
      *         may need tons deposits and manual flushing.
@@ -420,4 +426,23 @@ public class UiValues {
     public static void setStartWithMiner(Boolean startWithMiner) {
         UiValues.startWithMiner = startWithMiner;
     }
+
+    /**
+     * Retrieves the flag for whether the randomizer should try to make the game
+     * progressively harder or not. When enabled, the randomizer will try to
+     * randomize higher amounts of ingredients as the game progresses, making the
+     * game progressively harder to play. When disabled, the randomizer will
+     * randomize components randomly, regardless of the game progress.
+     * 
+     * @return Whether the randomizer should try to make the game progressively
+     *         harder or not.
+     */
+    public static Boolean getProgressiveBias() {
+        return UiValues.progressiveBias;
+    }
+
+    public static void setProgressiveBias(Boolean progBias) {
+        UiValues.progressiveBias = progBias;
+    }
+
 }

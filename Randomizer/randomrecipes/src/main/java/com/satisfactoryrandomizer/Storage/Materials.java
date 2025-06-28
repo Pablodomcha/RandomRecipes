@@ -500,35 +500,31 @@ public class Materials {
 
         // Equipment
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJumpingStilts", "Recipe_BladeRunners", 1));
-        tempNoPrefixComps.add(generateComponent("Desc_CartridgeStandard", "Recipe_Cartridge", false));
-        tempNoPrefixComps.add(generateComponent("Desc_Chainsaw", "Recipe_Chainsaw", false));
-        tempNoPrefixComps.add(generateComponent("Desc_Filter", "Recipe_FilterGasMask", false));
-        tempNoPrefixComps.add(generateComponent("Desc_HazmatFilter", "Recipe_FilterHazmat", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorGasmask", "Recipe_Gasmask", false));
+        tempNoPrefixComps.add(generateComponent("Desc_CartridgeStandard", "Recipe_Cartridge", 500));
+        tempNoPrefixComps.add(generateComponent("Desc_Chainsaw", "Recipe_Chainsaw", 1));
+        tempNoPrefixComps.add(generateComponent("Desc_Filter", "Recipe_FilterGasMask", 50));
+        tempNoPrefixComps.add(generateComponent("Desc_HazmatFilter", "Recipe_FilterHazmat", 50));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorGasmask", "Recipe_Gasmask", 1));
         tempNoPrefixComps.add(generateComponent("Desc_Gunpowder", "Recipe_Gunpowder", false));
         tempNoPrefixComps.add(generateComponent("Desc_GunpowderMK2", "Recipe_GunpowderMK2", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHazmatSuit", "Recipe_HazmatSuit", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHoverPack", "Recipe_Hoverpack", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJetPack", "Recipe_JetPack", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHazmatSuit", "Recipe_HazmatSuit", 1));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHoverPack", "Recipe_Hoverpack", 1));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJetPack", "Recipe_JetPack", 1));
         tempNoPrefixComps.add(generateComponent("Desc_Medkit", "Recipe_MedicinalInhaler", false));
         tempNoPrefixComps.add(generateComponent("Desc_NobeliskExplosive", "Recipe_Nobelisk", false));
         tempNoPrefixComps
-                .add(generateComponent("BP_EquipmentDescriptorNobeliskDetonator", "Recipe_NobeliskDetonator", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorObjectScanner", "Recipe_ObjectScanner", false));
-        tempNoPrefixComps.add(generateComponent("Desc_Parachute", "Recipe_Parachute", false));
+                .add(generateComponent("BP_EquipmentDescriptorNobeliskDetonator", "Recipe_NobeliskDetonator", 1));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorObjectScanner", "Recipe_ObjectScanner", 1));
+        tempNoPrefixComps.add(generateComponent("Desc_Parachute", "Recipe_Parachute", 1));
         tempNoPrefixComps.add(generateComponent("BP_ItemDescriptorPortableMiner", "Recipe_PortableMiner", false));
-        tempNoPrefixComps.add(generateComponent("Desc_RebarGunProjectile", "Recipe_RebarGun", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorRifle", "Recipe_SpaceRifleMk1", false));
+        tempNoPrefixComps.add(generateComponent("Desc_RebarGunProjectile", "Recipe_RebarGun", 1));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorRifle", "Recipe_SpaceRifleMk1", 1));
         tempNoPrefixComps.add(generateComponent("Desc_SpikedRebar", "Recipe_SpikedRebar", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorStunSpear", "Recipe_XenoBasher", false));
-        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorShockShank", "Recipe_XenoZapper", false));
-        tempNoPrefixComps.add(generateComponent("BP_EqDescZipLine", "Recipe_ZipLine", false));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorStunSpear", "Recipe_XenoBasher", 1));
+        tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorShockShank", "Recipe_XenoZapper", 1));
+        tempNoPrefixComps.add(generateComponent("BP_EqDescZipLine", "Recipe_ZipLine", 1));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Equipment/"));
         tempNoPrefixComps.clear();
-
-        // Not found recipe: Desc_Rebar_Stunshot, Desc_Rebar_Spreadshot,
-        // Desc_Rebar_Explosive, Desc_NobeliskGas, Desc_NobeliskShockwave,
-        // Desc_NobeliskCluster, Desc_NobeliskNuke,
 
         return tempComps;
     }
