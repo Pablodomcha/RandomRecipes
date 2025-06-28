@@ -146,10 +146,11 @@ public class UiValues {
      *         Hard: Recipes can have solid outputs other than the desired and the
      *         Awesome sink may not be available or have really hard crafting
      *         recipe.
-     *         No U: Recipes can have solid/liquid outputs other than the desired
+     *         Liquids too: Recipes can have solid/liquid outputs other than the desired
      *         and the sink may not be available or have really hard crafting
      *         recipe. Packaging to get rid of liquids may or may not be easy, you
      *         may need tons deposits and manual flushing.
+     *         Double party: Always get an extra output for muliple output stations.
      */
     public static int getWaste() {
         return UiValues.waste;

@@ -169,11 +169,11 @@ public class Ui {
                                 "<html><p>Easy: Recipes only have 1 output, so you don't need to handle a second resource you may not need.</p>"
                                                 + "<p>Medium: Recipes can have solid outputs other than the desired, but the Awesome sink recipe will be available early and will have a simple recipe.</p>"
                                                 + "<p>Hard: Recipes can have solid outputs other than the desired and the Awesome sink may not be available or have really hard crafting recipe.</p>"
-                                                + "<p>No U: Recipes can have solid/liquid outputs other than the desired and the sink may not be available or have really hard crafting recipe. You may need many deposits (if they're even available) and manual flushing.</p>"
-                                                +
-                                                " <p> (The \"desired\" output is the one for which the recipe is generated, even if you like more the other output)</p></html>");
+                                                + "<p>Liquids too: Recipes can have solid/liquid outputs other than the desired and the sink may not be available or have really hard crafting recipe. You may need many deposits (if they're even available) and manual flushing.</p>"
+                                                + "<p>Double party: Always get an extra output for muliple output stations once you can use liquids.</p>"
+                                                + " <p> (The \"desired\" output is the one for which the recipe is generated, even if you like more the other output)</p></html>");
                 panelWaste.add(label);
-                String[] wasteOptions = { "Easy", "Medium", "Hard", "No U" };
+                String[] wasteOptions = { "Easy", "Medium", "Hard", "Liquids too", "Double party" };
                 wasteComboBox = new JComboBox<>(wasteOptions);
                 panelWaste.add(wasteComboBox);
                 panel.add(panelWaste, getBagColumn());

@@ -356,7 +356,7 @@ public class SequenceGenerator {
         // Create Recipe JSON file
         CreateJSON.saveMilestoneAsJson(recipe, milestone.getRecipePath());
 
-        Console.cheatsheet(milestone.getName() + " can be made.");
+        Console.cheatsheet("    " + milestone.getName() + " can be made.");
 
         // Mark the component as craftable
         materials.setMilestoneCraftable(milestone.getName(), true);
@@ -681,9 +681,9 @@ public class SequenceGenerator {
         // Use random resources between 1 and the max selected value.
         int totalresources;
         if (type.equals("structure")) {
-            totalresources = getBiasedRandomInt(1, UiValues.getMaxItemStruct(), UiValues.getInputBias());
+            totalresources = getBiasedRandomInt(1, UiValues.getMaxItemStruct(), 50);
         } else if (type.equals("milestone") || type.equals("tutorial")) {
-            totalresources = getBiasedRandomInt(1, UiValues.getMaxItemMile(), UiValues.getInputBias());
+            totalresources = getBiasedRandomInt(1, UiValues.getMaxItemMile(), 50);
         } else if (type.equals("cheap")) {
             totalresources = 1;
         } else {
@@ -784,7 +784,11 @@ public class SequenceGenerator {
                 materials.setRandomizableAvailable(r.getName(), true);
             }
 
-            Console.hiddenLog("    Unlocked: " + r.getName());
+            if (r.getName() == null) {
+                Console.hiddenLog("    Unlocked: " + r.getPath());
+            } else {
+                Console.hiddenLog("    Unlocked: " + r.getName());
+            }
 
         }
 
@@ -811,12 +815,12 @@ public class SequenceGenerator {
         List<Mat> products = new ArrayList<>();
 
         // Get slots for the station:
-        // Cannot have liquid slots if waste is not 3
+        // Cannot have liquid slots if waste is not 3 or more
         // If waste is 0, the only product is the already added main product
         int liquidslots;
         int solidslots;
         if (mainliquid != null) {
-            liquidslots = (UiValues.getWaste() == 3) ? station.getLiquidOut() : 0;
+            liquidslots = (UiValues.getWaste() >= 3) ? station.getLiquidOut() : 0;
             if (UiValues.getWaste() == 0) {
                 return products;
             }
@@ -829,7 +833,7 @@ public class SequenceGenerator {
         // Remove the slot of the main product, as it's already used
         // Don't remove slots for alternate recipes, as they don't have main product
         if (mainliquid != null) {
-            if (mainliquid && UiValues.getWaste() == 3)
+            if (mainliquid && UiValues.getWaste() >= 3)
                 liquidslots--;
             if (!mainliquid)
                 solidslots--;
@@ -842,7 +846,7 @@ public class SequenceGenerator {
         }
 
         // Use random resources between 1 and the max possible for the station
-        int totalresources = getBiasedRandomInt(0, liquidslots + solidslots, UiValues.getInputBias());
+        int totalresources = getBiasedRandomInt(0, liquidslots + solidslots, ((UiValues.getWaste() == 4) ? 100 : 50));
         if (mainliquid == null && totalresources == 0) {
             totalresources++;
         }

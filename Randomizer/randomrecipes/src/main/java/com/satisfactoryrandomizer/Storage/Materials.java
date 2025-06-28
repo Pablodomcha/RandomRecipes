@@ -2095,19 +2095,16 @@ public class Materials {
         }
         for (Component component : animal) {
             if (component.getName().equals(name)) {
-                Console.hiddenLog("Using animal part: " + name);
                 return component.use();
             }
         }
         for (Component component : limited) {
             if (component.getName().equals(name)) {
-                Console.hiddenLog("Using limited item: " + name);
                 return component.use();
             }
         }
         for (Component elevatorPart : elevator) {
             if (elevatorPart.getName().equals(name)) {
-                Console.hiddenLog("Using elevator part: " + name);
                 return elevatorPart.use();
             }
         }
