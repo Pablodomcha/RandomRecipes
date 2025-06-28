@@ -361,9 +361,9 @@ public class Ui {
 
                 label = new JLabel("Number of different items for crafting bias:");
                 label.setToolTipText(
-                                "Higher numbers mean that the randomizer will try to use more different ingredients per recipe/milestone. 100 means always will use all slots, 0 means all recipes use 1 input/output slot, 50 means there's no bias. If waste is in easy, this only affects ingredients.");
+                                "Higher numbers mean that the randomizer will try to use more different ingredients per recipe/milestone. put -1 to disable.");
                 panelInputBias.add(label);
-                inputBiasSpinner = new JSpinner(new SpinnerNumberModel(50, 0, 100, 1));
+                inputBiasSpinner = new JSpinner(new SpinnerNumberModel(50, -1, 100, 1));
                 panelInputBias.add(inputBiasSpinner);
                 panel.add(panelInputBias, getBagColumn());
 
@@ -430,6 +430,7 @@ public class Ui {
 
                 // Add buttons
                 JPanel buttonPanel = new JPanel();
+
                 JButton saveButton = new JButton("Randomize");
                 saveButton.addActionListener(new ActionListener() {
                         @Override
@@ -439,22 +440,40 @@ public class Ui {
                 });
                 saveButton.setToolTipText(
                                 "<html><p>Generate the randomization.</p> <p>You know? That which this thing is all about to begin with.</p></html>");
-                JButton loadLastButton = new JButton("Load Last Values");
+
+                JButton loadLastButton = new JButton("Load Preferences");
                 buttonPanel.add(saveButton);
                 panel.add(buttonPanel, gbcFullRight);
                 loadLastButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                                 int result = JOptionPane.showConfirmDialog(frame,
-                                                "Are you sure you want to load your last randomization's settings?",
+                                                "<html>Are you sure you want to <b>LOAD</b> your saved settings?</html>",
                                                 "Confirm", JOptionPane.YES_NO_OPTION);
                                 if (result == JOptionPane.YES_OPTION) {
                                         loadPreferences();
                                 }
                         }
                 });
-                loadLastButton.setToolTipText("Load your last randomization's settings.");
+                loadLastButton.setToolTipText("Load saved settings.");
 
+                JButton saveSettingsButton = new JButton("Save Preferences");
+                buttonPanel.add(saveButton);
+                panel.add(buttonPanel, gbcFullRight);
+                saveSettingsButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                                int result = JOptionPane.showConfirmDialog(frame,
+                                                "<html>Are you sure you want to <b>SAVE</b> these settings?</html>",
+                                                "Confirm", JOptionPane.YES_NO_OPTION);
+                                if (result == JOptionPane.YES_OPTION) {
+                                        savePreferences();
+                                }
+                        }
+                });
+                saveSettingsButton.setToolTipText("Save these settings.");
+
+                buttonPanel.add(saveSettingsButton);
                 buttonPanel.add(loadLastButton);
                 buttonPanel.add(saveButton);
                 panel.add(buttonPanel, gbcFullRight);
@@ -523,8 +542,9 @@ public class Ui {
                 logArea.setCaretPosition(logArea.getDocument().getLength());
         }
 
-        public void saveValues() throws Exception {
-                UiValues.setSeed(seedField.getText().isEmpty() ? 0 : Long.parseLong(seedField.getText()));
+        public void saveValues() {
+                String seedText = seedField.getText().trim();
+                UiValues.setSeed(seedText.isEmpty() ? 0 : Long.parseLong(seedText));
                 UiValues.setOreLocation(oreLocationComboBox.getSelectedIndex());
                 UiValues.setBelts(beltsComboBox.getSelectedIndex());
                 UiValues.setElectricity(electricityComboBox.getSelectedIndex());
@@ -549,8 +569,6 @@ public class Ui {
                 UiValues.setStartWithMiner(startWithMiner.isSelected());
                 UiValues.setProgressiveBias(progressiveBias.isSelected());
                 UiValues.setAdvLog(advLogCheckBox.isSelected());
-
-                savePreferences();
 
         }
 
@@ -607,8 +625,8 @@ public class Ui {
                 }
         }
 
-        public void savePreferences() throws Exception {
-                Console.log("Saving values..."); //
+        public void savePreferences() {
+                Console.log("Saving preferences..."); //
                 // Iterating over 'fields' (which now correctly stores JComponent references)
                 for (Map.Entry<String, JComponent> entry : fields.entrySet()) {
                         String key = entry.getKey();
@@ -629,7 +647,12 @@ public class Ui {
                                 }
                         }
                 }
-                prefs.flush();
+                try {
+                        prefs.flush();
+                } catch (Exception e) {
+                        Console.log("The flush call failed:");
+                        e.printStackTrace();
+                }
         }
 
 }

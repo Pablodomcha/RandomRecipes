@@ -17,20 +17,68 @@ public class Tests {
     // does.
     public static void test() {
 
-        for (int bias = 1; bias <= 100; bias += 5) {
-            double r = 0.5; // uniform [0,1)
-            // Map bias 0..50 to favor min, 50..100 to favor max
-            if (bias < 50) {
-                // Skew towards min
-                double power = 1 + (49.0 - bias) / 49.0 * 2; // power: 10 at bias=0, 1 at bias=50
-                r = Math.pow(r, power);
-            } else {
-                // Skew towards max
-                double power = 1 + (bias - 51.0) / 49.0 * 2; // power: 1 at bias=50, 10 at bias=100
-                r = 1 - Math.pow(1 - r, power);
-            }
+        double min = 0.0;
+        double max = 1000.0;
+        double targetBias = 100;
 
-            System.out.println("Bias: " + bias + " r: " +  String.valueOf(r));
+        int numGenerations = 10;
+        long sum = 0;
+
+        System.out.println(
+                "Generating " + numGenerations + " numbers with Gaussian bias " + targetBias);
+        for (int i = 0; i < numGenerations; i++) {
+            double num = generateGaussianBiasedNumber(min, max, targetBias);
+            sum += num;
+            System.out.println("Generated number " + (i + 1) + ": " + num);
         }
+
+        double average = (double) sum / numGenerations;
+        System.out.println("Average of generated numbers: " + average);
+        System.out.println("Expected average (bias): " + targetBias + "%");
+        System.out.println("std dev: " + Math.min(max - targetBias, targetBias - min));
+    }
+
+    public static int generateGaussianBiasedNumber(double min, double max, double bias) {
+        if (bias < (-1) || bias > 100) {
+            throw new IllegalArgumentException("Bias must be within the range [" + (-1) + ", " + 100 + "]");
+        }
+        if(bias == (-1)){
+            return ((int) (random.nextDouble() * (max-min) + min));
+        }
+
+        double usedBias = (max - min) * bias / 100;
+        double spread = bias - min;
+        double gaussianValue;
+        int result;
+        Boolean cap = false;
+
+        do {
+            gaussianValue = (random.nextGaussian() * spread) + usedBias;
+            result = (int) Math.round(gaussianValue);
+
+            // If the value is too far above the bias, put it above the max to reroll it
+            // capped above the bias.
+            if (result > (bias + (bias - min)) && !cap) {
+                result = (int) max + 10;
+            }
+            // If the value is too far below the bias, put it below the min to reroll it
+            // capped below the bias.
+            if (result < (bias - (max - bias)) && !cap) {
+                result = (int) min - 10;
+            }
+            // if the value is below the min, reroll it but keep it below the bias.
+            if (result < 0 && !cap) {
+                max = bias;
+                cap = true;
+            }
+            // if the value is avobe the max, reroll it but keep it above the bias.
+            if (result > max && !cap) {
+                min = bias;
+                cap = true;
+            }
+            // System.out.println("Value: " + result);
+        } while (result < min || result > max); // Re-roll if outside the desired range
+
+        return result;
     }
 }

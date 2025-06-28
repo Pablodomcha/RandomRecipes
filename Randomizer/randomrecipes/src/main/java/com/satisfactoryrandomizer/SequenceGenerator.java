@@ -43,6 +43,15 @@ public class SequenceGenerator {
         // Log the selected values
         Console.hiddenLog("\nSelected values:");
         UiValues.logAll();
+
+        SequenceGenerator.seed = UiValues.getSeed();
+        // Generate a random seed if not provided and set it to the random generator
+        if (SequenceGenerator.seed == 0) {
+            generateSeed();
+            Console.log("\nGenerating seed because it wasn't provided.");
+        }
+        Console.importantLog("Using seed: " + SequenceGenerator.seed);
+        SequenceGenerator.random = new Random(SequenceGenerator.seed);
         Console.hiddenLog("");
 
         // Delete RecipePatches folder before starting to avoid having extra alternates
@@ -71,14 +80,6 @@ public class SequenceGenerator {
 
         // Set the number of items for percentage related things
         SequenceGenerator.nItems = materials.getAllRandomizables().size();
-
-        // Generate a random seed if not provided and set it to the random generator
-        if (SequenceGenerator.seed == 0) {
-            generateSeed();
-            Console.log("\nGenerating seed because it wasn't provided.");
-        }
-        Console.importantLog("Using seed: " + SequenceGenerator.seed);
-        SequenceGenerator.random = new Random(SequenceGenerator.seed);
 
         // Create the starting array of items
         List<Randomizable> randomizables = materials.getAvailableButUncraftableRandomizables();
@@ -609,7 +610,7 @@ public class SequenceGenerator {
 
         // Use random resources between 1 and the max possible for the station for
         // production.
-        int totalresources = getBiasedRandomInt(1, liquidslots + solidslots, UiValues.getInputBias());
+        int totalresources = generateGaussianBiasedNumber(1, liquidslots + solidslots, UiValues.getInputBias());
 
         for (int i = 0; i < totalresources; i++) {
             Boolean selectedLiquid = false;
@@ -681,9 +682,9 @@ public class SequenceGenerator {
         // Use random resources between 1 and the max selected value.
         int totalresources;
         if (type.equals("structure")) {
-            totalresources = getBiasedRandomInt(1, UiValues.getMaxItemStruct(), 50);
+            totalresources = random.nextInt(UiValues.getMaxItemStruct());
         } else if (type.equals("milestone") || type.equals("tutorial")) {
-            totalresources = getBiasedRandomInt(1, UiValues.getMaxItemMile(), 50);
+            totalresources = random.nextInt(UiValues.getMaxItemMile());
         } else if (type.equals("cheap")) {
             totalresources = 1;
         } else {
@@ -713,9 +714,7 @@ public class SequenceGenerator {
             int amount;
             if (type.equals("structure")) {
                 amount = random.nextInt(UiValues.getMaxStackStruct()) + 1;
-            } else if (type.equals("tutorial")) { // Make tutorials use few materials.
-                amount = random.nextInt((UiValues.getMaxStackMile() / 10) + 1) + 1;
-            } else if (type.equals("milestone")) {
+            } else if (type.equals("milestone") || type.equals("tutorial")) {
                 int bias = addedItems * 100 / SequenceGenerator.nItems;
                 int max = UiValues.getMaxStackMile();
                 for (Component c : materials.getAvailableAnimal()) {
@@ -723,7 +722,7 @@ public class SequenceGenerator {
                         max = (int) Math.sqrt(max); // reduce the amount of animal parts
                     }
                 }
-                amount = getBiasedRandomInt(1, max , UiValues.getProgressiveBias() ? bias : 50);
+                amount = generateGaussianBiasedNumber(1, max, UiValues.getProgressiveBias() ? bias : -1);
             } else if (type.equals("cheap")) {
                 amount = random.nextInt(2) + 1;
             } else {
@@ -847,7 +846,7 @@ public class SequenceGenerator {
         }
 
         // Use random resources between 1 and the max possible for the station
-        int totalresources = getBiasedRandomInt(0, liquidslots + solidslots, ((UiValues.getWaste() == 4) ? 100 : 50));
+        int totalresources = random.nextInt(liquidslots + solidslots + 1);
         if (mainliquid == null && totalresources == 0) {
             totalresources++;
         }
@@ -951,26 +950,51 @@ public class SequenceGenerator {
         return component;
     }
 
-    private static int getBiasedRandomInt(int min, int max, int bias) { // In copilot we trust lmao
-        if (bias <= 0)
-            return min;
-        if (bias >= 100)
-            return max;
-        if (bias == 50)
-            return min + random.nextInt(max - min + 1);
-
-        double r = random.nextDouble(); // uniform [0,1)
-        // Map bias 0..50 to favor min, 50..100 to favor max
-        if (bias < 50) {
-            // Skew towards min
-            double power = 1 + (49.0 - bias) / 49.0 * 2.0; // power: 10 at bias=0, 1 at bias=50
-            r = Math.pow(r, power);
-        } else {
-            // Skew towards max
-            double power = 1 + (bias - 51.0) / 49.0 * 2.0; // power: 1 at bias=50, 10 at bias=100
-            r = 1 - Math.pow(1 - r, power);
+    public static int generateGaussianBiasedNumber(double min, double max, double bias) {
+        if(max == min){
+            return (int) min;
         }
-        return min + (int) ((max - min + 1) * r);
+        if (bias < (-1) || bias > 100) {
+            throw new IllegalArgumentException("Bias must be within the range [" + (-1) + ", " + 100 + "]");
+        }
+        if (bias == (-1)) {
+            return ((int) (random.nextDouble() * (max - min) + min));
+        }
+
+        double usedBias = (max - min) * bias / 100;
+        double spread = usedBias - min;
+        double gaussianValue;
+        int result;
+        Boolean cap = false;
+
+        do {
+            gaussianValue = (random.nextGaussian() * spread) + usedBias;
+            result = (int) Math.round(gaussianValue);
+
+            // If the value is too far above the bias, put it above the max to reroll it
+            // capped above the bias.
+            if (result > (bias + (bias - min)) && !cap) {
+                result = (int) max + 10;
+            }
+            // If the value is too far below the bias, put it below the min to reroll it
+            // capped below the bias.
+            if (result < (bias - (max - bias)) && !cap) {
+                result = (int) min - 10;
+            }
+            // if the value is below the min, reroll it but keep it below the bias.
+            if (result < 0 && !cap) {
+                max = bias;
+                cap = true;
+            }
+            // if the value is avobe the max, reroll it but keep it above the bias.
+            if (result > max && !cap) {
+                min = bias;
+                cap = true;
+            }
+            // System.out.println("Value: " + result);
+        } while (result < min || result > max); // Re-roll if outside the desired range
+
+        return result;
     }
 
     public static void generateSeed() {
