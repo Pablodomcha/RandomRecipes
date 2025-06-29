@@ -43,6 +43,10 @@ public class Component extends Randomizable {
         return this.maxstack;
     }
 
+    public void setStack(int stack) {
+        this.maxstack = stack;
+    }
+
     /**
      * Use one of the material, reducing the amount of remaining uses by 1.
      * 

@@ -72,7 +72,7 @@ public class SequenceGenerator {
         }
 
         if (UiValues.getStartWithMiner()) {
-            startRecipes.add("BP_ItemDescriptorPortableMiner");
+            startRecipes.add("Recipe_PortableMiner");
             setForceCraftable(materials.getRandomizableByName("BP_ItemDescriptorPortableMiner"));
             materials.getRandomizableByName("BP_ItemDescriptorPortableMiner").setAvailable(true);
         }

@@ -1,11 +1,6 @@
 ---Test:
 
-does not cap at max stack, goes up to the value given.
-make milestone times also progressive.
-
 ---TODO:
-
-portable miner not really unlocked.
 
 set correct stack sizes.
 

@@ -345,6 +345,10 @@ public class Materials {
             tempRawOre.add(new Component("Desc_SAM", false, null));
         }
 
+        for(Component rawOre : tempRawOre) {
+            rawOre.setStack(100);
+        }
+
         return tempRawOre;
     }
 
@@ -353,26 +357,26 @@ public class Materials {
         List<Component> tempNoPrefixComps = new ArrayList<>();
 
         // Assembler
-        tempNoPrefixComps.add(generateComponent("Desc_CircuitBoardHighSpeed", "Recipe_AILimiter", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_CircuitBoard", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_ElectromagneticControlRod", false));
-        tempNoPrefixComps.add(generateComponent("Desc_SteelPlateReinforced", "Recipe_EncasedIndustrialBeam", false));
-        tempNoPrefixComps.add(generateComponent("Desc_AluminumPlateReinforced", "Recipe_HeatSink", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_IronPlateReinforced", false));
+        tempNoPrefixComps.add(generateComponent("Desc_CircuitBoardHighSpeed", "Recipe_AILimiter", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_CircuitBoard", 200));
+        tempNoPrefixComps.add(generateComponent("Recipe_ElectromagneticControlRod", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_SteelPlateReinforced", "Recipe_EncasedIndustrialBeam", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_AluminumPlateReinforced", "Recipe_HeatSink", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_IronPlateReinforced", 100));
         tempNoPrefixComps.add(generateComponent("Recipe_ModularFrame", false));
         tempNoPrefixComps.add(generateComponent("Recipe_Motor", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PlutoniumCell", false, uraniumReq));
         tempNoPrefixComps.add(generateComponent("Recipe_PressureConversionCube", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Rotor", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_SAMFluctuator", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Stator", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_Rotor", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_SAMFluctuator", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_Stator", 100));
         tempNoPrefixComps.add(
                 generateComponent("Recipe_UraniumCell", false, uraniumReq));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Assembler/"));
         tempNoPrefixComps.clear();
 
         // Blender
-        tempNoPrefixComps.add(generateComponent("Recipe_CoolingSystem", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_CoolingSystem", 100));
         tempNoPrefixComps.add(generateComponent("Desc_ModularFrameFused", "Recipe_FusedModularFrame", false));
         tempNoPrefixComps.add(generateComponent("Recipe_NitricAcid", true));
         tempNoPrefixComps
@@ -383,57 +387,57 @@ public class Materials {
 
         // Constructor
         tempNoPrefixComps.add(generateComponent("Recipe_AlienDNACapsule", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_AluminumCasing", false));
-        tempNoPrefixComps.add(generateComponent("Desc_AluminumPlate", "Recipe_AluminumSheet", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Biofuel", false));
-        tempNoPrefixComps.add(generateComponent("Desc_GenericBiomass", "Recipe_Biomass_Leaves", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_AluminumCasing", 200));
+        tempNoPrefixComps.add(generateComponent("Desc_AluminumPlate", "Recipe_AluminumSheet", 200));
+        tempNoPrefixComps.add(generateComponent("Recipe_Biofuel", 200));
+        tempNoPrefixComps.add(generateComponent("Desc_GenericBiomass", "Recipe_Biomass_Leaves", 200));
         // Using second biomass recipe for heavy oil
         tempNoPrefixComps.add(generateComponent("Desc_HeavyOilResidue", "Recipe_Biomass_Wood", true));
-        tempNoPrefixComps.add(generateComponent("Recipe_Cable", false));
-        tempNoPrefixComps.add(generateComponent("Desc_Cement", "Recipe_Concrete", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_CopperDust", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_CopperSheet", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Fabric", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_FicsiteMesh", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_FluidCanister", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_GasTank", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_IronPlate", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_IronRod", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_Cable", 200));
+        tempNoPrefixComps.add(generateComponent("Desc_Cement", "Recipe_Concrete", 500));
+        tempNoPrefixComps.add(generateComponent("Recipe_CopperDust", 500));
+        tempNoPrefixComps.add(generateComponent("Recipe_CopperSheet", 200));
+        tempNoPrefixComps.add(generateComponent("Recipe_Fabric", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_FicsiteMesh", 200));
+        tempNoPrefixComps.add(generateComponent("Recipe_FluidCanister", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_GasTank", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_IronPlate", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_IronRod", 200));
         tempNoPrefixComps.add(generateComponent("Recipe_NuclearFuelRod", false, uraniumReq));
-        tempNoPrefixComps.add(generateComponent("Recipe_QuartzCrystal", false));
-        tempNoPrefixComps.add(generateComponent("Desc_HighSpeedWire", "Recipe_Quickwire", false));
-        tempNoPrefixComps.add(generateComponent("Desc_IronScrew", "Recipe_Screw", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Silica", false));
-        tempNoPrefixComps.add(generateComponent("Desc_SteelPlate", "Recipe_SteelBeam", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_SteelPipe", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Wire", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_QuartzCrystal", 200));
+        tempNoPrefixComps.add(generateComponent("Desc_HighSpeedWire", "Recipe_Quickwire", 500));
+        tempNoPrefixComps.add(generateComponent("Desc_IronScrew", "Recipe_Screw", 500));
+        tempNoPrefixComps.add(generateComponent("Recipe_Silica", 200));
+        tempNoPrefixComps.add(generateComponent("Desc_SteelPlate", "Recipe_SteelBeam", 200));
+        tempNoPrefixComps.add(generateComponent("Recipe_SteelPipe", 200));
+        tempNoPrefixComps.add(generateComponent("Recipe_Wire", 500));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Constructor/"));
         tempNoPrefixComps.clear();
 
         // Converter
         tempNoPrefixComps.add(generateComponent("Recipe_DarkEnergy", true));
-        tempNoPrefixComps.add(generateComponent("Desc_FicsiteIngot", "Recipe_FicsiteIngot_AL", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Ficsonium", false));
+        tempNoPrefixComps.add(generateComponent("Desc_FicsiteIngot", "Recipe_FicsiteIngot_AL", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_Ficsonium", false, uraniumReq));
         tempNoPrefixComps.add(generateComponent("Recipe_QuantumEnergy", true));
-        tempNoPrefixComps.add(generateComponent("Recipe_TimeCrystal", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_TimeCrystal", 200));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Converter/"));
         tempNoPrefixComps.clear();
 
         // HadronCollider
         tempNoPrefixComps.add(generateComponent("Recipe_DarkMatter", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Diamond", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_FicsoniumFuelRod", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_Diamond", 200));
+        tempNoPrefixComps.add(generateComponent("Recipe_FicsoniumFuelRod", false, uraniumReq));
         tempNoPrefixComps.add(generateComponent("Desc_PlutoniumPellet", "Recipe_Plutonium", false, uraniumReq));
         tempNoPrefixComps.add(generateComponent("Recipe_SingularityCell", false));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "HadronCollider/"));
         tempNoPrefixComps.clear();
 
         // Manufacturer
-        tempNoPrefixComps.add(generateComponent("Recipe_Battery", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_Battery", 200));
         tempNoPrefixComps.add(generateComponent("Recipe_Computer", false));
         tempNoPrefixComps.add(generateComponent("Recipe_ComputerSuper", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_CrystalOscillator", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_HighSpeedConnector", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_CrystalOscillator", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_HighSpeedConnector", 100));
         tempNoPrefixComps.add(generateComponent("Recipe_ModularFrameHeavy", false));
         tempNoPrefixComps.add(generateComponent("Desc_MotorLightweight", "Recipe_MotorTurbo", false));
         tempNoPrefixComps.add(generateComponent("Recipe_PlutoniumFuelRod", false, uraniumReq));
@@ -443,30 +447,30 @@ public class Materials {
 
         // OilRefinery
         tempNoPrefixComps.add(generateComponent("Recipe_AluminaSolution", true));
-        tempNoPrefixComps.add(generateComponent("Recipe_AluminumScrap", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_AluminumScrap", 5000));
         tempNoPrefixComps.add(generateComponent("Recipe_IonizedFuel", true));
         tempNoPrefixComps.add(generateComponent("Recipe_LiquidBiofuel", true));
         tempNoPrefixComps.add(generateComponent("Recipe_LiquidFuel", true));
-        tempNoPrefixComps.add(generateComponent("Recipe_PetroleumCoke", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Plastic", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_Rubber", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PetroleumCoke", 200));
+        tempNoPrefixComps.add(generateComponent("Recipe_Plastic", 200));
+        tempNoPrefixComps.add(generateComponent("Recipe_Rubber", 200));
         tempNoPrefixComps.add(generateComponent("Recipe_SulfuricAcid", true));
-        tempNoPrefixComps.add(generateComponent("Recipe_Fuel", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_Fuel", 100));
         tempNoPrefixComps.add(generateComponent("Recipe_PackagedBiofuel", false));
-        tempNoPrefixComps.add(generateComponent("Desc_PackagedOil", "Recipe_PackagedCrudeOil", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_PackagedOilResidue", false));
-        tempNoPrefixComps.add(generateComponent("Desc_TurboFuel", "Recipe_PackagedTurboFuel", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_PackagedWater", false));
+        tempNoPrefixComps.add(generateComponent("Desc_PackagedOil", "Recipe_PackagedCrudeOil", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedOilResidue", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_TurboFuel", "Recipe_PackagedTurboFuel", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedWater", 100));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "OilRefinery/"));
         tempNoPrefixComps.clear();
 
         // Packager
-        tempNoPrefixComps.add(generateComponent("Recipe_PackagedAlumina", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_PackagedIonizedFuel", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_PackagedNitricAcid", false));
-        tempNoPrefixComps.add(generateComponent("Desc_PackagedNitrogenGas", "Recipe_PackagedNitrogen", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_PackagedRocketFuel", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_PackagedSulfuricAcid", false));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedAlumina", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedIonizedFuel", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedNitricAcid", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_PackagedNitrogenGas", "Recipe_PackagedNitrogen", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedRocketFuel", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_PackagedSulfuricAcid", 100));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Packager/"));
         tempNoPrefixComps.clear();
 
@@ -475,19 +479,19 @@ public class Materials {
 
         // QuantumEncoder
         tempNoPrefixComps.add(generateComponent("Recipe_AlienPowerFuel", false));
-        tempNoPrefixComps.add(generateComponent("Desc_QuantumOscillator", "Recipe_SuperpositionOscillator", false));
-        tempNoPrefixComps.add(generateComponent("Desc_CrystalShard", "Recipe_SyntheticPowerShard", false));
-        tempNoPrefixComps.add(generateComponent("Recipe_TemporalProcessor", false));
+        tempNoPrefixComps.add(generateComponent("Desc_QuantumOscillator", "Recipe_SuperpositionOscillator", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_CrystalShard", "Recipe_SyntheticPowerShard", 100));
+        tempNoPrefixComps.add(generateComponent("Recipe_TemporalProcessor", 100));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "QuantumEncoder/"));
         tempNoPrefixComps.clear();
 
         // Smelter
-        tempNoPrefixComps.add(generateComponent("Desc_AluminumIngot", "Recipe_IngotAluminum", false));
-        tempNoPrefixComps.add(generateComponent("Desc_GoldIngot", "Recipe_IngotCaterium", false));
-        tempNoPrefixComps.add(generateComponent("Desc_CopperIngot", "Recipe_IngotCopper", false));
-        tempNoPrefixComps.add(generateComponent("Desc_IronIngot", "Recipe_IngotIron", false));
-        tempNoPrefixComps.add(generateComponent("Desc_SAMIngot", "Recipe_IngotSAM", false));
-        tempNoPrefixComps.add(generateComponent("Desc_SteelIngot", "Recipe_IngotSteel", false));
+        tempNoPrefixComps.add(generateComponent("Desc_AluminumIngot", "Recipe_IngotAluminum", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_GoldIngot", "Recipe_IngotCaterium", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_CopperIngot", "Recipe_IngotCopper", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_IronIngot", "Recipe_IngotIron", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_SAMIngot", "Recipe_IngotSAM", 100));
+        tempNoPrefixComps.add(generateComponent("Desc_SteelIngot", "Recipe_IngotSteel", 100));
         tempComps.addAll(addPrefixComp(tempNoPrefixComps, "Smelter/"));
         tempNoPrefixComps.clear();
 
@@ -505,8 +509,8 @@ public class Materials {
         tempNoPrefixComps.add(generateComponent("Desc_Filter", "Recipe_FilterGasMask", 50));
         tempNoPrefixComps.add(generateComponent("Desc_HazmatFilter", "Recipe_FilterHazmat", 50));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorGasmask", "Recipe_Gasmask", 1));
-        tempNoPrefixComps.add(generateComponent("Desc_Gunpowder", "Recipe_Gunpowder", false));
-        tempNoPrefixComps.add(generateComponent("Desc_GunpowderMK2", "Recipe_GunpowderMK2", false));
+        tempNoPrefixComps.add(generateComponent("Desc_Gunpowder", "Recipe_Gunpowder", 200));
+        tempNoPrefixComps.add(generateComponent("Desc_GunpowderMK2", "Recipe_GunpowderMK2", 100));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHazmatSuit", "Recipe_HazmatSuit", 1));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorHoverPack", "Recipe_Hoverpack", 1));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorJetPack", "Recipe_JetPack", 1));
@@ -516,7 +520,7 @@ public class Materials {
                 .add(generateComponent("BP_EquipmentDescriptorNobeliskDetonator", "Recipe_NobeliskDetonator", 1));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorObjectScanner", "Recipe_ObjectScanner", 1));
         tempNoPrefixComps.add(generateComponent("Desc_Parachute", "Recipe_Parachute", 1));
-        tempNoPrefixComps.add(generateComponent("BP_ItemDescriptorPortableMiner", "Recipe_PortableMiner", false));
+        tempNoPrefixComps.add(generateComponent("BP_ItemDescriptorPortableMiner", "Recipe_PortableMiner", 1));
         tempNoPrefixComps.add(generateComponent("Desc_RebarGunProjectile", "Recipe_RebarGun", 1));
         tempNoPrefixComps.add(generateComponent("BP_EquipmentDescriptorRifle", "Recipe_SpaceRifleMk1", 1));
         tempNoPrefixComps.add(generateComponent("Desc_SpikedRebar", "Recipe_SpikedRebar", false));
@@ -1395,6 +1399,10 @@ public class Materials {
 
     private Component generateComponent(String name, String recipe, int maxstack) {
         return new Component(name, recipe, false, false, false, maxstack, null);
+    }
+
+    private Component generateComponent(String recipe, int maxstack) {
+        return new Component(recipe.replace("Recipe", "Desc"), recipe, false, false, false, maxstack, null);
     }
 
     private Milestone generateMamMilestone(String recipe, List<String> Reqs) {
