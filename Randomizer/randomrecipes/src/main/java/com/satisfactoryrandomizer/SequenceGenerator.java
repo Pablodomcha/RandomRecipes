@@ -453,10 +453,10 @@ public class SequenceGenerator {
         // Don't add main product if there isn't one (alternate recipes).
         if (station.getLiquidIn() + station.getSolidIn() > 0 && comp.getName() != null) {
             if (comp.isLiquid()) {
-                prod.add(new Mat(comp.getName(), (random.nextInt(UiValues.getMaxStackCraft()) + 1) * 1000));
+                prod.add(new Mat(comp.getName(), (random.nextInt(Math.min(comp.getStack(), UiValues.getMaxProdCraft())) + 1) * 1000));
                 prod.addAll(generateProducts(station, true));
             } else {
-                prod.add(new Mat(comp.getName(), random.nextInt(UiValues.getMaxStackCraft()) + 1));
+                prod.add(new Mat(comp.getName(), random.nextInt(Math.min(comp.getStack(), UiValues.getMaxProdCraft())) + 1));
                 prod.addAll(generateProducts(station, false));
             }
         } else {
