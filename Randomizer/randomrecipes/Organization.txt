@@ -7,7 +7,7 @@ make milestone times also progressive.
 
 portable miner not really unlocked.
 
-set correct stack sizes
+set correct stack sizes.
 
 --------------------------------------------------------------------------------------------------------------
 

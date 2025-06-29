@@ -410,8 +410,8 @@ public class UiValues {
         return UiValues.freeChance;
     }
 
-    public static void setFreeChance(int waste) {
-        UiValues.waste = waste;
+    public static void setFreeChance(int free) {
+        UiValues.freeChance = free;
     }
 
     /**
