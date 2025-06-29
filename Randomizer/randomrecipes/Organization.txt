@@ -2,6 +2,11 @@
 
 ---TODO:
 
+sequence generator 880 double party not done
+portable miner not really unlocked
+does not cap at max stack, goes up to the value given.
+make milestone times also progressive
+
 --------------------------------------------------------------------------------------------------------------
 
 Missing:

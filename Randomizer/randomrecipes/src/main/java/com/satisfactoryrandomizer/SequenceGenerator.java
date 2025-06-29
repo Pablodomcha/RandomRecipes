@@ -846,7 +846,12 @@ public class SequenceGenerator {
         }
 
         // Use random resources between 1 and the max possible for the station
-        int totalresources = random.nextInt(liquidslots + solidslots + 1);
+        int totalresources;
+        if(UiValues.getWaste() >= 4){
+            totalresources = liquidslots + solidslots;
+        } else {
+            totalresources = random.nextInt(liquidslots + solidslots + 1);
+        }
         if (mainliquid == null && totalresources == 0) {
             totalresources++;
         }
@@ -873,8 +878,8 @@ public class SequenceGenerator {
             Component component = availableComponents.get(random.nextInt(availableComponents.size()));
 
             // Add the ingredient to the list and generate the amount randomly.
-            // Use the UiValues to get the max stack size for the component.
-            int amount = random.nextInt(Math.min(component.getStack(), UiValues.getMaxStackCraft())) + 1;
+            // Use the UiValues to get the max stack size for the product.
+            int amount = random.nextInt(Math.min(component.getStack(), UiValues.getMaxProdCraft())) + 1;
 
             if (component.isLiquid()) {
                 amount = amount * 1000;
