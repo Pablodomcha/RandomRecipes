@@ -311,33 +311,6 @@ public class SequenceGenerator {
             checkAlso.add((String) mile);
         }
 
-        // Force Tutorials to have at least some of the tutorial requirements to ensure
-        // they are craftable by the time they are needed for Tutorial_6
-        if (milestone.getName().contains("Tutorial_")) {
-            Milestone tut6 = materials.getMilestoneByName("Tutorial_6");
-
-            // Adds up to 2 fixed unlocks per tutorial and 10 to Tutorial_5 (increase the
-            // chance extrachecks are done)
-            int cont = 2;
-            if (milestone.getName().equals("Tutorial_5")) {
-                cont = 10;
-            }
-            List<String> extraCheck;
-
-            while (tut6.getExtraCheck().size() > 0 && cont-- > 0) {
-                // Remove the extra check belonging to a milestone and get an extra check at
-                // random
-                extraCheck = new ArrayList<>(tut6.getExtraCheck());
-                extraCheck.removeIf(s -> s.contains("Tutorial_"));
-
-                if (!extraCheck.isEmpty()) {
-                    String s = extraCheck.get(random.nextInt(extraCheck.size()));
-                    milestone.addFixedUnlock(s);
-                }
-            }
-
-        }
-
         List<String> unlocks;
         if (type.equals("depot")) {
             unlocks = generateUnlocks(milestone.getnRecipes(), milestone.getFixedUnlocks(),
@@ -347,11 +320,18 @@ public class SequenceGenerator {
                     milestone.getPhase(), false);
         }
 
+        int amount;
+        if (milestone.getName().contains("Tutorial_")) {
+            amount = random.nextInt(UiValues.getMaxTimeMile() / 10);
+        } else {
+            amount = random.nextInt(UiValues.getMaxTimeMile());
+        }
+
         MilestoneSchematic recipe = new MilestoneSchematic(
                 unlocks, // Unlocks
                 mats, // Ingredients
                 "Schematic_" + milestone.getName() + ".json", // Filename
-                random.nextInt(UiValues.getMaxTimeMile())// Time
+                amount// Time
         );
 
         // Create Recipe JSON file
@@ -453,10 +433,12 @@ public class SequenceGenerator {
         // Don't add main product if there isn't one (alternate recipes).
         if (station.getLiquidIn() + station.getSolidIn() > 0 && comp.getName() != null) {
             if (comp.isLiquid()) {
-                prod.add(new Mat(comp.getName(), (random.nextInt(Math.min(comp.getStack(), UiValues.getMaxProdCraft())) + 1) * 1000));
+                prod.add(new Mat(comp.getName(),
+                        (random.nextInt(Math.min(comp.getStack(), UiValues.getMaxProdCraft())) + 1) * 1000));
                 prod.addAll(generateProducts(station, true));
             } else {
-                prod.add(new Mat(comp.getName(), random.nextInt(Math.min(comp.getStack(), UiValues.getMaxProdCraft())) + 1));
+                prod.add(new Mat(comp.getName(),
+                        random.nextInt(Math.min(comp.getStack(), UiValues.getMaxProdCraft())) + 1));
                 prod.addAll(generateProducts(station, false));
             }
         } else {
@@ -847,7 +829,7 @@ public class SequenceGenerator {
 
         // Use random resources between 1 and the max possible for the station
         int totalresources;
-        if(UiValues.getWaste() >= 4){
+        if (UiValues.getWaste() >= 4) {
             totalresources = liquidslots + solidslots;
         } else {
             totalresources = random.nextInt(liquidslots + solidslots + 1);
@@ -956,7 +938,7 @@ public class SequenceGenerator {
     }
 
     public static int generateGaussianBiasedNumber(double min, double max, double bias) {
-        if(max == min){
+        if (max == min) {
             return (int) min;
         }
         if (bias < (-1) || bias > 100) {
