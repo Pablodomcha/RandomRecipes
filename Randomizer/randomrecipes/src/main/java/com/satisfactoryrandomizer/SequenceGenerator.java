@@ -28,6 +28,7 @@ public class SequenceGenerator {
     private static int mamChance = 0;
     private static Boolean mamDone = false;
     private static List<Randomizable> forcedCraftables = new ArrayList<>();
+    private static Randomizable lastComponent = null;
 
     // Delete all static values
     public static void reset() {
@@ -157,13 +158,18 @@ public class SequenceGenerator {
                 milestone.addFixedUnlock(item.getName());
                 Console.hiddenLog("Added " + item.getName() + " to " + milestone.getName());
                 materials.setfixedRandomizable(item);
-                setForceCraftable(item);
+                if (i == 5) {
+                    lastComponent = item;
+                } else {
+                    setForceCraftable(item);
+                }
                 if (milestones.size() > items.size()) {
                     milestones.remove(milestone);
                 }
             }
 
         }
+        Console.hiddenLog("Last Component: " + lastComponent.getName());
 
         // Spread the Randomizables evenly across the milestones
         int milestonesAvailable = materials.getAllMilestones().size();
@@ -203,6 +209,11 @@ public class SequenceGenerator {
             // If there are items that need to be made craftable, give them priority
             randomizable = forceCraftable(randomizable);
 
+            // If it's the last item, don't do it unless it's the last.
+            if (randomizable == lastComponent && randomizables.size() > 1) {
+                continue;
+            }
+
             if (randomizable instanceof Component) {
                 generateComp((Component) randomizable, materials.getCraftableRandomizables().size(), "component");
             } else if (randomizable instanceof CraftStation) {
@@ -211,11 +222,14 @@ public class SequenceGenerator {
 
                 // Chance to skip the milestone to make them appear later
                 Boolean skipMilestone = false;
-                for (int i = 0; i < UiValues.getForceLongGameBias(); i++) {
+                for (int i = 0; i < (UiValues.getForceLongGameBias() * 2); i++) {
                     skipMilestone = random.nextBoolean();
                     if (skipMilestone || size > 1) {
                         break;
                     }
+                }
+                if (skipMilestone) {
+                    continue;
                 }
 
                 if (!finishedProgression
@@ -398,7 +412,7 @@ public class SequenceGenerator {
 
         // If the station is not the last one obtained, reroll to increase station
         // variability.
-        int count = UiValues.getStationBias();
+        int count = UiValues.getStationBias() * 2;
 
         // Check if there's even a last obtained station before checking it's name.
         while (!station.getName().equals(SequenceGenerator.lastObtainedStation)

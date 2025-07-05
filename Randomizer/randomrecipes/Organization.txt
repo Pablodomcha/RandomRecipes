@@ -6,13 +6,7 @@ Ores are enforced into crafting recipes ASAP to increase ore variability.
 
 ---TODO:
 
-Input bias not working correctly.
-
-2 solids for packager.
-
 Space elevator part 12 is generated last (increasing it's chance to have later resources).
-
-Option to halve max used for better productivity.
 
 --------------------------------------------------------------------------------------------------------------
 
