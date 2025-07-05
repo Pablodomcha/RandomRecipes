@@ -100,12 +100,6 @@ public class SequenceGenerator {
         materials.getMilestoneByName("Tutorial_6").addExtraCheck(SequenceGenerator.firstStation);
         Console.hiddenLog("");
 
-        // Add all extrachecks of Tutorial_6 to forcedunlocks, since they all need to be
-        // craftable as soon as they're unlocked.
-        for (String s : materials.getMilestoneByName("Tutorial_6").getExtraCheck()) {
-            setForceCraftable(materials.getRandomizableByName(s));
-        }
-
         // Generate the extraChecks after they have been set
         materials.fillExtraChecks();
 
@@ -160,9 +154,8 @@ public class SequenceGenerator {
                 materials.setfixedRandomizable(item);
                 if (i == 5) {
                     lastComponent = item;
-                } else {
-                    setForceCraftable(item);
                 }
+
                 if (milestones.size() > items.size()) {
                     milestones.remove(milestone);
                 }

@@ -2,11 +2,7 @@
 
 Programable splitter keeps default costs despite it's recipe being generated.
 
-Ores are enforced into crafting recipes ASAP to increase ore variability.
-
 ---TODO:
-
-Space elevator part 12 is generated last (increasing it's chance to have later resources).
 
 --------------------------------------------------------------------------------------------------------------
 
