@@ -24,6 +24,8 @@ public class Ui {
         private JCheckBox advLogCheckBox;
         private JCheckBox startWithMiner;
         private JCheckBox progressiveBias;
+        private JCheckBox capProdIn;
+        private JCheckBox capProdOut;
         private JTextField seedField;
         private JSpinner maxStackCraftSpinner;
         private JSpinner maxProdCraftSpinner;
@@ -271,7 +273,8 @@ public class Ui {
                 JPanel panelMaxItemStruct = new JPanel();
                 panelMaxItemStruct.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("<html>Max number of different items for building<font color='red'>*</font>:</html>");
+                label = new JLabel(
+                                "<html>Max number of different items for building<font color='red'>*</font>:</html>");
                 label.setToolTipText(
                                 "<html>Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build (<font color='red'>this could render the seed uncompletable</font>).</html>");
                 panelMaxItemStruct.add(label);
@@ -283,7 +286,8 @@ public class Ui {
                 JPanel panelMaxStackMile = new JPanel();
                 panelMaxStackMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("<html>Max amount of each material for milestones<font color='red'>*</font>:</html>");
+                label = new JLabel(
+                                "<html>Max amount of each material for milestones<font color='red'>*</font>:</html>");
                 label.setToolTipText(
                                 "<html><p>Maximum number of each component needed to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.<p>Affects MAM milestones which may be mandatory.</p><p><font color='red'>A value too high may render the seed uncompletable</font></p></html>");
                 panelMaxStackMile.add(label);
@@ -295,7 +299,8 @@ public class Ui {
                 JPanel panelMaxItemMile = new JPanel();
                 panelMaxItemMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("<html>Max number of different items for milestones<font color='red'>*</font>:</html>");
+                label = new JLabel(
+                                "<html>Max number of different items for milestones<font color='red'>*</font>:</html>");
                 label.setToolTipText(
                                 "<html><p>Maximum number of different items to complete a milestone.<p>Affects MAM milestones which may be mandatory.</p><p><font color='red'>A value too high may render the seed uncompletable</font></p></html>");
                 panelMaxItemMile.add(label);
@@ -425,6 +430,32 @@ public class Ui {
                 panelProgressiveBias.add(progressiveBias);
                 panel.add(panelProgressiveBias, getBagColumn());
 
+                // Cap productivity In
+                JPanel panelCapProdIn = new JPanel();
+                panelCapProdIn.setLayout(new FlowLayout(FlowLayout.LEFT));
+                label = new JLabel("Cap Input for productivity:");
+                label.setToolTipText(
+                                "<html><div>Caps the input for crafting recipes at half the maximum stack, allowing productivity to reach 100% (needs both caps to reach 100%)</div>"
+                                                + "<div>Production speed decreases greatly with this disabled, as resuming production after input reaches needed amount is not instant and the time is not negligible sometimes.</div></html>");
+                panelCapProdIn.add(label);
+                capProdIn = new JCheckBox();
+                capProdIn.setSelected(true);
+                panelCapProdIn.add(capProdIn);
+                panel.add(panelCapProdIn, getBagColumn());
+
+                // Cap productivity Out
+                JPanel panelCapProdOut = new JPanel();
+                panelCapProdOut.setLayout(new FlowLayout(FlowLayout.LEFT));
+                label = new JLabel("Cap Output for productivity:");
+                label.setToolTipText(
+                                "<html><div>Caps the output for crafting recipes at half the maximum stack, allowing productivity to reach 100% (needs both caps to reach 100%)</div>"
+                                                + "<div>Unlike capping the input, while this does decrease productivity, it doesn't affect amount produced, as the time lost is lost because the produced amount per craft is too large.</div></html>");
+                panelCapProdOut.add(label);
+                capProdOut = new JCheckBox();
+                capProdOut.setSelected(true);
+                panelCapProdOut.add(capProdOut);
+                panel.add(panelCapProdOut, getBagColumn());
+
                 // Advanced Logging
                 JPanel panelAdvLog = new JPanel();
                 panelAdvLog.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -518,6 +549,8 @@ public class Ui {
                 fields.put("startWithMiner", startWithMiner);
                 fields.put("progressiveBias", progressiveBias);
                 fields.put("advLogCheckBox", advLogCheckBox);
+                fields.put("capProdOut", capProdOut);
+                fields.put("capProdIn", capProdIn);
                 fields.put("maxStackCraftSpinner", maxStackCraftSpinner);
                 fields.put("maxProdCraftSpinner", maxProdCraftSpinner);
                 fields.put("maxStackStructSpinner", maxStackStructSpinner);
@@ -577,6 +610,7 @@ public class Ui {
                 UiValues.setStartWithMiner(startWithMiner.isSelected());
                 UiValues.setProgressiveBias(progressiveBias.isSelected());
                 UiValues.setAdvLog(advLogCheckBox.isSelected());
+                UiValues.setProductivity(new Boolean[] { capProdIn.isSelected(), capProdOut.isSelected() });
 
         }
 

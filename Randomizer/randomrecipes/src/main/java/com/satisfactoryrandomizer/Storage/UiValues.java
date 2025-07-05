@@ -18,6 +18,8 @@ public class UiValues {
     static Boolean advLog = false;
     static Boolean startWithMiner = false;
     static Boolean progressiveBias = false;
+    static Boolean capProductivityInput = false;
+    static Boolean capProductivityOutput = false;
 
     // Numeric values here
     static long seed = 0;
@@ -443,6 +445,23 @@ public class UiValues {
 
     public static void setProgressiveBias(Boolean progBias) {
         UiValues.progressiveBias = progBias;
+    }
+
+    /**
+     * Retrieves the productivity settings for the input and output.
+     * 
+     * @return An array of Booleans where the first element indicates whether the
+     *         input productivity is capped, and the second element indicates 
+     *         whether the output productivity is capped.
+     */
+
+    public static Boolean[] getProductivity() {
+        return new Boolean[] { UiValues.capProductivityInput, UiValues.capProductivityOutput };
+    }
+
+    public static void setProductivity(Boolean[] productivity) {
+        UiValues.capProductivityInput = productivity[0];
+        UiValues.capProductivityOutput = productivity[1];
     }
 
 }

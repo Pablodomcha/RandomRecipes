@@ -342,7 +342,7 @@ public class SequenceGenerator {
         // Create Recipe JSON file
         CreateJSON.saveMilestoneAsJson(recipe, milestone.getRecipePath());
 
-        Console.cheatsheet("    " + milestone.getName() + " can be made.");
+        Console.cheatsheet(milestone.getName() + " can be made.");
 
         // Mark the component as craftable
         materials.setMilestoneCraftable(milestone.getName(), true);
@@ -394,6 +394,8 @@ public class SequenceGenerator {
             station = materials.getStationByName(firstStation);
         }
 
+        int outDivisor = UiValues.getProductivity()[1] ? 2 : 1;
+
         // If the station is not the last one obtained, reroll to increase station
         // variability.
         int count = UiValues.getStationBias();
@@ -439,11 +441,16 @@ public class SequenceGenerator {
         if (station.getLiquidOut() + station.getSolidOut() > 0 && comp.getName() != null) {
             if (comp.isLiquid()) {
                 prod.add(new Mat(comp.getName(),
-                        (random.nextInt(Math.min(comp.getStack(), UiValues.getMaxProdCraft())) + 1) * 1000));
+                        (random.nextInt(
+                                minValue((int) Math.ceil(comp.getStack() / outDivisor), UiValues.getMaxProdCraft()))
+                                + 1)
+                                * 1000));
                 prod.addAll(generateProducts(station, true));
             } else {
                 prod.add(new Mat(comp.getName(),
-                        random.nextInt(Math.min(comp.getStack(), UiValues.getMaxProdCraft())) + 1));
+                        random.nextInt(
+                                minValue((int) Math.ceil(comp.getStack() / outDivisor), UiValues.getMaxProdCraft()))
+                                + 1));
                 prod.addAll(generateProducts(station, false));
             }
         } else {
@@ -649,10 +656,14 @@ public class SequenceGenerator {
                 return ingredients;
             }
 
+            int inDivisor = UiValues.getProductivity()[0] ? 2 : 1;
+
             // Add the ingredient to the list and generate the amount randomly
             // Use the UiValues to get the max stack size for the component
             // Multiply by 1000 for liquids
-            int amount = random.nextInt(Math.min(comp.getStack(), UiValues.getMaxStackCraft())) + 1;
+            int amount = random.nextInt(
+                    minValue((int) Math.ceil(comp.getStack() / inDivisor) / inDivisor, UiValues.getMaxStackCraft()))
+                    + 1;
 
             if (selectedLiquid) {
                 amount = amount * 1000;
@@ -868,9 +879,11 @@ public class SequenceGenerator {
 
             Component component = availableComponents.get(random.nextInt(availableComponents.size()));
 
+            int outDivisor = UiValues.getProductivity()[1] ? 2 : 1;
+
             // Add the ingredient to the list and generate the amount randomly.
             // Use the UiValues to get the max stack size for the product.
-            int amount = random.nextInt(Math.min(component.getStack(), UiValues.getMaxProdCraft())) + 1;
+            int amount = random.nextInt(minValue(component.getStack() / outDivisor, UiValues.getMaxProdCraft())) + 1;
 
             if (component.isLiquid()) {
                 amount = amount * 1000;
@@ -974,7 +987,7 @@ public class SequenceGenerator {
         double usedBias = (max - min) * bias / 100;
         // Use 20% of the range as spread
         double spread = (max - min) / 5;
-        
+
         double gaussianValue;
         int result;
         Boolean cap = false;
@@ -1045,4 +1058,11 @@ public class SequenceGenerator {
         return randomizable;
     }
 
+    private static int minValue(int v1, int v2) {
+        int ans = Math.min(v1, v2);
+        if (ans < 1) {
+            return 1;
+        }
+        return ans;
+    }
 }
