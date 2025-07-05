@@ -15,8 +15,8 @@ public class Materials {
     private final List<Component> components = new ArrayList<>(); // Components
     private final List<Component> alternate = new ArrayList<>(); // Alternate components
     private final List<Component> HD = new ArrayList<>(); // Hard Drive recipes (not added to milestones)
-    private final List<Component> limited = new ArrayList<>(); // limited ingredients
-    private final List<Component> animal = new ArrayList<>(); // limited ingredients
+    private final List<Component> limited = new ArrayList<>(); // Limited ingredients
+    private final List<Component> animal = new ArrayList<>(); // Animal Parts
     private final List<Component> equip = new ArrayList<>(); // Equipment (can be made, but not used as material)
     private final List<Component> elevator = new ArrayList<>(); // Elevator parts
     private List<CraftStation> stations = new ArrayList<>(); // Crafting Stations
@@ -329,6 +329,12 @@ public class Materials {
             tempRawOre.add(new Component("Desc_NitrogenGas", true,
                     Arrays.asList("Milestone_8-3", "Desc_FrackingExtractor", "Desc_FrackingSmasher", "power")));
             tempRawOre.add(new Component("Desc_SAM", false, Arrays.asList("Milestone_9-1", "Research_Alien_SAM")));
+
+            // Ensure ores are forced in at least 2 recipes to increase usage for later
+            // unlocked ores.
+            for (Component ore : tempRawOre) {
+                ore.setRawOre(2);
+            }
         } else {
             tempRawOre.add(new Component("Desc_OreIron", false, null));
             tempRawOre.add(new Component("Desc_OreCopper", false, null));
@@ -345,7 +351,7 @@ public class Materials {
             tempRawOre.add(new Component("Desc_SAM", false, null));
         }
 
-        for(Component rawOre : tempRawOre) {
+        for (Component rawOre : tempRawOre) {
             rawOre.setStack(100);
         }
 
@@ -1000,7 +1006,7 @@ public class Materials {
 
         // Mycelia
         tempNoPrefix.add(
-                generateMamMilestone("Research_Mycelia_1", Arrays.asList("Desc_Mam", "Desc_Chainsaw", "Desc_Biofuel")));
+                generateMamMilestone("Research_Mycelia_1", Arrays.asList("Desc_Mam")));
         // 2
         tempNoPrefix.add(generateMamMilestone("Research_Mycelia_2", Arrays.asList("Research_Mycelia_1")));
         tempNoPrefix.add(generateMamMilestone("Research_Mycelia_8", Arrays.asList("Research_Mycelia_1")));
@@ -1513,6 +1519,24 @@ public class Materials {
 
     // Getters and Setters
 
+    public List<Component> getOres() {
+        List<Component> ores = new ArrayList<>();
+        for (Component c : this.components) {
+            if (c.getRawOre() > 0 && c.isAvailable()) {
+                ores.add(c);
+            }
+        }
+        return ores;
+    }
+
+    public Boolean forceOre() {
+        if (this.getOres().size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public Component getComponentByName(String name) {
         for (Component component : this.components) {
             if (component.getName().equals(name)) {
@@ -1529,7 +1553,6 @@ public class Materials {
                 return ele;
             }
         }
-
         Console.log("Component not found: " + name);
         return null;
     }

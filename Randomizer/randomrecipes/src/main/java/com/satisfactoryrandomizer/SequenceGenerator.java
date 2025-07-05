@@ -2,7 +2,10 @@ package com.satisfactoryrandomizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -128,7 +131,9 @@ public class SequenceGenerator {
         for (int i = 1; i <= 5; i++) {
             List<Milestone> milestonesChecks = materials.getMilestonesInPhase(i + 1);
             List<Milestone> milestones = materials.getMilestonesInPhase(i);
-            Set<Randomizable> items = new HashSet<>();
+
+            // Linked so that it preserves order
+            Set<Randomizable> items = new LinkedHashSet<>();
 
             for (Milestone m : milestonesChecks) {
                 for (String s : m.getExtraCheck()) {
@@ -431,7 +436,7 @@ public class SequenceGenerator {
         // Add the main product multiplying the value range by 1000 for liquids.
         // Then add the rest of the products if the option is enabled and there's space.
         // Don't add main product if there isn't one (alternate recipes).
-        if (station.getLiquidIn() + station.getSolidIn() > 0 && comp.getName() != null) {
+        if (station.getLiquidOut() + station.getSolidOut() > 0 && comp.getName() != null) {
             if (comp.isLiquid()) {
                 prod.add(new Mat(comp.getName(),
                         (random.nextInt(Math.min(comp.getStack(), UiValues.getMaxProdCraft())) + 1) * 1000));
@@ -613,7 +618,8 @@ public class SequenceGenerator {
             }
 
             // Select a random component from the usable components
-            // The first attempt in alternate will use all ingredients (available or not),
+            // The first attempt in alternate will use all ingredients (available or not)
+            // The first attempt in non-alternate will try to use forced ores
             // from there, it will roll only craftable
             List<Component> craftableComponents;
             if (alternate) {
@@ -623,7 +629,11 @@ public class SequenceGenerator {
                     craftableComponents.addAll(materials.getAvailableLimited());
                 }
             } else {
-                craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
+                if (!selectedLiquid && materials.forceOre()) {
+                    craftableComponents = materials.getOres();
+                } else {
+                    craftableComponents = materials.getAvailableAndCraftableComponents(selectedLiquid);
+                }
             }
 
             Component comp = ensureUnused(ingredients, craftableComponents, selectedLiquid, alternate);
@@ -832,10 +842,7 @@ public class SequenceGenerator {
         if (UiValues.getWaste() >= 4) {
             totalresources = liquidslots + solidslots;
         } else {
-            totalresources = random.nextInt(liquidslots + solidslots + 1);
-        }
-        if (mainliquid == null && totalresources == 0) {
-            totalresources++;
+            totalresources = random.nextInt(liquidslots + solidslots) + 1;
         }
 
         for (int i = 0; i < totalresources; i++) {
@@ -854,8 +861,10 @@ public class SequenceGenerator {
             }
             // Select a random component from the components
             List<Component> availableComponents = materials.getAllComponents(selectedLiquid);
-            availableComponents.addAll(materials.getAvailableAnimal());
-            availableComponents.addAll(materials.getAvailableLimited());
+            if (!selectedLiquid) {
+                availableComponents.addAll(materials.getAvailableAnimal());
+                availableComponents.addAll(materials.getAvailableLimited());
+            }
 
             Component component = availableComponents.get(random.nextInt(availableComponents.size()));
 
@@ -906,15 +915,28 @@ public class SequenceGenerator {
                 return null;
             } else if (++loops == 100 || craftableComponents.size() <= 0) {
                 Console.log("Looping through the available materials for the " + loops
-                        + "th time, \"Max recipes used\" is too low. The uses of all available components will be increased by 1 to procceed");
+                        + "th time, \"Max number of different recipes to use each material\" is too low. The uses of all available components will be increased by 1 to procceed");
                 materials.refillComponents();
                 craftableComponents = materials.getAvailableAndCraftableComponents(liquid);
                 if (craftableComponents.size() < list.size()) {
-                    Console.hiddenLog("All available materials used, can't add more.");
+                    Console.log(
+                            "All available materials used, can't add more. Happens with some seeds for early recipes. This shouldn't stop the randomizer from working.");
+                    return null;
                 }
+            } // 1429724
+
+            // Select a random component from the provided list
+            component = craftableComponents.get(random.nextInt(craftableComponents.size()));
+
+            // Reduce the uses of raw ore (negative values work as 0, so no need to check)
+            if (component.getRawOre() > 0) {
+                materials.getComponentByName(component.getName()).reduceRawOre();
             }
 
-            component = craftableComponents.get(random.nextInt(craftableComponents.size()));
+            // Refresh the list. Usually will be the same, but in the cases it isn't, this
+            // is less troublesome.
+            craftableComponents = materials.getAvailableAndCraftableComponents(liquid);
+
             Boolean alreadyExists = false;
             for (Mat ing : list) {
                 if (ing.getName().equals(component.getName())) {
@@ -944,7 +966,7 @@ public class SequenceGenerator {
         if (bias < (-1) || bias > 100) {
             throw new IllegalArgumentException("Bias must be within the range [" + (-1) + ", " + 100 + "]");
         }
-        if (bias == (-1)) {
+        if (bias <= 0) {
             return ((int) (random.nextDouble() * (max - min) + min));
         }
 
@@ -956,6 +978,7 @@ public class SequenceGenerator {
 
         do {
             gaussianValue = (random.nextGaussian() * spread) + usedBias;
+            Console.hiddenLog("Random Gaussian: " + gaussianValue);
             result = (int) Math.round(gaussianValue);
 
             // If the value is too far above the bias, put it above the max to reroll it

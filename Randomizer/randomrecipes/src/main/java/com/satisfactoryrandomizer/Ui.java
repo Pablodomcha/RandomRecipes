@@ -110,6 +110,22 @@ public class Ui {
 
                 panel.add(panelSeed, gbcFull);
 
+                JPanel panelWarning = new JPanel();
+                panelWarning.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+                label = new JLabel(
+                                "<html>Settings that could render a seed impossible to complete are marked with \"<font color='red'>*</font>\"</html>");
+                label.setToolTipText(
+                                "<html><p>Located: You don't need ores you can't scan to unlock the ability to scan them. Uranium will only be needed for progression if you can have radiation protection. A lot of things will come from iron (for better or worse).</p>"
+                                                +
+                                                "<p>Unlocated: Any ore can be part of any recipe. Uranium will only be needed for progression if you can have radiation protection.</p>"
+                                                +
+                                                "<p>Radiation Party: Uranium could be needed for progression before having radiation protection.</p></html>");
+                panelWarning.add(label);
+                panel.add(panelWarning, getBagColumn());
+
+                panel = nextSection(panel);
+
                 // Dropdown Fields
 
                 // Ore Location
@@ -211,16 +227,7 @@ public class Ui {
                 panelForceLongGameBias.add(forceLongGameBiasComboBox);
                 panel.add(panelForceLongGameBias, getBagColumn());
 
-                while (position < columns) {
-                        panel.add(new JPanel(), getBagColumn());
-                }
-
-                for (int i = 0; i < columns; i++) {
-                        GridBagConstraints gbcLocal = getBagColumn();
-                        gbcLocal.insets = new Insets(0, 0, 10, 0);
-                        gbcLocal.anchor = GridBagConstraints.CENTER;
-                        panel.add(new JLabel(" "), gbcLocal);
-                }
+                panel = nextSection(panel);
 
                 // Numeric Value Fields
 
@@ -252,9 +259,9 @@ public class Ui {
                 JPanel panelMaxStackStruct = new JPanel();
                 panelMaxStackStruct.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max amount of each material for building:");
+                label = new JLabel("<html>Max amount of each material for building<font color='red'>*</font>:</html>");
                 label.setToolTipText(
-                                "Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).");
+                                "<html>Maximum number of each component needed to build with the builder tool. Big values will need a lot of inventory slots to build (<font color='red'>this could render the seed uncompletable</font>).</html>");
                 panelMaxStackStruct.add(label);
                 maxStackStructSpinner = new JSpinner(new SpinnerNumberModel(10, 1, 1000, 1));
                 panelMaxStackStruct.add(maxStackStructSpinner);
@@ -264,9 +271,9 @@ public class Ui {
                 JPanel panelMaxItemStruct = new JPanel();
                 panelMaxItemStruct.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max number of different items for building:");
+                label = new JLabel("<html>Max number of different items for building<font color='red'>*</font>:</html>");
                 label.setToolTipText(
-                                "Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build (this could render the seed uncompletable).");
+                                "<html>Maximum number of different items to build with the builder tool. Big values will need a lot of inventory slots to build (<font color='red'>this could render the seed uncompletable</font>).</html>");
                 panelMaxItemStruct.add(label);
                 maxItemStructSpinner = new JSpinner(new SpinnerNumberModel(4, 1, 20, 1));
                 panelMaxItemStruct.add(maxItemStructSpinner);
@@ -276,9 +283,9 @@ public class Ui {
                 JPanel panelMaxStackMile = new JPanel();
                 panelMaxStackMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max amount of each material for milestones:");
+                label = new JLabel("<html>Max amount of each material for milestones<font color='red'>*</font>:</html>");
                 label.setToolTipText(
-                                "Maximum number of each component needed to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.");
+                                "<html><p>Maximum number of each component needed to complete a milestone. Accepts numbers in the thousands at least. Not sure how high it has to be to break.<p>Affects MAM milestones which may be mandatory.</p><p><font color='red'>A value too high may render the seed uncompletable</font></p></html>");
                 panelMaxStackMile.add(label);
                 maxStackMileSpinner = new JSpinner(new SpinnerNumberModel(500, 1, 100000, 1));
                 panelMaxStackMile.add(maxStackMileSpinner);
@@ -288,8 +295,9 @@ public class Ui {
                 JPanel panelMaxItemMile = new JPanel();
                 panelMaxItemMile.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Max number of different items for milestones:");
-                label.setToolTipText("Maximum number of different items to complete a milestone.");
+                label = new JLabel("<html>Max number of different items for milestones<font color='red'>*</font>:</html>");
+                label.setToolTipText(
+                                "<html><p>Maximum number of different items to complete a milestone.<p>Affects MAM milestones which may be mandatory.</p><p><font color='red'>A value too high may render the seed uncompletable</font></p></html>");
                 panelMaxItemMile.add(label);
                 maxItemMileSpinner = new JSpinner(new SpinnerNumberModel(5, 1, 20, 1));
                 panelMaxItemMile.add(maxItemMileSpinner);
@@ -373,7 +381,7 @@ public class Ui {
 
                 label = new JLabel("Max number of different recipes to use each material:");
                 label.setToolTipText(
-                                "Maximum number of recipes that can use a material. The randomizer will increase this value if it can't complete a randomization. Lower values increase component diversity.");
+                                "<html><div>Maximum number of recipes that can use a material. The randomizer will increase this value if it can't complete a randomization.</div><div>Lower values increase component diversity.</div><div>Alternate recipes ignore this.</div></html>");
                 panelMaxRecipesUsed.add(label);
                 maxRecipesUsedSpinner = new JSpinner(new SpinnerNumberModel(20, 1, 10000, 1));
                 panelMaxRecipesUsed.add(maxRecipesUsedSpinner);
@@ -585,6 +593,21 @@ public class Ui {
                 }
                 ans.gridx = position++;
                 return ans;
+        }
+
+        private JPanel nextSection(JPanel panel) {
+                JPanel ret = panel;
+                while (position < columns) {
+                        ret.add(new JPanel(), getBagColumn());
+                }
+
+                for (int i = 0; i < columns; i++) {
+                        GridBagConstraints gbcLocal = getBagColumn();
+                        gbcLocal.insets = new Insets(0, 0, 10, 0);
+                        gbcLocal.anchor = GridBagConstraints.CENTER;
+                        ret.add(new JLabel(" "), gbcLocal);
+                }
+                return ret;
         }
 
         private void loadPreferences() {

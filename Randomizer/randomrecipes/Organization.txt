@@ -1,8 +1,18 @@
 ---Test:
 
+Programable splitter keeps default costs despite it's recipe being generated.
+
 ---TODO:
 
-set correct stack sizes.
+Input bias not working correctly.
+
+2 solids for packager.
+
+Space elevator part 12 is generated last (increasing it's chance to have later resources)
+
+ores are enforced into crafting recipes ASAP to increase ore variability.
+
+Option to halve max used for better productivity.
 
 --------------------------------------------------------------------------------------------------------------
 

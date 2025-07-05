@@ -8,6 +8,7 @@ public class Component extends Randomizable {
     private Boolean liquid;
     private int remainingUses = UiValues.getMaxRecipesUsed();
     private int maxstack = 50;
+    private int rawOre = 0;
 
     // Constructor for raw materials, set as craftable as soon as available so that
     // no recipe is created for them.
@@ -78,5 +79,17 @@ public class Component extends Randomizable {
 
     public Boolean isAvailableIgnoreUses(){
         return super.isAvailable();
+    }
+
+    public int getRawOre() {
+        return this.rawOre;
+    }
+
+    public void setRawOre(int rawOre) {
+        this.rawOre = rawOre;
+    }
+
+    public void reduceRawOre() {
+        this.rawOre--;
     }
 }
