@@ -970,35 +970,37 @@ public class SequenceGenerator {
             return ((int) (random.nextDouble() * (max - min) + min));
         }
 
+        // COnvert from percent to value
         double usedBias = (max - min) * bias / 100;
-        double spread = usedBias - min;
+        // Use 20% of the range as spread
+        double spread = (max - min) / 5;
+        
         double gaussianValue;
         int result;
         Boolean cap = false;
 
         do {
             gaussianValue = (random.nextGaussian() * spread) + usedBias;
-            Console.hiddenLog("Random Gaussian: " + gaussianValue);
             result = (int) Math.round(gaussianValue);
 
             // If the value is too far above the bias, put it above the max to reroll it
             // capped above the bias.
-            if (result > (bias + (bias - min)) && !cap) {
+            if (result > (usedBias + (usedBias - min)) && !cap) {
                 result = (int) max + 10;
             }
             // If the value is too far below the bias, put it below the min to reroll it
             // capped below the bias.
-            if (result < (bias - (max - bias)) && !cap) {
+            if (result < (usedBias - (max - usedBias)) && !cap) {
                 result = (int) min - 10;
             }
             // if the value is below the min, reroll it but keep it below the bias.
             if (result < 0 && !cap) {
-                max = bias;
+                max = usedBias;
                 cap = true;
             }
             // if the value is avobe the max, reroll it but keep it above the bias.
             if (result > max && !cap) {
-                min = bias;
+                min = usedBias;
                 cap = true;
             }
             // System.out.println("Value: " + result);

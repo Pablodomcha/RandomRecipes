@@ -367,7 +367,7 @@ public class Ui {
                 JPanel panelInputBias = new JPanel();
                 panelInputBias.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-                label = new JLabel("Number of different items for crafting bias:");
+                label = new JLabel("Number of different items for crafting bias(%):");
                 label.setToolTipText(
                                 "Higher numbers mean that the randomizer will try to use more different ingredients per recipe/milestone. put -1 to disable.");
                 panelInputBias.add(label);
