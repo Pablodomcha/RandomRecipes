@@ -250,7 +250,7 @@ public class Materials {
         if (UiValues.getBelts() == 0) {
             tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMerger", false, false,
                     "Recipe_ConveyorAttachmentMerger", true, true, 0));
-            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitterLift", false, false,
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitter", false, false,
                     "Recipe_ConveyorAttachmentSplitter", true, true, 0));
         } else {
             tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMerger", false, false,
@@ -1138,9 +1138,9 @@ public class Materials {
         tempStructures.add(generateStructure("Recipe_BlueprintDesigner_Mk3"));
         tempStructures.add(generateStructure("Recipe_CeilingLight"));
         tempStructures.add(generateStructure("Recipe_CentralStorage"));
-        tempStructures.add(generateStructure("Recipe_ConveyorAttachmentMergerPriorityLift"));
-        tempStructures.add(generateStructure("Recipe_ConveyorAttachmentSplitterSmartLift"));
-        tempStructures.add(generateStructure("Recipe_ConveyorAttachmentSplitterProgrammableLift"));
+        tempStructures.add(generateStructure("Recipe_ConveyorAttachmentMergerPriority"));
+        tempStructures.add(generateStructure("Recipe_ConveyorAttachmentSplitterSmart"));
+        tempStructures.add(generateStructure("Recipe_ConveyorAttachmentSplitterProgrammable"));
         tempStructures.add(generateStructure("Recipe_ConveyorCeilingAttachment"));
         tempStructures.add(generateStructure("Recipe_ConveyorMonitor"));
         tempStructures.add(generateStructure("Recipe_ConveyorPoleStackable"));
