@@ -1,7 +1,5 @@
 ---Test:
 
-Programable splitter keeps default costs despite it's recipe being generated.
-
 ---TODO:
 
 --------------------------------------------------------------------------------------------------------------

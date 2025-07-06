@@ -986,8 +986,12 @@ public class SequenceGenerator {
         if (bias < (-1) || bias > 100) {
             throw new IllegalArgumentException("Bias must be within the range [" + (-1) + ", " + 100 + "]");
         }
-        if (bias <= 0) {
+        if (bias < 0) {
             return ((int) (random.nextDouble() * (max - min) + min));
+        } else if (bias >= 100) {
+            return (int) max;
+        } else if (bias == (0)) {
+            return (int) min;
         }
 
         // COnvert from percent to value
