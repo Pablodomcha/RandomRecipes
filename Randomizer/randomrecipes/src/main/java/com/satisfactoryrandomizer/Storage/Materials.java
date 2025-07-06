@@ -248,15 +248,15 @@ public class Materials {
                     "Recipe_ConveyorPole", false, false, 9));
         }
         if (UiValues.getBelts() == 0) {
-            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMergerLift", false, false,
-                    "Recipe_ConveyorAttachmentMergerLift", true, true, 0));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMerger", false, false,
+                    "Recipe_ConveyorAttachmentMerger", true, true, 0));
             tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitterLift", false, false,
-                    "Recipe_ConveyorAttachmentSplitterLift", true, true, 0));
+                    "Recipe_ConveyorAttachmentSplitter", true, true, 0));
         } else {
-            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMergerLift", false, false,
-                    "Recipe_ConveyorAttachmentMergerLift", false, false, 9));
-            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitterLift", false, false,
-                    "Recipe_ConveyorAttachmentSplitterLift", false, false, 9));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentMerger", false, false,
+                    "Recipe_ConveyorAttachmentMerger", false, false, 9));
+            tempStructures.add(new EssentialStructure("Desc_ConveyorAttachmentSplitter", false, false,
+                    "Recipe_ConveyorAttachmentSplitter", false, false, 9));
         }
 
         // Electricity settings
