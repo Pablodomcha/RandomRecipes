@@ -4,6 +4,18 @@ A simple recipe randomizer created in Java to create the JSON files that Content
 
 Why Java? I had VSCode set up to use Java from my last project and it was as good a choice as any for such a simple task.
 
+## How to use:
+
+    1. Install the mod as any other Satisfactory mod.
+
+    2. Go to the mod folder. In Steam, when you browse the game's local files, it's in:
+       FactoryGame -> Mods -> RandomRecipes
+
+    3. Run the .jar file. You need Java installed for this, I could waste my time explaining how to
+       do it, or you can Google it or ask any AI.
+
+    4. Select your settings and press "Randomize" (save them if you want to load them later).
+
 ## Info:
     0. Hove over the options to see more info about them.
 
