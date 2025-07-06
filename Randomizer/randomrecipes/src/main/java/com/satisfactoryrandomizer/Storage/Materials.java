@@ -155,6 +155,7 @@ public class Materials {
         tempStructures.add(new Structure("Desc_GeneratorFuel", false, false, "Recipe_GeneratorFuel", true));
         tempStructures.add(new Structure("Desc_GeneratorGeoThermal", false, false, "Recipe_GeneratorGeoThermal", true));
         tempStructures.add(new Structure("Desc_GeneratorNuclear", false, false, "Recipe_GeneratorNuclear", false));
+        structures.addAll(generateTrainStation());
         structures.addAll(addPrefixStruc(tempStructures, "//Game/FactoryGame/Recipes/Buildings/"));
         tempStructures.clear();
         structures.addAll(addPrefixStruc(generateStructures(), "//Game/FactoryGame/Recipes/Buildings/"));
@@ -1354,6 +1355,24 @@ public class Materials {
         tempStructures.clear();
 
         return tempReturnStructures;
+    }
+
+    private List<Structure> generateTrainStation() {
+        // Because obviously the train couldn't be located in any logical place
+        List<Structure> tempStructures = new ArrayList<>();
+        List<Structure> tempReturnStructures = new ArrayList<>();
+
+        tempStructures.add(generateStructure("Recipe_TrainStation"));
+        tempStructures.add(generateStructure("Recipe_TrainDockingStation"));
+        tempStructures.add(generateStructure("Recipe_TrainDockingStationLiquid"));
+        tempStructures.add(generateStructure("Recipe_TrainPlatformEmpty"));
+        tempStructures.add(generateStructure("Recipe_TrainPlatformEmpty_02"));
+        tempReturnStructures
+                .addAll(addPrefixStruc(tempStructures, "//Game/FactoryGame/Buildable/Factory/Train/Station"));
+        tempStructures.clear();
+
+        return tempReturnStructures;
+
     }
 
     private List<Structure> generateVehicles() {
