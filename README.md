@@ -79,33 +79,27 @@ Why Java? I had VSCode set up to use Java from my last project and it was as goo
     If you haven't read the info and don't find your answer here, it may be there.
 
    ### Why are some values wrongly displayed in the cost portion of the building menu?
-
     For some reason many structures have more than 1 recipe, one is taken for the actual building but
     the displayed cost in building screen is sometimes a different one.
 
-   #### What does "Remaining loops to cap" mean?
-
+   ### What does "Remaining loops to cap" mean?
     The randomizer only loops for 3000 times, in testing no settings ever took more than 1000 loops,
     so I set the cap a bit higher to avoid infinite loops if it fails. For the most part you can
     ignore that message as long as the number is not 0 (You will get an error message then).
 
    ### Should I care about what the log says when generating?
-
     For the most part, no, the only thing you have to check is that all items have been randomized.
     Cases where not every item gets randomized are not very frequent but not really rare, you can
     beat the game in them anyway, but won't have access to all the items that weren't randomized.
 
    ### Are MAM researches needed for beating the game/progression?
-
     They can be. The logic can use anything you can unlock and is not an alternate recipe to make
     the main win path. Seeds that don't need the MAM are rare.
 
    ### Can a seed be unbeatable?
-
     Yes, the values that may make a seed unbeatable are marked.
 
    ### Is there a way to change values to complete an uncompletable seed?
-
     1. If the problem is inventory space (which should be the only one that is not a bug), a mod
        to increase inventory space may save you.
 
